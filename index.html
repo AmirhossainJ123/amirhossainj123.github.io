@@ -1,11 +1,200 @@
 <html>
+    <script>
+        old_num_1 = 0
+        old_num_2 = 0
+        old_num_3 = 0
+        old_num_4 = 0
+        old_num_5 = 0
+        old_num_6 = 0
+        new_num_1 = 0
+        new_num_2 = 0
+        new_num_3 = 0
+        new_num_4 = 0
+        new_num_5 = 0
+        new_num_6 = 0
+        function minusize(new_num_1,old_num_1) {
+            if (new_num_1 > old_num_1)
+                old_num_1 += 2
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 2
+            if (new_num_1 > old_num_1)
+                old_num_1 += 1
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 1
+            return old_num_1
+        }
+        function randomize(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+        function slower_cursor_loop() {
+            setTimeout(() => {
+                old_num_5 = minusize(new_num_5,old_num_5)
+                const set = document.querySelector(".coolz")
+                set.style.padding = (old_num_5)/20 + "px"
+                if (new_num_5 === old_num_5) {
+                    new_num_5 = randomize(20,100);
+                }
+                slower_cursor_loop()
+            }, 400);
+        }
+        function color_culoop() {
+            setTimeout(() => {
+                old_num_6 = minusize(new_num_6,old_num_6)
+                const set = document.querySelector(".coolz")
+                set.style.backgroundColor = `rgb(${old_num_6},${old_num_6},${old_num_6})`
+                set.style.borderColor = `rgb(${255-old_num_6},${255-old_num_6},${255-old_num_6})`
+                if (new_num_6 === old_num_6) {
+                    new_num_6 = randomize(0,256);
+                    setTimeout(() => {
+                        color_culoop()
+                    }, 2500);
+                }
+                else
+                    color_culoop()
+            }, 10);
+        }
+        function cursor_loop() {
+            setTimeout(() => {
+            old_num_1 = minusize(new_num_1,old_num_1)
+            old_num_2 = minusize(new_num_2,old_num_2)
+            old_num_3 = minusize(new_num_3,old_num_3)
+            old_num_4 = minusize(new_num_4,old_num_4)
+            const set = document.querySelector(".coolz")
+            set.style.borderBottomLeftRadius = old_num_1 + "%"
+            set.style.borderBottomRightRadius = old_num_2 + "%"
+            set.style.borderTopLeftRadius = old_num_3 + "%"
+            set.style.borderTopRightRadius = old_num_4 + "%"
+
+            if (new_num_1 === old_num_1) {
+                new_num_1 = randomize(30,101);
+            }
+            if (new_num_2 === old_num_2) {
+                new_num_2 = randomize(30,101);
+            }
+            if (new_num_3 === old_num_3) {
+                new_num_3 = randomize(30,101);
+            }
+            if (new_num_4 === old_num_4) {
+                new_num_4 = randomize(30,101);
+            }
+            if (new_num_5 === old_num_5) {
+                new_num_5 = randomize(1,5);
+            }
+            cursor_loop()
+            }, 25);
+        }
+        function main() {
+            cursor_loop()
+            slower_cursor_loop()
+            color_culoop()
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Vai&display=swap');
+        body {
+            cursor:none;
+        }
+        .qlz {
+            outline:0px;
+            border:3px solid darkgray;
+            border-radius: 5px;
+            background-color: white;
+            padding: 10px;
+            cursor: none;
+            box-shadow: 3px 10px;
+            left: 50%;
+            position: absolute;
+            margin-left: -50px;
+        }
+        .qlz:hover {
+            outline:0px;
+            border:3px solid gray;
+            border-radius: 5px;
+            background-color: darkgray;
+            padding: 10px;
+            cursor: none;
+        }
+        .qlz:active {
+            outline:0px;
+            border:3px solid rgb(87, 87, 87);
+            border-radius: 5px;
+            background-color: gray;
+            padding: 10px;
+            cursor: none;
+        }
+        .fhf {
+            outline:0px;
+            border:3px solid gray;
+            border-radius: 5px;
+            background-color: rgb(87, 87, 87);
+            padding: 10px;
+            cursor: none;
+            box-shadow: 3px 10px;
+            left: 50.1%;
+            margin-top: 50px;
+            position: absolute;
+            margin-left: -50px;
+        }
+        .fhf:hover {
+            outline:0px;
+            border:3px solid darkgray;
+            border-radius: 5px;
+            background-color: gray;
+            padding: 10px;
+            cursor: none;
+        }
+        .fhf:active {
+            outline:0px;
+            border:3px solid white;
+            border-radius: 5px;
+            background-color: darkgray;
+            padding: 10px;
+            cursor: none;
+        }
+        .coolz {
+            cursor: none;
+            width: 20px;
+            height: 20px;
+            margin: auto;
+            top: 0%;
+            left: 0%;
+            position: absolute;
+            display: inline-block;
+            background-color: white;
+            text-align: center;
+            pointer-events: none;
+            border: 2px solid black;
+        }
+        .ooga {
+            margin-top: 12.5%;
+        }
+        h1, h3 {
+            color: white;
+            text-align: center;
+            font-family: 'Noto Sans Vai', sans-serif;
+        }
+    </style>
     <title>AmirhossainJ123</title>
-    <body style="background-image: url(Steve.png);background-size: contain;">
-        <h1 style="color:white;">I am bored of programming now, so COMING SOON</h1>
-        <h3 style="color:white;">You can just take a look at Quiz Land to see whether if its cool or nah idk</h3>
-        <h3 style="color:white;">Don't cheat!</h3>
-        <form action="quiz.html">
-        <button>Quiz Land</button>
+    <body style="background-image: url(Steve.png);background-size: contain;" onload="main()">
+        <h1 class="ooga"></h1>
+        <h1>I am bored of programming now, so COMING SOON</h1>
+        <h3>You can just take a look at Quiz Land to see whether if its cool or nah idk</h3>
+        <h3>Or maybe you want to find a trea... oof I should have not said it! in 404 page!</h3>
+        <h3>Don't cheat!</h3>
+        <form action="quiz">
+        <button class="qlz">Quiz Land</button>
         </form>
+        <form action="404">
+        <button class="fhf">404 Page</button>
+        </form>
+        <div class="cursor coolz"><div>
+            <script>
+                window.addEventListener('mousemove',(e) => {
+                    const cursorCool = document.querySelector('.coolz');
+                    New_posX = e.clientX-10
+                    New_posY = e.clientY-10
+                    cursorCool.style.transform = `translate3d(${New_posX}px, ${New_posY}px, 0)`;
+                });
+            </script>
     </body>
 </html>
