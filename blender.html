@@ -1,4 +1,63 @@
 <html>
+    <script>
+        old_num_1 = 0
+        old_num_2 = 0
+        old_num_3 = 0
+        old_num_4 = 0
+        new_num_1 = 0
+        new_num_2 = 0
+        new_num_3 = 0
+        new_num_4 = 0
+        function minusize(new_num_1,old_num_1) {
+            if (new_num_1 > old_num_1)
+                old_num_1 += 2
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 2
+            if (new_num_1 > old_num_1)
+                old_num_1 += 1
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 1
+            return old_num_1
+        }
+        function randomize(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+        function scrool() {
+            setTimeout(() => {
+            old_num_1 = minusize(new_num_1,old_num_1)
+            old_num_2 = minusize(new_num_2,old_num_2)
+            old_num_3 = minusize(new_num_3,old_num_3)
+            old_num_4 = minusize(new_num_4,old_num_4)
+            const set = document.querySelector("-webkit-scrollbar-thumb")
+            set.style.borderBottomLeftRadius = old_num_1 + "%"
+            set.style.borderBottomRightRadius = old_num_2 + "%"
+            set.style.borderTopLeftRadius = old_num_3 + "%"
+            set.style.borderTopRightRadius = old_num_4 + "%"
+            const setz = document.querySelector("-webkit-scrollbar")
+            setz.style.borderBottomLeftRadius = old_num_1 + "%"
+            setz.style.borderBottomRightRadius = old_num_2 + "%"
+            setz.style.borderTopLeftRadius = old_num_3 + "%"
+            setz.style.borderTopRightRadius = old_num_4 + "%"
+
+            if (new_num_1 === old_num_1) {
+                new_num_1 = randomize(10,50);
+            }
+            if (new_num_2 === old_num_2) {
+                new_num_2 = randomize(10,50);
+            }
+            if (new_num_3 === old_num_3) {
+                new_num_3 = randomize(10,50);
+            }
+            if (new_num_4 === old_num_4) {
+                new_num_4 = randomize(10,50);
+            }
+            scrool()
+            }, 25);
+        }
+        function main() {
+            scrool()
+        }
+    </script>
     <style>
         body {
             background-color: black;
@@ -15,6 +74,7 @@
         .imagez img{
             width: 480;
             height: 270;
+            border-bottom: 2px solid darkgray;
         }
         .imageo * {
             color: white;
@@ -34,8 +94,18 @@
         .usedbefore {
             opacity: 0.5;
         }
+        ::-webkit-scrollbar {
+            cursor: grab;
+            background-color: white;
+            border: 5px solid gray;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: red;
+            border: 1px solid orange;
+            cursor: grabbing;
+        }
     </style>
-    <body>
+    <body onload="main()">
         <div class="imagez">
             <img src="blender/Amogus.png" alt="Among us">
             <h1>Among Us</h3>
@@ -72,10 +142,10 @@
             <h3>A image of a Treasure (A basic image)!</h3>
             <h4 class="usedbefore">Used in 404 page</h4>
         </div>
-        <div class="imageo">
-            <img src="blender/insta.png" alt="3D Instagram">
-            <h1>3D Instagram</h3>
-            <h3>A image of Instagram but a little 3D and a good pillow</h3>
+        <div class="imagez">
+            <img src="blender/Technoblade_never_dies.png" alt="Donut">
+            <h1>Technoblade Never Dies!!</h3>
+            <h3>A image of Technoblade in a totem of undying rain</h3>
             <h4 class="usedbefore">Has not been used in this website</h4>
         </div>
         <div class="imageo">
@@ -88,6 +158,12 @@
             <img src="blender/Techno.png" alt="Technoblade">
             <h1>Technoblade</h3>
             <h3>A image of Technoblade!</h3>
+            <h4 class="usedbefore">Has not been used in this website</h4>
+        </div>
+        <div class="imageo">
+            <img src="blender/insta.png" alt="3D Instagram">
+            <h1>3D Instagram</h3>
+            <h3>A image of Instagram but a little 3D and a good pillow</h3>
             <h4 class="usedbefore">Has not been used in this website</h4>
         </div>
         <div class="imageo">
