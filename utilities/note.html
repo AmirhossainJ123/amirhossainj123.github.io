@@ -1,0 +1,33 @@
+<html>
+    <title>Personal Notebook</title>
+    <script>
+        function save() {
+            localStorage.setItem("psolnotebook",document.getElementById("mainz").value)
+        }
+        function main() {
+            document.getElementById("mainz").value = localStorage.getItem("psolnotebook")
+        }
+    </script>
+    <style>
+        textarea {
+            width: 500px;
+            height: 200px;
+            outline: none;
+            border: 2px solid black;
+            border-radius: 20px;
+            padding: 5px;
+            resize: none;
+        }
+        button {
+            background-color: gray;
+            border: 2px solid black;
+            border-radius: 30px;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+    <body onload="main()">
+        <textarea id="mainz" value="Your Personal NoteBook" ></textarea>
+        <button onclick="save()">Save</button>
+    </body>
+</html>
