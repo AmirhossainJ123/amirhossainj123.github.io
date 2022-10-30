@@ -1,0 +1,101 @@
+<html>
+    <script>
+        function recognizable(inputz) {
+            taken = 0
+            meanings=[]
+            for (let index = 0; index < inputz.length; index++) {
+                if (inputz[index] == "^") {
+                    meanings[taken] = "^"; taken++;
+                }
+                if (inputz[index] == "x") {
+                    meanings[taken] = "x"; taken++;
+                }
+                if (inputz[index] == "/") {
+                    meanings[taken] = "/"; taken++;
+                }
+                if (inputz[index] == "+") {
+                    meanings[taken] = "+"; taken++;
+                }
+                if (inputz[index] == "-") {
+                    meanings[taken] = "-"; taken++;
+                }
+            }
+            inputz = inputz.replaceAll("^","♣").replaceAll("x","♣").replaceAll("/","♣").replaceAll("-","♣").replaceAll("+","♣").replaceAll(" ","")
+            input = inputz.split("♣")
+            return [input,meanings]
+        }
+        function calculating(input) {
+            data = recognizable(input)
+            answer = data[0][0]
+            for (let index = 0; index < data[0].length; index++) {
+                if (data[1][index] == "^") {
+                    answer = answer ** data[0][index+1]
+                }
+                if (data[1][index] == "/") {
+                    answer = answer / data[0][index+1]
+                }
+                if (data[1][index] == "x") {
+                    answer = answer * data[0][index+1]
+                }
+                if (data[1][index] == "+") {
+                    answer = parseFloat(answer) + parseFloat(data[0][index+1])
+                }
+                if (data[1][index] == "-") {
+                    answer = answer - data[0][index+1]
+                }
+            }
+            return answer
+        }
+        function auto_calc() {
+            setTimeout((e) => {
+                try {
+                document.getElementById("useroutput").textContent = calculating((document.getElementById("userinput").value))
+            } catch (error) {
+            }
+            auto_calc()
+            }, 50);
+        }
+        function main() {
+            auto_calc()
+        }
+    </script>
+    <style>
+        body {
+            background-color: black;
+        }
+        .center {
+            width: 500px;
+            height: 500px;
+            left: 50%;
+            top: 50%;
+            margin-top: -250px;
+            margin-left: -250px;
+            position: absolute;
+        }
+        textarea {
+            width: 500px;
+            height: 200px;
+            outline: none;
+            border: 2px solid black;
+            outline: 1px solid white;
+            border-radius: 20px;
+            padding: 5px;
+            resize: none;
+            color: black;
+        }
+        h3 {
+            background-color: lightgreen;
+            border: 2px solid darkgreen;
+            border-radius: 30px;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+    <title>Calculator</title>
+    <body onload="main()">
+        <div class = "center">
+            <textarea id="userinput">2 x 5 - 5 ^ 2 / 5 + 1</textarea>
+            <h3 id="useroutput">6.0</h3>
+        </div>
+    </body>
+</html>
