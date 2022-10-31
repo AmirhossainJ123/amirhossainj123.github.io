@@ -1,8 +1,70 @@
 <html>
-<title>Message Encryptor</title>
+<title>Draw</title>
 <script>
-    numx = 20
-    numy = 0
+    Perset1 = `uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuu\\\\\\\\uuuuuuuuuuuuuuuuuuuuuuuuuuuuu\\\\\\\\\\\\uuuuu
+uuuu\\\\\\\\\\\\\\uuuuuuuuuuyyyyuuuuuuuuuuu\\\\\\\\\\\\\\\\\\\\\\\\uu
+uu\\\\\\\\\\\\\\\\\\\\uuuuuuuuyyyyyyuuuuuuu\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u
+u\\\\\\\\\\\\\\\\\\\\\\\\uuuuuuuyyyyyyuuuuuuuu\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u
+uuu\\\\\\\\\\\\\\\\uuuuuuuuuyyyyyyuuuuuuuuuu\\\\\\\\\\\\\\\\\\\\\\uuu
+uuuuu\\\\\\\\uuuuuuuuuuuyyyyyyuuuuuuuuuuuuu\\\\\\\\\\\\uuuuu
+uuuuuuuuuuuuuuuuuuuuuyyyyuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uu///uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uu///uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uu///uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuu/uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuu/u/uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+u/////uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+u/u/uuuuuuuuuuuuuuuuuuuuuuuZZZZZZZuuuuuuuuuuuuuuuu
+uuu/uuuuuuuuuuuuuuuuuuuuuuuZZZZZZZuuuuuuuuuuuuuuuu
+uu/u/uuuuuuuuuuuuuuuuuuuuuu///\\///uuuuuuuuuuuuuuuu
+uu/u/uuuuuuuuuuuuuuuuuuuuuu\\/\\\\\\/\\uuuuuuuuuuuuuuuu
+u/uuu/uuuuuuuuuuuuuuuuuuuuu\\/\\/\\/\\uuuuuuuuuuuuuuuu
+u/uuu/uuuuuuuuuuuuuuuuuuuuuZZZZZZZuuuuuuuuuuuuuuuu
+u/uuu/uuuuuuuuuuuuuuuuuuuuuZZZZZZZuuuuuuuuuuuuuuuu
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`;
+    Perset2 = `
+    f       f  
+   f       f   
+   f       f   
+ fffff   fffff 
+ffff\\ff ffff\\ff
+ffxxx\\f ffxxx\\f
+ffx/xff ffx/xff
+ffxxxff ffxxxff
+fffffff fffffff
+ fffff   fffff 
+
+///////////////`;
+    Perset3 = `        z       z       z       z       z     
+       zzz     zzz     zzz     zzz     zzz    
+       zzz     zzz     zzz     zzz     zzz    
+      zz//z   zz//z   zz//z   zz//z   zz//z   
+      zz//z   zz//z   zz//z   zz//z   zz//z   
+      z/zzz   z/zzz   z/zzz   z/zzz   z/zzz   
+       zzz     zzz     zzz     zzz     zzz    
+
+
+
+  cccc   RRRR   eeee   eeee   pppp   eeee   RRRR
+ c       R  R   e      e      p  p   e      R  R
+ c       RRRR   eeee   eeee   pppp   eeee   RRRR
+ c       RR     e      e      p      e      RR
+ c       R R    e      e      p      e      R R
+  cccc   R  R   eeee   eeee   p      eeee   R  R`;
+
+    square = 5;
+    space = 5;
+    numx = 20;
+    numy = 0;
     function randomize(min,max) {
         umm = min + Math.floor(Math.random()*(max-min))
         if (umm != 33)
@@ -12,44 +74,123 @@
     }
     function draw() {
         const canvas = document.getElementById("image");
+        const cansus = document.getElementById("encrypt").value;
         if (canvas.getContext) {
             const ctx = canvas.getContext("2d");
-            for (let index = 0; index < randomize(10,200); index++) {
-                ctx.fillStyle = "rgb(" + randomize(0,255) + "," + randomize(0,255) + "," + randomize(0,255) + ")";
-                ctx.fillRect(numx, numy, 5, 5);
-                if (numx > 230) {
+            ctx.reset()
+            numx = 20
+            numy = 0
+            for (let index = 0; index < cansus.length; index++) {
+                letter = cansus[index]
+                if (letter == "\n") {
                     numx = 20
-                    numy += 5
+                    numy += space
+                    continue
                 }
-                numx+=5
-            }
-            ctx.fillStyle = "rgb(33, 33, 33)";
-            ctx.fillRect(numx, numy, 5, 5);
-            if (numx > 230) {
-                numx = 20
-                numy += 5
-            }
-            numx+=5
-            ctx.fillStyle = "rgb(33, 33, 33)";
-            ctx.fillRect(numx, numy, 5, 5);
-            if (numx > 230) {
-                numx = 20
-                numy += 5
-            }
-            numx+=5
-            for (let index = 0; index < randomize(10,200); index++) {
-                ctx.fillStyle = "rgb(" + randomize(0,255) + "," + randomize(0,255) + "," + randomize(0,255) + ")";
-                ctx.fillRect(numx, numy, 5, 5);
-                if (numx > 230) {
+                if (letter == "/") {
+                    ctx.fillStyle = "rgb(0,0,0)"
+                    ctx.fillRect(numx, numy, square, square);
+                    numx+=space
+                    if (numx > 270) {
+                        numx = 20
+                        numy += space
+                    }
+                    continue
+                }
+                if (letter == " ") {
+                    numx+=space
+                    if (numx > 270) {
+                        numx = 20
+                        numy += space
+                    }
+                    continue
+                }
+                if (letter == "\\") {
+                    ctx.fillStyle = "rgb(255,255,255)"
+                    ctx.fillRect(numx, numy, square, square);
+                    numx+=5
+                    if (numx > 270) {
+                        numx = 20
+                        numy += space
+                    }
+                    continue
+                }
+                formauloz = letter.charCodeAt(0)
+                formaulo = document.getElementById("encryptio").value
+                formaulo_part3 = parseInt(formaulo)%100
+                formaulo_part2 = parseInt(formaulo/100)%100
+                formaulo_part1 = parseInt(formaulo/100/100)%100
+                formaulo_part1 *= 2
+                formaulo_part2 *= 2
+                formaulo_part3 *= 2
+                new_formauloz = formauloz * 5
+                new_formauloz -= 305
+                if (formauloz % 6 == 0)
+                formaulo_part1 += new_formauloz
+                
+                if (formauloz % 6 == 1) {
+                    formaulo_part1 += new_formauloz
+                    formaulo_part2 += new_formauloz
+                }
+                if (formauloz % 6 == 2)
+                    formaulo_part2 += new_formauloz
+                    
+                if (formauloz % 6 == 3) {
+                    formaulo_part2 += new_formauloz
+                    formaulo_part3 += new_formauloz
+                }
+                if (formauloz % 6 == 4)
+                    formaulo_part3 += new_formauloz
+                if (formauloz % 6 == 5) {
+                    formaulo_part1 += new_formauloz
+                    formaulo_part3 += new_formauloz
+                }
+                ctx.fillStyle = "rgb(" + parseInt(formaulo_part1) + "," + parseInt(formaulo_part2) + "," + parseInt(formaulo_part3) + ")";
+                ctx.fillRect(numx, numy, square, square);
+                numx+=space
+                if (numx > 270) {
                     numx = 20
-                    numy += 5
+                    numy += space
                 }
-                numx+=5
             }
         }
     }
+    var old_txt = "text"
+    var old_io = "12345"
+    function looop() {
+        setTimeout(() => {
+            const canvas = document.getElementById("image");
+            var new_txt = document.getElementById("encrypt").value;
+            var new_io = document.getElementById("encryptio").value;
+            if (new_txt != old_txt || new_io != old_io) {
+                draw()
+                old_txt = new_txt
+                old_io = new_io
+            }
+            looop()
+        }, 200);
+    }
+    function info() {
+        continue_the_proccess = confirm("By Pressing Ok you will get popups that will tell you what is the use of what, it will not work if you have popup blocker")
+        if (continue_the_proccess) {
+            alert("So this page you are in is page that you can make pixel art by texts!\n Message: 1/9")
+            alert("you are probably so mad at the colors and you want a better one?\n Message: 2/9")
+            alert("well there is a number part down there with 000123 default in it\n Message: 3/9")
+            alert("with that you can actually make your own colors!\n Message: 4/9")
+            alert("you can either use those buttons or you can edit it by hand\n Message: 5/9")
+            alert("well how the color works is that, idk either, you can maybe figure out by just experimenting Xd, if you know RGB then 2 by 2 by 2 (00 01 23)\n Message: 6/9")
+            alert("the reason its 000123 is that its a good amount of color difference between characters\n Message: 8/9")
+            alert("Good luck! oh btw try using / and \ \n:)\n Message: 9/9")
+        }
+    }
+    function add(num) {
+        document.getElementById("encryptio").value = parseInt(document.getElementById("encryptio").value) + num;
+    }
+    function rem(num) {
+        document.getElementById("encryptio").value = parseInt(document.getElementById("encryptio").value) - num;
+    }
     function main() {
-        draw()
+        looop()
     }
 </script>
 <style>
@@ -64,9 +205,8 @@
         position: absolute;
         margin-top: -250px;
         margin-left: -250px;
-        
     }
-    textarea {
+    .main {
         width: 500px;
         height: 200px;
         outline: 2px solid white;
@@ -77,20 +217,94 @@
         color: white;
         background-color: gray;
         margin: 10px;
+        cursor: text;
+    }
+    .main_codino {
+        width: 80px;
+        height: 30px;
+        outline: 2px solid white;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 5px;
+        resize: none;
+        color: white;
+        background-color: gray;
+        margin: 10px;
+        cursor: text;
     }
     canvas {
         width: 500px;
         height: 250px;
         outline: 2px solid white;
+        background-color: rgb(34, 34, 34);
         border: 2px solid black;
         border-radius: 10px;
         margin: 10px;
+        cursor: cell;
+    }
+    .buttonp {
+        width: 50px;
+        height: 50px;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        border: 3px solid darkgreen;
+        background-color: green;
+        opacity: 0.8;
+    }
+    .buttonm {
+        width: 50px;
+        height: 50px;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        border: 3px solid darkred;
+        background-color: red;
+        opacity: 0.8;
+    }
+    .buttonz {
+        width: 60px;
+        height: 50px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        border: 3px solid darkblue;
+        background-color: blue;
+        opacity: 0.8;
+    }
+    .buttonx {
+        width: 75px;
+        height: 50px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        border: 3px solid orangered;
+        background-color: orange;
+        opacity: 0.8;
+    }
+    button:hover {
+        opacity: 1;
     }
 </style>
 <body onload="main()">
+    <button class="buttonz" onclick="old_txt = {}">Reload</button>
+    <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset1">Preset 1</button>
+    <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset2">Preset 2</button>
+    <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset3">Preset 3</button>
     <div class="center">
-    <textarea id="encrypt">Hello Carl, come to our party at New York, don't tell anyone else!, Cya at tommorow night</textarea>
+    <textarea id="encrypt" class="main"></textarea>
     <canvas id="image"></canvas>
+    <textarea id="encryptio" class="main_codino">000123</textarea>
+    <br>
+    <button class="buttonp" onclick="add(10101)">+1A</button>
+    <button class="buttonm" onclick="rem(10101)">-1A</button>
+    <button class="buttonp" onclick="add(1)">+1</button>
+    <button class="buttonm" onclick="rem(1)">-1</button>
+    <button class="buttonp" onclick="add(5)">+5</button>
+    <button class="buttonm" onclick="rem(5)">-5</button>
+    <button class="buttonp" onclick="add(100)">+100</button>
+    <button class="buttonm" onclick="rem(100)">-100</button>
+    <button class="buttonz" onclick="info()">Info</button>
     </div>
 </body>
 </html>
