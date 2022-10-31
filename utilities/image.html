@@ -1,0 +1,96 @@
+<html>
+<title>Message Encryptor</title>
+<script>
+    numx = 20
+    numy = 0
+    function randomize(min,max) {
+        umm = min + Math.floor(Math.random()*(max-min))
+        if (umm != 33)
+            return umm
+        else
+            return randomize(min,max)
+    }
+    function draw() {
+        const canvas = document.getElementById("image");
+        if (canvas.getContext) {
+            const ctx = canvas.getContext("2d");
+            for (let index = 0; index < randomize(10,200); index++) {
+                ctx.fillStyle = "rgb(" + randomize(0,255) + "," + randomize(0,255) + "," + randomize(0,255) + ")";
+                ctx.fillRect(numx, numy, 5, 5);
+                if (numx > 230) {
+                    numx = 20
+                    numy += 5
+                }
+                numx+=5
+            }
+            ctx.fillStyle = "rgb(33, 33, 33)";
+            ctx.fillRect(numx, numy, 5, 5);
+            if (numx > 230) {
+                numx = 20
+                numy += 5
+            }
+            numx+=5
+            ctx.fillStyle = "rgb(33, 33, 33)";
+            ctx.fillRect(numx, numy, 5, 5);
+            if (numx > 230) {
+                numx = 20
+                numy += 5
+            }
+            numx+=5
+            for (let index = 0; index < randomize(10,200); index++) {
+                ctx.fillStyle = "rgb(" + randomize(0,255) + "," + randomize(0,255) + "," + randomize(0,255) + ")";
+                ctx.fillRect(numx, numy, 5, 5);
+                if (numx > 230) {
+                    numx = 20
+                    numy += 5
+                }
+                numx+=5
+            }
+        }
+    }
+    function main() {
+        draw()
+    }
+</script>
+<style>
+    body {
+        background-color: black;
+    }
+    .center {
+        width: 500px;
+        height: 500px;
+        left: 50%;
+        top: 50%;
+        position: absolute;
+        margin-top: -250px;
+        margin-left: -250px;
+        
+    }
+    textarea {
+        width: 500px;
+        height: 200px;
+        outline: 2px solid white;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 5px;
+        resize: none;
+        color: white;
+        background-color: gray;
+        margin: 10px;
+    }
+    canvas {
+        width: 500px;
+        height: 250px;
+        outline: 2px solid white;
+        border: 2px solid black;
+        border-radius: 10px;
+        margin: 10px;
+    }
+</style>
+<body onload="main()">
+    <div class="center">
+    <textarea id="encrypt">Hello Carl, come to our party at New York, don't tell anyone else!, Cya at tommorow night</textarea>
+    <canvas id="image"></canvas>
+    </div>
+</body>
+</html>

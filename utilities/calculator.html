@@ -29,27 +29,42 @@
             answer = data[0][0]
             for (let index = 0; index < data[0].length; index++) {
                 if (data[1][index] == "^") {
+                    console.log(answer + " ^ " + data[0][index+1])
                     answer = answer ** data[0][index+1]
                 }
-                if (data[1][index] == "/") {
-                    answer = answer / data[0][index+1]
-                }
+            }
+            for (let index = 0; index < data[0].length; index++) {
                 if (data[1][index] == "x") {
+                    console.log(answer + " x " + data[0][index+1])
                     answer = answer * data[0][index+1]
                 }
+                if (data[1][index] == "/") {
+                    console.log(answer + " / " + data[0][index+1])
+                    answer = answer / data[0][index+1]
+                }
+
+            }
+            for (let index = 0; index < data[0].length; index++) {
                 if (data[1][index] == "+") {
+                    console.log(answer + " + " + data[0][index+1])
                     answer = parseFloat(answer) + parseFloat(data[0][index+1])
                 }
                 if (data[1][index] == "-") {
+                    console.log(answer + " - " + data[0][index+1])
                     answer = answer - data[0][index+1]
                 }
             }
             return answer
         }
+        old_data = ""
         function auto_calc() {
             setTimeout((e) => {
                 try {
-                document.getElementById("useroutput").textContent = calculating((document.getElementById("userinput").value))
+                new_data = (document.getElementById("userinput").value)
+                if (new_data != old_data) {
+                    document.getElementById("useroutput").textContent = calculating((document.getElementById("userinput").value))
+                    old_data = (document.getElementById("userinput").value)
+                }
             } catch (error) {
             }
             auto_calc()
