@@ -60,7 +60,7 @@ fffffff fffffff
  c       RR     e      e      p      e      RR
  c       R R    e      e      p      e      R R
   cccc   R  R   eeee   eeee   p      eeee   R  R`;
-
+    dnldamount = localStorage.getItem("dnld")
     square = 5;
     space = 5;
     numx = 20;
@@ -71,6 +71,14 @@ fffffff fffffff
             return umm
         else
             return randomize(min,max)
+    }
+    function download() {
+        dnldamount++;
+        localStorage.setItem("dnld",dnldamount)
+        var link = document.createElement('a');
+        link.download = 'Art_' + dnldamount + '.png';
+        link.href = document.getElementById('image').toDataURL()
+        link.click();
     }
     function draw() {
         const canvas = document.getElementById("image");
@@ -108,7 +116,7 @@ fffffff fffffff
                 if (letter == "\\") {
                     ctx.fillStyle = "rgb(255,255,255)"
                     ctx.fillRect(numx, numy, square, square);
-                    numx+=5
+                    numx+=space
                     if (numx > 270) {
                         numx = 20
                         numy += space
@@ -157,15 +165,25 @@ fffffff fffffff
     }
     var old_txt = "text"
     var old_io = "12345"
+    var old_square = 5
+    var old_space = 5
+    var new_square = 5
+    var new_space = 5
     function looop() {
         setTimeout(() => {
+            new_square = document.getElementById("square").value
+            new_space = document.getElementById("spacez").value
             const canvas = document.getElementById("image");
             var new_txt = document.getElementById("encrypt").value;
             var new_io = document.getElementById("encryptio").value;
-            if (new_txt != old_txt || new_io != old_io) {
+            if (new_txt != old_txt || new_io != old_io || new_square != old_square || new_space != old_space) {
+                square = new_square
+                space = parseFloat(new_space)
                 draw()
                 old_txt = new_txt
                 old_io = new_io
+                old_square = new_square
+                old_space = new_space
             }
             looop()
         }, 200);
@@ -282,8 +300,22 @@ fffffff fffffff
         background-color: orange;
         opacity: 0.8;
     }
+    .buttond {
+        width: 150px;
+        height: 50px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        border: 3px solid purple;
+        background-color: darkcyan;
+        opacity: 0.8;
+    }
     button:hover {
         opacity: 1;
+    }
+    h2 {
+        display: inline-block;
+        color: white;
     }
 </style>
 <body onload="main()">
@@ -291,9 +323,17 @@ fffffff fffffff
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset1">Preset 1</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset2">Preset 2</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset3">Preset 3</button>
+    <br>
+    <h2>Pixeling:</h2>
+    <input type="range" class="ramge" step="0.1" max="10" min="0" id="square" value="5">
+    <br>
+    <h2>Spacing:</h2>
+    <input type="range" class="ramge" step="0.1" max="10" min="0" id="spacez" value="5">
+    <br>
+    <button class="buttond" onclick="download()">Download Image</button>
     <div class="center">
     <textarea id="encrypt" class="main"></textarea>
-    <canvas id="image"></canvas>
+    <canvas id="image" width="300" height="150"></canvas>
     <textarea id="encryptio" class="main_codino">000123</textarea>
     <br>
     <button class="buttonp" onclick="add(10101)">+1A</button>
