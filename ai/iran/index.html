@@ -1,0 +1,97 @@
+<html>
+    <title>Path Finder!</title>
+    <script>
+        function randomize(min,max) {
+            umm = min + Math.floor(Math.random()*(max-min))
+            if (umm != 33)
+                return umm
+            else
+                return randomize(min,max)
+        }
+        function percent_chance(percent) {
+            if (percent >= 100)
+                return true
+            else {
+                test = parseFloat((randomize(0,100000))/1000)
+                if (test <= percent)
+                    return true
+                else
+                    return false //I am bored of coding a WHOLE percent thing
+            }
+        }
+        check = 0
+        function draw_iran() {
+            const canvas = document.getElementById("canvas")
+            const ctx = canvas.getContext("2d");
+            ctx.reset()
+            numx = 10
+            numy = 10
+            square = 5
+            perzent = 500
+            percentz = 2
+            filled_locs = []
+            for (let index = 0; index < 9200; index++) {
+                if (true) {
+                    rnadoma = randomize(240,255)
+                    ctx.fillStyle = "rgb(" + parseInt(rnadoma) + "," + parseInt(rnadoma) + "," + parseInt(rnadoma) + ")"
+                    ctx.fillRect(numx, numy, square, square);
+                }
+                if (percent_chance(perzent) && index <= 4100) {
+                    rnadoma = randomize(10,30)
+                    ctx.fillStyle = "rgb(" + parseInt(rnadoma) + "," + parseInt(parseInt(rnadoma)+70) + "," + parseInt(rnadoma) + ")"
+                    ctx.fillRect(numx, numy, square, square);
+                    perzent -= 0.2
+                }
+                if (percent_chance(75) && index >= 4100 && index <= 5100 && numx >= 275 && numx <= 315) {
+                    rnadoma = randomize(10,30)
+                    ctx.fillStyle = "rgb(" + parseInt(parseInt(rnadoma)+70)  + "," + parseInt(rnadoma) + "," + parseInt(rnadoma) + ")"
+                    ctx.fillRect(numx, numy, square, square);
+                    perzent -= 0.2
+                }
+                if (percent_chance(percentz) && index >= 5100) {
+                    rnadoma = randomize(10,30)
+                    ctx.fillStyle = "rgb(" + parseInt(rnadoma)+50 + "," + rnadoma + "," + rnadoma + ")"
+                    ctx.fillRect(numx, numy, square, square);
+                    percentz += 0.2
+                }
+                numx += square
+                if (numx > 590) {
+                    numx = 10
+                    numy += square
+                }
+            }
+        }
+        function looop() {
+            setTimeout(() => {
+                draw_iran()
+                looop()
+            }, 5);
+        }
+        function main() {
+            looop()
+        }
+    </script>
+    <style>
+        body {
+            background-color: black;
+        }
+        .center {
+            height: 400px;
+            width: 600px;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -300px;
+            position: absolute;
+        }
+        canvas {
+            background-color: black;
+            border: 3px solid white;
+        }
+    </style>
+    <body onload="main()">
+        <div class="center">
+            <canvas id="canvas" height="400" width="600"></canvas>
+        </div>
+    </body>
+</html>

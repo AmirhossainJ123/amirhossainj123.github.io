@@ -32,8 +32,6 @@
                     console.log(answer + " ^ " + data[0][index+1])
                     answer = answer ** data[0][index+1]
                 }
-            }
-            for (let index = 0; index < data[0].length; index++) {
                 if (data[1][index] == "x") {
                     console.log(answer + " x " + data[0][index+1])
                     answer = answer * data[0][index+1]
@@ -42,9 +40,6 @@
                     console.log(answer + " / " + data[0][index+1])
                     answer = answer / data[0][index+1]
                 }
-
-            }
-            for (let index = 0; index < data[0].length; index++) {
                 if (data[1][index] == "+") {
                     console.log(answer + " + " + data[0][index+1])
                     answer = parseFloat(answer) + parseFloat(data[0][index+1])
