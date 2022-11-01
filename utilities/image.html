@@ -60,6 +60,33 @@ fffffff fffffff
  c       RR     e      e      p      e      RR
  c       R R    e      e      p      e      R R
   cccc   R  R   eeee   eeee   p      eeee   R  R`;
+    Perset4 = `
+
+
+
+xxxxxx                            yyyyyy
+xxxxxx          y                 yyyyyy
+xxuuuux      /  a                 yl.uu.y
+xxuuuux  //////aay  ,,,           llu..uy
+xxuuuux xx/////aay                ll.uu.y
+xxxxxxx xxxx    a                 llyyyyy
+xxxxxxx xxx      y                lylyyyy
+xxxxxxx  //                       lyyyyyy
+xxxxxx                            ylyyyy
+xx  xx                           lyy  yy
+
+
+
+
+llll    llll    llll         ZZZZ    Z   Z    ZZZZ
+l  l    l       l   l        Z       Z   Z    Z   
+l  l    l       l   l        Z       Z   Z    Z   
+llll    llll    l   l        ZZZZ    Z   Z    ZZZZ
+ll      l       l   l           Z    Z   Z       Z
+l l     l       l   l           Z    Z   Z       Z
+l  l    l       l   l           Z    Z   Z       Z
+l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
+    
     saved = localStorage.getItem("saved")
     dnldamount = localStorage.getItem("dnld")
     square = 5;
@@ -326,6 +353,7 @@ fffffff fffffff
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset1">Preset 1</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset2">Preset 2</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset3">Preset 3</button>
+    <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset4">Preset 4</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = saved">Last Project</button>
     <br>
     <h2>Pixeling:</h2>
