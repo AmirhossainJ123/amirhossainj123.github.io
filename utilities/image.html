@@ -60,6 +60,7 @@ fffffff fffffff
  c       RR     e      e      p      e      RR
  c       R R    e      e      p      e      R R
   cccc   R  R   eeee   eeee   p      eeee   R  R`;
+    saved = localStorage.getItem("saved")
     dnldamount = localStorage.getItem("dnld")
     square = 5;
     space = 5;
@@ -79,6 +80,9 @@ fffffff fffffff
         link.download = 'Art_' + dnldamount + '.png';
         link.href = document.getElementById('image').toDataURL()
         link.click();
+    }
+    function save() {
+        localStorage.setItem("dnld",document.getElementById("encrypt").value)
     }
     function draw() {
         const canvas = document.getElementById("image");
@@ -323,6 +327,7 @@ fffffff fffffff
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset1">Preset 1</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset2">Preset 2</button>
     <button class="buttonx" onclick="document.getElementById('encrypt').value = Perset3">Preset 3</button>
+    <button class="buttonx" onclick="document.getElementById('encrypt').value = saved">Last Project</button>
     <br>
     <h2>Pixeling:</h2>
     <input type="range" class="ramge" step="0.1" max="10" min="0" id="square" value="5">
@@ -331,6 +336,7 @@ fffffff fffffff
     <input type="range" class="ramge" step="0.1" max="10" min="0" id="spacez" value="5">
     <br>
     <button class="buttond" onclick="download()">Download Image</button>
+    <button class="buttond" onclick="save()">Save</button>
     <div class="center">
     <textarea id="encrypt" class="main"></textarea>
     <canvas id="image" width="300" height="150"></canvas>
