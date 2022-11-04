@@ -32,7 +32,7 @@
                 const set = document.querySelector(".coolz")
                 set.style.padding = (old_num_5)/20 + "px"
                 if (new_num_5 === old_num_5) {
-                    new_num_5 = randomize(20,100);
+                    new_num_5 = randomize(40,240);
                 }
                 slower_cursor_loop()
             }, 400);
@@ -76,9 +76,6 @@
             }
             if (new_num_4 === old_num_4) {
                 new_num_4 = randomize(30,101);
-            }
-            if (new_num_5 === old_num_5) {
-                new_num_5 = randomize(1,5);
             }
             cursor_loop()
             }, 25);
