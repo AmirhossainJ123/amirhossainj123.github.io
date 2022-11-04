@@ -102,7 +102,7 @@
             background-color: white;
             padding: 10px;
             cursor: none;
-            box-shadow: 3px 10px;
+            box-shadow: 3px 3px 10px;
             left: 50%;
             position: absolute;
             margin-left: -50px;
@@ -134,7 +134,7 @@
             background-color: white;
             padding: 10px;
             cursor: none;
-            box-shadow: 3px 10px;
+            box-shadow: 3px 3px 10px;
             left: 50%;
             position: absolute;
             margin-left: -55px;
@@ -167,7 +167,7 @@
             background-color: rgb(87, 87, 87);
             padding: 10px;
             cursor: none;
-            box-shadow: 3px 10px;
+            box-shadow: 3px 3px 10px;
             left: 50.1%;
             margin-top: 50px;
             position: absolute;
@@ -199,11 +199,11 @@
             background-color: rgb(87, 87, 87);
             padding: 10px;
             cursor: none;
-            box-shadow: 3px 10px;
+            box-shadow: 3px 3px 10px;
             left: 50.1%;
             margin-top: 150px;
             position: absolute;
-            margin-left: -75px;
+            margin-left: -80px;
         }
         .fhff:hover {
             outline:0px;
@@ -250,12 +250,87 @@
         * {
             cursor: none;
         }
+        .cmg {
+            cursor: none;
+            color: white;
+            text-align: center;
+            font-family: 'Noto Sans Vai', sans-serif;
+            border-radius: 20px;
+            padding: 5px;
+            margin: 5px;
+            background-color: black;
+            top: 100%;
+            margin-top: -45px;
+            position: absolute;
+            border: 3px solid black;
+        }
+        .cmgz {
+            cursor: none;
+            color: darkred;
+            text-align: center;
+            font-family: 'Noto Sans Vai', sans-serif;
+            margin: 10px;
+            top: 100%;
+            margin-left: 275px;
+            margin-top: -60px;
+            position: absolute;
+            font-size: 40px;
+        }
+        @keyframes dingdong {
+            0% {
+                font-size: 40px;
+                transform: rotate(0deg);
+                color: red;
+                margin-top: -60px;
+            }
+            25% {
+                transform: rotate(10deg);
+                font-size: 50px;
+                margin-top: -75px;
+                color: darkred;
+            }
+            50% {
+                transform: rotate(0deg);
+                font-size: 50px;
+                margin-top: -75px;
+                color: red;
+            }
+            75% {
+                transform: rotate(-10deg);
+                font-size: 50px;
+                margin-top: -75px;
+                color: darkred;
+            }
+            100% {
+                font-size: 40px;
+                transform: rotate(0deg);
+                margin-top: -60px;
+                color: red;
+            }
+        }
+        .cmgz:hover {
+            animation-name: dingdong;
+            animation-duration: 400ms;
+            animation-timing-function: ease;
+            animation-iteration-count: infinite;
+            animation-fill-mode: forwards;
+        }
+        .cmg:hover {
+            transition: 400ms;
+            background-color: indigo;
+            border: 3px solid darkred;
+        }
+        .cmg {
+            transition: 400ms;
+            background-color: black;
+            border: 3px solid black;
+        }
     </style>
     <head>
         <meta name="google-site-verification" content="WdWLLBf9A1JTBfrsJAVqC4gBOpIiHtRa8EQ_a5zNqnE" />
     </head>
     <title>AmirhossainJ123</title>
-    <body style="background-image: url(Steve.png);background-size: contain;" onload="main()">
+    <body style="background-image: url(blender/Donut.png);background-size: cover;" onload="main()">
         <h1 class="ooga"></h1>
         <h1>I am bored of programming now, so COMING SOON</h1>
         <h3>You can just take a look at Quiz Land to see whether if its cool or nah idk</h3>
@@ -264,16 +339,20 @@
         <h3>Or maybe you want to see the current coming soon utilities that are going to be added</h3>
         <h3>Don't cheat!</h3>
         <form action="quiz">
-        <button class="qlz" href="https://amirhossainj123.github.io/quiz">Quiz Land</button>
+            <button class="qlz" href="https://amirhossainj123.github.io/quiz">Quiz Land</button>
         </form>
         <form action="blend">
             <button class="fhf" href="https://amirhossainj123.github.io/blend">My arts in Blender</button>
         </form>
         <form action="credit">
             <button class="qlzz" href="https://amirhossainj123.github.io/credit">Credit Page</button>
-            </form>
+        </form>
         <form action="utilities">
             <button class="fhff" href="https://amirhossainj123.github.io/utilities">Utilities (Not Ready)</button>
+        </form>
+        <form action="new_index">
+            <button class="cmg" href="https://amirhossainj123.github.io/new_index">Coming soon: A New Main Page Design!</button>
+            <h4 class="cmgz">!!!</h4>
         </form>
         <div class="cursor coolz"><div>
             <script>
