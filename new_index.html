@@ -1,21 +1,948 @@
 <title>COMING SOON...</title>
+<script>
+    
+    old_num_1 = 0
+        old_num_2 = 0
+        old_num_3 = 0
+        old_num_4 = 0
+        old_num_5 = 0
+        old_num_6 = 0
+        new_num_1 = 0
+        new_num_2 = 0
+        new_num_3 = 0
+        new_num_4 = 0
+        new_num_5 = 0
+        new_num_6 = 0
+        function minusize(new_num_1,old_num_1) {
+            if (new_num_1 > old_num_1)
+                old_num_1 += 2
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 2
+            if (new_num_1 > old_num_1)
+                old_num_1 += 1
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 1
+            return old_num_1
+        }
+        function randomize(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+        function slower_cursor_loop() {
+            setTimeout(() => {
+                old_num_5 = minusize(new_num_5,old_num_5)
+                const set = document.querySelector(".coolz")
+                set.style.padding = (old_num_5)/40 + "px"
+                if (new_num_5 === old_num_5) {
+                    new_num_5 = randomize(40,240);
+                }
+                slower_cursor_loop()
+            }, 400);
+        }
+        function color_culoop() {
+            setTimeout(() => {
+                new_susx = randomize(230,256)
+                new_susy = randomize(230,256)
+                new_susz = randomize(230,256)
+                susx = 243-new_susx
+                susy = 243-new_susy
+                susz = 243-new_susz
+                old_num_6 = minusize(new_num_6,old_num_6)
+                const set = document.querySelector(".coolz")
+                set.style.backgroundColor = `rgb(${old_num_6+susx},${old_num_6+susy},${old_num_6+susz})`
+                set.style.borderColor = `rgb(${new_susx-old_num_6},${new_susy-old_num_6},${new_susz-old_num_6})`
+                if (new_num_6 === old_num_6) {
+                    new_num_6 = randomize(0,256);
+                    setTimeout(() => {
+                        color_culoop()
+                    }, 2000);
+                }
+                else
+                    color_culoop()
+            }, 10);
+        }
+        function cursor_loop() {
+            setTimeout(() => {
+            old_num_1 = minusize(new_num_1,old_num_1)
+            old_num_2 = minusize(new_num_2,old_num_2)
+            old_num_3 = minusize(new_num_3,old_num_3)
+            old_num_4 = minusize(new_num_4,old_num_4)
+            const set = document.querySelector(".coolz")
+            set.style.borderBottomLeftRadius = old_num_1 + "%"
+            set.style.borderBottomRightRadius = old_num_2 + "%"
+            set.style.borderTopLeftRadius = old_num_3 + "%"
+            set.style.borderTopRightRadius = old_num_4 + "%"
+
+            if (new_num_1 === old_num_1) {
+                new_num_1 = randomize(40,121);
+            }
+            if (new_num_2 === old_num_2) {
+                new_num_2 = randomize(40,121);
+            }
+            if (new_num_3 === old_num_3) {
+                new_num_3 = randomize(40,121);
+            }
+            if (new_num_4 === old_num_4) {
+                new_num_4 = randomize(40,121);
+            }
+            cursor_loop()
+            }, 25);
+        }
+        function main() {
+            cursor_loop()
+            slower_cursor_loop()
+            color_culoop()
+        }
+</script>
 <style>
-    div {
-        height: 500px;
-        width: 500px;
-        top: 50%;
-        left: 50%;
-        margin-top: -250px;
-        margin-left: -250px;
+    @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+    * {
+        cursor: none;
+    }
+    body {
+        background-color: black;
+    }
+    .logo  {
+        margin: 5px;
+        display: inline-block;
+        background-color: black;
+        opacity: 0.8;
+        padding: 10px;
+        border-radius: 10px;
+        border: 5px solid rgb(53, 53, 53);
+    }
+    @keyframes cool {
+        0% {
+            margin-left: -500px;
+            color: black;
+        }
+        100% {
+            margin-left: 200px;
+            color: white;
+        }}
+    .logo h1, .logo h3 {
+        margin-left: -500px;
+        margin-top: 20px;
         position: absolute;
-        display: inline-flexbox;
-        align-items: center;
-        justify-items: center;
+        color: black;
+        display: none;
+        font-family: 'Poor Story', cursive;
+    }
+    .logo h1 {
+        font-family: 'Dancing Script', cursive;
+        margin-top: -20px;
+    }
+    .logo:hover {
+        transition: 500ms;
+        opacity: 1;
+        background-color: gray;
+    }
+    .logo:active h1, .logo:active h3 {
+        display: block;
+        animation-name: cool;
+        animation-timing-function: linear;
+        animation-duration: 200ms;
+        animation-fill-mode: forwards;
+
+    }
+    .logo:active {
+        transition: 500ms;
+        opacity: 1;
+        border-radius: 200px;
+        background-color: white;
+    }
+    .darkify {
+        width: 220px;
+        height: 220px;
+        margin-left: -210px;
+        margin-top: -10px;
+        display: inline-block;
+        background-color: rgba(22, 22, 22, 0.3);
+        position: absolute;
+        border-radius: 10px;
+    }
+    .coolz {
+        cursor: none;
+        width: 20px;
+        height: 20px;
+        margin: auto;
+        top: 0%;
+        left: 0%;
+        position: absolute;
+        display: inline-block;
+        background-color: white;
+        text-align: center;
+        pointer-events: none;
+        border: 2px solid black;
+    }
+    .darkify:hover {
+        transition: 1s;
+        background-color: rgba(182, 182, 182, 0.3);
+    }
+    .darkify:active {
+        transition: 1s;
+        border-radius: 200px;
+        background-color: unset;
     }
 </style>
-<body>
-    <div>
-        <h1>COMING SOON...</h1>
-        <h3>First Release: Friday 4 November 2022 - Friday 18 November 2022</h3>
+<body onload="main()">
+    <div class="logo">
+        <img src="logo.png" alt="LOGO" width="200" height="200">
+        <div class="darkify"></div>
+        <h1>AmirhossainJ123</h1>
+        <h3>Artist and Developer, Creator of this website</h3>
     </div>
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    COMING SOON
+    <div class="cursor coolz"><div>
+        <script>
+            window.addEventListener('mousemove',(e) => {
+                const cursorCool = document.querySelector('.coolz');
+                New_posX = e.clientX-10
+                New_posY = e.clientY-10
+                cursorCool.style.transform = `translate3d(${New_posX}px, ${New_posY}px, 0)`;
+            });
+        </script>
 </body>
