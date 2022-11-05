@@ -1,0 +1,59 @@
+<html>
+<title>Anything you say!</title>
+<body>
+    <html>
+    <script>
+        function getem() {
+            sus = window.location.href
+            return sus.split("/")[sus.length-1]
+        }
+        function save() {
+            if (document.getElementById("use").value != "" && document.getElementById("use").value != " " && document.getElementById("use").value == "404" && document.getElementById("use").value == "404.html" && document.getElementById("use").value == null && document.getElementById("use").value == undefined)
+            localStorage.setItem(document.getElementById("use").value,document.getElementById("red").value)
+        }
+        function main() {
+            a = localStorage.getItem(getem())
+            if (a != "" && a != " " && a != "404" && a != "404.html" && a != undefined && a != null)
+                window.location.href = a
+        }
+        function helpem() {
+            alert("Well! you can see 2 input there right?\nYou can use those to make your own custom redirect page!")
+            alert("So the first link is the page you want to use lets use ExampleAmir\nSo you used the page https://amirhossainj123.github.io/anything/you/say/ExampleAmir")
+            alert("And the second link is what you want to redirect it to for example:\nhttps://youtube.com/")
+            alert("Lets go you have done it, now if you go to\nhttps://amirhossainj123.github.io/anything/you/say/ExampleAmir\nYou will be redirected to youtube!")
+            alert("Good luck :D")
+        }
+    </script>
+    <style>
+        input {
+            outline: none;
+            border: 2px solid black;
+            border-radius: 20px;
+            padding: 5px;
+            color: black;
+        }
+        button {
+            background-color: green;
+            border: 2px solid darkgoldenrod;
+            border-radius: 30px;
+            text-align: center;
+            padding: 5px;
+        }
+        body {
+            background-color: black;
+        }
+        * {
+            color: white;
+        }
+    </style>
+    <body onload="main()">
+        <input type="text" id="use" value="Name of the page you want to use">
+        <input type="text" id="red" value="URL you want to redirect to">
+        <button onclick="save()">Save</button>
+        <button onclick="helpem()">HELP PLEASE?</button>
+        <h3>NOTE: Don't use space or backslash or any other special character like that only underline is allowed from specialies</h3>
+        <h3>NOTE: Also it only works in your client so if you send it to someone it won't work like that</h3>
+    </body>
+</html>
+</body>
+</html>
