@@ -5,7 +5,10 @@
     <script>
         function getem() {
             sus = window.location.href
-            return sus.split("/")[sus.length-1]
+            if (sus.startsWith("https://amirhossainj123.github.io/anything/you/say/404?code="))
+                return sus.replace("https://amirhossainj123.github.io/anything/you/say/404","").replace("?code=","")
+            else
+                return ""
         }
         function save() {
             if (document.getElementById("use").value != "" && document.getElementById("use").value != " " && document.getElementById("use").value == "404" && document.getElementById("use").value == "404.html" && document.getElementById("use").value == null && document.getElementById("use").value == undefined)
