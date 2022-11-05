@@ -17,7 +17,9 @@
         function main() {
             a = localStorage.getItem(getem())
             if (a != "" && a != " " && a != "redirector" && a != "redirector.html" && a != undefined && a != null)
-                window.location = a
+            {
+                window.open(a)
+            }
         }
         function helpem() {
             alert("Well! you can see 2 input there right?\nYou can use those to make your own custom redirect page!")
