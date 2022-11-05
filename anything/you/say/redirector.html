@@ -5,18 +5,18 @@
     <script>
         function getem() {
             sus = window.location.href
-            if (sus.replace("https://amirhossainj123.github.io","").startsWith("/anything/you/say/404?code="))
-                return sus.replace("https://amirhossainj123.github.io/","").replace("anything/you/say/404","").replace("?code=","")
+            if (sus.replace("https://amirhossainj123.github.io","").startsWith("/anything/you/say/redirector?code="))
+                return sus.replace("https://amirhossainj123.github.io/","").replace("anything/you/say/redirector","").replace("?code=","")
             else
                 return ""
         }
         function save() {
-            if (document.getElementById("use").value != "" && document.getElementById("use").value != " " && document.getElementById("use").value != "404" && document.getElementById("use").value != "404.html" && document.getElementById("use").value != null && document.getElementById("use").value != undefined)
+            if (document.getElementById("use").value != "" && document.getElementById("use").value != " " && document.getElementById("use").value != "redirector" && document.getElementById("use").value != "redirector.html" && document.getElementById("use").value != null && document.getElementById("use").value != undefined)
             localStorage.setItem(document.getElementById("use").value,document.getElementById("red").value)
         }
         function main() {
             a = localStorage.getItem(getem())
-            if (a != "" && a != " " && a != "404" && a != "404.html" && a != undefined && a != null)
+            if (a != "" && a != " " && a != "redirector" && a != "redirector.html" && a != undefined && a != null)
                 window.location = a
         }
         function helpem() {
