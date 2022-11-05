@@ -5,8 +5,8 @@
     <script>
         function getem() {
             sus = window.location.href
-            if (sus.startsWith("https://amirhossainj123.github.io/anything/you/say/404?code="))
-                return sus.replace("https://amirhossainj123.github.io/anything/you/say/404","").replace("?code=","")
+            if (sus.replace("https://amirhossainj123.github.io","").startsWith("/anything/you/say/404?code="))
+                return sus.replace("https://amirhossainj123.github.io/","").replace("anything/you/say/404","").replace("?code=","")
             else
                 return ""
         }
