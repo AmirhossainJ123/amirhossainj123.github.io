@@ -17,7 +17,7 @@
         function main() {
             a = localStorage.getItem(getem())
             if (a != "" && a != " " && a != "404" && a != "404.html" && a != undefined && a != null)
-                window.location.href = a
+                window.location = a
         }
         function helpem() {
             alert("Well! you can see 2 input there right?\nYou can use those to make your own custom redirect page!")
@@ -42,6 +42,13 @@
             text-align: center;
             padding: 5px;
         }
+        button:hover {
+            background-color: darkgreen;
+            border: 2px solid orangered;
+            border-radius: 30px;
+            text-align: center;
+            padding: 5px;
+        }
         body {
             background-color: black;
         }
@@ -56,6 +63,7 @@
         <button onclick="helpem()">HELP PLEASE?</button>
         <h3>NOTE: Don't use space or backslash or any other special character like that only underline is allowed from specialies</h3>
         <h3>NOTE: Also it only works in your client so if you send it to someone it won't work like that</h3>
+        <h3>NOTE: Try the Help button won't do bad!</h3>
     </body>
 </html>
 </body>
