@@ -32,14 +32,29 @@
             display: inline-block;
         }
         .advertisement {
+            transition: 500ms;
             top: 97%;
-            width: 510px;
-            height: 300px;
+            width: 383px;
+            height: 225px;
             margin: 10px;
-            margin-top: -302px;
+            margin-top: -237px;
             position: absolute;
-            border: 2px solid white;
+            border: 4px solid white;
             border-radius: 10px;
+            opacity: 0.5;
+        }
+        .advertisement * {
+            border-radius: 5px;
+        }
+        .advertisement:hover {
+            transition: 500ms;
+            border: 4px solid green;
+            opacity: 1;
+        }
+        .advertisement:active {
+            transition: 500ms;
+            border: 4px solid red;
+            opacity: 0;
         }
     </style>
     <body>
@@ -58,7 +73,7 @@
             <button href="https://amirhossainj123.github.io/anything/you/say/redirector">Client Side Redirector (Not Ready)</button>
         </form>
         <div class="advertisement">
-            <img src="https://amirhossainj123.github.io/advertisement/0.png" onclick="ads(0)" width="510" height="300">
+            <img src="https://amirhossainj123.github.io/advertisement/0.png" onclick="ads(0)" width="383" height="225">
         </div>
     </body>
 </html>
