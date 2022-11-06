@@ -1,4 +1,10 @@
 <html>
+    <script>
+        adv = ["https://discord.gg/Ethz2t9TVN"]
+        function ads(num) {
+            window.location = adv[num]
+        }
+    </script>
     <style>
         body {
             background-color: black;
@@ -25,6 +31,16 @@
         form {
             display: inline-block;
         }
+        .advertisement {
+            top: 97%;
+            width: 255px;
+            height: 150px;
+            margin: 10px;
+            margin-top: -152px;
+            position: absolute;
+            border: 2px solid white;
+            border-radius: 10px;
+        }
     </style>
     <body>
         <title>Utilities</title>
@@ -41,5 +57,8 @@
         <form action="https://amirhossainj123.github.io/anything/you/say/redirector">
             <button href="https://amirhossainj123.github.io/anything/you/say/redirector">Client Side Redirector (Not Ready)</button>
         </form>
+        <div class="advertisement">
+            <img src="https://amirhossainj123.github.io/advertisement/0.png" onclick="ads(0)" width="255" height="150">
+        </div>
     </body>
 </html>
