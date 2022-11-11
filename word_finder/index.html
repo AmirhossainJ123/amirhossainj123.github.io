@@ -1,0 +1,23 @@
+<script>
+    function getText(file) {
+        var request = new XMLHttpRequest();
+        request.open('GET', file, true);
+        request.send(null);
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                var type = request.getResponseHeader('Content-Type');
+                if (type.indexOf("text") !== 1) {
+                    return request.responseText;
+                }
+            }
+        }
+    }
+    function main() {
+        getText("https://amirhossainj123.github.io/knowledge/English.txt")
+    }
+</script>
+<body onload="main()">
+    <h1>Welcome</h1>
+    <span id="test"></span>
+    <h2>I used Matt Wiens English Library for this!</h2>
+</body>
