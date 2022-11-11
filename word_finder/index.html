@@ -35,17 +35,79 @@
         document.getElementById("output").textContent = repeater()
     }
 </script>
-<body onload="">
+<style>
+    body {
+        background-color: black;
+    }
+    * {
+        text-align: center;
+    }
+    h1 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: white;
+    }
+    .centerz {
+        width: 800px;
+        height: 500px;
+        left: 50%;
+        top: 50%;
+        margin-left: -410px;
+        margin-top: -300px;
+        position: absolute;
+    }
+    .center {
+        background-color: pink;
+        border-radius: 20px;
+        padding: 5px;
+        border: 5px solid gray;
+    }
+    .center * {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    h2 {
+        display: inline-block;
+    }
+    input {
+        padding: 5px;
+        background-color: white;
+        border: 3px solid gray;
+    }
+    button {
+        padding: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        color: black;
+        border-radius: 10px;
+        background-color: greenyellow;
+        border: 3px solid green;
+    }
+    button:hover {
+        background-color: green;
+        border: 3px solid darkgreen;
+    }
+    .bordered {
+        background-color: darkgray;
+        border: 3px solid gray;
+        padding: 10px;
+        border-radius: 10px;
+    }
+</style>
+<body onload="calc()">
+    <div class="centerz">
     <h1>Word Finder</h1>
-    <h2>Enter what it should start with!</h2>
+    <div class="center">
+    <h2>Enter what it should start with:</h2>
     <input type="text" id="a">
-    <h2>Enter what it should end with!</h2>
+    <h2>Enter what it should end with:</h2>
     <input type="text" id="b">
-    <h2>Enter what it should have in</h2>
+    <h2>Enter what it should have in:</h2>
     <input type="text" id="c">
+    <br>
     <button onclick="calc()">Find</button>
-    <h3 id="output"></h3>
+    <h3 id="output" class="bordered"></h3>
     <h3>Leave empty so it ignores that</h3>
-    <h3>So basically you can find words that start/end with something or has a special thing in it!</h3>
-    <h4>I used Matt Wiens English Library for this!</h2>
+    <h3>So basically you can find English words</h3>
+    <h4>I used Matt Wiens English Library for this!</h4>
+    </div>
+    </div>
 </body>
