@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <script>
+            posy = 380
+            speedy = 0
+            enemy_posx = []
+            enemy_posy = []
+            score = 0
+            function builds(posx) {
+                const canvas = document.getElementById("game");
+                if (canvas.getContext) {
+                    const ctx = canvas.getContext("2d");
+                    ctx.fillStyle = "rgb(0,100,0)"
+                    ctx.fillRect(0,400,700,100);
+                    ctx.fillStyle = "rgb(255,255,255)"
+                    ctx.fillRect(posx,posy,20,20);
+                    for (let index = 0; index < 3; index++) {
+                        ctx.fillStyle = "rgb(200,0,0)"
+                        ctx.fillRect(enemy_posx[index],enemy_posy[index],50,50);
+                    }
+                }
+            }
+            function head_down() {
+                speedy = 10
+            }
+            function jump() {
+                speedy = -10
+            }
+            function jumpa() {
+                setTimeout(() => { 
+                    if (posy > 0) {
+                        posy -= 15;
+                        jumpa()
+                    }
+                    if (posy <= -5)
+                        posy = 0;
+                }, 20);
+            }
+            function rule_fly() {
+                return true;
+            }
+            posx = 0
+            speed = 0
+            key_left = false
+            key_right = false
+            key_up = false
+            key_down = false
+            function randomizer(min,max) {
+                return min + Math.floor(Math.random()*(max-min))
+            }
+            function score_shower() {
+                setTimeout(() => {
+                    document.getElementById("scorem").textContent = "Score: " + score
+                    score_shower()
+                }, 100);
+            }
+            function main() {
+                main_loop()
+                score_shower()
+                for (let index = 0; index < 3; index++) {
+                    random_enemy_pos(index)
+                }
+                gravity_and_friction_and_speed()
+                addEventListener("keyup",(e) => {
+                    switch (e.keyCode) {
+                        case 37: case 65: key_left = false; break;
+                        case 38: case 87: key_up = false; break;
+                        case 39: case 68: key_right = false; break;
+                        case 40: case 83: key_down = false; break;
+                    }
+                });
+                addEventListener("keydown",(e) => {
+                    switch (e.keyCode) {
+                        case 37: case 65: key_left = true; break;
+                        case 38: case 87: key_up = true; break;
+                        case 39: case 68: key_right = true; break;
+                        case 40: case 83: key_down = true; break;
+                    }
+                });
+            }
+            function random_enemy_pos(index) {
+                enemy_posx[index] = randomizer(700,750)
+                enemy_posy[index] = randomizer(50,350)
+                score += 1
+            }
+            function gravity_and_friction_and_speed() {
+                setTimeout(() => {
+                    for (let index = 0; index < 3; index++) {
+                        enemy_posx[index] -= 5
+                        if (enemy_posx[index] < 0)
+                            random_enemy_pos(index)
+                    }
+                    speedy += 0.5
+                    posx += speed
+                    posy += speedy
+                    if (speed > 0)
+                        speed-=0.25
+                    if (speed < 0)
+                        speed+=0.25
+                    gravity_and_friction_and_speed()
+                }, 10);
+            }
+            function apply_buttons() {
+                if (key_down)
+                    head_down()
+                if (key_left)
+                    speed = -5
+                if (key_right)
+                    speed = 5
+                if (key_up)
+                    if (rule_fly)
+                        jump()
+            }
+            function colirule() {
+                if (posx < 0)
+                    posx = 0
+                if (posx > 680)
+                    posx = 680
+                if (posy < 0)
+                    posy = 0
+                if (posy > 380)
+                    posy = 380
+                for (let index = 0; index < 3; index++) {
+                    dx = Math.abs((posx+10)-(enemy_posx[index]+25))
+                    dy = Math.abs((posy+10)-(enemy_posy[index]+25))
+                    if (dx < 50 && dy < 50) {
+                        posx = 0
+                        posy = 380
+                        score -= 10
+                    }
+                }
+            }
+            function main_loop() {
+                setTimeout(() => {
+                    apply_buttons()
+                    colirule()
+                    const canvas = document.getElementById("game").getContext("2d").reset();
+                    builds(posx)
+                    main_loop(posx)
+                }, 2);
+            }
+        </script>
+        <style>
+            body {
+                background-image: url("Assets/game_background.png");
+                background-size: cover;
+            }
+            .centerize {
+                left: 50%;
+                top: 50%;
+                margin-top: -254px;
+                margin-left: -354px;
+                border: white solid 4px;
+                position: absolute;
+            }
+            h2 {
+                color: white;
+            }
+        </style>
+    </head>
+    <body onload="main()">
+        <canvas class="centerize" width="700" height="500" id="game"></canvas>
+        <h2 id="scorem"></h2>
+    </body>
+</html>
