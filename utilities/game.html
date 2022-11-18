@@ -160,10 +160,10 @@
         </div>
         <canvas class="centerize" width="700" height="500" id="game"></canvas>
         <div class="button_part">
-            <button class="x_button" onmouseup="key_up = false" onmousedown="key_up = true">X</button>
-            <button class="y_button" onmouseup="key_left = false" onmousedown="key_left = true">Y</button>
-            <button class="a_button" onmouseup="key_right = false" onmousedown="key_right = true">A</button>
-            <button class="b_button" onmouseup="key_down = false" onmousedown="key_down = true">B</button>
+            <button class="x_button" onmouseup="key_up = false" onmousedown="key_up = true" onpointerup="key_up = false" onpointerdown="key_up = true">X</button>
+            <button class="y_button" onmouseup="key_left = false" onmousedown="key_left = true" onpointerup="key_left = false" onpointerdown="key_left = true">Y</button>
+            <button class="a_button" onmouseup="key_right = false" onmousedown="key_right = true" onpointerup="key_right = false" onpointerdown="key_right = true">A</button>
+            <button class="b_button" onmouseup="key_down = false" onmousedown="key_down = true" onpointerup="key_down = false" onpointerdown="key_down = true">B</button>
         </div>
         <div class="button_part2">
             <button class="x_button" onmouseup="key_up = false" onmousedown="key_up = true">W</button>
