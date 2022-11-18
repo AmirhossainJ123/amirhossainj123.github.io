@@ -60,6 +60,17 @@ function start_menu() {
         const ctx = canvas.getContext("2d");
         ctx.fillStyle = "rgb(0,0,0)"
         ctx.fillRect(0,0,700,500);
+        ctx.strokeStyle = "rgb(200,200,200)"
+        ctx.beginPath();
+        ctx.moveTo(120, 30);
+        ctx.lineTo(30, 120);
+        ctx.lineWidth = 4
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(600, 470);
+        ctx.lineTo(670, 400);
+        ctx.lineWidth = 3
+        ctx.stroke();
     }
 }
 function head_down() {

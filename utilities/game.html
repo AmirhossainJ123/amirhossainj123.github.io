@@ -82,11 +82,73 @@
                 border: 2px solid black;
                 color: black;
             }
+            .button_part{
+                height: 200px;
+                width: 200px;
+                left: 50%;
+                top: 50%;
+                margin-top: -100px;
+                margin-left: 390px;
+                position: absolute;
+            }
+            .button_part * {
+                background-color: black;
+                color: white;
+                padding: 20px;
+                border: 2px solid white;
+                border-radius: 100%;
+                font-size: 30px;
+            }
+            .button_part button:hover {
+                background-color: rgb(50, 50, 50);
+                color: white;
+            }
+            .button_part2{
+                height: 200px;
+                width: 200px;
+                left: 50%;
+                top: 50%;
+                margin-top: -100px;
+                margin-left: -510px;
+                position: absolute;
+            }
+            .button_part2 * {
+                background-color: darkgray;
+                color: darkblue;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                padding: 20px;
+                border-radius: 100%;
+                font-size: 25px;
+            }
+            .button_part2 button:hover {
+                background-color: rgb(50, 50, 50);
+                color: white;
+            }
+            .x_button {
+                position: absolute;
+                margin-left: 25px;
+            }
+            .y_button {
+                position: absolute;
+                margin-left: -30px;
+                margin-top: 60px;
+            }
+            .b_button {
+                position: absolute;
+                margin-left: 25px;
+                margin-top: 120px;
+            }
+            .a_button {
+                position: absolute;
+                margin-left: 80px;
+                margin-top: 60px;
+            }
+            
         </style>
     </head>
     <body onload="main()">
-        <title>Game</title>
         <div class="lforya" id="lforu" hidden>
+            <title>Game</title>
             <h2>You have lost</h2>
             <h4>The red demons have captured your body and now you are in their control!</h4>
             <h4>Captain Rediwish has hacked the entire Whitishland using your body!</h4>
@@ -97,6 +159,18 @@
             <h4>Captain Rediwish is now in prison in Whitishland for killing billions of ppl</h4>
         </div>
         <canvas class="centerize" width="700" height="500" id="game"></canvas>
+        <div class="button_part">
+            <button class="x_button" onmouseup="key_up = false" onmousedown="key_up = true">X</button>
+            <button class="y_button" onmouseup="key_left = false" onmousedown="key_left = true">Y</button>
+            <button class="a_button" onmouseup="key_right = false" onmousedown="key_right = true">A</button>
+            <button class="b_button" onmouseup="key_down = false" onmousedown="key_down = true">B</button>
+        </div>
+        <div class="button_part2">
+            <button class="x_button" onmouseup="key_up = false" onmousedown="key_up = true">W</button>
+            <button class="y_button" onmouseup="key_left = false" onmousedown="key_left = true">A</button>
+            <button class="a_button" onmouseup="key_right = false" onmousedown="key_right = true">D</button>
+            <button class="b_button" onmouseup="key_down = false" onmousedown="key_down = true">S</button>
+        </div>
         <h2 id="scorem"></h2>
         <h3 id="capturedz"></h3>
         <h3 id="bluwishz"></h3>
