@@ -1,40 +1,75 @@
 <html>
     <head>
         <script>
+            czzz = 255
             posy = 380
+            start = false
             speedy = 0
-            enemy_posx = []
-            enemy_posy = []
+            bluwish = 0
+            captured = 0
+            gravity = 0.5
+            friction = 0.25
+            enemy_posx = [0,0,0]
+            enemy_posy = [0,0,0]
+            food_posx = [0]
+            food_posy = [0]
             score = 0
+            enemy_speed = 5
+            food_speed = 5
+            player_speed = 5
+            function doAll() {
+                document.getElementById("start_button").hidden = true
+                document.getElementById("option").hidden = false
+                for (let index = 0; index < enemy_posx.length; index++) {
+                    random_enemy_pos(index)
+                }
+                for (let index = 0; index < food_posx.length; index++) {
+                    random_food_pos(index)
+                }
+            }
+            function sleeptick() {
+                setTimeout(() => {
+                    if (start) {
+                        main_loop()
+                        score_shower()
+                        doAll()
+                        gravity_and_friction_and_speed()
+                    }
+                    else
+                        sleeptick()
+                }, 100);
+            }
             function builds(posx) {
                 const canvas = document.getElementById("game");
                 if (canvas.getContext) {
                     const ctx = canvas.getContext("2d");
                     ctx.fillStyle = "rgb(0,100,0)"
                     ctx.fillRect(0,400,700,100);
-                    ctx.fillStyle = "rgb(255,255,255)"
+                    ctx.fillStyle = `rgb(${czzz},${czzz},${czzz})`
                     ctx.fillRect(posx,posy,20,20);
-                    for (let index = 0; index < 3; index++) {
+                    for (let index = 0; index < food_posx.length; index++) {
+                        ctx.fillStyle = "rgb(0,0,200)"
+                        ctx.fillRect(food_posx[index],food_posy[index],20,20);
+                    }
+                    for (let index = 0; index < enemy_posx.length; index++) {
                         ctx.fillStyle = "rgb(200,0,0)"
                         ctx.fillRect(enemy_posx[index],enemy_posy[index],50,50);
                     }
                 }
             }
+            function start_menu() {
+                const canvas = document.getElementById("game");
+                if (canvas.getContext) {
+                    const ctx = canvas.getContext("2d");
+                    ctx.fillStyle = "rgb(0,0,0)"
+                    ctx.fillRect(0,0,700,500);
+                }
+            }
             function head_down() {
-                speedy = 10
+                speedy = player_speed+15
             }
             function jump() {
-                speedy = -10
-            }
-            function jumpa() {
-                setTimeout(() => { 
-                    if (posy > 0) {
-                        posy -= 15;
-                        jumpa()
-                    }
-                    if (posy <= -5)
-                        posy = 0;
-                }, 20);
+                speedy = -1*(player_speed+5)
             }
             function rule_fly() {
                 return true;
@@ -51,16 +86,62 @@
             function score_shower() {
                 setTimeout(() => {
                     document.getElementById("scorem").textContent = "Score: " + score
+                    document.getElementById("capturedz").textContent = "Cursed: " + captured
+                    document.getElementById("bluwishz").textContent = "Bluwish: " + bluwish
+                    if (czzz >= 255)
+                        document.getElementById("warres").textContent = "To Victory: " + parseInt(parseInt(500)-parseInt(czzz))
+                    else if (czzz < 255)
+                        document.getElementById("warres").textContent = "To Defeat: " + czzz
                     score_shower()
                 }, 100);
             }
-            function main() {
-                main_loop()
-                score_shower()
-                for (let index = 0; index < 3; index++) {
+            function add_more() {
+                enemy_posx.push("0")
+                enemy_posy.push("0")
+                for (let index = 0; index < enemy_posx.length; index++) {
                     random_enemy_pos(index)
                 }
-                gravity_and_friction_and_speed()
+                score = 0
+            }
+            function remove_enemy() {
+                enemy_posxx = []
+                enemy_posyy = []
+                for (let index = 0; index < enemy_posx.length-1; index++) {
+                    enemy_posxx[index] = enemy_posx[index]
+                    enemy_posyy[index] = enemy_posy[index]
+                }
+                enemy_posx = enemy_posxx
+                enemy_posy = enemy_posyy
+                for (let index = 0; index < enemy_posx.length; index++) {
+                    random_enemy_pos(index)
+                }
+                score = 0
+            }
+            function remove_food() {
+                food_posxx = []
+                food_posyy = []
+                for (let index = 0; index < food_posx.length-1; index++) {
+                    food_posxx[index] = food_posx[index]
+                    food_posyy[index] = food_posy[index]
+                }
+                food_posx = food_posxx
+                food_posy = food_posyy
+                for (let index = 0; index < food_posx.length; index++) {
+                    random_food_pos(index)
+                }
+                score = 0
+            }
+            function more_food() {
+                food_posx.push("0")
+                food_posy.push("0")
+                for (let index = 0; index < food_posx.length; index++) {
+                    random_food_pos(index)
+                }
+                score = 0
+            }
+            function main() {
+                start_menu()
+                sleeptick()
                 addEventListener("keyup",(e) => {
                     switch (e.keyCode) {
                         case 37: case 65: key_left = false; break;
@@ -80,23 +161,51 @@
             }
             function random_enemy_pos(index) {
                 enemy_posx[index] = randomizer(700,750)
-                enemy_posy[index] = randomizer(50,350)
+                enemy_posy[index] = randomizer(0,350)
                 score += 1
+            }
+            function random_food_pos(index) {
+                food_posx[index] = randomizer(700,750)
+                food_posy[index] = randomizer(0,350)
+                score -= 1
+            }
+            hidden_checker = true
+            function toggle_menu() {
+                hidden_checker = !hidden_checker
+                document.getElementById("fus").hidden = hidden_checker
+                document.getElementById("sus").hidden = hidden_checker
+                document.getElementById("susx").hidden = hidden_checker
+                document.getElementById("fusx").hidden = hidden_checker
+                document.getElementById("susz").hidden = hidden_checker
+                document.getElementById("suszz").hidden = hidden_checker
+                document.getElementById("suszzz").hidden = hidden_checker
+                document.getElementById("suszzzz").hidden = hidden_checker
+                document.getElementById("suszzzzz").hidden = hidden_checker
+                document.getElementById("suszzzzzz").hidden = hidden_checker
+                document.getElementById("suszzzzzzz").hidden = hidden_checker
+                document.getElementById("suszzzzzzzz").hidden = hidden_checker
+                document.getElementById("suszzzzzzzzz").hidden = hidden_checker
+                document.getElementById("suszzzzzzzzzz").hidden = hidden_checker
             }
             function gravity_and_friction_and_speed() {
                 setTimeout(() => {
-                    for (let index = 0; index < 3; index++) {
-                        enemy_posx[index] -= 5
+                    for (let index = 0; index < enemy_posx.length; index++) {
+                        enemy_posx[index] -= enemy_speed
                         if (enemy_posx[index] < 0)
                             random_enemy_pos(index)
                     }
-                    speedy += 0.5
+                    for (let index = 0; index < food_posx.length; index++) {
+                        food_posx[index] -= food_speed
+                        if (food_posx[index] < 0)
+                            random_food_pos(index)
+                    }
+                    speedy += gravity
                     posx += speed
                     posy += speedy
                     if (speed > 0)
-                        speed-=0.25
+                        speed-=friction
                     if (speed < 0)
-                        speed+=0.25
+                        speed+=friction
                     gravity_and_friction_and_speed()
                 }, 10);
             }
@@ -104,9 +213,9 @@
                 if (key_down)
                     head_down()
                 if (key_left)
-                    speed = -5
+                    speed = -player_speed
                 if (key_right)
-                    speed = 5
+                    speed = player_speed
                 if (key_up)
                     if (rule_fly)
                         jump()
@@ -120,13 +229,26 @@
                     posy = 0
                 if (posy > 380)
                     posy = 380
-                for (let index = 0; index < 3; index++) {
+                for (let index = 0; index < enemy_posx.length; index++) {
                     dx = Math.abs((posx+10)-(enemy_posx[index]+25))
                     dy = Math.abs((posy+10)-(enemy_posy[index]+25))
-                    if (dx < 50 && dy < 50) {
+                    if (dx < 35 && dy < 35) {
+                        czzz -= 1
                         posx = 0
                         posy = 380
-                        score -= 10
+                        random_enemy_pos(index)
+                        score -= 1+(enemy_posx.length/2)
+                        captured += 1
+                    }
+                }
+                for (let index = 0; index < food_posx.length; index++) {
+                    dx = Math.abs((posx+10)-(food_posx[index]+10))
+                    dy = Math.abs((posy+10)-(food_posy[index]+10))
+                    if (dx < 20 && dy < 20) {
+                        czzz += 1
+                        random_food_pos(index)
+                        score += 1
+                        bluwish += 1
                     }
                 }
             }
@@ -136,7 +258,18 @@
                     colirule()
                     const canvas = document.getElementById("game").getContext("2d").reset();
                     builds(posx)
-                    main_loop(posx)
+                    if (czzz <= 0) {
+                        document.getElementById("game").remove()
+                        document.getElementById("lforu").hidden = false
+                        score = "Defeated"
+                    }
+                    else if (czzz >= 500) {
+                        document.getElementById("game").remove()
+                        document.getElementById("wforu").hidden = false
+                        score = "Victory"
+                    }
+                    else
+                        main_loop()
                 }, 2);
             }
         </script>
@@ -149,17 +282,125 @@
                 left: 50%;
                 top: 50%;
                 margin-top: -254px;
-                margin-left: -354px;
-                border: white solid 4px;
+                margin-left: -554px;
+                outline: white solid 4px;
                 position: absolute;
+                border-left: 200px solid blue;
+                border-right: 200px solid red;
+                border-radius: 50px;
             }
-            h2 {
+            h2, h3 {
                 color: white;
+            }
+            .lforya * {
+                text-align: center;
+                color: white;
+            }
+            .lforya {
+                width: 600px;
+                height: 100px;
+                left: 50%;
+                top: 50%;
+                position: absolute;
+                margin-top: -50px;
+                margin-left: -300px;
+            }
+            .startzz {
+                transition: 0.25s;
+                width: 200px;
+                height: 100px;
+                left: 50%;
+                top: 50%;
+                font-size: xx-large;
+                border-radius: 20px;
+                position: absolute;
+                margin-top: -50px;
+                margin-left: -100px;
+                color: white;
+                background-color: darkgreen;
+                border: 5px solid yellowgreen;
+            }
+            .startzz:hover {
+                transition: 0.25s;
+                background-color: darkolivegreen;
+                border: 5px solid yellow;
+            }
+            .zuz {
+                transition: 0.25s;
+                background-color: white;
+                color: black;
+                border-radius: 5px;
+                padding: 5px;
+                border: 2px solid green;
+                margin: 5px;
+            }
+            .zuz:hover {
+                transition: 0.25s;
+                background-color: gray;
+                border: 2px solid darkgreen;
+            }
+            .zuf {
+                transition: 0.25s;
+                background-color: black;
+                color: green;
+                border-radius: 10px;
+                padding: 5px;
+                border: 2px solid darkgreen;
+                margin: 5px;
+            }
+            .zuf:hover {
+                transition: 0.25s;
+                background-color: darkgreen;
+                border: 2px solid black;
+                color: black;
             }
         </style>
     </head>
     <body onload="main()">
+        <div class="lforya" id="lforu" hidden>
+            <h2>You have lost</h2>
+            <h4>The red demons have captured your body and now you are in their control!</h4>
+            <h4>Captain Rediwish has hacked the entire Whitishland using your body!</h4>
+        </div>
+        <div class="lforya" id="wforu" hidden>
+            <h2>You have won</h2>
+            <h4>You have gathered all the bluies and we used all them to attack red demons!</h4>
+            <h4>Captain Rediwish is now in prison in Whitishland for killing billions of ppl</h4>
+        </div>
         <canvas class="centerize" width="700" height="500" id="game"></canvas>
         <h2 id="scorem"></h2>
+        <h3 id="capturedz"></h3>
+        <h3 id="bluwishz"></h3>
+        <h3 id="warres"></h3>
+        <button class="startzz" onclick="start=true" id="start_button">PLAY</button>
+        <button class="zuf" id="option" onclick="toggle_menu()" hidden>Developer Menu</button>
+        <br>
+        <button onclick="add_more()" id="sus" class="zuz" hidden>Add More Enemy</button>
+        <br>
+        <button onclick="more_food()" id="fus" class="zuz" hidden>Add More Food</button>
+        <br>
+        <button onclick="remove_enemy()" id="susx" class="zuz" hidden>Remove 1 Enemy</button>
+        <br>
+        <button onclick="remove_food()" id="fusx" class="zuz" hidden>Remove 1 Food</button>
+        <br>
+        <button onclick="enemy_speed += 0.1" id="susz" class="zuz" hidden>Increase Enemy Speed</button>
+        <br>
+        <button onclick="enemy_speed -= 0.1" id="suszz" class="zuz" hidden>Decrease Enemy Speed</button>
+        <br>
+        <button onclick="food_speed += 0.1" id="suszzz" class="zuz" hidden>Increase Food Speed</button>
+        <br>
+        <button onclick="food_speed -= 0.1" id="suszzzz" class="zuz" hidden>Decrease Food Speed</button>
+        <br>
+        <button onclick="player_speed += 0.1" id="suszzzzz" class="zuz" hidden>Increase Player Speed</button>
+        <br>
+        <button onclick="player_speed -= 0.1" id="suszzzzzz" class="zuz" hidden>Decrease Player Speed</button>
+        <br>
+        <button onclick="gravity += 0.1" id="suszzzzzzz" class="zuz" hidden>Increase Gravity</button>
+        <br>
+        <button onclick="gravity -= 0.1" id="suszzzzzzzz" class="zuz" hidden>Decrease Gravity</button>
+        <br>
+        <button onclick="friction += 0.1" id="suszzzzzzzzz" class="zuz" hidden>Increase Friction</button>
+        <br>
+        <button onclick="friction -= 0.1" id="suszzzzzzzzzz" class="zuz" hidden>Decrease Friction</button>
     </body>
 </html>
