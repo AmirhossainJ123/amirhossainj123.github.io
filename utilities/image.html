@@ -131,7 +131,7 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
                     ctx.fillStyle = "rgb(0,0,0)"
                     ctx.fillRect(numx, numy, square, square);
                     numx+=space
-                    if (numx > 270) {
+                    if (numx > old_resx-25) {
                         numx = 20
                         numy += space
                     }
@@ -139,7 +139,7 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
                 }
                 if (letter == " ") {
                     numx+=space
-                    if (numx > 270) {
+                    if (numx > old_resx-25) {
                         numx = 20
                         numy += space
                     }
@@ -149,7 +149,7 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
                     ctx.fillStyle = "rgb(255,255,255)"
                     ctx.fillRect(numx, numy, square, square);
                     numx+=space
-                    if (numx > 270) {
+                    if (numx > old_resx-25) {
                         numx = 20
                         numy += space
                     }
@@ -188,7 +188,7 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
                 ctx.fillStyle = "rgb(" + parseInt(formaulo_part1) + "," + parseInt(formaulo_part2) + "," + parseInt(formaulo_part3) + ")";
                 ctx.fillRect(numx, numy, square, square);
                 numx+=space
-                if (numx > 270) {
+                if (numx > old_resx-25) {
                     numx = 20
                     numy += space
                 }
@@ -198,16 +198,31 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
     var old_txt = "text"
     var old_io = "12345"
     var old_square = 5
+    var old_resx = 300
+    var old_resy = 150
     var old_space = 5
     var new_square = 5
     var new_space = 5
+    var new_resx = old_resx
+    var new_resy = old_resy
     function looop() {
         setTimeout(() => {
             new_square = document.getElementById("square").value
             new_space = document.getElementById("spacez").value
             const canvas = document.getElementById("image");
             var new_txt = document.getElementById("encrypt").value;
+            var new_resx = document.getElementById("resx").value;
+            var new_resy = document.getElementById("resy").value;
             var new_io = document.getElementById("encryptio").value;
+            if (new_resx != old_resx || new_resy != old_resy) {
+                canvas.setAttribute("width",new_resx)
+                canvas.setAttribute("height",new_resy)
+                document.querySelector(".zcanvas").style.width = 500
+                document.querySelector(".zcanvas").style.height = 250
+                old_resx = new_resx
+                old_resy = new_resy
+                draw()
+            }
             if (new_txt != old_txt || new_io != old_io || new_square != old_square || new_space != old_space) {
                 square = new_square
                 space = parseFloat(new_space)
@@ -282,7 +297,7 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
         margin: 10px;
         cursor: text;
     }
-    canvas {
+    .zcanvas {
         width: 500px;
         height: 250px;
         outline: 2px solid white;
@@ -360,6 +375,10 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
     <h2>Pixeling:</h2>
     <input type="range" class="ramge" step="0.1" max="20" min="0" id="square" value="5">
     <br>
+    <h2>Resolution:</h2>
+    <input type="number" class="resol" id="resx" value="300">
+    <input type="number" class="resol" id="resy" value="150">
+    <br>
     <h2>Spacing:</h2>
     <input type="range" class="ramge" step="0.1" max="20" min="0" id="spacez" value="5">
     <br>
@@ -367,7 +386,7 @@ l  l    llll    llll         ZZZZ     ZZZ     ZZZZ`
     <button class="buttond" onclick="save()">Save</button>
     <div class="center">
     <textarea id="encrypt" class="main"></textarea>
-    <canvas id="image" width="300" height="150"></canvas>
+    <canvas id="image" width="300" height="150" class="zcanvas"></canvas>
     <textarea id="encryptio" class="main_codino">000123</textarea>
     <br>
     <button class="buttonp" onclick="add(10101)">+1A</button>
