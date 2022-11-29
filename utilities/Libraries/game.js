@@ -34,13 +34,34 @@ function doAll() {
         random_magnet_pos(index)
     }
 }
+function askey() {
+    alert("Welcome to Jumpo Bumpi game")
+    alert("So basically your goal here is to dodge redies and get bluies as much as you can")
+    alert("If you get hit by a redy you will get a minus score and your soul will get closer to ultimate darkness")
+    alert("but if you get hit by a bluey your soul will get closer to ultimate whiteness")
+    alert("once you reached the ultimate whiteness you win, and once you reached ultimate darkness you loose")
+    alert("There are also 2 more things a tall rectangle which is a wall you have to dodge or else it can be annoying")
+    alert("and a small cube which is a magnet you can eat it by hitting it and you will pull the near bluies to yourself")
+    alert("You can move with either those buttons or WASD, WARNING: not made for FireFox")
+    confirm_it = confirm("Are you ready?")
+    if (confirm_it)
+        return true
+    else
+        return false
+}
 function sleeptick() {
     setTimeout(() => {
         if (start) {
-            main_loop()
-            score_shower()
-            doAll()
-            gravity_and_friction_and_speed()
+            if (askey()){
+                main_loop()
+                score_shower()
+                doAll()
+                gravity_and_friction_and_speed()
+            }
+            else {
+                sleeptick()
+                start =false
+            }
         }
         else
             sleeptick()
