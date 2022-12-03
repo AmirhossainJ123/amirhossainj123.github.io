@@ -80,6 +80,14 @@ function sumy(key) {
 }
 
 function generate(key) {
+    switch (key.toLowerCase()) {
+        case "dwaa": case "datnip":
+            return "he is a nice person"
+            break
+        case "amirhossainj123":
+            return "An idiot who only knows 2 things in the world (how to suffer and how to code(like a noob))"
+            break
+    }
     generated_string = ""
     knowings = knowledge()
     p1 = knowings[0]; p2 = knowings[1]; p3 = knowings[2]
