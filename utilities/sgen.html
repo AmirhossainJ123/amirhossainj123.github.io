@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <script src="Libraries/sentence.js"></script>
+        <script>
+            function loop() {
+                setTimeout(() => {
+                    if (document.getElementById("input").value != "")
+                        document.getElementById("result").textContent = generate(document.getElementById("input").value)
+                    loop()
+                }, 10);
+            }
+        </script>
+    </head>
+    <body onload="loop()">
+        <input id="input" value="">
+        <h2 id="result"></h2>
+    </body>
+</html>
