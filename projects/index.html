@@ -1,6 +1,127 @@
 <html>
+    <script>
+        links = ["https://www.planetminecraft.com/data-pack/minecraft-but-with-custom-swords/","https://www.planetminecraft.com/data-pack/minecraft-but-i-must-wear-glasses/","https://www.planetminecraft.com/data-pack/minecraft-but-challenge-menu/","https://www.planetminecraft.com/data-pack/realcraft-5465396/","https://www.planetminecraft.com/data-pack/nuke-nuke-your-friend-s-server/","https://www.planetminecraft.com/data-pack/minecraft-but-every-5-seconds-there-will-be-an-arrow-rain/","https://www.planetminecraft.com/data-pack/smp-configurator/"]
+        function redirectz(code) {
+            window.location.href = links[code];
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+        body {
+            background-image: url("backy.gif");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        h1 {
+            font-size: 100px;
+            text-align: center;
+            color: white;
+            font-family: 'PT Sans', sans-serif;
+        }
+        .midtext {
+            background-color: rgba(0,0,0,0.6);
+            padding: 10px;
+        }
+        .midtext * {
+            color: white;
+            text-align: center;
+            font-family: 'PT Sans', sans-serif;
+            margin: 5px;
+        }
+        .midtest h1 {
+            font-size: 50px;
+            margin: 7px;
+        }
+        .projects {
+            background-color: rgba(0,0,0,0.7);
+            padding: 5px;
+            border: 2px solid white;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .proj {
+            transition: 500ms;
+            background-color: rgba(0,0,255,0.7);
+            padding: 20px;
+            border: 2px solid white;
+            margin: 10px;
+            display: inline-block;
+            opacity: 0.8;
+            border-radius: 10px;
+        }
+        .proj:hover {
+            transition: 500ms;
+            opacity: 1;
+            margin: 20px;
+            background-color: red;
+        }
+        .proj img {
+            width: 200px;
+            height: 200px;
+        }
+        .proj * {
+            color: white;
+            font-family: 'PT Sans', sans-serif;
+            text-align: center;
+        }
+        .proj img {
+            border: 1px solid black;
+            border-bottom: 3px solid gray;
+            outline: 2px solid white;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: blue;
+        }
+        ::-webkit-scrollbar {
+            width: 15px;
+            
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: red;
+            border: 2px solid white;
+            border-radius: 40px;
+        }
+    </style>
     <body>
-        <h1>Coming soon...</h1>
-        <h3>Go to main page and enjoy rest of the website :></h3>
+        <h1>My Projects</h1>
+        <div class="midtext">
+            <h2>Welcome to this page</h2>
+            <h3>So here I put my projects that I make or will make</h3>
+            <h3>Categories you can choose from currently are these</h3>
+            <h3>Datapacks, Mods, Computer Program, Blender Project</h3>
+            <h3></h3>
+            <h3>Hope you enjoy it</h3>
+        </div>
+        <div class="projects">
+            <div class="proj" onclick="redirectz(0)">
+                <img src="preview/sword.png">
+                <h3>Custom Sword Datapack</h3>
+            </div>
+            <div class="proj" onclick="redirectz(1)">
+                <img src="preview/glasses.webp">
+                <h3>Glasses Datapack</h3>
+            </div>
+            <div class="proj" onclick="redirectz(2)">
+                <img src="preview/twist.webp">
+                <h3>Twist Menu Datapack</h3>
+            </div>
+            <div class="proj" onclick="redirectz(3)">
+                <img src="preview/rlc.webp">
+                <h3>Realcraft Datapack</h3>
+            </div>
+            <div class="proj" onclick="redirectz(4)">
+                <img src="preview/nuke.webp">
+                <h3>World Destroyer Datapack</h3>
+            </div>
+            <div class="proj" onclick="redirectz(5)">
+                <img src="preview/arrow.webp">
+                <h3>Arrow Rain Datapack</h3>
+            </div>
+            <div class="proj" onclick="redirectz(6)">
+                <img src="preview/smp.webp">
+                <h3>SMP Config Datapack</h3>
+            </div>
+        </div>
     </body>
 </html>
