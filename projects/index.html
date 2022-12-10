@@ -56,19 +56,24 @@
             background-color: red;
         }
         .proj img {
-            width: 200px;
-            height: 200px;
+            transition: 500ms;
+            max-width: 200px;
+            max-height: 200px;
+            display: flex;
+            border: 1px solid black;
+            border-bottom: 3px solid gray;
+            outline: 2px solid white;
+            border-radius: 10px;
         }
         .proj * {
             color: white;
             font-family: 'PT Sans', sans-serif;
             text-align: center;
         }
-        .proj img {
-            border: 1px solid black;
-            border-bottom: 3px solid gray;
-            outline: 2px solid white;
-            border-radius: 10px;
+        .proj:hover img {
+            transition: 500ms;
+            max-width: 400px;
+            max-height: 400px;
         }
         ::-webkit-scrollbar-track {
             background-color: blue;
