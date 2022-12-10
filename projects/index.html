@@ -34,9 +34,10 @@
         }
         .projects {
             background-color: rgba(0,0,0,0.7);
-            padding: 5px;
+            padding: 10px;
             border: 2px solid white;
-            margin: 10px;
+            margin: 20px;
+            display: grid;
             border-radius: 10px;
         }
         .proj {
@@ -52,29 +53,41 @@
         .proj:hover {
             transition: 500ms;
             opacity: 1;
-            margin: 20px;
+            margin-top: 2px;
+            margin-bottom: 2px;
             background-color: red;
         }
         .proj img {
             margin: auto;
             transition: 500ms;
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 240px;
+            max-height: 120px;
             display: flex;
             border: 1px solid black;
             border-bottom: 3px solid gray;
             outline: 2px solid white;
             border-radius: 10px;
+            filter: saturate(5) grayscale(0.75) brightness(1) invert(0);
         }
-        .proj * {
+        .proj h3 {
+            transition: 500ms;
             color: white;
             font-family: 'PT Sans', sans-serif;
             text-align: center;
         }
         .proj:hover img {
             transition: 500ms;
-            max-width: 400px;
-            max-height: 400px;
+            max-width: 500px;
+            max-height: 300px;
+            filter: saturate(1) grayscale(0) brightness(0.8) invert(0);
+        }
+        .proj:active img {
+            transition: 500ms;
+            filter: saturate(10) brightness(3) invert(1);
+        }
+        .proj:hover h3 {
+            transition: 500ms;
+            color: black;
         }
         ::-webkit-scrollbar-track {
             background-color: blue;
