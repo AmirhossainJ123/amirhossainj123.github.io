@@ -53,16 +53,16 @@
                 Square = EApplyPhysicsTo(Square) // Apply friction
                 Square2 = EApplyPhysicsTo(Square2)
                 if (key_up) {
-                    Square = EApplyForce(Square,[0,-0.2],[2,2,-2,-2]) // Apply a force to Square (Object,[Force_to_x_direction,Force_to_y_direction],[Terminal Velocity for different directions])
+                    Square = EApplyForce(Square,[0,-0.1],[4,4,-4,-4]) // Apply a force to Square (Object,[Force_to_x_direction,Force_to_y_direction],[Terminal Velocity for different directions])
                 }
                 if (key_left) {
-                    Square = EApplyForce(Square,[-0.2,0],[2,2,-2,-2])
+                    Square = EApplyForce(Square,[-0.1,0],[4,4,-4,-4])
                 }
                 if (key_down) {
-                    Square = EApplyForce(Square,[0,0.2],[2,2,-2,-2])
+                    Square = EApplyForce(Square,[0,0.1],[4,4,-4,-4])
                 }
                 if (key_right) {
-                    Square = EApplyForce(Square,[0.2,0],[2,2,-2,-2])
+                    Square = EApplyForce(Square,[0.1,0],[4,4,-4,-4])
                 }
                 Collision = ECollision(Square,Square2) // Check if they are colided (player ate food)
                 if (Collision) {
