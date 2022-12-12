@@ -1,0 +1,166 @@
+<head>
+    <title>3D Game</title>
+    <style>
+        body { margin: 0; }
+    </style>
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="js/three.js"></script>
+    <script>
+        function randomize(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+        function movement(x,z,keys,speed) {
+            keyx_left = keys[0]
+            keyx_right = keys[1]
+            keyx_up = keys[2]
+            keyx_down = keys[3]
+            console.log([x,z])
+            if (keyx_left)
+                x = -speed
+            if (keyx_right)
+                x = speed
+            if (keyx_up)
+                z = -speed
+            if (keyx_down)
+            z = speed
+            console.log([x,z])
+            console.log("")
+            return [x,z]
+        }
+        function smallize(num1,num2) {
+            if (num1 > 0)
+                num1-=num2
+            else if (num1 < 0)
+                num1+=num2
+            return num1
+        }
+        key_left = false
+        key_up = false
+        key_down = false
+        key_right = false
+        keyz_left = false
+        keyz_up = false
+        keyz_down = false
+        keyz_right = false
+        function main() {
+            addEventListener("keyup",(e) => {
+                switch (e.key) {
+                    case "a": key_left = false; break;
+                    case "w": key_up = false; break;
+                    case "d": key_right = false; break;
+                    case "s": key_down = false; break;
+                }
+            });
+            addEventListener("keydown",(e) => {
+                switch (e.key) {
+                    case "a": key_left = true; break;
+                    case "w": key_up = true; break;
+                    case "d": key_right = true; break;
+                    case "s": key_down = true; break;
+                }
+            });
+            addEventListener("keyup",(e) => {
+                switch (e.key) {
+                    case "j": keyz_left = false; break;
+                    case "i": keyz_up = false; break;
+                    case "l": keyz_right = false; break;
+                    case "k": keyz_down = false; break;
+                }
+            });
+            addEventListener("keydown",(e) => {
+                switch (e.key) {
+                    case "j": keyz_left = true; break;
+                    case "i": keyz_up = true; break;
+                    case "l": keyz_right = true; break;
+                    case "k": keyz_down = true; break;
+                }
+            });
+        }
+        pspeedx = 0
+        pspeedz = 0
+        pspeedx2 = 0
+        pspeedz2 = 0
+    </script>
+</head>
+<body onload="main()">
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+        var geometry = new THREE.BoxGeometry( 1, 2, 1 );
+        var geometry2 = new THREE.BoxGeometry( 1, 2, 1 );
+        var geometry2z = new THREE.BoxGeometry( 1.1, 2.1, 1.1 );
+        var geometryz = new THREE.BoxGeometry( 1.1, 2.1, 1.1 );
+        var material = new THREE.MeshBasicMaterial( { color: "rgb(100,000,000)"} );
+        var material2 = new THREE.MeshBasicMaterial( { color: "rgb(000,000,100)"} );
+        var edgez = new THREE.EdgesGeometry( geometryz );
+        var edge2z = new THREE.EdgesGeometry( geometry2z );
+        var materialz = new THREE.LineBasicMaterial( { color: "rgb(200,000,000)"} )
+        var material2z = new THREE.LineBasicMaterial( { color: "rgb(000,000,200)"} )
+        var cubez = new THREE.LineSegments( edgez, materialz);
+        var cube2z = new THREE.LineSegments( edge2z, material2z);
+        var cube = new THREE.Mesh( geometry, material );
+        var cube2 = new THREE.Mesh( geometry2, material2 );
+        scene.add( cube );
+        scene.add( cube2 );
+        scene.add( cubez );
+        scene.add( cube2z );
+        camera.position.z = 20;
+        camera.position.y = -5;
+        const realistic_gravity = 9.8
+        const gravity = -(realistic_gravity/10000);
+        var gravity_speed = 0
+        var gravity_speed2 = 0
+        var pspeed = 0.05
+        cube.position.x = 2
+        cube2.position.x = -2
+        const friction = 0.001
+        var animate = function () {
+            if (cube.position.y < -10)
+                gravity_speed = Math.abs(gravity_speed/1.9)
+            else
+                gravity_speed += gravity
+            if (cube2.position.y < -10)
+                gravity_speed2 = Math.abs(gravity_speed2/1.7)
+            else
+                gravity_speed2 += gravity
+            requestAnimationFrame( animate );
+            cube.position.y += gravity_speed
+            cube2.position.y += gravity_speed2
+            move2 = movement(pspeedx2,pspeedz2,[keyz_left,keyz_right,keyz_up,keyz_down],pspeed)
+            move = movement(pspeedx,pspeedz,[key_left,key_right,key_up,key_down],pspeed)
+            pspeedx2 = move2[0]
+            pspeedz2 = move2[1]
+            pspeedx = move[0]
+            pspeedz = move[1]
+            pspeedx = smallize(pspeedx,friction)
+            pspeedz = smallize(pspeedz,friction)
+            pspeedx2 = smallize(pspeedx2,friction)
+            pspeedz2 = smallize(pspeedz2,friction)
+            cube.position.x += pspeedx
+            cube.position.z += pspeedz
+            cube2.position.x += pspeedx2
+            cube2.position.z += pspeedz2
+
+            if (true) {
+                cubez.position.x = cube.position.x
+                cubez.position.y = cube.position.y
+                cubez.position.z = cube.position.z
+                cube2z.position.x = cube2.position.x
+                cube2z.position.y = cube2.position.y
+                cube2z.position.z = cube2.position.z
+                cubez.rotation.x = cube.rotation.x
+                cubez.rotation.y = cube.rotation.y
+                cubez.rotation.z = cube.rotation.z
+                cube2z.rotation.x = cube2.rotation.x
+                cube2z.rotation.y = cube2.rotation.y
+                cube2z.rotation.z = cube2.rotation.z
+            }
+
+            renderer.render( scene, camera );
+        };
+        animate();
+    </script>
+</body>
