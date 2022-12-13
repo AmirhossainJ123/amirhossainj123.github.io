@@ -1,6 +1,9 @@
 // Game default logic
 const EFGRAVITY = 0.05;
 const EFFRICTION = 0.025;
+var EGRAVITY=false
+var EFRICTION=false
+
 
 // Colors
 class EColors {
@@ -59,9 +62,14 @@ function EApplyForce(Object,Force,Limit) {
     return Object
 }
 
+function EConfig(Gravity=false,Friction=true) {
+    EGRAVITY = Gravity
+    EFRICTION = Friction
+}
+
 function ECollision(rect1,rect2) {
     Collision = rect1.x < rect2.x + rect2.w && rect1.x + rect1.w > rect2.x && rect1.y < rect2.y + rect2.z && rect1.z + rect1.y > rect2.y
-    return Collision
+    return [Collision]
 }
 
 function EApplyMotion(Object) {
@@ -80,10 +88,10 @@ function EApplyPhysicsTo(Object) {
     return Object
 }
 
-function ERender(Game,Object) {
+function ERender(Game,Objectz) {
     var game = document.getElementById(Game.screen_id).getContext("2d");
-    game.fillStyle = Object.color
-    game.fillRect(Object.x,Object.y,Object.w,Object.z);
+    game.fillStyle = Objectz.color
+    game.fillRect(Objectz.x,Objectz.y,Objectz.w,Objectz.z);
 }
 
 function EClear(Game) {
