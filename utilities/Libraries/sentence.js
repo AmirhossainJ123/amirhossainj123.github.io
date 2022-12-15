@@ -1,5 +1,6 @@
 secret_formula = 74
 secret_formulaz = 38
+secret_formulazu = 1.5
 secret_formulaez = 6
 
 function knowledge() {
@@ -89,7 +90,7 @@ function generate(key) {
     p1 = knowings[0]; p2 = knowings[1]; p3 = knowings[2]
     key = key_parter(key)
     code = decoder_key(key)
-    e = parseInt(parseInt(avg(code))) * secret_formula + secret_formulaz - parseInt(avg(sumy(bina(code))))
+    e = parseInt(parseInt(avg(code))) * secret_formula + secret_formulaz - parseInt(parseInt(avg(sumy(bina(code))))*secret_formulazu)
     generated_string += p1[e%3][e % p1[e%3].length] + " "
     generated_string += p2[e%3][e % p2[e%3].length] + " "
     generated_string += p3[e % p2[e%3].length][e % p3[e % p2[e%3].length].length] + "."
