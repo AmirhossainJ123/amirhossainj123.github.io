@@ -1,6 +1,6 @@
-secret_formula = 73
-secret_formulaz = 37
-secret_formulaez = 7
+secret_formula = 74
+secret_formulaz = 38
+secret_formulaez = 6
 
 function knowledge() {
     part_1_1 = ["I"]
@@ -23,9 +23,9 @@ function knowledge() {
 
     */
 
-    part_3_first =  ["cool","Assassin","Doctor","Killer","me","Robber","insane","amazing","dead","a beast","developer","scientist","student","an idiot","Legend","Hero","nerd","flying","eating","dying","sitting","watching","looking","searching","boring","bored","from Earth","taller","gamer","artist","stupid","SuperStar","kinda sus","weird","cringe","Captain","Bad","Real","Fake","Broke","Annoying","Flying","Playing Games","Cruel","unimaginably busy now"] // goes for am, is, are
-    part_3_second = ["had enough","been killed","been stolen","coins","done your job","life","gone insane","eaten the whole ice cream","written the book","died","been lied to","been destroyed","been dreaming","seen here before","begun the challenge","to be murdered","to be nice","to eat dirt","to say hi","to answer me","to kill the ender dragon and free the end","to get 100 score in the exam","to stop it","to explode to pieces","to do the Unthinkable"] // goes for have, have, has
-    part_3_third =  ["to go","the opportunity","the chance","to clean the room","enough power","lost","begun","the key","money","to play all night","to defeat everyone","to become the best","to recover","to start again","to do it","to drink orange juice with milk","to break glass","to eat expired food","to be murdured","to be bought","to be killed using the Axe","to buy poison","to buy tomatoes","to buy potatoes","to eat food","to kill the unkillable"] // goes for had, had, had
+    part_3_first =  ["cool","Assassin","Doctor","Killer","me","Robber","insane","amazing","dead","a beast","developer","scientist","student","an idiot","Legend","Hero","nerd","flying","eating","dying","sitting","watching","looking","searching","boring","bored","from Earth","taller","gamer","artist","stupid","SuperStar","kinda sus","weird","cringe","Captain","Bad","Real","Fake","Broke","Annoying","Flying","Playing Games","Cruel","unimaginably busy now","Bigger","You","Lovely","Rude"] // goes for am, is, are
+    part_3_second = ["had enough","been killed","been stolen","coins","done your job","life","gone insane","eaten the whole ice cream","written the book","died","been lied to","been destroyed","been dreaming","seen here before","begun the challenge","to be murdered","to be nice","to eat dirt","to say hi","to answer me","to kill the ender dragon and free the end","to get 100 score in the exam","to stop it","to explode to pieces","to do the Unthinkable","to be the King of the island"] // goes for have, have, has
+    part_3_third =  ["to go","the weapons","the chance","to clean the room","enough power","lost","begun","the keys","money","to play all night","to defeat everyone","to become the best","to recover","to start again","to do it","to drink orange juice with milk","to break glass","to eat expired food","to be murdured","to be bought","to be killed using the Axe","to buy poison","to buy tomatoes","to buy potatoes","to eat food","to kill the unkillable","the best chocolate in the world"] // goes for had, had, had
     part_3 = [part_3_first,part_3_second,part_3_third]
 
     parts = [part_1,part_2,part_3]
