@@ -1,0 +1,128 @@
+<script>
+    old_num_1 = 0
+        old_num_2 = 0
+        old_num_3 = 0
+        old_num_4 = 0
+        old_num_5 = 0
+        old_num_6 = 0
+        new_num_1 = 0
+        new_num_2 = 0
+        new_num_3 = 0
+        new_num_4 = 0
+        new_num_5 = 0
+        new_num_6 = 0
+        function minusize(new_num_1,old_num_1) {
+            if (new_num_1 > old_num_1)
+                old_num_1 += 2
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 2
+            if (new_num_1 > old_num_1)
+                old_num_1 += 1
+            else if (new_num_1 < old_num_1)
+                old_num_1 -= 1
+            return old_num_1
+        }
+        function randomize(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+        function slower_cursor_loop() {
+            setTimeout(() => {
+                old_num_5 = minusize(new_num_5,old_num_5)
+                const set = document.querySelector(".coolz")
+                set.style.padding = (old_num_5)/40 + "px"
+                if (new_num_5 === old_num_5) {
+                    new_num_5 = randomize(40,240);
+                }
+                slower_cursor_loop()
+            }, 400);
+        }
+        function color_culoop() {
+            setTimeout(() => {
+                new_susx = randomize(230,256)
+                new_susy = randomize(230,256)
+                new_susz = randomize(230,256)
+                susx = 243-new_susx
+                susy = 243-new_susy
+                susz = 243-new_susz
+                old_num_6 = minusize(new_num_6,old_num_6)
+                const set = document.querySelector(".coolz")
+                set.style.backgroundColor = `rgb(${old_num_6+susx},${old_num_6+susy},${old_num_6+susz})`
+                set.style.borderColor = `rgb(${new_susx-old_num_6},${new_susy-old_num_6},${new_susz-old_num_6})`
+                if (new_num_6 === old_num_6) {
+                    new_num_6 = randomize(0,256);
+                    setTimeout(() => {
+                        color_culoop()
+                    }, 2000);
+                }
+                else
+                    color_culoop()
+            }, 10);
+        }
+        function cursor_loop() {
+            setTimeout(() => {
+            old_num_1 = minusize(new_num_1,old_num_1)
+            old_num_2 = minusize(new_num_2,old_num_2)
+            old_num_3 = minusize(new_num_3,old_num_3)
+            old_num_4 = minusize(new_num_4,old_num_4)
+            const set = document.querySelector(".coolz")
+            set.style.borderBottomLeftRadius = old_num_1 + "%"
+            set.style.borderBottomRightRadius = old_num_2 + "%"
+            set.style.borderTopLeftRadius = old_num_3 + "%"
+            set.style.borderTopRightRadius = old_num_4 + "%"
+
+            if (new_num_1 === old_num_1) {
+                new_num_1 = randomize(40,121);
+            }
+            if (new_num_2 === old_num_2) {
+                new_num_2 = randomize(40,121);
+            }
+            if (new_num_3 === old_num_3) {
+                new_num_3 = randomize(40,121);
+            }
+            if (new_num_4 === old_num_4) {
+                new_num_4 = randomize(40,121);
+            }
+            cursor_loop()
+            }, 25);
+        }
+        function main() {
+            cursor_loop()
+            slower_cursor_loop()
+            color_culoop()
+        }
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+    * {
+        cursor: none;
+    }
+    body {
+        background-color: black;
+    }
+    .coolz {
+        cursor: none;
+        width: 20px;
+        height: 20px;
+        margin: auto;
+        top: 0%;
+        left: 0%;
+        position: absolute;
+        display: inline-block;
+        background-color: white;
+        text-align: center;
+        pointer-events: none;
+        border: 2px solid black;
+    }
+</style>
+<body onload="main()">
+    <div class="cursor coolz"><div>
+        <script>
+            window.addEventListener('mousemove',(e) => {
+                const cursorCool = document.querySelector('.coolz');
+                New_posX = e.clientX-10
+                New_posY = e.clientY-10
+                cursorCool.style.transform = `translate3d(${New_posX}px, ${New_posY}px, 0)`;
+            });
+        </script>
+</body>
