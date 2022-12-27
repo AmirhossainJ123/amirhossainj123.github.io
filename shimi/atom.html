@@ -1,0 +1,72 @@
+2<html>
+    <head>
+        <title>Atom</title>
+        <script>
+            function A_Limit(a) {return lim_at(a-1)} // limit for how many things can be in the current orbit without furthur orbits!
+            function B_Limit(a) {return lim_at(a-2)} // limit for how many things can be in the next custom orbit made to protect the old!
+            function sminus(a,b) {
+                if (a >= b)
+                    return a - b;
+                else
+                    return 0;
+            }
+            function convertert(a) {
+                text = ""
+                for (x = 0; x < a.length; x++)
+                    text += " ," + a[x]
+                return text.replace(" ,","")
+            }
+            function lim_at(a) {return 2*a**2;}
+            function calculate(a) {
+                atom = []
+                current = 0;
+                /*
+                F Limit = Yes
+                A Limit = No
+                B Limit = No
+                */
+                while (a > 0) {
+                    if (current-2 < 0) {
+                        if (a >= lim_at(current))
+                            atom.push(lim_at(current))
+                        else
+                            atom.push(a)
+                        a = sminus(a,lim_at(current))
+                        current += 1
+                    }
+                    else {
+                        if (a > B_Limit(current)) {
+                            if (a >= A_Limit(current-1)) {
+                                if (atom[current-1] >= lim_at(current-1))
+                                    atom[current-1] = lim_at(current-1)
+                                else
+                                    atom[current-1] = a
+                                a = sminus(a,Math.abs(A_Limit(current-1)-lim_at(current-1)))
+                                current += 1
+                            }
+                            else
+                                atom.push(a)
+                            a = sminus(a,A_Limit(current))
+                            current += 1
+                        }
+                        if (a <= B_Limit(current)) {
+                            if (a >= B_Limit(current))
+                                atom.push(B_Limit(current))
+                            else
+                                atom.push(a)
+                            a = sminus(a,B_Limit(current))
+                            current += 1
+                        }
+                    }
+                }
+                document.getElementById("view").textContent = convertert(a)
+                return atom
+            }
+        </script>
+    </head>
+    <body>
+        <input id="atomic_number" type="number">
+        <button onclick="calculate(document.getElementById('atomic_number').value)">Calculate</button>
+        <h2 id="view"></h2>
+    </body>
+</html>

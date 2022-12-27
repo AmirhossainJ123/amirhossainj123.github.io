@@ -1,92 +1,5 @@
 <html>
-
-    <script>
-        old_num_1 = 0
-        old_num_2 = 0
-        old_num_3 = 0
-        old_num_4 = 0
-        old_num_5 = 0
-        old_num_6 = 0
-        new_num_1 = 0
-        new_num_2 = 0
-        new_num_3 = 0
-        new_num_4 = 0
-        new_num_5 = 0
-        new_num_6 = 0
-        function minusize(new_num_1,old_num_1) {
-            if (new_num_1 > old_num_1)
-                old_num_1 += 2
-            else if (new_num_1 < old_num_1)
-                old_num_1 -= 2
-            if (new_num_1 > old_num_1)
-                old_num_1 += 1
-            else if (new_num_1 < old_num_1)
-                old_num_1 -= 1
-            return old_num_1
-        }
-        function randomize(min,max) {
-            return min + Math.floor(Math.random()*(max-min))
-        }
-        function slower_cursor_loop() {
-            setTimeout(() => {
-                old_num_5 = minusize(new_num_5,old_num_5)
-                const set = document.querySelector(".coolz")
-                set.style.padding = (old_num_5)/40 + "px"
-                if (new_num_5 === old_num_5) {
-                    new_num_5 = randomize(40,240);
-                }
-                slower_cursor_loop()
-            }, 400);
-        }
-        function color_culoop() {
-            setTimeout(() => {
-                old_num_6 = minusize(new_num_6,old_num_6)
-                const set = document.querySelector(".coolz")
-                set.style.backgroundColor = `rgb(${old_num_6},${old_num_6},${old_num_6})`
-                set.style.borderColor = `rgb(${255-old_num_6},${255-old_num_6},${255-old_num_6})`
-                if (new_num_6 === old_num_6) {
-                    new_num_6 = randomize(0,256);
-                    setTimeout(() => {
-                        color_culoop()
-                    }, 2500);
-                }
-                else
-                    color_culoop()
-            }, 10);
-        }
-        function cursor_loop() {
-            setTimeout(() => {
-            old_num_1 = minusize(new_num_1,old_num_1)
-            old_num_2 = minusize(new_num_2,old_num_2)
-            old_num_3 = minusize(new_num_3,old_num_3)
-            old_num_4 = minusize(new_num_4,old_num_4)
-            const set = document.querySelector(".coolz")
-            set.style.borderBottomLeftRadius = old_num_1 + "%"
-            set.style.borderBottomRightRadius = old_num_2 + "%"
-            set.style.borderTopLeftRadius = old_num_3 + "%"
-            set.style.borderTopRightRadius = old_num_4 + "%"
-
-            if (new_num_1 === old_num_1) {
-                new_num_1 = randomize(30,101);
-            }
-            if (new_num_2 === old_num_2) {
-                new_num_2 = randomize(30,101);
-            }
-            if (new_num_3 === old_num_3) {
-                new_num_3 = randomize(30,101);
-            }
-            if (new_num_4 === old_num_4) {
-                new_num_4 = randomize(30,101);
-            }
-            cursor_loop()
-            }, 25);
-        }
-        function main() {
-            cursor_loop()
-            slower_cursor_loop()
-            color_culoop()
-        }
-    </script>
+    <script src="index.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Vai&display=swap');
         body {
@@ -101,9 +14,22 @@
             padding: 10px;
             cursor: none;
             box-shadow: 3px 3px 10px;
-            left: 50%;
+        }
+        .shadow {
+            cursor: none;
+            opacity: 0.5;
+            width: 20px;
+            height: 20px;
+            margin: auto;
+            top: 0%;
+            left: 0%;
             position: absolute;
-            margin-left: -50px;
+            display: inline-block;
+            background-color: white;
+            text-align: center;
+            pointer-events: none;
+            border: 2px solid black;
+            transform: translate3d(0px,0px,0px);
         }
         .qlz:hover {
             cursor: none;
@@ -115,40 +41,6 @@
             cursor: none;
         }
         .qlz:active {
-
-            cursor: none;
-            outline:0px;
-            border:3px solid rgb(87, 87, 87);
-            border-radius: 5px;
-            background-color: gray;
-            padding: 10px;
-            cursor: none;
-        }
-        .qlzz {
-            cursor: none;
-            outline:0px;
-            border:3px solid darkgray;
-            border-radius: 5px;
-            background-color: white;
-            padding: 10px;
-            cursor: none;
-            box-shadow: 3px 3px 10px;
-            left: 50%;
-            position: absolute;
-            margin-left: -55px;
-            margin-top: 100px;
-        }
-        .qlzz:hover {
-            cursor: none;
-            outline:0px;
-            border:3px solid gray;
-            border-radius: 5px;
-            background-color: darkgray;
-            padding: 10px;
-            cursor: none;
-        }
-        .qlzz:active {
-
             cursor: none;
             outline:0px;
             border:3px solid rgb(87, 87, 87);
@@ -166,10 +58,6 @@
             padding: 10px;
             cursor: none;
             box-shadow: 3px 3px 10px;
-            left: 50.1%;
-            margin-top: 50px;
-            position: absolute;
-            margin-left: -75px;
         }
         .fhf:hover {
             outline:0px;
@@ -189,35 +77,38 @@
             padding: 10px;
             cursor: none;
         }
-        .fhff {
+        .cl {
+            text-shadow: 1px 1px 4px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
             cursor: none;
             outline:0px;
-            border:3px solid gray;
+            border:3px solid rebeccapurple;
             border-radius: 5px;
-            background-color: rgb(87, 87, 87);
+            background-color: purple;
             padding: 10px;
             cursor: none;
             box-shadow: 3px 3px 10px;
-            left: 50.1%;
-            margin-top: 150px;
-            position: absolute;
-            margin-left: -80px;
+            position: relative;
+            margin-top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .fhff:hover {
+        .cl:hover {
             outline:0px;
             cursor: none;
-            border:3px solid darkgray;
+            border:3px solid rgb(86, 43, 129);
             border-radius: 5px;
-            background-color: gray;
+            background-color: rgb(161, 0, 161);
             padding: 10px;
             cursor: none;
         }
-        .fhff:active {
+        .cl:active {
             cursor: none;
             outline:0px;
-            border:3px solid white;
+            border:3px solid darkblue;
             border-radius: 5px;
-            background-color: darkgray;
+            background-color: orangered;
             padding: 10px;
             cursor: none;
         }
@@ -306,6 +197,19 @@
                 color: red;
             }
         }
+        .butp * {
+            margin: 8.5px;
+            width: max-content;
+            height: max-content;
+        }
+        .butp {
+            width: 600;
+            height: 300;
+            left: 50%;
+            position: absolute;
+            display: flex;
+            transform: translateX(-50%);
+        }
         .cmgz {
             animation-name: dingdong;
             animation-duration: 400ms;
@@ -342,7 +246,7 @@
         <meta name="twitter:description" content="My Personal Website with a lot of public cool utilities.">
         <meta name="twitter:image" content="https://amirhossainj123.github.io/blender/Donut.png">
         <link rel="canonical" href="https://amirhossainj123.github.io/">
-        <link rel="icon" type="image/png" sizes="32x32" href="/blender/Amirhossain.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="  blender/Room.png">
     </head>
     <body style="background-image: url(blender/Donut.png);background-size: cover;" onload="main()">
         <h1 class="ooga"></h1>
@@ -352,30 +256,28 @@
         <h3>Or maybe you want to learn more about how this stupid website is created</h3>
         <h3>Or maybe you want to see the current coming soon utilities that are going to be added</h3>
         <h3>Don't cheat!</h3>
-        <form action="quiz">
-            <button class="qlz" href="https://amirhossainj123.github.io/quiz">Quiz Land</button>
-        </form>
-        <form action="blend">
-            <button class="fhf" href="https://amirhossainj123.github.io/blend">My arts in Blender</button>
-        </form>
-        <form action="credit">
-            <button class="qlzz" href="https://amirhossainj123.github.io/credit">Credit Page</button>
-        </form>
-        <form action="utilities">
-            <button class="fhff" href="https://amirhossainj123.github.io/utilities">Utilities (Not Ready)</button>
+        <div class="butp">
+            <form action="quiz">
+                <button class="qlz" href="https://amirhossainj123.github.io/quiz">Quiz Land</button>
+            </form>
+            <form action="blend">
+                <button class="fhf" href="https://amirhossainj123.github.io/blend">My arts in Blender</button>
+            </form>
+            <form action="credit">
+                <button class="qlz" href="https://amirhossainj123.github.io/credit">Credit Page</button>
+            </form>
+            <form action="utilities">
+                <button class="fhf" href="https://amirhossainj123.github.io/utilities">Utilities (Not Ready)</button>
+            </form>
+        </div>
+        <form action="website/collection">
+            <button class="cl" href="https://amirhossainj123.github.io/website/collection">Useful and Amazing websites you should definitely check out!</button>
         </form>
         <form action="new_index">
             <button class="cmg" href="https://amirhossainj123.github.io/new_index">Coming soon: A New Main Page Design!</button>
             <h4 class="cmgz">!!!</h4>
         </form>
-        <div class="cursor coolz"><div>
-            <script>
-                window.addEventListener('mousemove',(e) => {
-                    const cursorCool = document.querySelector('.coolz');
-                    New_posX = e.clientX-10
-                    New_posY = e.clientY-10
-                    cursorCool.style.transform = `translate3d(${New_posX}px, ${New_posY}px, 0)`;
-                });
-            </script>
+        <div class="cursor shadow"></div>
+        <div class="cursor coolz"></div>
     </body>
 </html>
