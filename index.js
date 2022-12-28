@@ -141,6 +141,12 @@ old_num_1 = 0
                 New_posY = e.clientY-10
                 cursorCool.style.transform = `translate3d(${New_posX}px, ${New_posY}px, 0)`;
             });
+            window.addEventListener('touchdown',(e) => {
+                const cursorCool = document.querySelector('.coolz');
+                New_posX = e.clientX-10
+                New_posY = e.clientY-10
+                cursorCool.style.transform = `translate3d(${New_posX}px, ${New_posY}px, 0)`;
+            });
             cursor_loop()
             slower_cursor_loop()
             color_culoop()
