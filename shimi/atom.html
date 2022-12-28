@@ -2,66 +2,49 @@
     <head>
         <title>Atom</title>
         <script>
-            function A_Limit(a) {return lim_at(a-1)} // limit for how many things can be in the current orbit without furthur orbits!
-            function B_Limit(a) {return lim_at(a-2)} // limit for how many things can be in the next custom orbit made to protect the old!
-            function sminus(a,b) {
-                if (a >= b)
-                    return a - b;
-                else
-                    return 0;
+            function show(a) {
+                b = []
+                for(x=0;x<a.length;x++)
+                    b.push(a[x].length)
+                return b
             }
-            function convertert(a) {
-                text = ""
-                for (x = 0; x < a.length; x++)
-                    text += " ," + a[x]
-                return text.replace(" ,","")
-            }
-            function lim_at(a) {return 2*a**2;}
-            function calculate(a) {
-                atom = []
-                current = 0;
-                /*
-                F Limit = Yes
-                A Limit = No
-                B Limit = No
-                */
-                while (a > 0) {
-                    if (current-2 < 0) {
-                        if (a >= lim_at(current))
-                            atom.push(lim_at(current))
-                        else
-                            atom.push(a)
-                        a = sminus(a,lim_at(current))
-                        current += 1
-                    }
-                    else {
-                        if (a > B_Limit(current)) {
-                            if (a >= A_Limit(current-1)) {
-                                if (atom[current-1] >= lim_at(current-1))
-                                    atom[current-1] = lim_at(current-1)
-                                else
-                                    atom[current-1] = a
-                                a = sminus(a,Math.abs(A_Limit(current-1)-lim_at(current-1)))
-                                current += 1
-                            }
-                            else
-                                atom.push(a)
-                            a = sminus(a,A_Limit(current))
-                            current += 1
-                        }
-                        if (a <= B_Limit(current)) {
-                            if (a >= B_Limit(current))
-                                atom.push(B_Limit(current))
-                            else
-                                atom.push(a)
-                            a = sminus(a,B_Limit(current))
-                            current += 1
-                        }
-                    }
+            function calculateElectrons(atomicNumber) {
+                const shells = [[]];  // create an array of shells, each containing an array of electrons
+                let currentShell = 0;  // keep track of the current shell we are adding electrons to
+                let remainingElectrons = atomicNumber;  // keep track of the remaining number of electrons to assign
+              
+                // keep adding electrons until there are none left
+                while (remainingElectrons > 0) {
+                  // if the current shell has reached the limit (2 * currentShell^2), move to the next shell
+                  if (shells[currentShell].length >= 2 * currentShell ** 2) {
+                    currentShell++;
+                    shells.push([]);
+                  }
+              
+                  // add as many electrons as possible to the current shell, up to the shell's limit
+                  const shellLimit = Math.min(remainingElectrons, 2 * currentShell ** 2 - shells[currentShell].length);
+                  shells[currentShell] = shells[currentShell].concat(Array(shellLimit).fill(1));
+                  remainingElectrons -= shellLimit;
                 }
-                document.getElementById("view").textContent = convertert(a)
-                return atom
-            }
+              
+                // now we need to handle the case where the last shell has more than 8 electrons
+                let lastShellIndex = shells.length - 1;  // index of the last shell
+                while (shells[lastShellIndex].length > 8) {
+                  // if the last shell has more than 8 electrons, move as many as possible (up to 6) to the shell before it
+                  const excessElectrons = shells[lastShellIndex].length - 8;
+                  const numElectronsToMove = Math.min(excessElectrons, 6);
+                  shells[lastShellIndex - 1] = shells[lastShellIndex - 1].concat(Array(numElectronsToMove).fill(1));
+                  shells[lastShellIndex] = shells[lastShellIndex].slice(0, -numElectronsToMove);
+              
+                  // if the last shell is now empty, remove it and move to the next-to-last shell
+                  if (shells[lastShellIndex].length === 0) {
+                    shells.pop();
+                    lastShellIndex--;
+                  }
+                }
+              
+                return shells;
+              }
         </script>
     </head>
     <body>
