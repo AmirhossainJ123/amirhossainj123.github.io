@@ -6,6 +6,7 @@
   <meta charset="utf-8" />
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
   <!-- CodeMirror -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
@@ -14,29 +15,20 @@
   <link rel="stylesheet" href="https://firepad.io/releases/v1.5.9/firepad.css" />
   <script src="https://firepad.io/releases/v1.5.9/firepad.min.js"></script>
 
-  <!-- Include example userlist script / CSS.
-       Can be downloaded from: https://github.com/firebase/firepad/tree/master/examples/ -->
-  <script src="firepad-userlist.js"></script>
-  <link rel="stylesheet" href="firepad-userlist.css" />
-
   <style>
     html { height: 100%; }
-    body { margin: 0; height: 100%; }
-    /* Height / width / positioning can be customized for your use case.
-       For demo purposes, we make the user list 175px and firepad fill the rest of the page. */
-    #userlist {
-      position: absolute; left: 0; top: 0; bottom: 0; height: auto;
-      width: 175px;
-    }
-    #firepad {
-      position: absolute; left: 175px; top: 0; bottom: 0; right: 0; height: auto;
+    body { margin: 0; height: 100%; position: relative; }
+      /* Height / width / positioning can be customized for your use case.
+         For demo purposes, we make firepad fill the entire browser. */
+    #firepad-container {
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
 
 <body onload="init()">
-  <div id="userlist"></div>
-  <div id="firepad"></div>
+  <div id="firepad-container"></div>
 
   <script>
     function init() {
@@ -53,23 +45,79 @@
       var firepadRef = getExampleRef();
 
       //// Create CodeMirror (with lineWrapping on).
-      var codeMirror = CodeMirror(document.getElementById('firepad'), { lineWrapping: true });
+      var codeMirror = CodeMirror(document.getElementById('firepad-container'), { lineWrapping: true });
 
-      // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
-      var userId = Math.floor(Math.random() * 9999999999).toString();
-
-      //// Create Firepad (with rich text features and our desired userId).
+      //// Create Firepad (with rich text toolbar and shortcuts enabled).
       var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-          { richTextToolbar: true, richTextShortcuts: true, userId: userId});
-
-      //// Create FirepadUserList (with our desired userId).
-      var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
-          document.getElementById('userlist'), userId);
+          { richTextToolbar: true, richTextShortcuts: true });
 
       //// Initialize contents.
       firepad.on('ready', function() {
         if (firepad.isHistoryEmpty()) {
-          firepad.setText('Check out the user list to the left!');
+          firepad.setHtml(
+              '<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/>\n' +
+              '<br/>' +
+              '<div style="font-size: 18px">' +
+              'Supports:<br/>' +
+              '<ul>' +
+                '<li>Different ' +
+                  '<span style="font-family: impact">fonts,</span>' +
+                  '<span style="font-size: 24px;"> sizes, </span>' +
+                  '<span style="color: blue">and colors.</span>' +
+                '</li>' +
+                '<li>' +
+                  '<b>Bold, </b>' +
+                  '<i>italic, </i>' +
+                  '<u>and underline.</u>' +
+                '</li>' +
+                '<li>Lists' +
+                  '<ol>' +
+                    '<li>One</li>' +
+                    '<li>Two</li>' +
+                  '</ol>' +
+                '</li>' +
+                '<li>Undo / redo</li>' +
+                '<li>Cursor / selection synchronization.</li>' +
+                '<li><checkbox></checkbox> It supports customized entities.</li>' +
+                '<li>And it\'s all fully collaborative!</li>' +
+              '</ul>' +
+              '</div>');
+        }
+      });
+
+      // An example of a complex custom entity.
+      firepad.registerEntity('checkbox', {
+        render: function (info, entityHandler) {
+          var inputElement = document.createElement('input');
+          inputElement.setAttribute('type', 'checkbox');
+          if(info.checked) {
+            inputElement.checked = 'checked';
+          }
+          inputElement.addEventListener('click', function () {
+            entityHandler.replace({checked:this.checked});
+          });
+          return inputElement;
+        }.bind(this),
+        fromElement: function (element) {
+          var info = {};
+          if(element.hasAttribute('checked')) {
+            info.checked = true;
+          }
+          return info;
+        },
+        update: function (info, element) {
+          if (info.checked) {
+            element.checked = 'checked';
+          } else {
+            element.checked = null;
+          }
+        },
+        export: function (info) {
+          var inputElement = document.createElement('checkbox');
+          if(info.checked) {
+            inputElement.setAttribute('checked', true);
+          }
+          return inputElement;
         }
       });
     }
