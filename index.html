@@ -265,7 +265,78 @@
             background-color: blue;
             border: 3px solid darkblue;
         }
-        .cmgd {
+        .cmgbd {
+            width: 150px;
+            height: 80px;
+            cursor: none;
+            color: white;
+            text-align: center;
+            font-family: 'Noto Sans Vai', sans-serif;
+            border-radius: 30px;
+            margin: 5px;
+            background-image: url("https://img.freepik.com/premium-vector/flag-usa-united-states-america-background_53500-169.jpg?w=2000");
+            background-size: cover;
+            left: 100%;
+            top: 100%;
+            margin-top: -90px;
+            margin-left: -350px;
+            position: absolute;
+            border: 3px solid darkblue;
+        }
+        .grayerz {
+            width: 140px;
+            height: 70px;
+            cursor: none;
+            color: white;
+            text-align: center;
+            font-family: 'Noto Sans Vai', sans-serif;
+            border-radius: 30px;
+            padding: 5px;
+            margin-top: -5px;
+            margin-left: -10px;
+            background-color: rgba(150,150,150,0.9);
+            left: 100%;
+            display: flex;
+            top: 100%;
+        }
+        .grayerz * {
+            font-size: 14px;
+        }
+        .grayerz h4 {
+            margin-top:22px;
+        }
+        .cmgbd:hover {
+            transition: 400ms;
+            background-color: darkblue;
+            border: 3px solid blue;
+            box-shadow: 0px 0px 30px;
+        }
+        .grayerz:hover {
+            transition: 400ms;
+            background-color: rgba(150,150,150,0.5);
+        }
+        .grayerz:active {
+            transition: 400ms;
+            background-color: rgba(150,150,150,0.2);
+        }
+        .grayerz:active h4 {
+            transition: 400ms;
+            color: black;
+            font-size: 20px;
+            margin-top:16px;
+        }
+        .cmgbd:active {
+            transition: 2000ms;
+            background-color: blueviolet;
+            border: 3px solid indigo;
+            color: darkblue;
+            box-shadow: 0px 0px 10000px 10000px;
+        }
+        .cmgbd {
+            transition: 400ms;
+            box-shadow: 0px 0px 0px;
+            background-color: blue;
+            border: 3px solid darkblue;
         }
     </style>
     <head>
@@ -322,7 +393,14 @@
                 <img src="discord.ico" alt="discord" width="64" height="64">
                 <h4 style="margin-top:22px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 15px;">Electrians</h4>
             </button>
-            <h4 class="cmgz">!!!</h4>
+        </form>
+        <form action="discord/bin">
+            <button class="cmgbd" href="https://amirhossainj123.github.io/discord/bin">
+                <div class="grayerz">
+                    <img src="discord.ico" alt="discord" width="64" height="64">
+                    <h4 style=" font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Bin-Codes!</h4>
+                </div>
+            </button>
         </form>
         <div class="cursor shadow"></div>
         <div class="cursor coolz"></div>
