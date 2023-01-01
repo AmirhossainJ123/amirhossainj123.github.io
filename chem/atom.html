@@ -28,6 +28,7 @@
       }
       input {
         transition: 500ms;
+        margin-left: 40px;
         color: black;
         background-color: white;
         padding: 5px;
@@ -45,7 +46,6 @@
       button {
         transition: 500ms;
         margin: 5px;
-        margin-left: 13px;
         padding: 10px;
         border: 2px solid green;
         background-color: white;
@@ -82,6 +82,7 @@
         <div class="center">
           <input id="atomic_number" type="number" value="10">
           <br>
+          <button onclick="download();">Download</button>
           <button onclick="b = calculate(document.getElementById('atomic_number').value);document.getElementById('view').textContent = show(b,', ');">Write</button>
           <button onclick="b = calculate(document.getElementById('atomic_number').value);draw(b)">Draw</button>
         </div>
