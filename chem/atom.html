@@ -4,18 +4,92 @@
         <script src="atom.js"></script>
     </head>
     <style>
+      body {
+        background-color: black;
+      }
       .atomic {
+        border-radius: 100%;
+        background-color: white;
         width: 500px;
         height: 500px;
         border: 2px solid black;
         margin: 10px;
       }
+      .center {
+        left: 50%;
+        transform:translateX(-50%);
+        position: absolute;
+      }
+      .zenter {
+        left: 50%;
+        transform:translateX(-50%);
+        margin-top: 80px;
+        position: absolute;
+      }
+      input {
+        transition: 500ms;
+        color: black;
+        background-color: white;
+        padding: 5px;
+        border: 2px solid gray;
+        border-radius: 10px;
+      }
+      input:hover {
+        transition: 500ms;
+        color: white;
+        background-color: black;
+        padding: 5px;
+        border: 2px solid gray;
+        border-radius: 10px;
+      }
+      button {
+        transition: 500ms;
+        margin: 5px;
+        margin-left: 13px;
+        padding: 10px;
+        border: 2px solid green;
+        background-color: white;
+        border-radius: 10px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      h2 {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+      button:hover {
+        transition: 500ms;
+        border: 2px solid darkgreen;
+        background-color: darkgray;
+        border-radius: 10px;
+      }
+      button:active {
+        transition: 500ms;
+        border: 2px solid white;
+        background-color: green;
+        border-radius: 10px;
+      }
+      .scroller {
+        display: flex;
+        color: white;
+        text-align: center;
+        position: absolute;
+        margin-top: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     </style>
     <body>
-        <input id="atomic_number" type="number">
-        <button onclick="b = calculate(document.getElementById('atomic_number').value);document.getElementById('view').textContent = show(b,', ');">Calculate</button>
-        <button onclick="b = calculate(document.getElementById('atomic_number').value);draw(b)">Show</button>
-        <h2 id="view">0</h2>
-        <canvas class="atomic" id="canvas"></canvas>
+        <div class="center">
+          <input id="atomic_number" type="number" value="10">
+          <br>
+          <button onclick="b = calculate(document.getElementById('atomic_number').value);document.getElementById('view').textContent = show(b,', ');">Write</button>
+          <button onclick="b = calculate(document.getElementById('atomic_number').value);draw(b)">Draw</button>
+        </div>
+        <div class="zenter">
+          <canvas class="atomic" id="canvas"></canvas>
+        </div>
+        <div class="scroller">
+          <h2 id="view">0</h2>
+        </div>
     </body>
 </html>
