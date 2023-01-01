@@ -27,7 +27,7 @@ function calculate(a) { // a = atomic number
     return shell_array
 }
 function draw(shells) {
-    margin=20;
+    margin=80;
     scale = (shells.length*2+1)*margin;
     const canvas = document.getElementById("canvas");
     canvas.width = scale; canvas.height = scale;
@@ -35,30 +35,28 @@ function draw(shells) {
         const ctx = canvas.getContext("2d");
         ctx.reset()
         ctx.beginPath();
-        ctx.arc(scale/2, scale/2, 10, 0, 2 * Math.PI);
+        ctx.arc(scale/2, scale/2, 40, 0, 2 * Math.PI);
         ctx.fillStyle = "rgb(200,0,0)"
         ctx.fill();
         for (let index = 1; index <= shells.length; index++){
             ctx.beginPath();
             ctx.arc(scale/2, scale/2, index*margin, 0, 2 * Math.PI);
             ctx.lineWidth = 1;
+            ctx.strokeStyle = "rgb(0,0,0)"
             ctx.stroke();
-            t = shells[index-1]/index*margin
-            console.error(t + " " + scale)
-            a = t
-            for (let i = 0; i < shells[index-1]; i++) {
+            let radius = margin*index;
+            let amountOfDots = shells[index-1];
+            let angle = 2 * Math.PI / amountOfDots;
+            for (let i = 0; i < amountOfDots; i++) {
+                let x = scale/2 + radius * Math.cos(i * angle);
+                let y = scale/2 + radius * Math.sin(i * angle);
                 ctx.beginPath();
-                b = (index*margin)**2-(a-scale/2)**2
-                if (b == 0)
-                    b = index*margin
-                else
-                    b = Math.sqrt(b)+scale/2
-                console.log(b + " " + a)
-                console.log("")
-                ctx.arc(a, b, 3, 0, 2 * Math.PI);
-                ctx.fillStyle = "rgb(0,0,200)"
+                ctx.arc(x, y, 8, 0, 2 * Math.PI);
+                ctx.strokeStyle = "rgb(0,0,100)"
+                ctx.fillStyle = "rgb(0,0,255)"
+                ctx.lineWidth = 2
                 ctx.fill();
-                a += t
+                ctx.stroke();
             }
         }
     }

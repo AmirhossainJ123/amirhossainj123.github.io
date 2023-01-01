@@ -13,7 +13,8 @@
     </style>
     <body>
         <input id="atomic_number" type="number">
-        <button onclick="b = calculate(document.getElementById('atomic_number').value);document.getElementById('view').textContent = show(b,', '); draw(b)">Calculate</button>
+        <button onclick="b = calculate(document.getElementById('atomic_number').value);document.getElementById('view').textContent = show(b,', ');">Calculate</button>
+        <button onclick="b = calculate(document.getElementById('atomic_number').value);draw(b)">Show</button>
         <h2 id="view">0</h2>
         <canvas class="atomic" id="canvas"></canvas>
     </body>
