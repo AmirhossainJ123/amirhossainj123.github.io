@@ -1,0 +1,138 @@
+<head>
+    <script src="electrame.js"></script>
+    <title>Game Test</title>
+    <script>
+        function randomizer(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+    </script>
+</head>
+<style>
+    canvas {
+        border: 5px solid black;
+    }
+</style>
+<body>
+    <canvas id="game" width="800" height="400"></canvas>
+    <script>
+        // Setup for keyboard
+
+        key_left = false
+        key_up = false
+        key_down = false
+        key_right = false
+
+        addEventListener("keyup",(e) => {
+            switch (e.keyCode) {
+                case 37: case 65: key_left = false; break;
+                case 38: case 87: key_up = false; break;
+                case 39: case 68: key_right = false; break;
+                case 40: case 83: key_down = false; break;
+            }
+        });
+        addEventListener("keydown",(e) => {
+            switch (e.keyCode) {
+                case 37: case 65: key_left = true; break;
+                case 38: case 87: key_up = true; break;
+                case 39: case 68: key_right = true; break;
+                case 40: case 83: key_down = true; break;
+            }
+        });
+
+        // Config for Physics
+        Gravity = true  // YES gravity :DDD
+        Friction = true // Yes Friction :)
+        EConfig(Gravity,Friction)
+
+        // Coding Game
+        Game = new EGame("game")
+        World = new EColors(1).DAY
+        Sq = new EColors(1).BLACK
+        BIO = new EColors(1).PINK
+        Grass = new EColors(1).DARKGREEN
+        Sky = new ESquare(1000,600)
+        Squr = new ESquare(20,20)
+        Bois = new ESquare(100,20)
+        Grond = new ESquare(1000,50)
+        Background = new EObject(-100,-100,Sky,World) // Background
+        Square = new EObject(500,500,Squr,Sq) // Boi
+        Pads = new EObject(100,300,Bois,BIO) // Boiz
+        Padz = new EObject(100,310,Bois,BIO) // Boiz
+        Ground = new EObject(-100,350,Grond,Grass) // BoiGround
+        jump_able = false
+        function PadSwitch() {
+            setTimeout(()=> {
+                Pads.x = randomizer(20,780)
+                Pads.y = randomizer(20,300)
+                PadSwitch()
+            },10000)
+        }
+        function PadSwatch() {
+            setTimeout(()=> {
+                Padz.x = randomizer(20,780)
+                Padz.y = randomizer(170,300)
+                PadSwatch()
+            },7000)
+        }
+        function Grunder(Grund,Pod) {
+            if (Grund[0]) {
+                jump_able = true
+                if (Square.vy > 0)
+                    Square.vy = 0
+                Results = Square.y
+                if (Square.y-Square.shape.z <= Pod.y-1)
+                    Results = Pod.y-20
+                if (Square.y <= Pod.y+Pod.shape.z-1)
+                    Results = Pod.y+Pod.shape.z
+                Square.y = Results
+            }
+        }
+        function My_Game() {
+            setTimeout( (e) => {
+                Square = EApplyMotion(Square)
+                Square = EApplyPhysicsTo(Square)
+                if (key_up && jump_able) {
+                    jump_able = false
+                    Square = EApplyForce(Square,[0,-2.5],[0,5,0,-5]) // Apply a force to Square (Object,[Force_to_x_direction,Force_to_y_direction],[Terminal Velocity for different directions])
+                }
+                if (key_left) {
+                    Square = EApplyForce(Square,[-0.1,0],[4,4,-4,-4])
+                }
+                if (key_down) {
+                    Square = EApplyForce(Square,[0,0.1],[4,4,-4,-4])
+                }
+                if (key_right) {
+                    Square = EApplyForce(Square,[0.1,0],[4,4,-4,-4])
+                }
+                BorderCol = EBoxCollision(Square,Background)[0] // Check if they are colided or not
+                jump_able=false;
+                Grund = EBoxCollision(Square,Ground)[0]
+                if (Grund) {
+                    jump_able = true
+                    if (Square.vy > 0)
+                        Square.vy = 0
+                    if (Square.y >= Ground.y+1)
+                        Square.y = 550
+                }
+                Grund = EBoxCollision(Square,Pads)
+                Grunder(Grund,Pads)
+                Grund = EBoxCollision(Square,Padz)
+                Grunder(Grund,Padz)
+                if (!BorderCol) {
+                    Square.x = randomizer(20,780)
+                    Square.y = randomizer(300,310)
+                }
+                EClear(Game) // Clear the screen (get ready to render another one)
+                ERender(Game,Background) // Render the Background in Game
+                ERender(Game,Ground) // Render the GRND in Game
+                ERender(Game,Square) // Render the BOI in Game
+                ERender(Game,Pads) // Render the BOI in Game
+                ERender(Game,Padz) // Render the BOIZ in Game
+                My_Game() // Loop
+            }, 10);
+        }
+        My_Game()
+        PadSwatch();
+        PadSwitch();
+    </script>
+</body>
