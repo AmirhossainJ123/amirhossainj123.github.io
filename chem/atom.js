@@ -43,13 +43,64 @@ function download() {
     link.href = document.getElementById('canvas').toDataURL()
     link.click();
 }
+PublicKey = false
 function test(a=0,b) {
     setTimeout((e)=>{
+        PublicKey = false
         draw(calculate(a));
         a++;
         if (a < b)
             test(a,b);
-    },500);
+        else
+            PublicKey = true
+    },parseInt(document.getElementById("fps").value));
+}
+function record_check(mediaRecorder,recordedChunks,stream,canvas) {
+    setTimeout((e)=>{
+        if (PublicKey) {
+            mediaRecorder.stop();
+            setTimeout(() => {
+                const blob = new Blob(recordedChunks, {
+                    type: "video/webm"
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "recording.webm";
+                a.click();
+                URL.revokeObjectURL(url);
+            },0);
+            document.getElementById("recorder").hidden = false;
+            document.getElementById("animator").hidden = false;
+            document.getElementById("drawer").hidden = false;
+            document.getElementById("fps").hidden = false;
+        }
+        else
+            record_check(mediaRecorder,recordedChunks,stream,canvas);
+    },10);
+}
+function record() {
+    const canvas = document.getElementById("canvas");
+    document.getElementById("recorder").hidden = true;
+    document.getElementById("animator").hidden = true;
+    document.getElementById("drawer").hidden = true;
+    document.getElementById("fps").hidden = true;
+    let mediaRecorder;
+    let recordedChunks;
+    const stream = canvas.captureStream(25);
+    mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm;codecs=vp9',
+        ignoreMutedMedia: true
+    });
+    recordedChunks = [];
+    mediaRecorder.ondataavailable = e => {
+        if(e.data.size > 0){
+        recordedChunks.push(e.data);
+        }
+    };
+    mediaRecorder.start();
+    animate = test(0,document.getElementById('atomic_number').value)
+    record_check(mediaRecorder,recordedChunks,stream,canvas)
 }
 function draw(shells) {
     Confirmation = true
