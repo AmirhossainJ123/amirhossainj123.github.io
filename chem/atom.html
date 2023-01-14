@@ -17,7 +17,7 @@
       <link rel="canonical" href="https://amirhossainj123.github.io/chem/atom">
       <link rel="icon" type="image/png" sizes="32x32" href="atoms.png">
       <title>Atom</title>
-      <script src="atom.js"></script>
+      <script src="atomic.js"></script>
     </head>
     <style>
       body {
@@ -102,6 +102,18 @@
         left: 50%;
         transform: translateX(-50%);
       }
+      .credit {
+        display: flex;
+        color: white;
+        text-align: center;
+        position: absolute;
+        margin-top: 680px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .credit * {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
     </style>
     <body>
       <div class="center">
@@ -121,6 +133,9 @@
         <button onclick="test(0,parseInt(document.getElementById('atomic_number').value))" id="animator">Animate</button>
         <button onclick="record()" id="recorder">Record Animation</button>
         <input type="range" min="2" max="5000" id="fps" value=250>
+      </div>
+      <div class="credit">
+        <h3>Special thanks to my teacher: Mr.Hashemi</h3>
       </div>
     </body>
 </html>

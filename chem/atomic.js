@@ -52,7 +52,7 @@ function test(a=0,b) {
         if (a < b)
             test(a,b);
         else
-            PublicKey = true
+            setTimeout(() => {PublicKey = true;},500);
     },parseInt(document.getElementById("fps").value));
 }
 function record_check(mediaRecorder,recordedChunks,stream,canvas) {
@@ -80,7 +80,7 @@ function record_check(mediaRecorder,recordedChunks,stream,canvas) {
     },10);
 }
 function record() {
-    PublicKey = false
+    PublicKey = false;
     const canvas = document.getElementById("canvas");
     document.getElementById("recorder").hidden = true;
     document.getElementById("animator").hidden = true;
