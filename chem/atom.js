@@ -80,6 +80,7 @@ function record_check(mediaRecorder,recordedChunks,stream,canvas) {
     },10);
 }
 function record() {
+    PublicKey = false
     const canvas = document.getElementById("canvas");
     document.getElementById("recorder").hidden = true;
     document.getElementById("animator").hidden = true;
