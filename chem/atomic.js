@@ -43,6 +43,14 @@ function download() {
     link.href = document.getElementById('canvas').toDataURL()
     link.click();
 }
+function test(a=0,b) {
+    setTimeout((e)=>{
+        draw(calculate(a));
+        a++;
+        if (a < b)
+            test(a,b);
+    },500);
+}
 function draw(shells) {
     Confirmation = true
     if (shells.length >= 20) {
