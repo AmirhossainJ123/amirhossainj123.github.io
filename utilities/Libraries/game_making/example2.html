@@ -58,19 +58,19 @@
                 if (Square.vy > 0)
                     Square.vy = 0
                 Results = Square.y
-                if (Square.y-Square.shape.z <= Pod.y-1)
+                if (parseFloat(Square.y)-parseFloat(Square.shape.z) > Pod.y)
+                    Results = Pod.y+20
+                if (Square.y < parseFloat(Pod.y)-parseFloat(Pod.shape.z))
                     Results = Pod.y-20
-                if (Square.y <= Pod.y+Pod.shape.z-1)
-                    Results = Pod.y+Pod.shape.z
                 Square.y = Results
             }
         }
         function My_Game() {
             setTimeout( (e) => {
-                key_down = EKeyboard("S")
-                key_left = EKeyboard("A")
-                key_right = EKeyboard("D")
                 key_up = EKeyboard("W")
+                key_left = EKeyboard("A")
+                key_down = EKeyboard("S")
+                key_right = EKeyboard("D")
                 Square = EApplyMotion(Square)
                 Square = EApplyPhysicsTo(Square)
                 if (key_up && jump_able) {
