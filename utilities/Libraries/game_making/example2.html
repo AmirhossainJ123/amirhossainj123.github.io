@@ -17,28 +17,6 @@
     <script>
         // Setup for keyboard
 
-        key_left = false
-        key_up = false
-        key_down = false
-        key_right = false
-
-        addEventListener("keyup",(e) => {
-            switch (e.keyCode) {
-                case 37: case 65: key_left = false; break;
-                case 38: case 87: key_up = false; break;
-                case 39: case 68: key_right = false; break;
-                case 40: case 83: key_down = false; break;
-            }
-        });
-        addEventListener("keydown",(e) => {
-            switch (e.keyCode) {
-                case 37: case 65: key_left = true; break;
-                case 38: case 87: key_up = true; break;
-                case 39: case 68: key_right = true; break;
-                case 40: case 83: key_down = true; break;
-            }
-        });
-
         // Config for Physics
         Gravity = true  // YES gravity :DDD
         Friction = true // Yes Friction :)
@@ -89,6 +67,10 @@
         }
         function My_Game() {
             setTimeout( (e) => {
+                key_down = EKeyboard("S")
+                key_left = EKeyboard("A")
+                key_right = EKeyboard("D")
+                key_up = EKeyboard("W")
                 Square = EApplyMotion(Square)
                 Square = EApplyPhysicsTo(Square)
                 if (key_up && jump_able) {

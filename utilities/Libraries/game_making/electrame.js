@@ -4,6 +4,35 @@ const EFFRICTION = 0.025;
 var EGRAVITY=false
 var EFRICTION=false
 
+// key detection
+KeysPressed = []
+addEventListener("keydown",(e) => {
+    !_findEqual(KeysPressed,e.key) ? KeysPressed.push([e.key,true]) : KeysPressed[_findIndex(KeysPressed,e.key)][1] = true;
+});
+addEventListener("keyup",(e) => {
+    !_findEqual(KeysPressed,e.key) ? KeysPressed.push([e.key,false]) : KeysPressed[_findIndex(KeysPressed,e.key)][1] = false;
+});
+
+function _findEqual(array,key) {
+    for (let index = 0; index < array.length; index++) {
+        if (array[index][0]==key)
+            return true
+    }
+    return false
+}
+function _findIndex(array,key) {
+    for (let index = 0; index < array.length; index++) {
+        if (array[index][0]==key)
+            return index
+    }
+}
+function _findResult(array,key) {
+    for (let index = 0; index < array.length; index++) {
+        if (array[index][0]==key)
+            return array[index][1]
+    }
+    return false
+}
 
 // Colors
 class EColors {
@@ -30,6 +59,8 @@ class EColors {
         this.ORANGE = "rgba(200,100,0," + opacity + ")"
     }
 }
+
+function EKeyboard(key) {return _findResult(KeysPressed,key.toLowerCase());}
 
 class EGame {
     constructor (screen_id) {
