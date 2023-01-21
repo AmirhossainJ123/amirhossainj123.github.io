@@ -27,6 +27,7 @@
             color: white;
             font-size: 75px;
             text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         form {
             display: inline-block;
@@ -56,6 +57,20 @@
             border: 4px solid red;
             opacity: 0;
         }
+        .stuff {
+            transition: 500ms;
+            background-color: rgba(100,100,100,0.4);
+            border-radius: 50px;
+            margin-left: 100px;
+            margin-right: 100px;
+            box-shadow: 0px 0px 5px rgba(100,100,100,0.4);
+            padding: 20px;
+        }
+        .stuff:hover {
+            transition: 500ms;
+            background-color: rgba(100,100,100,1);
+            box-shadow: 0px 0px 50px rgba(100,100,100,1);
+        }
     </style>
     <head>
         <meta charset="UTF-8">
@@ -79,33 +94,38 @@
     <body>
         <title>Utilities</title>
         <h1>Utilities</h1>
-        <form action="note">
-            <button href="https://amirhossainj123.github.io/utilities/note">Personal Notebook</button>
-        </form>
-        <form action="calculator">
-            <button href="https://amirhossainj123.github.io/utilities/calculator">Calculator (Not Ready)</button>
-        </form>
-        <form action="image">
-            <button href="https://amirhossainj123.github.io/utilities/image">Painting Typer</button>
-        </form>
-        <form action="https://amirhossainj123.github.io/anything/you/say/redirector">
-            <button href="https://amirhossainj123.github.io/anything/you/say/redirector">Client Side Redirector (Not Ready)</button>
-        </form>
-        <form action="https://amirhossainj123.github.io/word_finder">
-            <button href="https://amirhossainj123.github.io/word_finder">Word Finder</button>
-        </form>
-        <form action="https://amirhossainj123.github.io/utilities/accurate">
-            <button href="https://amirhossainj123.github.io/utilities/accurate">Accurate Calculator (Not Ready)</button>
-        </form>
-        <form action="https://amirhossainj123.github.io/utilities/game">
-            <button href="https://amirhossainj123.github.io/utilities/game">Game</button>
-        </form>
-        <form action="https://amirhossainj123.github.io/utilities/sgen">
-            <button href="https://amirhossainj123.github.io/utilities/sgen">Sentence Generator</button>
-        </form>
-        <form action="https://amirhossainj123.github.io/chem/atom">
-            <button href="https://amirhossainj123.github.io/chem/atom">Atom Image Generator</button>
-        </form>
+        <div class="stuff">
+            <form action="note">
+                <button href="https://amirhossainj123.github.io/utilities/note">Personal Notebook</button>
+            </form>
+            <form action="calculator">
+                <button href="https://amirhossainj123.github.io/utilities/calculator">Calculator (Not Ready)</button>
+            </form>
+            <form action="image">
+                <button href="https://amirhossainj123.github.io/utilities/image">Painting Typer</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/anything/you/say/redirector">
+                <button href="https://amirhossainj123.github.io/anything/you/say/redirector">Client Side Redirector (Not Ready)</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/word_finder">
+                <button href="https://amirhossainj123.github.io/word_finder">Word Finder</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/utilities/accurate">
+                <button href="https://amirhossainj123.github.io/utilities/accurate">Accurate Calculator (Not Ready)</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/utilities/game">
+                <button href="https://amirhossainj123.github.io/utilities/game">Game</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/utilities/sgen">
+                <button href="https://amirhossainj123.github.io/utilities/sgen">Sentence Generator</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/chem/atom">
+                <button href="https://amirhossainj123.github.io/chem/atom">Atom Image Generator</button>
+            </form>
+            <form action="https://amirhossainj123.github.io/utilities/Libraries/game_making">
+                <button href="https://amirhossainj123.github.io/utilities/Libraries/game_making">Electrame Game Making Library</button>
+            </form>
+        </div>
         <div class="advertisement">
             <img src="https://amirhossainj123.github.io/advertisement/0.png" onclick="ads(0)" width="383" height="225">
         </div>

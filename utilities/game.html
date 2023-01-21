@@ -167,7 +167,6 @@
     </head>
     <body onload="main()">
         <div class="lforya" id="lforu" hidden>
-            <title>Game</title>
             <h2>You have lost</h2>
             <h4>The red demons have captured your body and now you are in their control!</h4>
             <h4>Captain Rediwish has hacked the entire Whitishland using your body!</h4>
@@ -190,6 +189,8 @@
             <button class="a_button" onmouseup="key_right = false" onmousedown="key_right = true" onpointerup="key_right = false" onpointerdown="key_right = true">S</button>
             <button class="b_button" onmouseup="key_down = false" onmousedown="key_down = true" onpointerup="key_down = false" onpointerdown="key_down = true">D</button>
         </div>
+        <h3 style="display: inline-block; margin-left:5px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Resolution</h3>
+        <input type="range" min="1" max="100" value="100" id="resos" onchange="document.querySelector('body').style.scale=document.getElementById('resos').value+'%'">
         <h2 id="scorem"></h2>
         <h3 id="capturedz"></h3>
         <h3 id="bluwishz"></h3>
