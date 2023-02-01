@@ -153,6 +153,51 @@ function ECircleCollision(circ1,circ2) {
         return false
 }
 
+function EVelocityX(object) {return object.vx}
+function EVelocityY(object) {return object.vy}
+function EPositionX(object) {return object.x}
+function EPositionY(object) {return object.y}
+function EScaleX(object) {return object.shape.x}
+function EScaleY(object) {return object.shape.y}
+function EType(object) {return object.shape.id}
+
+function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
+    if (object1.shape.id == "Square" && object2.shape.id == "Square")
+        if (EBoxCollision(object1,object2)[0]) {
+            if (object1.x < object2.x + object2.shape.w/2) {
+                object1.x = object2.x + object2.shape.w/2
+                if (Bounce_Force != false) {
+                    object1.vx = Bounce_Force[0] // Bounce_Force = [Force to be applied when hit the right, Force to be applied when hit the left, Force to be applied when hit the top, Force to be applied when hit the bottom]
+                }
+            }
+            else if (object1.x + object1.shape.w > object2.x - object2.shape.w/2) {
+                object1.x = object2.x - object1.shape.w - object2.shape.w/2
+                if (Bounce_Force != false) {
+                    object1.vx = Bounce_Force[1]
+                }
+            }
+            if (object1.y + object1.shape.z > object2.y) {
+                object1.y = object2.y - object1.shape.z
+                if (Bounce_Force != false) {
+                    object1.vy = Bounce_Force[2]
+                }
+            }
+            else if (object1.y < object2.y + object2.shape.z) {
+                object1.y = object2.y + object2.shape.z
+                if (Bounce_Force != false) {
+                    object1.vy = Bounce_Force[3]
+                }
+            }
+        }
+    else if (object1.shape.id == "Circle" && object2.shape.id == "Square")
+        console.log("Box Circle Collider")
+    else if (object1.shape.id == "Circle" && object2.shape.id == "Circle")
+        console.log("Circle Collider")
+    else if (object1.shape.id == "Square" && object2.shape.id == "Circle")
+        console.log("Box Circle Collider")
+    return object1
+}
+
 function EApplyMotion(Object) {
     Object.x += Object.vx
     Object.y += Object.vy
