@@ -1,6 +1,7 @@
 import os
 from os import system as do
 from time import sleep as wait
+# you are allowed to yoink anything from this python file and don't give ANY credit ;c
 def filter(directory):
     directories = []
     dir = [x.replace("\\","/") for x in directory]
@@ -32,5 +33,4 @@ for y in Submit:
 typer.close()
 do("cls")
 print("Your sitemap is now up to date!")
-do("msg * Done!")
 wait(3)
