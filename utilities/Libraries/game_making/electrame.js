@@ -164,14 +164,14 @@ function EType(object) {return object.shape.id}
 function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
     if (object1.shape.id == "Square" && object2.shape.id == "Square")
         if (EBoxCollision(object1,object2)[0]) {
-            if (object1.x < object2.x + object2.shape.w/2) {
-                object1.x = object2.x + object2.shape.w/2
+            if (object1.x < object2.x + object2.shape.w) {
+                object1.x = object2.x + object2.shape.w
                 if (Bounce_Force != false) {
                     object1.vx = Bounce_Force[0] // Bounce_Force = [Force to be applied when hit the right, Force to be applied when hit the left, Force to be applied when hit the top, Force to be applied when hit the bottom]
                 }
             }
-            else if (object1.x + object1.shape.w > object2.x - object2.shape.w/2) {
-                object1.x = object2.x - object1.shape.w - object2.shape.w/2
+            else if (object1.x + object1.shape.w > object2.x) {
+                object1.x = object2.x - object1.shape.w
                 if (Bounce_Force != false) {
                     object1.vx = Bounce_Force[1]
                 }
