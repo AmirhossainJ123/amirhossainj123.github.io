@@ -4,7 +4,7 @@ body {
     background-size: cover;
     padding: 10px;
 }
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, pre {
     color: white;
 }
 h1,h2 {
@@ -12,6 +12,9 @@ h1,h2 {
 }
 h3,h4,h5 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+pre {
+    font-family: 'Times New Roman', Times, serif;
 }
 .centerize_h {
     left: 50%;
@@ -56,23 +59,25 @@ h3,h4,h5 {
     padding: 5px;
     display: inline-block;
     border-radius: 20px;
+    border: 2px solid indigo;
 }
 .main_part_parts * {
     text-align: center;
 }
 .main_part_parts:hover {
     transition: 500ms;
-    background-color: red;
+    background-color: purple;
+    border: 2px solid darkblue;
 }
-.main_part_parts:hover .answer {
-    transition: 500ms;
-    opacity: 1;
-    width: auto;
-    height: auto;
+::-webkit-scrollbar {
+    background-color: gray;
+    border: 3px solid rgb(51, 51, 51);
+    border-radius: 10px;
 }
-.answer {
-    transition: 500ms;
-    opacity: 0;
-    height: 0;
-    width: 0;
+::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-button {
+    border-radius: 100%;
 }
