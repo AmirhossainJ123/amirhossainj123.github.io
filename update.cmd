@@ -1,1 +1,2 @@
 start Sitemap_Creator.py
+exit
