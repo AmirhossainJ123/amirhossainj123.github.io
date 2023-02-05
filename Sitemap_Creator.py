@@ -33,4 +33,5 @@ for y in Submit:
 typer.close()
 do("cls")
 print("Your sitemap is now up to date!")
+do("start upload.cmd")
 wait(3)
