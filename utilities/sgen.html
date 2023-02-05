@@ -1,18 +1,50 @@
 <html>
-    <head>
-        <script src="Libraries/sentence.js"></script>
-        <script>
-            function loop() {
-                setTimeout(() => {
-                    if (document.getElementById("input").value != "")
-                        document.getElementById("result").textContent = generate(document.getElementById("input").value)
-                    loop()
-                }, 10);
-            }
-        </script>
-    </head>
-    <body onload="loop()">
-        <input id="input" value="">
-        <h2 id="result"></h2>
-    </body>
+    <script src="website.js"></script>
+<head>
+	<title>Text Thingy</title>
+	<link href="https://jaegerwalddev.github.io/english/style.css" rel="stylesheet">
+	<script src="https://amirhossainj123.github.io/utilities/Libraries/sentence.js"></script>
+	<script>
+		function loop() {
+			setTimeout(() => {
+				if (document.getElementById("input").value != "")
+					document.getElementById("result").textContent = generate(document.getElementById("input").value)
+					loop()
+				}, 10);
+			}
+    	</script>
+	<style>
+		textarea {
+			max-width: 95%;
+			max-height: 25%;
+			min-width: 35%;
+			min-height: 5%;
+			height: 5%;
+			background-color: #687692;
+			color: #ffffff;
+			border: 4px solid #9DB3BF;
+			border-radius: 9px;
+			padding: 10px;
+			text-align: center;
+			font-family: 'Montserrat', sans-serif; font-size: 16px;
+			margin-bottom: 5px;
+			margin-top: 5px;
+			margin-left: 5px;
+			margin-right: 5px;
+			width: 75%;
+		}
+		textarea::placeholder {
+			color: #9DB3BF;
+		}
+	</style>
+</head>
+<body onload="loop()">
+	<div style="max-height: 100%;">
+		<h1>Amirhossainj123 Text Thingy</h1>
+		<textarea placeholder= "Enter some text..." id="input" value=""></textarea>
+		<h1>Text:</h1>
+		<h2 id="result">∘ ∘ ∘</h2>
+		Original JS by Amirhossainj123<br>Fancy Wrapper by Jaegerwald
+	</div>
+</body>
 </html>
