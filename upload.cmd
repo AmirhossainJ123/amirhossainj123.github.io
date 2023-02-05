@@ -1,4 +1,3 @@
 git add *
-git commit -m "New Update"
+git commit -m "NEW UPDOIT"
 git push
-msg * Uploaded
