@@ -68,7 +68,7 @@
                 }
             }
             Store = []
-            function refresh() {
+            function refresh(func,aply) {
             var filled = -1
             var Exist = false;
             for (x = 0; x<Elements.length+1; x++) {
@@ -167,68 +167,75 @@
                     button.append(button_down);
                 }
             }
+            x = aply
+            if (func == "moveup") {
+                try {
+                    for (y=0;y<Store.length;y++) {
+                        if (parseInt(Store[y][2]) == parseInt(x-1)) {
+                            Store[y][2] = parseInt(parseInt(Store[y][2])+1)
+                        }
+                        if (parseInt(Store[y][2]) == parseInt(x)) {
+                            Store[y][2] = parseInt(Store[y][2]-1)
+                            break
+                        }
+                    }
+                } catch (err) {
+                    console.err("I hate this so much")
+                }
+            }
+            if (func == "movedown") {
+                try {
+                    for (y=0;y<Store.length;y++) {
+                        if (parseInt(Store[y][2]) == parseInt(parseInt(x)+1)) {
+                            Store[y][2] = parseInt(Store[y][2]-1)
+                            break;
+                        }
+                        if (parseInt(Store[y][2]) == parseInt(x)) {
+                            Store[y][2] = parseInt(parseInt(Store[y][2])+1)
+                        }
+                    }
+                } catch (err) {
+                    console.err("I hate this so much")
+                }
+            }
+            if (func == "delete") {
+                try {
+                    for (y=0;y<Store.length;y++) {
+                        if (parseInt(Store[y][2]) == parseInt(x)) {
+                            Store.splice(y,1)
+                        }
+                    }
+                } catch (err) {
+                    console.err("I hate this so much")
+                }
+            }
             for (x=0;x<Store.length;x++) {
                 document.getElementById(Store[x][0] + Store[x][2] + "_" + Store[x][3]).value = Store[x][1]
             }
         }
         function DeleteElement(x) {
-            try {
-                for (y=0;y<Store.length;y++) {
-                    if (parseInt(Store[y][2]) == parseInt(x)) {
-                        Store.splice(y,1)
-                    }
-                }
-            } catch (err) {
-                console.err("I hate this so much")
-            }
             if (x > -1) {
                 Elements.splice(x, 1);
             }
-            refresh()
+            refresh('delete',x)
         }
         function AddElement(num, x) {
             let Element = All[num][x]
             Elements[Elements.length] = Element
-            refresh()
+            refresh('')
         }
         function MoveUpElement(x) {
-            try {
-                for (y=0;y<Store.length;y++) {
-                    if (parseInt(Store[y][2]) == parseInt(x-1)) {
-                        Store[y][2] = parseInt(Store[y][2]+1)
-                        break;
-                    }
-                    if (parseInt(Store[y][2]) == parseInt(x)) {
-                        Store[y][2] = parseInt(Store[y][2]-1)
-                    }
-                }
-            } catch (err) {
-                console.err("I hate this so much")
-            }
             temp = Elements[x-1]
             Elements[x-1] = Elements[x]
             Elements[x] = temp
             console.log(x)
-            refresh()
+            refresh('moveup',x)
         }
         function MoveDownElement(x) {
-            try {
-                for (y=0;y<Store.length;y++) {
-                    if (parseInt(Store[y][2]) == parseInt(x+1)) {
-                        Store[y][2] = parseInt(Store[y][2]-1)
-                        break;
-                    }
-                    if (parseInt(Store[y][2]) == parseInt(x)) {
-                        Store[y][2] = parseInt(Store[y][2]+1)
-                    }
-                }
-            } catch (err) {
-                console.err("I hate this so much")
-            }
             temp = Elements[x+1]
             Elements[x+1] = Elements[x]
             Elements[x] = temp
-            refresh()
+            refresh('movedown',x)
         }
         </script>
         <style>
