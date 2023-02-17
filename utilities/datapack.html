@@ -18,13 +18,38 @@
         <link rel="canonical" href="https://amirhossainj123.github.io/utilities/datapack">
         <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
         <script>
-            Events = ["On World Tick","On World Load"]
-            Functions = ["Kill <player>","Spawn <entity>","Place <block>"]
-            Variables = ["Number","Text"]
-            Selectors = ["Everyone","Everyplayer","Random Player","Nearby Player","Player who is holding <item>"]
-            Loops = ["Loop <number> times","While <statement>","If <statement>"]
-            All = [Events,Functions,Variables,Selectors,Loops]
+            Elements = []
+            Events = ["On World Tick",
+                "On World Load"];
+
+            Functions = ["Kill <player>",
+                "Spawn <entity>",
+                "Place <block>",
+                "Set time to <time>"];
+
+            Informations = ["<player>'s Health",
+                "<player>'s Food",
+                "<player>'s Death Count",
+                "<player> Amount of dealt damage",
+                "<player> Amount of taken damage"];
+
+            Variables = ["Number",
+                "Text",
+                "Statement"];
+
+            Selectors = ["Everyone",
+                "Everyplayer",
+                "Random Player",
+                "Nearby Player",
+                "Player who is holding <item>"];
+
+            Loops = ["Loop <number> times",
+                "While <statement>",
+                "If <statement>"];
+
+            All = [Events,Functions,Informations,Variables,Selectors,Loops]
             toggle = [false,false,false,false,false]
+            Event_Toggles = [false,false]
             function visible(num) {
                 num--;
                 check = toggle[num]
@@ -36,7 +61,7 @@
                         button.innerText= Vis[x]
                         button.id="Sub" + num+1
                         button.className = "subutton"
-                        button.onclick = "console.log('F')"
+                        button.setAttribute("onclick","visible(" + (num+1) + "); AddElement(" + num + "," + x + ")")    
                         document.getElementById("Keys"+(num+1)).append(button);
                     }
                 }
@@ -48,6 +73,24 @@
                     }
                 }
             }
+        function refresh() {
+            if (Elements.length > 1)
+                for (x = 0; x<Elements.length-1; x++) {
+                    document.getElementById("Pos"+x).remove()
+                }
+            for (x = 0; x<Elements.length; x++) {
+                let button = document.createElement('div')
+                button.innerText= Elements[x]
+                button.id="Pos" + x
+                button.className = "Connecties"
+                document.getElementById("preview").append(button);
+            }
+        }
+        function AddElement(num, x) {
+            let Element = All[num][x]
+            Elements[Elements.length] = Element
+            refresh()
+        }
         </script>
         <style>
             body {
@@ -63,6 +106,7 @@
                 background-color: rgba(100,100,100,0.5);
                 box-shadow: 0px 0px 10px gray;
                 border-radius: 20px;
+                padding: 5px;
             }
             .functions * {
                 margin: 10px;
@@ -72,21 +116,32 @@
                 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             }
             .functions {
+                display: inline-block;
                 border-right: 5px solid rgba(20,20,20,0.5);
                 width: 30%;
                 height: 100%;
                 border-radius: 10px;
-                padding: 5px;
-                transform: translateY(-2.5px);
             }
-            .explainbar *{
+            .functions::-webkit-scrollbar {
+                background-color: rgb(100,100,100);
+                border-radius: 20px;
+            }
+            .functions::-webkit-scrollbar-thumb {
+                background-color: rgb(20,20,20);
+                border-radius: 20px;
+            }
+            .functions {
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .preview {
+                color: white;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 display: inline-block;
-            }
-            .explainbar {
-                display: flexbox;
+                height: 100%;
+                width: 65%;
                 position: absolute;
-                left: 10%;
-                margin-right: 50px;
+                margin: 5px;
             }
             .eve {
                 transition: 100ms;
@@ -148,6 +203,18 @@
                 transition: 100ms;
                 background-color: rgb(0, 0, 150);
             }
+            .inf {
+                transition: 100ms;
+                background-color: burlywood;
+            }
+            .inf:hover {
+                transition: 100ms;
+                background-color: rgb(182, 151, 110);
+            }
+            .inf:active {
+                transition: 100ms;
+                background-color: rgb(112, 94, 69);
+            }
             .subutton {
                 transition: 100ms;
                 background-color: black;
@@ -168,9 +235,13 @@
             <div class="functions">
                 <button class="eve" onclick="visible(1)" id="Keys1">Events</button><br>
                 <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
-                <button class="var" onclick="visible(3)" id="Keys3">Variables</button><br>
-                <button class="sel" onclick="visible(4)" id="Keys4">Selectors</button><br>
-                <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button>
+                <button class="inf" onclick="visible(3)" id="Keys3">Informations</button><br>
+                <button class="var" onclick="visible(4)" id="Keys4">Variables</button><br>
+                <button class="sel" onclick="visible(5)" id="Keys5">Selectors</button><br>
+                <button class="loo" onclick="visible(6)" id="Keys6">Flow Control</button>
+            </div>
+            <div class="preview" id="preview">
+                Preview
             </div>
         </div>
     </body>
