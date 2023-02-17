@@ -93,6 +93,7 @@
                             filled++
                             Elements[x][1][y] = document.getElementById("input_" + x + "_" + y).value
                             Exist = false
+                            resize(x,y)
                         }
                     }
                 }
@@ -155,7 +156,7 @@
                                     input.className = "inputfun spaced"
                                 else
                                     input.className = "inputfun"
-                                input.setAttribute("onchange","inputset(); resize(" + x + "," + num + ")")
+                                input.setAttribute("onchange","inputset();")
                                 num++
                             button.append(input);
                             inputValue = ""
