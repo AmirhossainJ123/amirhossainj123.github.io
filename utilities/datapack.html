@@ -23,27 +23,37 @@
                 "On World Load"];
 
             Functions = ["Kill <player>",
-                "Spawn <entity>",
-                "Place <block>",
-                "Set time to <time>"];
+                "Kill <entity>",
+                "Spawn <entity> ~<x> ~<y> ~<z>",
+                "Give <player> <count>x <item>",
+                "Place <block> ~<x> ~<y> ~<z>",
+                "Set time to <time>",
+                "Run Following Commands From <x> <y> <z>"];
 
-            Informations = ["<var> = <player>'s Health",
-                "<var> = <player>'s Food",
-                "<var> = <player>'s Death Count",
-                "<var> = <player> Amount of dealt damage",
-                "<var> = <player> Amount of taken damage"];
+            Informations = ["<var number> = <player>'s Health",
+                "<var number> = <player>'s Food",
+                "<var number> = <player>'s Death Count",
+                "<var number> = <player> Amount of dealt damage",
+                "<var number> = <player> Amount of taken damage"];
 
-            Variables = ["<var> = Number",
-                "<var> = Text",
-                "<var> = Statement"];
+            Variables = ["<var number> = <number>",
+                "<var number> = <var> - <var>",
+                "<var number> = <var> + <var>",
+                "<var number> = <var> * <var>",
+                "<var number> = <var> / <var>",
+                "<var> = if <var> = <var>",
+                "<var> = if <var> > <var>",
+                "<var> = if <var> < <var>"];
 
-            Loops = ["Loop <number> times",
-                "While <statement>",
-                "If <statement>"];
-
+            Loops = ["Loop <var> times",
+                "While <var>",
+                "If <var>"];
+            FullCode = [[],[]]
+            CurrentCode = 1
+            FullCode[CurrentCode] = Elements
+            Elements = FullCode[CurrentCode]
             All = [Events,Functions,Informations,Variables,Loops]
             toggle = [false,false,false,false,false]
-            Event_Toggles = [false,false]
             function visible(num) {
                 num--;
                 check = toggle[num]
@@ -87,92 +97,104 @@
                     }
                 }
             }
+            function resize(x,y) {
+                dude = document.getElementById("input_" + x + "_" + y)
+                dude.style.width = dude.value.length+1 + "ch";
+            }
             function refresh(func,aply) {
-            for (x = 0; x<Elements.length+1; x++) {
                 for (x = 0; x<Elements.length+1; x++) {
-                    try {
-                        document.getElementById("Pos_"+x).remove()
-                    } catch(err) {
-                        console.error("I hate this more")
+                    for (x = 0; x<Elements.length+1; x++) {
+                        try {
+                            document.getElementById("Pos_"+x).remove()
+                        } catch(err) {
+                            console.error("I hate this more")
+                        }
                     }
                 }
-            }
-            for (x = 0; x<Elements.length; x++) {
-                let sortment = document.createElement('div')
-                sortment.className = "sort"
-                sortment.id="Pos_"+x
-                document.getElementById("preview").append(sortment)
-                let button = document.createElement('div')
-                button.id="Layer_" + x
-                button.className = "Connecties"
-                sortment.append(button);
-                var innerstuff = ""
-                var toggle = true
-                var num = 0;
-                var inputValue = "";
-                for (y=0;y<Elements[x][0].length;y++) {
-                    if (Elements[x][0][y] == "<") {
-                        toggle = false
-                        var current = document.createElement('p')
-                        current.id="text_"+x+"_"+num
-                        current.className = "ctext"
-                        current.innerText = innerstuff
-                        button.append(current);
-                        innerstuff = ""
+                for (x = 0; x<Elements.length; x++) {
+                    let sortment = document.createElement('div')
+                    sortment.className = "sort"
+                    sortment.id="Pos_"+x
+                    document.getElementById("preview").append(sortment)
+                    let button = document.createElement('div')
+                    button.id="Layer_" + x
+                    button.className = "Connecties"
+                    sortment.append(button);
+                    var innerstuff = ""
+                    var toggle = true
+                    var num = 0;
+                    var inputValue = "";
+                    var hasspace = false
+                    for (y=0;y<Elements[x][0].length;y++) {
+                        if (Elements[x][0][y] == "<") {
+                            toggle = false
+                            var current = document.createElement('h3')
+                            current.id="text_"+x+"_"+num
+                            current.className = "ctext"
+                            current.innerText = innerstuff
+                            if (innerstuff[0] == " ")
+                                current.className = "ctext spaced"
+                            button.append(current); 
+                            if (innerstuff[innerstuff.length-1] == " ")
+                                hasspace = true
+                            else
+                                hasspace = false
+                            innerstuff = ""
 
-                    }
-                    if (Elements[x][0][y-1] == ">")  {
-                        toggle = true
-                    }
-                    if (Elements[x][0][y] == ">") {
-                        var input = document.createElement('input')
-                        input.id="input_" + x + "_" + num
-                        if (Elements[x][1][num] == "" || Elements[x][1][num] == undefined)
+                        }
+                        if (Elements[x][0][y-1] == ">")  {
+                            toggle = true
+                        }
+                        if (Elements[x][0][y] == ">") {
+                            var input = document.createElement('input')
+                            input.id="input_" + x + "_" + num
+                            if (!(Elements[x][1][num] == "" || Elements[x][1][num] == undefined))
+                                inputValue = Elements[x][1][num]
+                                input.value = inputValue.replaceAll("<","").replaceAll(">","")
+                                if (hasspace)
+                                    input.className = "inputfun spaced"
+                                else
+                                    input.className = "inputfun"
+                                input.setAttribute("onchange","inputset(); resize(" + x + "," + num + ")")
+                                num++
+                            button.append(input);
                             inputValue = ""
+                        }
+                        if (toggle)
+                            innerstuff += Elements[x][0][y]
                         else
-                            inputValue = Elements[x][1][num]
-                        num++
-                        input.value = inputValue
-                        input.className = "inputfun"
-                        input.setAttribute("onchange","inputset()")
-                        button.append(input);
-                        inputValue = ""
+                            inputValue += Elements[x][0][y]
                     }
-                    if (toggle)
-                        innerstuff += Elements[x][0][y]
-                    else
-                        inputValue += Elements[x][0][y]
-                }
-                var current = document.createElement('p')
-                current.id="text_"+y
-                current.className = "ctext"
-                current.innerText = innerstuff
-                button.append(current);
-                innerstuff = ""
-                let button_del = document.createElement('button')
-                button_del.innerText= "🗑"
-                button_del.id="btns"
-                button_del.className = "dlt"
-                button_del.setAttribute("onclick","DeleteElement(" + x + ")")
-                button.append(button_del);
-                if (Elements.length > 1 && x != 0) {
-                    let button_up = document.createElement('button')
-                    button_up.innerText= "⬆"
-                    button_up.id="btns"
-                    button_up.className = "up"
-                    button_up.setAttribute("onclick","MoveUpElement(" + x + ")")
-                    button.append(button_up);
-                }
-                if (Elements.length > 1 && x != Elements.length-1) {
-                    let button_down = document.createElement('button')
-                    button_down.innerText= "⬇"
-                    button_down.id="btns"
-                    button_down.className = "down"
-                    button_down.setAttribute("onclick","MoveDownElement(" + x + ")")
-                    button.append(button_down);
+                    var current = document.createElement('h3')
+                    current.id="text_"+y
+                    current.className = "ctext"
+                    current.innerText = innerstuff
+                    button.append(current);
+                    innerstuff = ""
+                    let button_del = document.createElement('button')
+                    button_del.innerText= "🗑"
+                    button_del.id="btns"
+                    button_del.className = "dlt"
+                    button_del.setAttribute("onclick","DeleteElement(" + x + ")")
+                    button.append(button_del);
+                    if (Elements.length > 1 && x != 0) {
+                        let button_up = document.createElement('button')
+                        button_up.innerText= "⬆"
+                        button_up.id="btns"
+                        button_up.className = "up"
+                        button_up.setAttribute("onclick","MoveUpElement(" + x + ")")
+                        button.append(button_up);
+                    }
+                    if (Elements.length > 1 && x != Elements.length-1) {
+                        let button_down = document.createElement('button')
+                        button_down.innerText= "⬇"
+                        button_down.id="btns"
+                        button_down.className = "down"
+                        button_down.setAttribute("onclick","MoveDownElement(" + x + ")")
+                        button.append(button_down);
+                    }
                 }
             }
-        }
         function DeleteElement(x) {
             if (x > -1) {
                 Elements.splice(x, 1);
@@ -180,8 +202,16 @@
             refresh()
         }
         function AddElement(num, x) {
-            let Element = All[num][x]
-            Elements[Elements.length] = [Element,["","","","",""]]
+            if (num != 0) {
+                let Element = All[num][x]
+                Elements[Elements.length] = [Element,["","","","",""]]
+            }
+            else {
+                FullCode[CurrentCode] = Elements
+                CurrentCode = x
+                Elements = FullCode[CurrentCode]
+                document.getElementById("preview").innerText = "Preview - " + All[num][x]
+            }
             refresh('')
         }
         function MoveUpElement(x) {
@@ -433,10 +463,20 @@
             }
             .ctext {
                 display: inline-block;
+                margin: 1px;
+                margin-top: 5px;
+                margin-bottom: 5px;
             }
             .inputfun {
-                width: 50px;
+                margin-left: 1px;
+                margin-right: 1px;
+                border-radius: 5px;
+                border: 2px solid black;
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
             }
+                .spaced {
+                    margin-left: 10px;
+                }
         </style>
     </head>
     <body>
@@ -446,10 +486,10 @@
                 <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
                 <button class="inf" onclick="visible(3)" id="Keys3">Informations</button><br>
                 <button class="var" onclick="visible(4)" id="Keys4">Variables</button><br>
-                <button class="loo" onclick="visible(6)" id="Keys6">Flow Control</button>
+                <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button>
             </div>
             <div class="preview" id="preview">
-                Preview
+                Preview - On World Load
                 <br><br>
             </div>
             <button class="download">☑</button>

@@ -20,7 +20,6 @@ https://amirhossainj123.github.io/portfolio/index
 https://amirhossainj123.github.io/projects/index
 https://amirhossainj123.github.io/redirect_moderation/baablu
 https://amirhossainj123.github.io/utilities/accurate
-https://amirhossainj123.github.io/utilities/backpack
 https://amirhossainj123.github.io/utilities/calculator
 https://amirhossainj123.github.io/utilities/datapack
 https://amirhossainj123.github.io/utilities/game
