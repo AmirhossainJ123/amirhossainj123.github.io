@@ -27,27 +27,21 @@
                 "Place <block>",
                 "Set time to <time>"];
 
-            Informations = ["<player>'s Health",
-                "<player>'s Food",
-                "<player>'s Death Count",
-                "<player> Amount of dealt damage",
-                "<player> Amount of taken damage"];
+            Informations = ["<var> = <player>'s Health",
+                "<var> = <player>'s Food",
+                "<var> = <player>'s Death Count",
+                "<var> = <player> Amount of dealt damage",
+                "<var> = <player> Amount of taken damage"];
 
-            Variables = ["Number",
-                "Text",
-                "Statement"];
-
-            Selectors = ["Everyone",
-                "Everyplayer",
-                "Random Player",
-                "Nearby Player",
-                "Player who is holding <item>"];
+            Variables = ["<var> = Number",
+                "<var> = Text",
+                "<var> = Statement"];
 
             Loops = ["Loop <number> times",
                 "While <statement>",
                 "If <statement>"];
 
-            All = [Events,Functions,Informations,Variables,Selectors,Loops]
+            All = [Events,Functions,Informations,Variables,Loops]
             toggle = [false,false,false,false,false]
             Event_Toggles = [false,false]
             function visible(num) {
@@ -73,31 +67,83 @@
                     }
                 }
             }
-        function DeleteElement(x) {
-            document.getElementById("Pos"+x).remove()
-            if (x > -1) {
-                Elements.splice(x, 1);
-            }
-            refresh()
-        }
-        function refresh() {
+            Store = []
+            function refresh() {
+            var filled = -1
+            var Exist = false;
             for (x = 0; x<Elements.length+1; x++) {
-                try {
-                    document.getElementById("Pos"+x).remove()
-                } catch(err) {
-                    console.error("I hate this")
+                for (y=0;y<5;y++) {
+                        try {
+                        A = document.getElementById("input_" + x + "_" + y).value
+                        Exist = true;
+                    } catch(err) {
+                        console.error("I hate this")
+                    }
+                        if (Exist) {
+                            filled++
+                            Store[filled] = ["","","",""]
+                            Store[filled][0] = "input_"
+                            Store[filled][1] = document.getElementById("input_" + x + "_" + y).value
+                            Store[filled][2] = x
+                            Store[filled][3] = y
+                            Exist = false
+                        }
+                    }
                 }
-            }
+                for (x = 0; x<Elements.length+1; x++) {
+                    try {
+                        document.getElementById("Pos_"+x).remove()
+                    } catch(err) {
+                        console.error("I hate this more")
+                    }
+                }
             for (x = 0; x<Elements.length; x++) {
                 let sortment = document.createElement('div')
                 sortment.className = "sort"
-                sortment.id="Pos"+x
+                sortment.id="Pos_"+x
                 document.getElementById("preview").append(sortment)
                 let button = document.createElement('div')
-                button.innerText= Elements[x]
-                button.id="Layer" + x
+                button.id="Layer_" + x
                 button.className = "Connecties"
                 sortment.append(button);
+                var innerstuff = ""
+                var toggle = true
+                var num = 0;
+                var inputValue = "";
+                for (y=0;y<Elements[x].length;y++) {
+                    if (Elements[x][y] == "<") {
+                        toggle = false
+                        var current = document.createElement('p')
+                        current.id="text_"+x+"_"+num
+                        current.className = "ctext"
+                        current.innerText = innerstuff
+                        button.append(current);
+                        innerstuff = ""
+
+                    }
+                    if (Elements[x][y-1] == ">")  {
+                        toggle = true
+                    }
+                    if (Elements[x][y] == ">") {
+                        var input = document.createElement('input')
+                        num++
+                        input.id="input_" + x + "_" + num
+                        input.innerText = inputValue
+                        input.className = "inputfun"
+                        button.append(input);
+                        inputValue = ""
+                    }
+                    if (toggle)
+                        innerstuff += Elements[x][y]
+                    else
+                        inputValue += Elements[x][y]
+                }
+                var current = document.createElement('p')
+                current.id="text_"+y
+                current.className = "ctext"
+                current.innerText = innerstuff
+                button.append(current);
+                innerstuff = ""
                 let button_del = document.createElement('button')
                 button_del.innerText= "🗑"
                 button_del.id="btns"
@@ -121,6 +167,24 @@
                     button.append(button_down);
                 }
             }
+            for (x=0;x<Store.length;x++) {
+                document.getElementById(Store[x][0] + Store[x][2] + "_" + Store[x][3]).value = Store[x][1]
+            }
+        }
+        function DeleteElement(x) {
+            try {
+                for (y=0;y<Store.length;y++) {
+                    if (parseInt(Store[y][2]) == parseInt(x)) {
+                        Store.splice(y,1)
+                    }
+                }
+            } catch (err) {
+                console.err("I hate this so much")
+            }
+            if (x > -1) {
+                Elements.splice(x, 1);
+            }
+            refresh()
         }
         function AddElement(num, x) {
             let Element = All[num][x]
@@ -128,6 +192,19 @@
             refresh()
         }
         function MoveUpElement(x) {
+            try {
+                for (y=0;y<Store.length;y++) {
+                    if (parseInt(Store[y][2]) == parseInt(x-1)) {
+                        Store[y][2] = parseInt(Store[y][2]+1)
+                        break;
+                    }
+                    if (parseInt(Store[y][2]) == parseInt(x)) {
+                        Store[y][2] = parseInt(Store[y][2]-1)
+                    }
+                }
+            } catch (err) {
+                console.err("I hate this so much")
+            }
             temp = Elements[x-1]
             Elements[x-1] = Elements[x]
             Elements[x] = temp
@@ -135,6 +212,19 @@
             refresh()
         }
         function MoveDownElement(x) {
+            try {
+                for (y=0;y<Store.length;y++) {
+                    if (parseInt(Store[y][2]) == parseInt(x+1)) {
+                        Store[y][2] = parseInt(Store[y][2]-1)
+                        break;
+                    }
+                    if (parseInt(Store[y][2]) == parseInt(x)) {
+                        Store[y][2] = parseInt(Store[y][2]+1)
+                    }
+                }
+            } catch (err) {
+                console.err("I hate this so much")
+            }
             temp = Elements[x+1]
             Elements[x+1] = Elements[x]
             Elements[x] = temp
@@ -144,6 +234,10 @@
         <style>
             body {
                 background-color: black;
+                position: relative;
+            }
+            input:hover {
+                cursor:text;
             }
             .background {
                 width: 90%;
@@ -156,6 +250,9 @@
                 box-shadow: 0px 0px 10px gray;
                 border-radius: 20px;
                 padding: 5px;
+            }
+            .background::-webkit-scrollbar {
+                display: none;
             }
             .functions * {
                 margin: 10px;
@@ -190,6 +287,8 @@
                 height: 100%;
                 width: 65%;
                 position: absolute;
+                overflow-x: hidden;
+                overflow-y: auto;
                 margin: 5px;
             }
             .eve {
@@ -344,6 +443,33 @@
                 color: green;
                 border: 2px solid green;
             }
+            .download {
+                transition: 200ms;
+                color: black;
+                background-color: white;
+                width: 50px;
+                height: 50px;
+                margin-left: 100%;
+                margin-top: -50px;
+                transform: translateX(-100%);
+                font-size: x-large;
+                font-weight: bolder;
+                border-radius: 50px;
+                display: inline-block;
+                border: 2px solid black;
+            }
+            .download:hover {
+                transition: 200ms;
+                color: white;
+                background-color: black;
+                border: 2px solid white;
+            }
+            .ctext {
+                display: inline-block;
+            }
+            .inputfun {
+                width: 50px;
+            }
         </style>
     </head>
     <body>
@@ -353,13 +479,13 @@
                 <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
                 <button class="inf" onclick="visible(3)" id="Keys3">Informations</button><br>
                 <button class="var" onclick="visible(4)" id="Keys4">Variables</button><br>
-                <button class="sel" onclick="visible(5)" id="Keys5">Selectors</button><br>
                 <button class="loo" onclick="visible(6)" id="Keys6">Flow Control</button>
             </div>
             <div class="preview" id="preview">
                 Preview
                 <br><br>
             </div>
+            <button class="download">☑</button>
         </div>
     </body>
 </html>
