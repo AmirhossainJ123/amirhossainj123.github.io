@@ -68,27 +68,28 @@
                 }
             }
             Store = []
-            function inputset() {
-                for (x=0;x<Elements.length+1;x++) {
-                    var Exist = false;
-                    var filled = 0
-                    for (y=0;y<5;y++) {
+            function refresh(func,aply) {
+            var filled = -1
+            var Exist = false;
+            for (x = 0; x<Elements.length+1; x++) {
+                for (y=0;y<5;y++) {
                         try {
-                            A = document.getElementById("input_" + x + "_" + y).value
-                            Exist = true;
-                        } catch(err) {
-                            console.error("I hate this")
-                        }
+                        A = document.getElementById("input_" + x + "_" + y).value
+                        Exist = true;
+                    } catch(err) {
+                        console.error("I hate this")
+                    }
                         if (Exist) {
                             filled++
-                            Elements[x][1][y] = document.getElementById("input_" + x + "_" + y).value
+                            Store[filled] = ["","","",""]
+                            Store[filled][0] = "input_"
+                            Store[filled][1] = document.getElementById("input_" + x + "_" + y).value
+                            Store[filled][2] = x
+                            Store[filled][3] = y
                             Exist = false
                         }
                     }
                 }
-            }
-            function refresh(func,aply) {
-            for (x = 0; x<Elements.length+1; x++) {
                 for (x = 0; x<Elements.length+1; x++) {
                     try {
                         document.getElementById("Pos_"+x).remove()
@@ -96,7 +97,6 @@
                         console.error("I hate this more")
                     }
                 }
-            }
             for (x = 0; x<Elements.length; x++) {
                 let sortment = document.createElement('div')
                 sortment.className = "sort"
@@ -110,8 +110,8 @@
                 var toggle = true
                 var num = 0;
                 var inputValue = "";
-                for (y=0;y<Elements[x][0].length;y++) {
-                    if (Elements[x][0][y] == "<") {
+                for (y=0;y<Elements[x].length;y++) {
+                    if (Elements[x][y] == "<") {
                         toggle = false
                         var current = document.createElement('p')
                         current.id="text_"+x+"_"+num
@@ -121,27 +121,22 @@
                         innerstuff = ""
 
                     }
-                    if (Elements[x][0][y-1] == ">")  {
+                    if (Elements[x][y-1] == ">")  {
                         toggle = true
                     }
-                    if (Elements[x][0][y] == ">") {
+                    if (Elements[x][y] == ">") {
                         var input = document.createElement('input')
-                        input.id="input_" + x + "_" + num
-                        if (Elements[x][1][num] == "" || Elements[x][1][num] == undefined)
-                            inputValue = ""
-                        else
-                            inputValue = Elements[x][1][num]
                         num++
-                        input.value = inputValue
+                        input.id="input_" + x + "_" + num
+                        input.innerText = inputValue
                         input.className = "inputfun"
-                        input.setAttribute("onchange","inputset()")
                         button.append(input);
                         inputValue = ""
                     }
                     if (toggle)
-                        innerstuff += Elements[x][0][y]
+                        innerstuff += Elements[x][y]
                     else
-                        inputValue += Elements[x][0][y]
+                        inputValue += Elements[x][y]
                 }
                 var current = document.createElement('p')
                 current.id="text_"+y
@@ -172,16 +167,61 @@
                     button.append(button_down);
                 }
             }
+            x = aply
+            if (func == "moveup") {
+                try {
+                    for (y=0;y<Store.length;y++) {
+                        if (parseInt(Store[y][2]) == parseInt(x)) {
+                            Store[y][2] = x-1
+                            break;
+                        }
+                        if (parseInt(Store[y][2]) == parseInt(x)-1) {
+                            Store[y][2] = x
+                        }
+                    }
+                } catch (err) {
+                    console.err("I hate this so much")
+                }
+            }
+            else if (func == "movedown") {
+                try {
+                    for (y=0;y<Store.length;y++) {
+                        if (parseInt(Store[y][2]) == parseInt(x)+1) {
+                            Store[y][2] = x
+                            break;
+                        }
+                        if (parseInt(Store[y][2]) == parseInt(x)) {
+                            Store[y][2] = x+1
+                        }
+                    }
+                } catch (err) {
+                    console.err("I hate this so much")
+                }
+            }
+            else if (func == "delete") {
+                try {
+                    for (y=0;y<Store.length;y++) {
+                        if (parseInt(Store[y][2]) == parseInt(x)) {
+                            Store.splice(y,1)
+                        }
+                    }
+                } catch (err) {
+                    console.err("I hate this so much")
+                }
+            }
+            for (x=0;x<Store.length;x++) {
+                document.getElementById(Store[x][0] + Store[x][2] + "_" + Store[x][3]).value = Store[x][1]
+            }
         }
         function DeleteElement(x) {
             if (x > -1) {
                 Elements.splice(x, 1);
             }
-            refresh()
+            refresh('delete',x)
         }
         function AddElement(num, x) {
             let Element = All[num][x]
-            Elements[Elements.length] = [Element,["","","","",""]]
+            Elements[Elements.length] = Element
             refresh('')
         }
         function MoveUpElement(x) {
@@ -189,13 +229,13 @@
             Elements[x-1] = Elements[x]
             Elements[x] = temp
             console.log(x)
-            refresh()
+            refresh('moveup',x)
         }
         function MoveDownElement(x) {
             temp = Elements[x+1]
             Elements[x+1] = Elements[x]
             Elements[x] = temp
-            refresh()
+            refresh('movedown',x)
         }
         </script>
         <style>
