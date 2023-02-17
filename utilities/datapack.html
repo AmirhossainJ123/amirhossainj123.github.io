@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Datapack Maker">
+        <meta name="keywords" content="Datapack, Fun, Maker">
+        <meta name="theme-color" content="#ff5522">
+        <meta name="title" content="Datapack Maker">
+        <meta property="og:title" content="Datapack Maker">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://amirhossainj123.github.io/utilities/datapack">
+        <meta property="og:image" content="https://amirhossainj123.github.io/utilities/Assets/minecraft.png">
+        <meta property="og:description" content="Make your own datapack SIMPLY">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Datapack Maker">
+        <meta name="twitter:description" content="Make your own datapack SIMPLY">
+        <meta name="twitter:image" content="https://amirhossainj123.github.io/utilities/Assets/minecraft.png">
+        <link rel="canonical" href="https://amirhossainj123.github.io/utilities/datapack">
+        <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
+        <script>
+            Events = ["On World Tick","On World Load"]
+            Functions = ["Kill <player>","Spawn <entity>","Place <block>"]
+            Variables = ["Number","Text"]
+            Selectors = ["Everyone","Everyplayer","Random Player","Nearby Player","Player who is holding <item>"]
+            Loops = ["Loop <number> times","While <statement>","If <statement>"]
+            All = [Events,Functions,Variables,Selectors,Loops]
+            toggle = [false,false,false,false,false]
+            function visible(num) {
+                num--;
+                check = toggle[num]
+                if (!check) {
+                    let Vis = All[num]
+                    toggle[num] = true
+                    for (x = 0; x<Vis.length; x++) {
+                        let button = document.createElement('button')
+                        button.innerText= Vis[x]
+                        button.id="Sub" + num+1
+                        button.className = "subutton"
+                        button.onclick = "console.log('F')"
+                        document.getElementById("Keys"+(num+1)).append(button);
+                    }
+                }
+                else {
+                    toggle[num] = false
+                    let Vis = All[num]
+                    for (x = 0; x<Vis.length; x++) {
+                        document.getElementById("Sub"+num+1).remove()
+                    }
+                }
+            }
+        </script>
+        <style>
+            body {
+                background-color: black;
+            }
+            .background {
+                width: 90%;
+                height: 90%;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                position: absolute;
+                background-color: rgba(100,100,100,0.5);
+                box-shadow: 0px 0px 10px gray;
+                border-radius: 20px;
+            }
+            .functions * {
+                margin: 10px;
+                border: 2px solid black;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            .functions {
+                border-right: 5px solid rgba(20,20,20,0.5);
+                width: 30%;
+                height: 100%;
+                border-radius: 10px;
+                padding: 5px;
+                transform: translateY(-2.5px);
+            }
+            .explainbar *{
+                display: inline-block;
+            }
+            .explainbar {
+                display: flexbox;
+                position: absolute;
+                left: 10%;
+                margin-right: 50px;
+            }
+            .eve {
+                transition: 100ms;
+                background-color: orangered;
+            }
+            .eve:hover {
+                transition: 100ms;
+                background-color: rgb(219, 58, 0);
+            }
+            .eve:active {
+                transition: 100ms;
+                background-color: rgb(192, 51, 0);
+            }
+            .fun {
+                transition: 100ms;
+                background-color: green;
+            }
+            .fun:hover {
+                transition: 100ms;
+                background-color: rgb(0, 105, 0);
+            }
+            .fun:active {
+                transition: 100ms;
+                background-color: rgb(0, 78, 0);
+            }
+            .var {
+                transition: 100ms;
+                background-color: purple;
+            }
+            .var:hover {
+                transition: 100ms;
+                background-color: rgb(102, 0, 102);
+            }
+            .var:active {
+                transition: 100ms;
+                background-color: rgb(70, 0, 70);
+            }
+            .sel {
+                transition: 100ms;
+                background-color: yellow;
+            }
+            .sel:hover {
+                transition: 100ms;
+                background-color: rgb(201, 201, 0);
+            }
+            .sel:active {
+                transition: 100ms;
+                background-color: rgb(173, 173, 0);
+            }
+            .loo {
+                transition: 100ms;
+                background-color: blue;
+            }
+            .loo:hover {
+                transition: 100ms;
+                background-color: rgb(0, 0, 190);
+            }
+            .loo:active {
+                transition: 100ms;
+                background-color: rgb(0, 0, 150);
+            }
+            .subutton {
+                transition: 100ms;
+                background-color: black;
+                color: white;
+            }
+            .subutton:hover {
+                transition: 100ms;
+                background-color: rgb(49, 49, 49);
+            }
+            .subutton:active {
+                transition: 100ms;
+                background-color: rgb(87, 87, 87);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="background">
+            <div class="functions">
+                <button class="eve" onclick="visible(1)" id="Keys1">Events</button><br>
+                <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
+                <button class="var" onclick="visible(3)" id="Keys3">Variables</button><br>
+                <button class="sel" onclick="visible(4)" id="Keys4">Selectors</button><br>
+                <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button>
+            </div>
+        </div>
+    </body>
+</html>

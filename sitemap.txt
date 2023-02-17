@@ -21,6 +21,7 @@ https://amirhossainj123.github.io/projects/index
 https://amirhossainj123.github.io/redirect_moderation/baablu
 https://amirhossainj123.github.io/utilities/accurate
 https://amirhossainj123.github.io/utilities/calculator
+https://amirhossainj123.github.io/utilities/datapack
 https://amirhossainj123.github.io/utilities/game
 https://amirhossainj123.github.io/utilities/image
 https://amirhossainj123.github.io/utilities/index
