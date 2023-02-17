@@ -61,7 +61,7 @@
                         button.innerText= Vis[x]
                         button.id="Sub" + num+1
                         button.className = "subutton"
-                        button.setAttribute("onclick","visible(" + (num+1) + "); AddElement(" + num + "," + x + ")")    
+                        button.setAttribute("onclick","visible(" + (num+1) + "); AddElement(" + num + "," + x + ")")
                         document.getElementById("Keys"+(num+1)).append(button);
                     }
                 }
@@ -73,22 +73,71 @@
                     }
                 }
             }
+        function DeleteElement(x) {
+            document.getElementById("Pos"+x).remove()
+            if (x > -1) {
+                Elements.splice(x, 1);
+            }
+            refresh()
+        }
         function refresh() {
-            if (Elements.length > 1)
-                for (x = 0; x<Elements.length-1; x++) {
+            for (x = 0; x<Elements.length+1; x++) {
+                try {
                     document.getElementById("Pos"+x).remove()
+                } catch(err) {
+                    console.error("I hate this")
                 }
+            }
             for (x = 0; x<Elements.length; x++) {
+                let sortment = document.createElement('div')
+                sortment.className = "sort"
+                sortment.id="Pos"+x
+                document.getElementById("preview").append(sortment)
                 let button = document.createElement('div')
                 button.innerText= Elements[x]
-                button.id="Pos" + x
+                button.id="Layer" + x
                 button.className = "Connecties"
-                document.getElementById("preview").append(button);
+                sortment.append(button);
+                let button_del = document.createElement('button')
+                button_del.innerText= "🗑"
+                button_del.id="btns"
+                button_del.className = "dlt"
+                button_del.setAttribute("onclick","DeleteElement(" + x + ")")
+                button.append(button_del);
+                if (Elements.length > 1 && x != 0) {
+                    let button_up = document.createElement('button')
+                    button_up.innerText= "⬆"
+                    button_up.id="btns"
+                    button_up.className = "up"
+                    button_up.setAttribute("onclick","MoveUpElement(" + x + ")")
+                    button.append(button_up);
+                }
+                if (Elements.length > 1 && x != Elements.length-1) {
+                    let button_down = document.createElement('button')
+                    button_down.innerText= "⬇"
+                    button_down.id="btns"
+                    button_down.className = "down"
+                    button_down.setAttribute("onclick","MoveDownElement(" + x + ")")
+                    button.append(button_down);
+                }
             }
         }
         function AddElement(num, x) {
             let Element = All[num][x]
             Elements[Elements.length] = Element
+            refresh()
+        }
+        function MoveUpElement(x) {
+            temp = Elements[x-1]
+            Elements[x-1] = Elements[x]
+            Elements[x] = temp
+            console.log(x)
+            refresh()
+        }
+        function MoveDownElement(x) {
+            temp = Elements[x+1]
+            Elements[x+1] = Elements[x]
+            Elements[x] = temp
             refresh()
         }
         </script>
@@ -228,6 +277,73 @@
                 transition: 100ms;
                 background-color: rgb(87, 87, 87);
             }
+            .Connecties {
+                background-color: white;
+                color: black;
+                display: inline-block;
+                border-radius: 50px;
+                padding: 10px;
+                margin: 10px;
+            }
+            .Connecties * {
+                margin-left: 10px;
+            }
+            .dlt {
+                transition: 500ms;
+                width: 30px;
+                height: 30px;
+                background-color: white;
+                border-radius: 10px;
+                color: red;
+                font-weight: bold;
+                font-size: large;
+                border: 2px solid red;
+            }
+            .dlt:hover {
+                transition: 500ms;
+                background-color: red;
+                border-radius: 10px;
+                color: white;
+                font-weight: bold;
+                font-size: large;
+                border: 2px solid black;
+            }
+            .up {
+                transition: 500ms;
+                width: 30px;
+                height: 30px;
+                background-color: blue;
+                border-radius: 10px;
+                color: white;
+                font-weight: bold;
+                font-size: medium;
+                border: 2px solid black;
+            }
+            .up:hover {
+                transition: 500ms;
+                background-color: white;
+                border-radius: 10px;
+                color: blue;
+                border: 2px solid blue;
+            }
+            .down {
+                transition: 500ms;
+                width: 30px;
+                height: 30px;
+                background-color: green;
+                border-radius: 10px;
+                color: white;
+                font-weight: bold;
+                font-size: medium;
+                border: 2px solid black;
+            }
+            .down:hover {
+                transition: 500ms;
+                background-color: white;
+                border-radius: 10px;
+                color: green;
+                border: 2px solid green;
+            }
         </style>
     </head>
     <body>
@@ -242,6 +358,7 @@
             </div>
             <div class="preview" id="preview">
                 Preview
+                <br><br>
             </div>
         </div>
     </body>
