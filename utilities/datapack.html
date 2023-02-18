@@ -17,18 +17,29 @@
         <meta name="twitter:image" content="https://amirhossainj123.github.io/utilities/Assets/minecraft.png">
         <link rel="canonical" href="https://amirhossainj123.github.io/utilities/datapack">
         <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="Libraries/datapack_compilor.js"></script>
         <script>
             Elements = []
-            Events = ["On World Tick",
-                "On World Load"];
+            Events = ["On World Load",
+                "On World Tick"];
 
             Functions = ["Kill <player>",
                 "Kill <entity>",
                 "Spawn <entity> ~<x> ~<y> ~<z>",
                 "Give <player> <count>x <item>",
+                "Give <player> <count>x <var custom item>",
                 "Place <block> ~<x> ~<y> ~<z>",
                 "Set time to <time>",
-                "Run Following Commands From <x> <y> <z>"];
+                "Run The Next Command From <x> <y> <z>",
+                "Run The Next Command From <entity>",
+                "Run The Next Command From <player>",
+                "Teleport <player> ~<x> ~<y> ~<z>",
+                "Teleport <entity> ~<x> ~<y> ~<z>",
+                "Send message in chat, visible for <player>: <message>",
+                "Display on <player>'s screen as title: <message>",
+                "Display on <player>'s screen as subtitle: <message>",
+                "Display on <player>'s screen as actionbar: <message>"];
 
             Informations = ["<var number> = <player>'s Health",
                 "<var number> = <player>'s Food",
@@ -36,20 +47,28 @@
                 "<var number> = <player> Amount of dealt damage",
                 "<var number> = <player> Amount of taken damage"];
 
-            Variables = ["<var number> = <number>",
-                "<var number> = <var> - <var>",
-                "<var number> = <var> + <var>",
-                "<var number> = <var> * <var>",
-                "<var number> = <var> / <var>",
-                "<var> = if <var> = <var>",
-                "<var> = if <var> > <var>",
-                "<var> = if <var> < <var>"];
+            Variables = ["Define <var number> as <number>",
+                "<var number> += <var number>",
+                "<var number> -= <var number>",
+                "<var number> *= <var number>",
+                "<var number> /= <var number>",
+                "<var number> = if [<var number> = <var number>]",
+                "<var number> = if [<var number> > <var number>]",
+                "<var number> = if [<var number> < <var number>]",
+                "Define <var custom item> as <item name>",
+                "<var custom item>'s name = <name>",
+                "<var custom item>'s enchantments += <enchantment name> <enchantment level>",
+                "<var custom item>'s lore += <lore>",
+                "<var custom item> is unbreakable = <yes/no>",
+                "<var custom item> invisible enchantments = <yes/no>",
+                "<var custom item> damage = <number>",
+                ];
 
-            Loops = ["Loop <var> times",
-                "While <var>",
-                "If <var>"];
+            Loops = [
+            "If <var> run the next command",
+            "Unless <var> run the next command"];
             FullCode = [[],[]]
-            CurrentCode = 1
+            CurrentCode = 0
             FullCode[CurrentCode] = Elements
             Elements = FullCode[CurrentCode]
             All = [Events,Functions,Informations,Variables,Loops]
@@ -91,7 +110,11 @@
                         }
                         if (Exist) {
                             filled++
-                            Elements[x][1][y] = document.getElementById("input_" + x + "_" + y).value
+                            Elements[x][1][y] = "false"
+                            if (document.getElementById("input_" + x + "_" + y).checked)
+                                Elements[x][1][y] = "true"
+                            else
+                                Elements[x][1][y] = document.getElementById("input_" + x + "_" + y).value
                             Exist = false
                             resize(x,y)
                         }
@@ -100,7 +123,11 @@
             }
             function resize(x,y) {
                 dude = document.getElementById("input_" + x + "_" + y)
-                dude.style.width = dude.value.length+1 + "ch";
+                if (!(dude.type == "checkbox")) {
+                    dude.style.width = dude.value.length+1 + "ch";
+                    if (dude.type == "number")
+                        dude.style.width = dude.value.length+3 + "ch";
+                }
             }
             function refresh(func,aply) {
                 for (x = 0; x<Elements.length+1; x++) {
@@ -125,6 +152,7 @@
                     var toggle = true
                     var num = 0;
                     var inputValue = "";
+                    var inputValueZ = "";
                     var hasspace = false
                     for (y=0;y<Elements[x][0].length;y++) {
                         if (Elements[x][0][y] == "<") {
@@ -149,13 +177,33 @@
                         if (Elements[x][0][y] == ">") {
                             var input = document.createElement('input')
                             input.id="input_" + x + "_" + num
-                            if (!(Elements[x][1][num] == "" || Elements[x][1][num] == undefined))
-                                inputValue = Elements[x][1][num]
-                                input.value = inputValue.replaceAll("<","").replaceAll(">","")
+                            if (inputValue.replaceAll("<","").replaceAll(">","").replaceAll(" ","") == "yes/no") {
+                                input.setAttribute("type","checkbox")
+                                if (hasspace)
+                                    input.className = "chockbox spaced"
+                                else
+                                    input.className = "chockbox"
+                                }
+                            else if (inputValue.replaceAll("<","").replaceAll(">","").replaceAll(" ","") == "number" || inputValue.replaceAll("<","").replaceAll(">","").replaceAll(" ","") == "count") {
+                                input.setAttribute("type","number")
+                                if (hasspace)
+                                    input.className = "inputfunn spaced"
+                                else
+                                    input.className = "inputfunn"
+                                }
+                            else {
                                 if (hasspace)
                                     input.className = "inputfun spaced"
                                 else
                                     input.className = "inputfun"
+                                }
+                            if (!(Elements[x][1][num] == "" || Elements[x][1][num] == undefined))
+                                inputValue = Elements[x][1][num]
+                                input.checked = false
+                                if (Elements[x][1][num] == "true")
+                                    input.checked = true
+                                else
+                                    input.value = inputValue.replaceAll("<","").replaceAll(">","")
                                 input.setAttribute("onchange","inputset();")
                                 num++
                             button.append(input);
@@ -173,26 +221,40 @@
                     button.append(current);
                     innerstuff = ""
                     let button_del = document.createElement('button')
-                    button_del.innerText= "🗑"
                     button_del.id="btns"
                     button_del.className = "dlt"
                     button_del.setAttribute("onclick","DeleteElement(" + x + ")")
                     button.append(button_del);
+                    let icon = document.createElement("i")
+                    icon.id="btns"
+                    icon.className = "material-icons"
+                    icon.innerText = "delete_forever"
+                    button_del.append(icon)
                     if (Elements.length > 1 && x != 0) {
                         let button_up = document.createElement('button')
-                        button_up.innerText= "⬆"
+                        button_up.innerText= ""
                         button_up.id="btns"
                         button_up.className = "up"
                         button_up.setAttribute("onclick","MoveUpElement(" + x + ")")
                         button.append(button_up);
+                        let icons = document.createElement("i")
+                        icons.id="btns"
+                        icons.className = "material-icons"
+                        icons.innerText = "arrow_upward"
+                        button_up.append(icons)
                     }
                     if (Elements.length > 1 && x != Elements.length-1) {
                         let button_down = document.createElement('button')
-                        button_down.innerText= "⬇"
+                        button_down.innerText= ""
                         button_down.id="btns"
                         button_down.className = "down"
                         button_down.setAttribute("onclick","MoveDownElement(" + x + ")")
                         button.append(button_down);
+                        let iconz = document.createElement("i")
+                        iconz.id="btns"
+                        iconz.className = "material-icons"
+                        iconz.innerText = "arrow_downward"
+                        button_down.append(iconz)
                     }
                 }
             }
@@ -201,11 +263,12 @@
                 Elements.splice(x, 1);
             }
             refresh()
+            inputset()
         }
         function AddElement(num, x) {
             if (num != 0) {
-                let Element = All[num][x]
-                Elements[Elements.length] = [Element,["","","","",""]]
+                let Element = All[num][x] // num = category, x = code
+                Elements[Elements.length] = [Element,["","","","",""],[num,x]]
             }
             else {
                 FullCode[CurrentCode] = Elements
@@ -213,7 +276,8 @@
                 Elements = FullCode[CurrentCode]
                 document.getElementById("preview").innerText = "Preview - " + All[num][x]
             }
-            refresh('')
+            refresh()
+            inputset()
         }
         function MoveUpElement(x) {
             temp = Elements[x-1]
@@ -221,14 +285,16 @@
             Elements[x] = temp
             console.log(x)
             refresh()
+            inputset()
         }
         function MoveDownElement(x) {
             temp = Elements[x+1]
             Elements[x+1] = Elements[x]
             Elements[x] = temp
             refresh()
+            inputset()
         }
-        </script>
+    </script>
         <style>
             body {
                 background-color: black;
@@ -379,10 +445,10 @@
                 color: black;
                 display: inline-block;
                 border-radius: 50px;
-                padding: 10px;
+                padding: 12px;
                 margin: 10px;
             }
-            .Connecties * {
+            .Connecties button div h3 input {
                 margin-left: 10px;
             }
             .dlt {
@@ -392,9 +458,14 @@
                 background-color: white;
                 border-radius: 10px;
                 color: red;
-                font-weight: bold;
                 font-size: large;
                 border: 2px solid red;
+                padding: 0px;
+                margin-left: 10px;
+            }
+            i {
+                margin-left: 0px;
+                margin-right: 0px;
             }
             .dlt:hover {
                 transition: 500ms;
@@ -415,6 +486,8 @@
                 font-weight: bold;
                 font-size: medium;
                 border: 2px solid black;
+                padding: 0px;
+                margin-left: 10px;
             }
             .up:hover {
                 transition: 500ms;
@@ -433,6 +506,8 @@
                 font-weight: bold;
                 font-size: medium;
                 border: 2px solid black;
+                padding: 0px;
+                margin-left: 10px;
             }
             .down:hover {
                 transition: 500ms;
@@ -465,19 +540,38 @@
             .ctext {
                 display: inline-block;
                 margin: 1px;
-                margin-top: 5px;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
             }
             .inputfun {
+                width: 50px;
                 margin-left: 1px;
                 margin-right: 1px;
                 border-radius: 5px;
                 border: 2px solid black;
                 font-family:Verdana, Geneva, Tahoma, sans-serif;
             }
-                .spaced {
-                    margin-left: 10px;
-                }
+            .inputfunn {
+                width: 50px;
+                margin-left: 1px;
+                margin-right: 1px;
+                border-radius: 5px;
+                border: 2px solid black;
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .chockbox {
+                width: 20px;
+                height: 20px;
+                border-radius: 5px;
+                border: 2px solid black;
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+                transform: translateY(5px);
+            }
+            .chockbox:hover {
+                cursor: pointer;
+            }
+            .spaced {
+                margin-left: 10px;
+            }
         </style>
     </head>
     <body>
@@ -493,7 +587,7 @@
                 Preview - On World Load
                 <br><br>
             </div>
-            <button class="download">☑</button>
+            <button class="download" onclick="Code = Compile(FullCode); Download(Code[0],Code[1])">☑</button>
         </div>
     </body>
 </html>
