@@ -19,6 +19,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="Libraries/datapack_compilor.js"></script>
+        <script src="https://amirhossainj123.github.io/index.js" defer></script>
         <script>
             Elements = []
             Events = ["On World Load",
@@ -344,16 +345,34 @@
                 overflow-x: hidden;
                 overflow-y: auto;
             }
+            .functions * {
+                margin: 10px;
+                border: 2px solid black;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
             .preview {
                 color: white;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 display: inline-block;
-                height: 100%;
+                height: 90%;
                 width: 65%;
                 position: absolute;
                 overflow-x: hidden;
                 overflow-y: auto;
                 margin: 5px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                padding: 10px;
+            }
+            .preview::-webkit-scrollbar {
+                background-color: rgb(100,100,100);
+                border-radius: 20px;
+            }
+            .preview::-webkit-scrollbar-thumb {
+                background-color: rgb(20,20,20);
+                border-radius: 20px;
             }
             .eve {
                 transition: 100ms;
