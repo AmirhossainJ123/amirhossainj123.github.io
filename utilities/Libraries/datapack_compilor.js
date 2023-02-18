@@ -5,6 +5,24 @@ function endliner(array) {
     }
     return text
 }
+function BuildItem(Index,Array) {
+    Info = Array[Index] // [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase(),"",[],[],"0b","0b",0]
+    text = `${Info[1]}{display:{Name:'"${Info[2]}"',Lore:[`
+    for (let index = 0; index < Info[4].length; index++) {
+        text += `'"${Info[4][index]}"',`
+    }
+    text.slice(0,-1);
+    text += "]},Enchantments:["
+    for (let index = 0; index < Info[3].length; index++) {
+        text += `{id:"${Info[3][index][0]}",lvl:${Info[3][index][1]}},`
+    }
+    text.slice(0,-1);
+    text += `],Unbreakable:${Info[5]}`
+    if (Info[6] == "1b")
+        text += ",HideFlags:45"
+    text += ",damage:" + Info[7] + "}"
+    return text
+}
 function Download(load,tick) {
     tick.unshift(" ")
     load.unshift(" ")
@@ -54,6 +72,7 @@ function Compiler(Info) {
     Code = []
     Definitions = []
     for (let index = 0; index < Info.length; index++) {
+        Index = index
         if (Code[filled_lines] == undefined)
             Code[filled_lines] = ""
         if (Info[index][2][0] == 1)  {
@@ -70,7 +89,7 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 3) {
-                Code[filled_lines] += "give "  + Info[index][1][0] + " " + Info[index][1][2].replaceAll(" ","_").toLowerCase + " " + Info[index][1][1]
+                Code[filled_lines] += "give "  + Info[index][1][0] + " " + Info[index][1][2].replaceAll(" ","_").toLowerCase() + " " + Info[index][1][1]
                 filled_lines++;
             }
             if (Info[index][2][1] == 4) {
@@ -192,9 +211,9 @@ function Compiler(Info) {
             }
             if (Info[index][2][1] == 8) {
                 if (SearchIn(Definitions,Info[index][1][0]) == undefined)
-                    Definitions[Definitions.length-1] = [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase,"",[],[],"0b","0b",0]
+                    Definitions[Definitions.length] = [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase(),"",[],[],"0b","0b",0]
                 else
-                    Definitions[SearchIndex(Definitions,Info[index][1][0])] = [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase,"",[],[],"0b","0b",0]
+                    Definitions[SearchIndex(Definitions,Info[index][1][0])] = [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase(),"",[],[],"0b","0b",0]
             }
             if (Info[index][2][1] == 9) {
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][2] = Info[index][1][1]
