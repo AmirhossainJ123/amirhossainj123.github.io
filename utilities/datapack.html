@@ -155,6 +155,7 @@
                     var inputValue = "";
                     var inputValueZ = "";
                     var hasspace = false
+                    var hasseen = false
                     for (y=0;y<Elements[x][0].length;y++) {
                         if (Elements[x][0][y] == "<") {
                             toggle = false
@@ -170,12 +171,13 @@
                             else
                                 hasspace = false
                             innerstuff = ""
-
+                            hasseen = true
                         }
                         if (Elements[x][0][y-1] == ">")  {
                             toggle = true
                         }
                         if (Elements[x][0][y] == ">") {
+                            if (hasseen) {
                             var input = document.createElement('input')
                             input.id="input_" + x + "_" + num
                             if (inputValue.replaceAll("<","").replaceAll(">","").replaceAll(" ","") == "yes/no") {
@@ -209,6 +211,8 @@
                                 num++
                             button.append(input);
                             inputValue = ""
+                            hasseen = false
+                            }
                         }
                         if (toggle)
                             innerstuff += Elements[x][0][y]
