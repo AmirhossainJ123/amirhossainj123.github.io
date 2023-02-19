@@ -82,7 +82,7 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 1) {
-                Code[filled_lines] += "kill @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" is ","=").replaceAll(" the ","") + "]"
+                Code[filled_lines] += "kill @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "]"
                 filled_lines++;
             }
             if (Info[index][2][1] == 2) {
@@ -116,7 +116,7 @@ function Compiler(Info) {
                 Code[filled_lines] = "execute positioned ~" + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " run "
             }
             if (Info[index][2][1] == 8) {
-                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_").toLowerCase() + "] at @s run "
+                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] at @s run "
             }
             if (Info[index][2][1] == 9) {
                 Code[filled_lines] = "execute as " + Info[index][1][0] + " at @s run "
@@ -126,7 +126,7 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 11) {
-                Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_").toLowerCase() + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
+                Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
             if (Info[index][2][1] == 12) {
@@ -146,7 +146,7 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 16) {
-                Code[filled_lines] += `execute as @e[type=${Info[index][1][3].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_").toLowerCase()}] run data merge entity @s {Motion:[${(parseFloat(Info[index][1][0])).toString()},${(parseFloat(Info[index][1][1])).toString()},${(parseFloat(Info[index][1][2])).toString()}]}`
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][3].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run data merge entity @s {Motion:[${(parseFloat(Info[index][1][0])).toString()},${(parseFloat(Info[index][1][1])).toString()},${(parseFloat(Info[index][1][2])).toString()}]}`
                 filled_lines++;
             }
         }

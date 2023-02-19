@@ -20,7 +20,11 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="Libraries/datapack_compilor.js"></script>
         <script src="https://amirhossainj123.github.io/website.js" defer></script>
+        <script defer>SavedFullCode = [[],[]]</script>
         <script>
+            function ConvertFor(Array) {return JSON.stringify(Array);}
+            function ConvertBack(Array) {return JSON.parse(Array);}
+
             Elements = []
             Events = ["On World Load",
                 "On World Tick"];
@@ -76,9 +80,12 @@
             All = [Events,Functions,Informations,Variables,Loops]
             toggle = [false,false,false,false,false]
             function visible(num) {
+                Classes = ["eve","fun","inf","var","loo"]
                 num--;
+                Curasses = Classes[num]
                 check = toggle[num]
                 if (!check) {
+                    document.getElementById("Keys"+(num+1)).className = Curasses + " expandable"
                     let Vis = All[num]
                     toggle[num] = true
                     for (x = 0; x<Vis.length; x++) {
@@ -91,6 +98,7 @@
                     }
                 }
                 else {
+                    document.getElementById("Keys"+(num+1)).className = Curasses
                     toggle[num] = false
                     let Vis = All[num]
                     for (x = 0; x<Vis.length; x++) {
@@ -437,18 +445,6 @@
                 transition: 100ms;
                 background-color: rgb(70, 0, 70);
             }
-            .sel {
-                transition: 100ms;
-                background-color: yellow;
-            }
-            .sel:hover {
-                transition: 100ms;
-                background-color: rgb(201, 201, 0);
-            }
-            .sel:active {
-                transition: 100ms;
-                background-color: rgb(173, 173, 0);
-            }
             .loo {
                 transition: 100ms;
                 background-color: blue;
@@ -460,6 +456,18 @@
             .loo:active {
                 transition: 100ms;
                 background-color: rgb(0, 0, 150);
+            }
+            .loa {
+                transition: 100ms;
+                background-color: darkolivegreen;
+            }
+            .loa:hover {
+                transition: 100ms;
+                background-color: rgb(62, 78, 35);
+            }
+            .loa:active {
+                transition: 100ms;
+                background-color: rgb(40, 51, 22);
             }
             .inf {
                 transition: 100ms;
@@ -495,14 +503,34 @@
                 margin: 10px;
                 
             }
-            @keyframes Connected {
+            @keyframes FadeIn {
                 0% {
                     opacity: 0;
-                    transform: translateX(-50px);
                 }
                 100% {
                     opacity: 1;
-                    transform: translateX(0px);
+                }
+            }
+            @keyframes FadeOut {
+                0% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+            @keyframes Connected {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-150%)
+                }
+                75% {
+                    opacity: 1;
+                    transform: translateX(20px)
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0px)
                 }
             }
             @keyframes Moveback {
@@ -517,10 +545,12 @@
                 0% {
                     opacity: 1;
                     background-color: white;
+                    transform: scale(1);
                 }
                 100% {
                     opacity: 0;
                     background-color: black;
+                    transform: scale(0);
                 }
             }
             @keyframes Moving {
@@ -658,6 +688,37 @@
             .spaced {
                 margin-left: 10px;
             }
+            @keyframes test {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(0.99);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            .expandable:active {
+                animation: test 1s linear infinite normal forwards;
+            }
+            @keyframes toost {
+                0% {
+                    transform: rotateZ(0deg);
+                }
+                33% {
+                    transform: rotateZ(5deg);
+                }
+                66% {
+                    transform: rotateZ(-5deg);
+                }
+                99% {
+                    transform: rotateZ(0deg);
+                }
+            }
+            button:not(.expandable):hover {
+                animation: toost 1s linear infinite normal forwards;
+            }
         </style>
     </head>
     <body>
@@ -667,7 +728,9 @@
                 <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
                 <button class="inf" onclick="visible(3)" id="Keys3">Informations</button><br>
                 <button class="var" onclick="visible(4)" id="Keys4">Variables</button><br>
-                <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button>
+                <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button><br>
+                <button class="loa" onclick="localStorage.setItem('SavedLoadCodes',ConvertFor(FullCode[0])); localStorage.setItem('SavedTickCodes',ConvertFor(FullCode[1])); refresh();">Save Project</button><br>
+                <button class="loa" onclick="SavedFullCode[0]=ConvertBack(localStorage.getItem('SavedLoadCodes')); SavedFullCode[1] = ConvertBack(localStorage.getItem('SavedTickCodes')); FullCode = SavedFullCode; Elements = FullCode[CurrentCode]; refresh();">Load Last Project</button>
             </div>
             <div class="preview" id="preview">
                 Preview - On World Load
