@@ -11,12 +11,12 @@ function BuildItem(Index,Array) {
     for (let index = 0; index < Info[4].length; index++) {
         text += `'"${Info[4][index]}"',`
     }
-    text.slice(0,-1);
+    text = text.slice(0,-1);
     text += "]},Enchantments:["
     for (let index = 0; index < Info[3].length; index++) {
         text += `{id:"${Info[3][index][0]}",lvl:${Info[3][index][1]}},`
     }
-    text.slice(0,-1);
+    text = text.slice(0,-1);
     text += `],Unbreakable:${Info[5]}`
     if (Info[6] == "1b")
         text += ",HideFlags:45"
@@ -85,7 +85,14 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 2) {
-                Code[filled_lines] += "summon "  + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
+                Tag = Info[index][1][4]
+                Tag = Tag.replaceAll(" and ",",").replaceAll(" ","_").split(",") 
+                Tags = ""
+                Tag.forEach(element => {
+                    Tags += '"' + element + '",'
+                });
+                Tags = Tags.slice(0,-1)
+                Code[filled_lines] += "summon "  + Info[index][1][0].replaceAll(" ","_").toLowerCase() + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3] + ' {Tags:[' + Tags + "]}"
                 filled_lines++;
             }
             if (Info[index][2][1] == 3) {
@@ -108,7 +115,7 @@ function Compiler(Info) {
                 Code[filled_lines] = "execute positioned ~" + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " run "
             }
             if (Info[index][2][1] == 8) {
-                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll(" is ","=").replaceAll(" the ","") + "] at @s run "
+                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll("with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_") + "] at @s run "
             }
             if (Info[index][2][1] == 9) {
                 Code[filled_lines] = "execute as " + Info[index][1][0] + " at @s run "
@@ -118,7 +125,7 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 11) {
-                Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" is ","=").replaceAll(" the ","") + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
+                Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" is ","=") + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
             if (Info[index][2][1] == 12) {
