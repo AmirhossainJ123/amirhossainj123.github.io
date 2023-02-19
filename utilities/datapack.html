@@ -149,6 +149,14 @@
                     let button = document.createElement('div')
                     button.id="Layer_" + x
                     button.className = "Connecties"
+                    if (!Elements[x][3]) {
+                        Elements[x][3] = true
+                        button.style.animation = "Connected 0.3s ease-out 1 normal forwards"
+                    }
+                    if (!Elements[x][4]) {
+                        Elements[x][4] = true
+                        button.style.animation = "Moveback 0.3s ease-out 1 normal forwards"
+                    }
                     sortment.append(button);
                     var innerstuff = ""
                     var toggle = true
@@ -268,13 +276,16 @@
             if (x > -1) {
                 Elements.splice(x, 1);
             }
-            refresh()
-            inputset()
+            document.getElementById("Layer_" + x).style.animation = "Delete 0.3s ease-out 1 normal forwards"
+            setTimeout(()=>{
+                refresh()
+                inputset()
+            },350)
         }
         function AddElement(num, x) {
             if (num != 0) {
                 let Element = All[num][x] // num = category, x = code
-                Elements[Elements.length] = [Element,["","","","","","","","","",""],[num,x]]
+                Elements[Elements.length] = [Element,["","","","","","","","","",""],[num,x],false,true]
             }
             else {
                 FullCode[CurrentCode] = Elements
@@ -286,19 +297,30 @@
             inputset()
         }
         function MoveUpElement(x) {
+            document.getElementById("Layer_" + x.toString()).style.animation = "Moving 0.3s ease-out 1 normal forwards"
+            document.getElementById("Layer_" + (x-1).toString()).style.animation = "Moving 0.3s ease-out 1 normal forwards"
             temp = Elements[x-1]
             Elements[x-1] = Elements[x]
             Elements[x] = temp
-            console.log(x)
-            refresh()
-            inputset()
+            setTimeout(()=>{
+                Elements[x][4] = false
+                Elements[x-1][4] = false
+                refresh()
+                inputset()
+            },350)
         }
         function MoveDownElement(x) {
+            document.getElementById("Layer_" + x).style.animation = "Moving 0.3s ease-out 1 normal forwards"
+            document.getElementById("Layer_" + parseInt(parseInt(x)+1)).style.animation = "Moving 0.3s ease-out 1 normal forwards"
             temp = Elements[x+1]
             Elements[x+1] = Elements[x]
             Elements[x] = temp
-            refresh()
-            inputset()
+            setTimeout(()=>{
+                Elements[x][4] = false
+                Elements[parseInt(x)+1][4] = false
+                refresh()
+                inputset()
+            },350)
         }
     </script>
         <style>
@@ -471,6 +493,46 @@
                 border-radius: 50px;
                 padding: 12px;
                 margin: 10px;
+                
+            }
+            @keyframes Connected {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-50px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0px);
+                }
+            }
+            @keyframes Moveback {
+                0% {
+                    transform: translateX(-150%);
+                }
+                100% {
+                    transform: translateX(0px);
+                }
+            }
+            @keyframes Delete {
+                0% {
+                    opacity: 1;
+                    background-color: white;
+                }
+                100% {
+                    opacity: 0;
+                    background-color: black;
+                }
+            }
+            @keyframes Moving {
+                0% {
+                    transform: translateX(0px);
+                }
+                80% {
+                    transform: translateX(-150%);
+                }
+                100% {
+                    transform: translateX(-150%);
+                }
             }
             .Connecties button div h3 input {
                 margin-left: 10px;
