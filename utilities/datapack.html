@@ -40,7 +40,8 @@
                 "Send message in chat, visible for <player>: <message>",
                 "Display on <player>'s screen as title: <message>",
                 "Display on <player>'s screen as subtitle: <message>",
-                "Display on <player>'s screen as actionbar: <message>"];
+                "Display on <player>'s screen as actionbar: <message>",
+                "Apply Force ~<number> ~<number> ~<number> to <entity>"];
 
             Informations = ["<var number> = <player>'s Health",
                 "<var number> = <player>'s Food",
@@ -102,7 +103,7 @@
                 for (x=0;x<Elements.length+1;x++) {
                     var Exist = false;
                     var filled = 0
-                    for (y=0;y<5;y++) {
+                    for (y=0;y<10;y++) {
                         try {
                             A = document.getElementById("input_" + x + "_" + y).value
                             Exist = true;
@@ -273,7 +274,7 @@
         function AddElement(num, x) {
             if (num != 0) {
                 let Element = All[num][x] // num = category, x = code
-                Elements[Elements.length] = [Element,["","","","",""],[num,x]]
+                Elements[Elements.length] = [Element,["","","","","","","","","",""],[num,x]]
             }
             else {
                 FullCode[CurrentCode] = Elements

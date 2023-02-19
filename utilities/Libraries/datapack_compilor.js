@@ -33,6 +33,7 @@ function Download(load,tick) {
     load.unshift("scoreboard objectives add CONST_TAKEN custom:damage_taken")
     load.unshift("scoreboard objectives add CONST_JUMP custom:jump")
     load.unshift("scoreboard objectives add CONST_NUMBERS dummy")
+    load.unshift("scoreboard objectives add CONST_SYSTEM dummy")
     load.unshift("# Constant Scoreboards!")
     load.unshift(" ")
 
@@ -92,7 +93,7 @@ function Compiler(Info) {
                     Tags += '"' + element + '",'
                 });
                 Tags = Tags.slice(0,-1)
-                Code[filled_lines] += "summon "  + Info[index][1][0].replaceAll(" ","_").toLowerCase() + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3] + ' {Tags:[' + Tags + "]}"
+                Code[filled_lines] += "summon "  + Info[index][1][0].toLowerCase().replaceAll(" ","_") + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3] + ' {Tags:[' + Tags + "]}"
                 filled_lines++;
             }
             if (Info[index][2][1] == 3) {
@@ -115,7 +116,7 @@ function Compiler(Info) {
                 Code[filled_lines] = "execute positioned ~" + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " run "
             }
             if (Info[index][2][1] == 8) {
-                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll("with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_") + "] at @s run "
+                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_").toLowerCase() + "] at @s run "
             }
             if (Info[index][2][1] == 9) {
                 Code[filled_lines] = "execute as " + Info[index][1][0] + " at @s run "
@@ -125,7 +126,7 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 11) {
-                Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" is ","=") + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
+                Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_").toLowerCase() + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
             if (Info[index][2][1] == 12) {
@@ -142,6 +143,10 @@ function Compiler(Info) {
             }
             if (Info[index][2][1] == 15) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' actionbar {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
+                filled_lines++;
+            }
+            if (Info[index][2][1] == 16) {
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][3].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" the ","").replaceAll(" ","_").toLowerCase()}] run data merge entity @s {Motion:[${(parseFloat(Info[index][1][0])).toString()},${(parseFloat(Info[index][1][1])).toString()},${(parseFloat(Info[index][1][2])).toString()}]}`
                 filled_lines++;
             }
         }
