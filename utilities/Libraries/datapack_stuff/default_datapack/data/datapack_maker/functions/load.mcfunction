@@ -1,1 +1,1 @@
-execute if score test CONST_NUMBERS = tost CONST_NUMBERS run scoreboard players set tist CONST_NUMBERS 1
+execute store result score @s CONST_MOTION_X run data get entity @s Pos[0] 

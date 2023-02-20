@@ -33,7 +33,12 @@ function Download(load,tick) {
     load.unshift("scoreboard objectives add CONST_TAKEN custom:damage_taken")
     load.unshift("scoreboard objectives add CONST_JUMP custom:jump")
     load.unshift("scoreboard objectives add CONST_NUMBERS dummy")
-    load.unshift("scoreboard objectives add CONST_SYSTEM dummy")
+    load.unshift("scoreboard objectives add CONST_MOTION_X dummy")
+    load.unshift("scoreboard objectives add CONST_MOTION_X_PRIME dummy")
+    load.unshift("scoreboard objectives add CONST_MOTION_Y dummy")
+    load.unshift("scoreboard objectives add CONST_MOTION_Y_PRIME dummy")
+    load.unshift("scoreboard objectives add CONST_MOTION_Z dummy")
+    load.unshift("scoreboard objectives add CONST_MOTION_Z_PRIME dummy")
     load.unshift("# Constant Scoreboards!")
     load.unshift(" ")
 
@@ -53,6 +58,32 @@ function Download(load,tick) {
     linkz.download = "tick.mcfunction";
     linkz.click();
     URL.revokeObjectURL(linkz.href);
+
+    // ZIP PART BABY
+    /*const zip = new JSZip();
+    zip.file("pack.mcmeta", '{\n    "pack": {\n        "pack_format": 7,\n        "description": "My Datapack"\n    }\n}');
+    const loadTag = {
+        "values": [
+            "MyDatapack:load"
+        ]
+    }
+    const tickTag = {
+        "values": [
+            "MyDatapack:tick"
+        ]
+    }
+    zip.file("data/minecraft/tags/functions/load.json", JSON.stringify(loadTag));
+    zip.file("data/minecraft/tags/functions/tick.json", JSON.stringify(tickTag));
+    zip.file('pack.mcmeta', '{\n    "pack": {\n        "pack_format": 10,\n        "description": "Made with AmirhossainJ123\'s datapack maker"\n    }\n}');
+    zip.folder('data/minecraft/tags/functions').file('load.json', '{\n   "values": [\n       "[' + datapack + ']:load"\n   ]\n}');
+    zip.folder('data/minecraft/tags/functions').file('tick.json', '{\n   "values": [\n       "[' + datapack + ']:tick"\n   ]\n}');
+    zip.folder('data/' + datapack + '/functions').file('tick.mcfunction', tick);
+    zip.folder('data/' + datapack + '/functions').file('load.mcfunction', load);
+    
+    zip.generateAsync({ type: "blob" })
+    .then(function(content) {
+        saveAs(content, "datapack.zip");
+    });*/
 }
 function SearchIn(def,item) {
     for (let index = 0; index < def.length; index++) {
@@ -93,7 +124,7 @@ function Compiler(Info) {
                     Tags += '"' + element + '",'
                 });
                 Tags = Tags.slice(0,-1)
-                Code[filled_lines] += "summon "  + Info[index][1][0].toLowerCase().replaceAll(" ","_") + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3] + ' {Tags:[' + Tags + "]}"
+                Code[filled_lines] += "summon "  + Info[index][1][0].toLowerCase().replaceAll(" ","_") + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3] + ' {Tags:[' + Tags.toLowerCase() + "]}"
                 filled_lines++;
             }
             if (Info[index][2][1] == 3) {
@@ -147,6 +178,130 @@ function Compiler(Info) {
             }
             if (Info[index][2][1] == 16) {
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][3].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run data merge entity @s {Motion:[${(parseFloat(Info[index][1][0])).toString()},${(parseFloat(Info[index][1][1])).toString()},${(parseFloat(Info[index][1][2])).toString()}]}`
+                filled_lines++;
+            }
+            if (Info[index][2][1] == 17) {
+                SavedFilledLine = Code[filled_lines]
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ~ ~ ~`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_X run data get entity @s Pos[0] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Y run data get entity @s Pos[1] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Z run data get entity @s Pos[2] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] rotated as @s eyes run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ^ ^ ^${Info[index][1][2]/10}`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_X_PRIME run data get entity @s Pos[0] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Y_PRIME run data get entity @s Pos[1] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Z_PRIME run data get entity @s Pos[2] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players operation @s CONST_MOTION_X_PRIME -= @s CONST_MOTION_X`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players operation @s CONST_MOTION_Y_PRIME -= @s CONST_MOTION_Y`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players operation @s CONST_MOTION_Z_PRIME -= @s CONST_MOTION_Z`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result entity @s Motion[0] double 0.0001 run scoreboard players get @s CONST_MOTION_X_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result entity @s Motion[1] double 0.0001 run scoreboard players get @s CONST_MOTION_Y_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result entity @s Motion[2] double 0.0001 run scoreboard players get @s CONST_MOTION_Z_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_X`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Y`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Z`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_X_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Y_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Z_PRIME`
+                filled_lines++;
+            }
+            if (Info[index][2][1] == 18) {
+                SavedFilledLine = Code[filled_lines]
+                Code[filled_lines] += `execute as ${Info[index][1][1]} rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ~ ~ ~`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_X run data get entity @s Pos[0] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Y run data get entity @s Pos[1] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Z run data get entity @s Pos[2] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as ${Info[index][1][1]} rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ^ ^ ^${Info[index][1][2]/10}`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_X_PRIME run data get entity @s Pos[0] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Y_PRIME run data get entity @s Pos[1] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result score @s CONST_MOTION_Z_PRIME run data get entity @s Pos[2] 10000`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players operation @s CONST_MOTION_X_PRIME -= @s CONST_MOTION_X`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players operation @s CONST_MOTION_Y_PRIME -= @s CONST_MOTION_Y`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players operation @s CONST_MOTION_Z_PRIME -= @s CONST_MOTION_Z`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result entity @s Motion[0] double 0.0001 run scoreboard players get @s CONST_MOTION_X_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result entity @s Motion[1] double 0.0001 run scoreboard players get @s CONST_MOTION_Y_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] store result entity @s Motion[2] double 0.0001 run scoreboard players get @s CONST_MOTION_Z_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_X`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Y`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Z`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_X_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Y_PRIME`
+                filled_lines++;
+                Code[filled_lines] = SavedFilledLine
+                Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Z_PRIME`
                 filled_lines++;
             }
         }

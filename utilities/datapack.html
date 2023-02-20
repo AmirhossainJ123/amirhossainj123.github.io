@@ -18,6 +18,8 @@
         <link rel="canonical" href="https://amirhossainj123.github.io/utilities/datapack">
         <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://raw.githubusercontent.com/Stuk/jszip/main/dist/jszip.min.js" module></script>
+        <script src="https://raw.githubusercontent.com/eligrey/FileSaver.js/master/dist/FileSaver.min.js" module></script>
         <script src="Libraries/datapack_compilor.js"></script>
         <script src="https://amirhossainj123.github.io/website.js" defer></script>
         <script defer>SavedFullCode = [[],[]]</script>
@@ -29,29 +31,31 @@
             Events = ["On World Load",
                 "On World Tick"];
 
-            Functions = ["Kill <player>",
+            Functions = ["Kill <player/selector>",
                 "Kill <entity>",
                 "Spawn <entity> ~<x> ~<y> ~<z> with <tags>",
-                "Give <player> <count>x <item>",
-                "Give <player> <count>x <var custom item>",
+                "Give <player/selector> <count>x <item>",
+                "Give <player/selector> <count>x <var custom item>",
                 "Place <block> ~<x> ~<y> ~<z>",
                 "Set time to <time>",
                 "Run The Next Command From <x> <y> <z>",
                 "Run The Next Command From <entity>",
-                "Run The Next Command From <player>",
-                "Teleport <player> ~<x> ~<y> ~<z>",
+                "Run The Next Command From <player/selector>",
+                "Teleport <player/selector> ~<x> ~<y> ~<z>",
                 "Teleport <entity> ~<x> ~<y> ~<z>",
-                "Send message in chat, visible for <player>: <message>",
-                "Display on <player>'s screen as title: <message>",
-                "Display on <player>'s screen as subtitle: <message>",
-                "Display on <player>'s screen as actionbar: <message>",
-                "Apply Force ~<number> ~<number> ~<number> to <entity>"];
+                "Send message in chat, visible for <player/selector>: <message>",
+                "Display on <player/selector>'s screen as title: <message>",
+                "Display on <player/selector>'s screen as subtitle: <message>",
+                "Display on <player/selector>'s screen as actionbar: <message>",
+                "Apply Force ~<number> ~<number> ~<number> to <entity>",
+                "Apply Force to <entity> in the direction of <entity> with power factor <number>",
+                "Apply Force to <entity> in the direction of <player/selector> with power factor <number>"];
 
-            Informations = ["<var number> = <player>'s Health",
-                "<var number> = <player>'s Food",
-                "<var number> = <player>'s Death Count",
-                "<var number> = <player> Amount of dealt damage",
-                "<var number> = <player> Amount of taken damage"];
+            Informations = ["<var number> = <player/selector>'s Health",
+                "<var number> = <player/selector>'s Food",
+                "<var number> = <player/selector>'s Death Count",
+                "<var number> = <player/selector> Amount of dealt damage",
+                "<var number> = <player/selector> Amount of taken damage"];
 
             Variables = ["Define <var number> as <number>",
                 "<var number> += <var number>",
@@ -716,7 +720,7 @@
                     transform: rotateZ(0deg);
                 }
             }
-            button:not(.expandable):hover {
+            button:not(.expandable):not(.download):hover {
                 animation: toost 1s linear infinite normal forwards;
             }
         </style>
