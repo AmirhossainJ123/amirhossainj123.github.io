@@ -1,1 +1,0 @@
-execute store result score @s CONST_MOTION_X run data get entity @s Pos[0] 
