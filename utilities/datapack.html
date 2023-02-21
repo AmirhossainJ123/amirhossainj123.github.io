@@ -18,8 +18,6 @@
         <link rel="canonical" href="https://amirhossainj123.github.io/utilities/datapack">
         <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <script src="https://raw.githubusercontent.com/Stuk/jszip/main/dist/jszip.min.js" module></script>
-        <script src="https://raw.githubusercontent.com/eligrey/FileSaver.js/master/dist/FileSaver.min.js" module></script>
         <script src="Libraries/datapack_compilor.js"></script>
         <script src="https://amirhossainj123.github.io/website.js" defer></script>
         <script defer>SavedFullCode = [[],[]]</script>
@@ -38,9 +36,10 @@
                 "Give <player/selector> <count>x <var custom item>",
                 "Place <block> ~<x> ~<y> ~<z>",
                 "Set time to <time>",
-                "Run The Next Command From <x> <y> <z>",
-                "Run The Next Command From <entity>",
-                "Run The Next Command From <player/selector>",
+                "Run The Next <number> Command At ~<x> ~<y> ~<z>",
+                "Run The Next <number> Command At <x> <y> <z>",
+                "Run The Next <number> Command From <entity>",
+                "Run The Next <number> Command From <player/selector>",
                 "Teleport <player/selector> ~<x> ~<y> ~<z>",
                 "Teleport <entity> ~<x> ~<y> ~<z>",
                 "Send message in chat, visible for <player/selector>: <message>",
@@ -65,18 +64,21 @@
                 "<var number> = if [<var number> = <var number>]",
                 "<var number> = if [<var number> > <var number>]",
                 "<var number> = if [<var number> < <var number>]",
+                "<var number> = if [<entity> exists]",
+                "<var number> = if [block at ~<x> ~<y> ~<z> is <block>]",
+                "<var number> = if [biome at ~<x> ~<y> ~<z> is <biome>]",
                 "Define <var custom item> as <item name>",
                 "<var custom item>'s name = <name>",
                 "<var custom item>'s enchantments += <enchantment name> <enchantment level>",
                 "<var custom item>'s lore += <lore>",
                 "<var custom item> is unbreakable = <yes/no>",
                 "<var custom item> invisible enchantments = <yes/no>",
-                "<var custom item> damage = <number>",
-                ];
-
+                "<var custom item> damage = <number>"
+            ];
+                                                
             Loops = [
-            "If <var> run the next command",
-            "Unless <var> run the next command"];
+                "If <var> run the next <number> command",
+                "Unless <var> run the next <number> command"];
             FullCode = [[],[]]
             CurrentCode = 0
             FullCode[CurrentCode] = Elements
@@ -398,10 +400,8 @@
                 height: 90%;
                 width: 65%;
                 position: absolute;
-                overflow-x: hidden;
-                overflow-y: auto;
                 margin: 5px;
-                overflow-x: hidden;
+                overflow-x: auto;
                 overflow-y: auto;
                 padding: 10px;
             }

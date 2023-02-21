@@ -144,43 +144,62 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 7) {
-                Code[filled_lines] = "execute positioned ~" + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " run "
+                filler = filled_lines
+                for (x = 0; x < Info[index][1][0]; x++) {
+                    Code[filler] = "execute positioned ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3] + " run "
+                    filler++;
+                }
             }
             if (Info[index][2][1] == 8) {
-                Code[filled_lines] = "execute as @e[type=" + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] at @s run "
+                filler = filled_lines
+                for (x = 0; x < Info[index][1][0]; x++) {
+                    Code[filler] = "execute positioned " + Info[index][1][1] + " " + Info[index][1][2] + " " + Info[index][1][3] + " run "
+                    filler++;
+                }
             }
             if (Info[index][2][1] == 9) {
-                Code[filled_lines] = "execute as " + Info[index][1][0] + " at @s run "
+                filler = filled_lines
+                for (x = 0; x < Info[index][1][0]; x++) {
+                    Code[filler] = "execute as @e[type=" + Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] at @s run "
+                    filler++;
+                }
             }
             if (Info[index][2][1] == 10) {
+                filler = filled_lines
+                for (x = 0; x < Info[index][1][0]; x++) {
+                    Code[filler] = "execute as " + Info[index][1][1] + " at @s run "
+                    filler++;
+                }
+            }
+            if (Info[index][2][1] == 11) {
                 Code[filled_lines] += "tp "  + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
-            if (Info[index][2][1] == 11) {
+            if (Info[index][2][1] == 12) {
                 Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
-            if (Info[index][2][1] == 12) {
+            if (Info[index][2][1] == 13) {
                 Code[filled_lines] += "tellraw "  + Info[index][1][0] + ' {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 13) {
+            if (Info[index][2][1] == 14) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' title {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 14) {
+            if (Info[index][2][1] == 15) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' subtitle {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 15) {
+            if (Info[index][2][1] == 16) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' actionbar {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 16) {
+            if (Info[index][2][1] == 17) {
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][3].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run data merge entity @s {Motion:[${(parseFloat(Info[index][1][0])).toString()},${(parseFloat(Info[index][1][1])).toString()},${(parseFloat(Info[index][1][2])).toString()}]}`
                 filled_lines++;
             }
-            if (Info[index][2][1] == 17) {
+            if (Info[index][2][1] == 18) {
                 SavedFilledLine = Code[filled_lines]
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ~ ~ ~`
                 filled_lines++;
@@ -242,7 +261,7 @@ function Compiler(Info) {
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Z_PRIME`
                 filled_lines++;
             }
-            if (Info[index][2][1] == 18) {
+            if (Info[index][2][1] == 19) {
                 SavedFilledLine = Code[filled_lines]
                 Code[filled_lines] += `execute as ${Info[index][1][1]} rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ~ ~ ~`
                 filled_lines++;
@@ -377,33 +396,57 @@ function Compiler(Info) {
                 filled_lines++;
             }
             if (Info[index][2][1] == 8) {
+                Chick = Code[filled_lines]
+                Code[filled_lines] += `execute if entity @e[type=${Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players set ${Info[index][1][0]} CONST_NUMBERS 1`
+                filled_lines++;
+                Code[filled_lines] = Chick
+                Code[filled_lines] += `execute unless entity @e[type=${Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players set ${Info[index][1][0]} CONST_NUMBERS 0`
+                filled_lines++;
+            }
+            if (Info[index][2][1] == 9) {
+                Chick = Code[filled_lines]
+                Code[filled_lines] += `execute if block ~${Info[index][1][1]} ~${Info[index][1][2]} ~${Info[index][1][3]} ${Info[index][1][4].replaceAll(" ","_").toLowerCase()} run scoreboard players set ${Info[index][1][0]} CONST_NUMBERS 1`
+                filled_lines++;
+                Code[filled_lines] = Chick
+                Code[filled_lines] += `execute unless block ~${Info[index][1][1]} ~${Info[index][1][2]} ~${Info[index][1][3]} ${Info[index][1][4].replaceAll(" ","_").toLowerCase()} run scoreboard players set ${Info[index][1][0]} CONST_NUMBERS 0`
+                filled_lines++;
+            }
+            if (Info[index][2][1] == 10) {
+                Chick = Code[filled_lines]
+                Code[filled_lines] += `execute if biome ~${Info[index][1][1]} ~${Info[index][1][2]} ~${Info[index][1][3]} ${Info[index][1][4].replaceAll(" ","_").toLowerCase()} run scoreboard players set ${Info[index][1][0]} CONST_NUMBERS 1`
+                filled_lines++;
+                Code[filled_lines] = Chick
+                Code[filled_lines] += `execute unless biome ~${Info[index][1][1]} ~${Info[index][1][2]} ~${Info[index][1][3]} ${Info[index][1][4].replaceAll(" ","_").toLowerCase()} run scoreboard players set ${Info[index][1][0]} CONST_NUMBERS 0`
+                filled_lines++;
+            }
+            if (Info[index][2][1] == 11) {
                 if (SearchIn(Definitions,Info[index][1][0]) == undefined)
                     Definitions[Definitions.length] = [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase(),"",[],[],"0b","0b",0]
                 else
                     Definitions[SearchIndex(Definitions,Info[index][1][0])] = [Info[index][1][0],Info[index][1][1].replaceAll(" ","_").toLowerCase(),"",[],[],"0b","0b",0]
             }
-            if (Info[index][2][1] == 9) {
+            if (Info[index][2][1] == 12) {
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][2] = Info[index][1][1]
             }
-            if (Info[index][2][1] == 10) {
+            if (Info[index][2][1] == 13) {
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][3][Definitions[SearchIndex(Definitions,Info[index][1][0])][3].length] = [Info[index][1][1],Info[index][1][2]]
             }
-            if (Info[index][2][1] == 11) {
+            if (Info[index][2][1] == 14) {
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][4][Definitions[SearchIndex(Definitions,Info[index][1][0])][4].length] = Info[index][1][1]
             }
-            if (Info[index][2][1] == 12) {
+            if (Info[index][2][1] == 15) {
                 if (Info[index][1][1] = "true")
                     Definitions[SearchIndex(Definitions,Info[index][1][0])][5] = "1b"
                 else
                     Definitions[SearchIndex(Definitions,Info[index][1][0])][5] = "0b"
             }
-            if (Info[index][2][1] == 13) {
+            if (Info[index][2][1] == 16) {
                 if (Info[index][1][1] = "true")
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][6] = "1b"
                 else
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][6] = "0b"
             }
-            if (Info[index][2][1] == 14) {
+            if (Info[index][2][1] == 17) {
                 Definitions[SearchIndex(Definitions,Info[index][1][0])][7] = Info[index][1][1]
             }
         }
