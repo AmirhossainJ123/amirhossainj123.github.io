@@ -424,3 +424,27 @@ button:not(.expandable):not(.download):hover {
         opacity: 1;
     }
 }
+.discord {
+    display: flex;
+    padding: 0px;
+    border-radius: 15px;
+}
+.discord * {
+    border: 0px;
+}
+.discord img {
+    margin: 7px;
+}
+.discord h3 {
+    margin-left: -20px;
+    margin-top: 22px;
+}
+.discord:hover {
+    filter: saturate(20);
+    background-color: gray;
+}
+.discord:active {
+    filter: saturate(200);
+    background-color: black;
+    color: white;
+}
