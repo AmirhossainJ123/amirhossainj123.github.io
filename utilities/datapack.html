@@ -33,6 +33,12 @@
                 <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button><br>
                 <button class="loa" onclick="localStorage.setItem('SavedLoadCodes',ConvertFor(FullCode[0])); localStorage.setItem('SavedTickCodes',ConvertFor(FullCode[1])); refresh();">Save Project</button><br>
                 <button class="loa" onclick="SavedFullCode[0]=ConvertBack(localStorage.getItem('SavedLoadCodes')); SavedFullCode[1] = ConvertBack(localStorage.getItem('SavedTickCodes')); FullCode = SavedFullCode; Elements = FullCode[CurrentCode]; refresh();">Load Last Project</button>
+                <div class="themes">
+                    <button class="btnz" onclick="theme(0)"><img src="Assets/white.png" width="64" height="64"></button>
+                    <button class="btnz" onclick="theme(1)"><img src="Assets/gold_icon.png" width="64" height="64"></button>
+                    <button class="btnz" onclick="theme(2)"><img src="Assets/prgrm.png" width="64" height="64"></button>
+                    <button class="btnz" onclick="theme(3)"><img src="Assets/wall.png" width="64" height="64"></button>
+                </div>
             </div>
             <div class="preview" id="preview">
                 Preview - On World Load

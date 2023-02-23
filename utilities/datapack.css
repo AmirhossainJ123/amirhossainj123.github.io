@@ -165,7 +165,6 @@ input:hover {
     border-radius: 50px;
     padding: 12px;
     margin: 10px;
-    
 }
 @keyframes FadeIn {
     0% {
@@ -382,4 +381,46 @@ i {
 }
 button:not(.expandable):not(.download):hover {
     animation: toost 1s linear infinite normal forwards;
+}
+.Connecties {
+    background-position: center;
+    background-size: contain;
+    background-image: none;
+}
+.btnz {
+    padding: 0px;
+    border: 0px solid white;
+    border-radius: 100%;
+}
+.btnz img {
+    margin: 0px;
+    padding: 5px;
+    border: 0px solid white;
+}
+.btnz:hover {
+    background-color: gray;
+    filter: saturate(5);
+}
+.btnz:active {
+    background-color: white;
+    filter: saturate(50) invert(1) grayscale(1);
+}
+.themes {
+    top: 90%;
+    display: flex;
+    border: 0px;
+    top: 100%;
+}
+@keyframes refresh {
+    0% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        transform: rotateY(360deg);
+        opacity: 1;
+    }
 }

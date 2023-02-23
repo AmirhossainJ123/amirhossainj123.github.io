@@ -1,5 +1,29 @@
 // Main Page Stuff ---------------------------------------------------------------------------------------------------------------
 
+function theme_set(link,clr) {
+    const boxes = document.querySelectorAll('.Connecties');
+    boxes.forEach(box => {
+        box.style.animation = "refresh 0.3s ease-in 1 0s normal forwards"
+        setTimeout(()=>{
+            box.style.animation = ""
+        },300)
+        setTimeout(()=>{
+            box.style.backgroundImage = link;
+            box.style.color = clr;
+        },150)
+    });
+}
+
+function theme(num) {
+    if (num == 0)
+        theme_set("","black")
+    if (num == 1)
+        theme_set("url('Assets/gold_texture.jpg')","black")
+    if (num == 2)
+        theme_set("url('Assets/program.jpeg')","white")
+    if (num == 3)
+        theme_set("url('Assets/wall.jpg')","")
+}
 
 function ConvertFor(Array) {return JSON.stringify(Array);}
 function ConvertBack(Array) {return JSON.parse(Array);}
