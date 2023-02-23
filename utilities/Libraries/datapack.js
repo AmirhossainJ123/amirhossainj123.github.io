@@ -1,5 +1,5 @@
 // Main Page Stuff ---------------------------------------------------------------------------------------------------------------
-
+current_theme = 0;
 function theme_set(link,clr) {
     const boxes = document.querySelectorAll('.Connecties');
     boxes.forEach(box => {
@@ -23,7 +23,9 @@ function theme(num) {
         theme_set("url('Assets/program.jpeg')","white")
     if (num == 3)
         theme_set("url('Assets/wall.jpg')","")
+    current_theme = num
 }
+
 
 function ConvertFor(Array) {return JSON.stringify(Array);}
 function ConvertBack(Array) {return JSON.parse(Array);}
@@ -289,6 +291,7 @@ function refresh(func,aply) {
             button_down.append(iconz)
         }
     }
+    theme(current_theme)
 }
 function DeleteElement(x) {
 if (x > -1) {
