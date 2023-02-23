@@ -16,6 +16,7 @@ Functions = ["Kill <player/selector>",
     "Place <block> ~<x> ~<y> ~<z>",
     "Set time to <time>",
     "Run The Next <number> Command At ~<x> ~<y> ~<z>",
+    "Run The Next <number> Command At ^<x> ^<y> ^<z>",
     "Run The Next <number> Command At <x> <y> <z>",
     "Run The Next <number> Command From <entity>",
     "Run The Next <number> Command From <player/selector>",
@@ -484,53 +485,60 @@ function Compiler(Info) {
             if (Info[index][2][1] == 8) {
                 filler = filled_lines
                 for (x = 0; x < Info[index][1][0]; x++) {
-                    Code[filler] = "execute positioned " + Info[index][1][1] + " " + Info[index][1][2] + " " + Info[index][1][3] + " run "
+                    Code[filler] = "execute positioned ^" + Info[index][1][1] + " ^" + Info[index][1][2] + " ^" + Info[index][1][3] + " run "
                     filler++;
                 }
             }
             if (Info[index][2][1] == 9) {
                 filler = filled_lines
                 for (x = 0; x < Info[index][1][0]; x++) {
-                    Code[filler] = "execute as @e[type=" + Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] at @s run "
+                    Code[filler] = "execute positioned " + Info[index][1][1] + " " + Info[index][1][2] + " " + Info[index][1][3] + " run "
                     filler++;
                 }
             }
             if (Info[index][2][1] == 10) {
                 filler = filled_lines
                 for (x = 0; x < Info[index][1][0]; x++) {
-                    Code[filler] = "execute as " + Info[index][1][1] + " at @s run "
+                    Code[filler] = "execute as @e[type=" + Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] at @s run "
                     filler++;
                 }
             }
             if (Info[index][2][1] == 11) {
+                filler = filled_lines
+                for (x = 0; x < Info[index][1][0]; x++) {
+                    Code[filler] = "execute as " + Info[index][1][1] + " at @s run "
+                    filler++;
+                }
+            }
+            if (Info[index][2][1] == 12) {
                 Code[filled_lines] += "tp "  + Info[index][1][0] + " ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
-            if (Info[index][2][1] == 12) {
+            if (Info[index][2][1] == 13) {
                 Code[filled_lines] += "tp @e[type="  + Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase() + "] ~" + Info[index][1][1] + " ~" + Info[index][1][2] + " ~" + Info[index][1][3]
                 filled_lines++;
             }
-            if (Info[index][2][1] == 13) {
+            if (Info[index][2][1] == 14) {
                 Code[filled_lines] += "tellraw "  + Info[index][1][0] + ' {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 14) {
+            if (Info[index][2][1] == 15) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' title {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 15) {
+            if (Info[index][2][1] == 16) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' subtitle {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 16) {
+            if (Info[index][2][1] == 17) {
                 Code[filled_lines] += "title "  + Info[index][1][0] + ' actionbar {"text":"' + Info[Index][1][1].replaceAll("&","§") + '"}'
                 filled_lines++;
             }
-            if (Info[index][2][1] == 17) {
+            if (Info[index][2][1] == 18) {
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][3].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run data merge entity @s {Motion:[${(parseFloat(Info[index][1][0])).toString()},${(parseFloat(Info[index][1][1])).toString()},${(parseFloat(Info[index][1][2])).toString()}]}`
                 filled_lines++;
             }
-            if (Info[index][2][1] == 18) {
+            if (Info[index][2][1] == 19) {
                 SavedFilledLine = Code[filled_lines]
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][1].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ~ ~ ~`
                 filled_lines++;
@@ -592,7 +600,7 @@ function Compiler(Info) {
                 Code[filled_lines] += `execute as @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] run scoreboard players reset @s CONST_MOTION_Z_PRIME`
                 filled_lines++;
             }
-            if (Info[index][2][1] == 19) {
+            if (Info[index][2][1] == 20) {
                 SavedFilledLine = Code[filled_lines]
                 Code[filled_lines] += `execute as ${Info[index][1][1]} rotated as @s run tp @e[type=${Info[index][1][0].replaceAll(" and ",",").replaceAll(" with ",",").replaceAll(" being ","=").replaceAll(" is ","=").replaceAll(" ","_").toLowerCase()}] ~ ~ ~`
                 filled_lines++;

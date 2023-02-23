@@ -157,40 +157,63 @@ function EVelocityX(object) {return object.vx}
 function EVelocityY(object) {return object.vy}
 function EPositionX(object) {return object.x}
 function EPositionY(object) {return object.y}
-function EScaleX(object) {return object.shape.x}
-function EScaleY(object) {return object.shape.y}
+function EScaleX(object) {return object.shape.w}
+function EScaleY(object) {return object.shape.z}
 function EType(object) {return object.shape.id}
 
 function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
-    if (object1.shape.id == "Square" && object2.shape.id == "Square")
+    if (object1.shape.id == "Square" && object2.shape.id == "Square") {
         if (EBoxCollision(object1,object2)[0]) {
-            if (object1.x < object2.x + object2.shape.w) {
-                object1.x = object2.x + object2.shape.w
-                if (Bounce_Force != false) {
-                    object1.vx = Bounce_Force[0] // Bounce_Force = [Force to be applied when hit the right, Force to be applied when hit the left, Force to be applied when hit the top, Force to be applied when hit the bottom]
-                }
+            let object1Top_object2Bottom = Math.abs(object1.y - (object2.y + object2.shape.z));
+            let object1Right_object2Left = Math.abs((object1.x + object1.shape.w) - object2.x);
+            let object1Left_object2Right = Math.abs(object1.x - (object2.x + object2.shape.w));
+            let object1Bottom_object2Top = Math.abs((object1.y + object1.shape.z) - object2.y);
+        
+            if ((object1.y <= object2.y + object2.shape.z && object1.y + object1.shape.z > object2.y + object2.shape.z) && (object1Top_object2Bottom < object1Right_object2Left && object1Top_object2Bottom < object1Left_object2Right)) {
+                object1.y = object2.y + object2.shape.z;
+                object1.vy = Bounce_Force[2];
             }
-            else if (object1.x + object1.shape.w > object2.x) {
-                object1.x = object2.x - object1.shape.w
-                if (Bounce_Force != false) {
-                    object1.vx = Bounce_Force[1]
-                }
+            if ((object1.y + object1.shape.z >= object2.y && object1.y < object2.y) && (object1Bottom_object2Top < object1Right_object2Left && object1Bottom_object2Top < object1Left_object2Right)) {
+                object1.y = object2.y - object1.shape.z; 
+                object1.vy = Bounce_Force[3];
             }
-            if (object1.y + object1.shape.z > object2.y) {
-                object1.y = object2.y - object1.shape.z
-                if (Bounce_Force != false) {
-                    object1.vy = Bounce_Force[2]
-                }
+            if ((object1.x + object1.shape.w >= object2.x && object1.x < object2.x) && (object1Right_object2Left < object1Top_object2Bottom && object1Right_object2Left < object1Bottom_object2Top)) {
+                object1.x = object2.x - object1.shape.w;
+                object1.vx = Bounce_Force[1]; 
             }
-            else if (object1.y < object2.y + object2.shape.z) {
-                object1.y = object2.y + object2.shape.z
-                if (Bounce_Force != false) {
-                    object1.vy = Bounce_Force[3]
-                }
+            if ((object1.x <= object2.x + object2.shape.w && object1.x + object1.shape.w > object2.x + object2.shape.w) && (object1Left_object2Right < object1Top_object2Bottom && object1Left_object2Right < object1Bottom_object2Top)) {
+                object1.x = object2.x + object2.shape.w;
+                object1.vx = Bounce_Force[0]; 
             }
         }
+    }
     else if (object1.shape.id == "Circle" && object2.shape.id == "Square")
-        console.log("Box Circle Collider")
+        if (EBoxCircleCollision(object1,object2)) {
+            let CircleLeft = object1.x-object1.shape.rad
+            let CircleRight = object1.x+object1.shape.rad
+            let CircleTop = object1.y-object1.shape.rad
+            let CircleBottom = object1.y+object1.shape.rad
+            let SquareLeft = object2.x
+            let SquareRight = object2.x+object2.shape.w
+            let SquareTop = object2.y
+            let SquareBottom = object2.y+object2.shape.z
+            if ((CircleLeft <= SquareRight && object1.x >= object2.x) && !(object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
+                object1.x = SquareRight + object1.shape.rad
+                object1.vx = Bounce_Force[0]
+            }
+            else if ((CircleRight >= SquareLeft && object1.x <= object2.x) && !(object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
+                object1.x = SquareLeft - object1.shape.rad
+                object1.vx = Bounce_Force[1]
+            }
+            if ((CircleTop <= SquareBottom && object1.y >= object2.y) && (object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
+                object1.y = SquareBottom + object1.shape.rad
+                object1.vy = Bounce_Force[2]
+            }
+            else if ((CircleBottom >= SquareTop && object1.y <= object2.y) && (object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
+                object1.y = SquareLeft - object1.shape.rad
+                object1.vy = Bounce_Force[3]
+            }
+        }
     else if (object1.shape.id == "Circle" && object2.shape.id == "Circle")
         console.log("Circle Collider")
     else if (object1.shape.id == "Square" && object2.shape.id == "Circle")
