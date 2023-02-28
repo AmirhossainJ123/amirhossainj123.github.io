@@ -38,6 +38,6 @@ for y in Submit:
     number += length(arrayTostring(A.read()).replace(" ","").replace("    ","").split("\n"))
 print(number)
 B = open("code_range.html","w")
-B.write("Lines: " + number)
+B.write("Lines: " + str(number))
 B.close()
 wait(3)
