@@ -159,6 +159,7 @@ function EPositionX(object) {return object.x}
 function EPositionY(object) {return object.y}
 function EScaleX(object) {return object.shape.w}
 function EScaleY(object) {return object.shape.z}
+function ERadius(object) {return object.shape.rad}
 function EType(object) {return object.shape.id}
 
 function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
