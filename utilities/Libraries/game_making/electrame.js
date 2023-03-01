@@ -215,7 +215,12 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
             }
         }
     else if (object1.shape.id == "Circle" && object2.shape.id == "Circle")
-        console.log("Circle Collider")
+        if (ECircleCollision(object1,object2)) {
+            PX = object1.x-object2.x
+            PY = object1.x-object2.x
+            object1.vx = PX*Bounce_Force[0]
+            object1.vy = PY*Bounce_Force[2]
+        }
     else if (object1.shape.id == "Square" && object2.shape.id == "Circle")
         console.log("Box Circle Collider")
     return object1
