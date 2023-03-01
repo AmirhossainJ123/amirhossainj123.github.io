@@ -72,13 +72,25 @@ class ESquare {
     constructor(Scale_x,Scale_y) {
         this.w = Scale_x
         this.z = Scale_y
+        this.Cid = "Square"
         this.id = "Square"
+    }
+}
+
+class EImage {
+    constructor(Scale_x,Scale_y,Image_Dest) {
+        this.w = Scale_x
+        this.z = Scale_y
+        this.image = Image_Dest
+        this.Cid = "Square"
+        this.id = "Image"
     }
 }
 
 class ECircle {
     constructor(radius) {
         this.rad = radius
+        this.Cid = "Circle"
         this.id = "Circle"
     }
 }
@@ -163,7 +175,7 @@ function ERadius(object) {return object.shape.rad}
 function EType(object) {return object.shape.id}
 
 function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
-    if (object1.shape.id == "Square" && object2.shape.id == "Square") {
+    if (object1.shape.Cid == "Square" && object2.shape.Cid == "Square") {
         if (EBoxCollision(object1,object2)[0]) {
             let object1Top_object2Bottom = Math.abs(object1.y - (object2.y + object2.shape.z));
             let object1Right_object2Left = Math.abs((object1.x + object1.shape.w) - object2.x);
@@ -188,7 +200,7 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
             }
         }
     }
-    else if (object1.shape.id == "Circle" && object2.shape.id == "Square")
+    else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Square")
         if (EBoxCircleCollision(object1,object2)) {
             let CircleLeft = object1.x-object1.shape.rad
             let CircleRight = object1.x+object1.shape.rad
@@ -215,17 +227,19 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
                 object1.vy = Bounce_Force[3]
             }
         }
-    else if (object1.shape.id == "Circle" && object2.shape.id == "Circle")
+    else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Circle")
         if (ECircleCollision(object1,object2)) {
             PX = object1.x-object2.x
             PY = object1.x-object2.x
             object1.vx = PX*Bounce_Force[0]
             object1.vy = PY*Bounce_Force[2]
         }
-    else if (object1.shape.id == "Square" && object2.shape.id == "Circle")
+    else if (object1.shape.Cid == "Square" && object2.shape.Cid == "Circle")
         console.log("Box Circle Collider")
     return object1
 }
+
+function ELoop(functtion) {return requestAnimationFrame(functtion)}
 
 function EApplyMotion(Object) {
     Object.x += Object.vx
@@ -233,9 +247,16 @@ function EApplyMotion(Object) {
     return Object
 }
 
+function EInit() {
+    let Images = document.createElement("div")
+    Images.setAttribute("style",'display:none')
+    Images.id = "game_making_hidden_stuff_in_electrame_library"
+    document.body.append(Images)
+}
+
 function EApplyPhysicsTo(Object) {
     if (EGRAVITY)
-        Object.vy -= EFGRAVITY
+    Object.vy -= EFGRAVITY
     if (EFRICTION) {
         Object.vx = Centerize_Number(Object.vx,EFFRICTION)
         Object.vy = Centerize_Number(Object.vy,EFFRICTION)
@@ -243,18 +264,35 @@ function EApplyPhysicsTo(Object) {
     return Object
 }
 
+Current_Added_Images = 0
+
 function ERender(Game,Objectz) {
     var game = document.getElementById(Game.screen_id).getContext("2d");
     game.fillStyle = Objectz.color
     if (Objectz.shape.id == "Square")
         game.fillRect(Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z);
-    if (Objectz.shape.id == "Circle") {
-        game.beginPath();
-        game.arc(Objectz.x, Objectz.y, Objectz.shape.rad, 0, 2 * Math.PI);
-        game.fill();
+        if (Objectz.shape.id == "Circle") {
+            game.beginPath();
+            game.arc(Objectz.x, Objectz.y, Objectz.shape.rad, 0, 2 * Math.PI);
+            game.fill();
+    }
+    if (Objectz.shape.id == "Image") {
+        Image = document.createElement("img")
+        Image.setAttribute("src",Objectz.shape.image)
+        Image.setAttribute("class","EImage")
+        Image.id="EImagez"
+        document.getElementById("game_making_hidden_stuff_in_electrame_library").append(Image)
+        Image.addEventListener("onload", ()=> {
+            game.drawImage(Image,Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z)
+            Current_Added_Images++
+        })
     }
 }
 
+
 function EClear(Game) {
+    for(let x=0;x<Current_Added_Images;x++)
+        document.getElementById("EImagez").remove()
+    Current_Added_Images = 0
     return document.getElementById(Game.screen_id).getContext("2d").reset()
 }

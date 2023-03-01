@@ -2,8 +2,148 @@
     <head>
         <script src="https://amirhossainj123.github.io/website.js"></script>
         <title>Documentation</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+            body {
+                background-color: black;
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
+            body::-webkit-scrollbar {
+                display: none;
+            }
+            .Information {
+                display: inline-block;
+                background-color: gray;
+                border-radius: 30px;
+                width: 60%;
+                height: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            .Information::-webkit-scrollbar {
+                display: none;
+            }
+            .categories {
+                display: inline-block;
+                background-color: gray;
+                border-radius: 30px;
+                width: 30%;
+                height: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            .categories a {
+                display:block;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: large;
+            }
+            .categories p {
+                display:block;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: x-large;
+                margin-bottom: 5px;
+            }
+            .categories h4 {
+                margin: 0px;
+                margin-top: 20px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+            .Information h4 {
+                margin: 5px;
+                font-size: large;
+                font-family: 'Shantell Sans', cursive;
+            }
+            .Information h3 {
+                margin: 5px;
+                font-size: large;
+                font-family: 'Source Sans Pro', sans-serif;
+                background-color: rgb(80, 80, 80);
+                border-radius: 10px;
+                border: 3px solid rgb(70, 70, 70);
+                padding-top: 7px;
+                padding-bottom: 7px;
+                padding-left: 5px;
+                white-space: pre-wrap;
+            }
+            .Information sup {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+            .Information h1 {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin-bottom: 10px;
+            }
+            .shadow {
+                background-color: gray;
+                height: 50px;
+                width: 61%;
+                box-shadow: 0px -20px 20px gray;
+                position: absolute;
+                bottom: 0px;
+                transform: translateY(-5px) translateX(-1%);
+                border-radius: 40px;
+            }
+        </style>
     </head>
     <body>
-        <h1>COMING SOON</h1>
+        <div class="categories">
+            <p>Introduction</p>
+            <a href="#intro">Introduce</a>
+            <a href="#how">How does it work?</a>
+            <a href="#start">Getting started</a>
+            <h4>____________________________________________</h4>
+            <p>Creating a Game</p>
+            <a href="#shape">Shapes</a>
+            <a href="#material">Materials</a>
+            <a href="#obj">Objects</a>
+            <a href="#info">Basic Information</a>
+            <a href="#forces">Forces & Physics</a>
+            <a href="#collide">Collisions</a>
+        </div>
+        <div class="Information">
+            <div class="shadow"></div>
+            <h1 id="intro">Introduce</h1>
+            <h4>So you want to make your own game, with coding, but you don't know much about coding?</h4>
+            <h4>you search on internet to find a good game making library for js, that is simple enough</h4>
+            <h4>or maybe ask a friend which introduces this game making library</h4>
+            <br>
+            <h4>And here we are introducing Electrame a simple Game Making<sup>2D</sup> library</h4>
+            <h4>which can make games so simply, you just got to know javascript<sup>  a lil bit</sup> and</h4>
+            <h4>you can start making your own game already! this library obviously, isn't as advanced as three<sup>js</sup></h4>
+            <h4>cause its not supposed to be advanced, like the meaning of "simple game making library"</h4>
+            <h4>is that the user can make its own game simply, and making it simple kinda have limitations</h4>
+            <br>
+            <h1 id="how">How does it work?</h1>
+            <h4>So reading this part means you like our library, right? :D</h4>
+            <h4>well our library uses a thing in html called canvas, which is sadly not supported in firefox</h4>
+            <h4>canvas gives the programmers tools to make cool screens and stuff, but it might get annoying very soon</h4>
+            <h4>for game making. here you understand what you write, which is technically possible if you make your game with functions</h4>
+            <h4>but we did it for you so not needed, for example here you can just define a shape and pick a color</h4>
+            <h4>or just put a rgb color yourself there, but we put a bunch of premade and useful colors there for you so yep</h4>
+            <h4>and just merge those 2 things into a object, which will generate this informations with it too</h4>
+            <h4>Position X, Position Y, Velocity X, Velocity Y, (Scale X, Scale Y) or Radius, Id, Shape, Cid</h4>
+            <h4>Cid is the collision id, which for example an image has a collision id of a rectangle("Square" in the code)</h4>
+            <h4>which you never ever need to touch unless you want your image to collide differently which happens rarely and others are obvious</h4>
+            <h4>so how do we render stuff?</h4>
+            <h4>we draw the frame, then after the next frame we delete the old frame and create a new one</h4>
+            <br>
+            <h1 id="start">Getting Started</h1>
+            <h4>So finally a new user wants to learn our library, AMAZING!</h4>
+            <h4>So first we add the canvas to html like the normal way OR we use ECreateGame(id) which we gonna name the game, first</h4>
+            <h3>ECreateGame("first");</h3>
+            <h4>Then we can config if our world has gravity or friction</h4>
+            <h3>let Gravity = false;
+let Friction = true;
+EConfig(Gravity,Friction);</h3>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
     </body>
 </html>

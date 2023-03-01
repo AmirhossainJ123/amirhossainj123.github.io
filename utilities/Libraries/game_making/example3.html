@@ -15,6 +15,8 @@
 <body>
     <canvas id="game" width="800" height="400"></canvas>
     <script>
+        EInit() // Initiate for images and stuff
+
         // Config for Physics
         Gravity = false  // NO gravity >:C
         Friction = true // Yes Friction :)
@@ -34,14 +36,13 @@
         SqA = new EColors(1).WHITE // Tall rectangle color
         Sky = new ESquare(1000,600) // background shape (width and height)
         Boll = new ECircle(5) // ball shape (radius)
-        Grond = new ECircle(10,10) // Small box shape 
+        Grond = new EImage(10,10,"https://amirhossainj123.github.io/Treasure.png") // Small box shape 
         Grund = new ESquare(10,20) // Tall rectangle shape
         Background = new EObject(-100,-100,Sky,World) // Object Background (x,y,shape,material)
         Player1 = new EObject(100,100,Grond,Sq) // Object Small Box
         Player2 = new EObject(200,200,Grund,SqA) // Object Tall Rectangle
         Corcle = new EObject(300,300,Boll,SqS) // Object Ball
         function My_Game() { // Game Functions
-            setTimeout( (e) => {
                 Player1 = EApplyCollision(Player1,Player2,[1,-1,1,-1]) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
                 Corcle = EApplyCollision(Corcle,Player1,[1,-1,1,-1])
                 Corcle = EApplyCollision(Corcle,Player2,[1,-1,1,-1])
@@ -83,8 +84,7 @@
                 ERender(Game,Player1) // Render the Player1 in Game
                 ERender(Game,Player2) // Render the Player2 in Game
                 ERender(Game,Corcle) // Render the Corcle in Game
-                My_Game() // Loop
-            }, 10); // Tick Speed or FPS, 10 basically means 100 FPS or Tick Speed
+                ELoop(My_Game()) // Let the loop begin
         }
         My_Game() // Run Game Function
     </script>
