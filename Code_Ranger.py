@@ -36,11 +36,17 @@ for directory in subdirectories:
         if os.path.isfile(f):
             TotalFiles.append(f)
 number = 0
+chars = 0
 for y in Submit:
     A = open(y,"r")
     number += length(arrayTostring(A.read()).replace(" ","").replace("    ","").split("\n"))
-print(str(number) + " " + str(length(TotalFiles)) + " " + str(length(Submit)))
+for y in Submit:
+    A = open(y,"r")
+    File = (arrayTostring(A.read()).replace(" ","").replace("    ","").split("\n"))
+    for z in range(0,length(File),1):
+        chars += length(File[z])
+print(str(number) + " " + str(length(TotalFiles)) + " " + str(length(Submit)) + " " + str(chars))
 B = open("code_range.html","w")
-B.write("<h2>Lines of code: " + str(number) + "</h2>\n" + "<h2>Files: " + str(length(TotalFiles)) + "</h2>\n" + "<h2>Files of Code: " + str(length(Submit)) + "</h2>")
+B.write("<h2>Lines of code: " + str(number) + "</h2>\n" + "<h2>Files: " + str(length(TotalFiles)) + "</h2>\n" + "<h2>Files of Code: " + str(length(Submit)) + "</h2>\n<h2>Characters: " + str(chars) + "</h2>")
 B.close()
 wait(3)
