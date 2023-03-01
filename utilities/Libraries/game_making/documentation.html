@@ -95,7 +95,9 @@
             <p>Introduction</p>
             <a href="#intro">Introduce</a>
             <a href="#how">How does it work?</a>
-            <a href="#start">Getting started</a>
+            <a href="#start">Getting started part 1</a>
+            <a href="#starter">Getting started part 2</a>
+            <a href="#beginner">Getting started part 3</a>
             <h4>____________________________________________</h4>
             <p>Creating a Game</p>
             <a href="#shape">Shapes</a>
@@ -132,14 +134,33 @@
             <h4>so how do we render stuff?</h4>
             <h4>we draw the frame, then after the next frame we delete the old frame and create a new one</h4>
             <br>
-            <h1 id="start">Getting Started</h1>
+            <h1 id="start">Getting Started PART 1</h1>
             <h4>So finally a new user wants to learn our library, AMAZING!</h4>
-            <h4>So first we add the canvas to html like the normal way OR we use ECreateGame(id) which we gonna name the game, first</h4>
-            <h3>ECreateGame("first");</h3>
+            <h4>So first we add the canvas to html like the normal way OR we use ECreateGame(id,width,height) which we gonna name the game: first</h4>
+            <h4>and I think our game would be 600 by 300 so here it is</h4>
+            <h3>ECreateGame("first", 600, 300);</h3>
             <h4>Then we can config if our world has gravity or friction</h4>
             <h3>let Gravity = false;
 let Friction = true;
 EConfig(Gravity,Friction);</h3>
+            <h4>Then we can define our game! with EGame(id) which in this case is</h4>
+            <h3>Game = new EGame("first");</h3>
+            <h4>Now we have our game! but we need a background right? first lets add the color of it, I am gonna go with bright blue<sup>Day color</sup></h4>
+            <h4>so we can use EColors for premade stuff, so this is how it is EColors(opacity 1 to 0).color</h4>
+            <h3>let Background = new EColors(1).DAY;</h3>
+            <h4>You can check the materials tab for a full list of the colors you can also use RGB</h4>
+            <h4>So the color is set, but for the shape, we all know our background is rectangle but sometimes you might use css to make your game screen circle</h4>
+            <h4>but we not gonna do that now so lets define the shape of the background! we can use ESquare(width,height)</h4>
+            <h3>let Background_Resolution = new ESquare(600,300);</h3>
+            <h4>now lets define the object! (x,y,shape,material)</h4>
+            <h3>let Sky = new EObject(0,0,Background_Resolution,Background)</h3>
+            <h4>now we defined the background, you can try and define the ground yourself now too</h4>
+            <h4>so after we defined everything we define a function and render everything!</h4>
+            <h3>function my_first_game() {
+    ERender(Sky);
+}
+my_first_game();</h3>
+            <h4>so enough for part one!</h4>
             <br>
             <br>
             <br>

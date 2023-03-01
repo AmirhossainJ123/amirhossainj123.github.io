@@ -266,6 +266,14 @@ function EApplyPhysicsTo(Object) {
 
 Current_Added_Images = 0
 
+function ECreateGame(id,width,height) {
+    let Game = document.createElement("canvas")
+    Game.id = id
+    Game.width = width
+    Game.height = height
+    document.body.append(Game)
+}
+
 function ERender(Game,Objectz) {
     var game = document.getElementById(Game.screen_id).getContext("2d");
     game.fillStyle = Objectz.color
