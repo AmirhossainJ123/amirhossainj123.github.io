@@ -1,6 +1,6 @@
 // Game default logic
-const EFGRAVITY = -0.1;
-const EFFRICTION = 0.025;
+EFGRAVITY = -0.1;
+EFFRICTION = 0.025;
 var EGRAVITY=false
 var EFRICTION=false
 
@@ -106,11 +106,20 @@ class EObject {
     }
 }
 
+function _abs(num) {
+    if (num < 0)
+        return -num
+    else
+        return num
+}
+
 function Centerize_Number(num1,num2) {
     if (num1 < 0)
         num1 += num2
     else if (num1 > 0)
         num1 -= num2
+    if (_abs(num1) < _abs(num2))
+        num1 = 0
     return num1
 }
 
@@ -128,9 +137,11 @@ function EApplyForce(Object,Force,Limit) {
     return Object
 }
 
-function EConfig(Gravity=false,Friction=true) {
+function EConfig(Gravity=false,Friction=true,GravityF=-EFGRAVITY,FrictionF=EFFRICTION) {
     EGRAVITY = Gravity
     EFRICTION = Friction
+    EFFRICTION = FrictionF
+    EFGRAVITY = -GravityF
 }
 
 function EBoxCollision(rect1,rect2) {
@@ -173,6 +184,14 @@ function EScaleX(object) {return object.shape.w}
 function EScaleY(object) {return object.shape.z}
 function ERadius(object) {return object.shape.rad}
 function EType(object) {return object.shape.id}
+
+function ESetVelocityX(object,value) {return object.vx=value}
+function ESetVelocityY(object,value) {return object.vy=value}
+function ESetPositionX(object,value) {return object.x=value}
+function ESetPositionY(object,value) {return object.y=value}
+function ESetScaleX(object,value) {return object.shape.w=value}
+function ESetScaleY(object,value) {return object.shape.z=value}
+function ESetRadius(object,value) {return object.shape.rad=value}
 
 function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
     if (object1.shape.Cid == "Square" && object2.shape.Cid == "Square") {
@@ -229,17 +248,12 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
         }
     else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Circle")
         if (ECircleCollision(object1,object2)) {
-            PX = object1.x-object2.x
-            PY = object1.x-object2.x
-            object1.vx = PX*Bounce_Force[0]
-            object1.vy = PY*Bounce_Force[2]
+            console.log("nu")
         }
     else if (object1.shape.Cid == "Square" && object2.shape.Cid == "Circle")
         console.log("Box Circle Collider")
     return object1
 }
-
-function ELoop(functtion) {return requestAnimationFrame(functtion)}
 
 function EApplyMotion(Object) {
     Object.x += Object.vx
@@ -248,10 +262,7 @@ function EApplyMotion(Object) {
 }
 
 function EInit() {
-    let Images = document.createElement("div")
-    Images.setAttribute("style",'display:none')
-    Images.id = "game_making_hidden_stuff_in_electrame_library"
-    document.body.append(Images)
+    console.log("Started")
 }
 
 function EApplyPhysicsTo(Object) {

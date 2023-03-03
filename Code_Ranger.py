@@ -42,7 +42,7 @@ for y in Submit:
     number += length(arrayTostring(A.read()).replace(" ","").replace("    ","").split("\n"))
 for y in Submit:
     A = open(y,"r")
-    File = (arrayTostring(A.read()).replace(" ","").replace("    ","").split("\n"))
+    File = (arrayTostring(A.read()).split("\n"))
     for z in range(0,length(File),1):
         chars += length(File[z])
 print(str(number) + " " + str(length(TotalFiles)) + " " + str(length(Submit)) + " " + str(chars))
