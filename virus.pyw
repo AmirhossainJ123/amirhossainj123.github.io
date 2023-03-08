@@ -65,9 +65,6 @@ wait(0.5)
 mouse.move(width/2,height/2)
 wait(0.25)
 mouse.click()
-wait(0.5)
-keyboard.press("f11")
-keyboard.release("f11")
 wait(0.25)
 keyboard.write("""You have been hacked :D
 if you want your computer back
