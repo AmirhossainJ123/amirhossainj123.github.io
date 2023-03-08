@@ -32,6 +32,9 @@
             h2[value = "+"] {
                 color: darkgreen;
             }
+            h2[value = "A"] {
+                color: black;
+            }
             h2[value = "-"] {
                 color: red;
             }
@@ -62,6 +65,31 @@
                 width: 100%;
                 margin: 0px;
             }
+            .iq {
+                transition: 500ms;
+                width: 100px;
+                -webkit-appearance: none;
+            }
+            .iq::-webkit-slider-runnable-track {
+                width: 300px;
+                height: 10px;
+                background-color: black;
+                -webkit-appearance: none;
+                border-radius: 50px;
+            }
+            .iq::-webkit-slider-thumb {
+                cursor: pointer;
+                width: 10px;
+                height: 10px;
+                -webkit-appearance: none;
+                background: white;
+                box-shadow: 0px 0px 10px 5px black;
+                border-radius: 100%;
+            }
+            .iq::-webkit-slider-runnable-track:hover {
+                transition: 500ms;
+                width: 400px;
+            }
         </style>
     </head>
     <script src="https://amirhossainj123.github.io/website.js"></script>
@@ -69,18 +97,29 @@
         <div class="conter">
             <h1>Rock Paper Scissors</h1>
             <div class="center">
-                <button onclick="user_choice(1)">Rock</button>
-                <button onclick="user_choice(2)">Paper</button>
-                <button onclick="user_choice(3)">Scissors</button>
+                <button onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
+                document.getElementById('result').setAttribute('value','A');
+                setTimeout(()=>{user_choice(1);},100)">Rock</button>
+                <button onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
+                document.getElementById('result').setAttribute('value','A');
+                setTimeout(()=>{user_choice(2);},100)">Paper</button>
+                <button onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
+                document.getElementById('result').setAttribute('value','A');
+                setTimeout(()=>{user_choice(3);},100)">Scissors</button>
             </div>
             <br>
             <br>
             <h2 id="result"></h2>
             <h2 id="score"></h2>
-            <button class="center" onclick="future()">Guess my next choose</button>
+            <button class="center" onclick="document.getElementById('next').textContent = 'Thinking...';setTimeout(()=>{future();},100)">Guess my next choose</button>
             <br>
             <br>
             <h2 id="next"></h2>
+            <div class="center">
+                <h2 style="display: inline-block;" id="pcc">IQ (4): </h2>
+                <input type="range" min="2" max="101" value=4 id="brain" onchange="change_pattern()" class="iq">
+            </div>
+            <br>
         </div>
     </body>
 </html>
