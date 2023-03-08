@@ -121,7 +121,7 @@
             <a href="#shape">Shapes</a>
             <a href="#material">Materials</a>
             <a href="#obj">Objects</a>
-            <a href="#info">Basic Information</a>
+            <a href="#cmds">Commands</a>
             <a href="#forces">Forces & Physics</a>
             <a href="#collide">Collisions</a>
         </div>
@@ -829,6 +829,37 @@ my_first_game();</h3>
             <h3>let Sky = new EColors(1).DAY;</h3>
             <h4>for example if you want a custom rgb color you can use</h4>
             <h3>let Sky = "rgb(23,255,125)";</h3>
+            <h1 id="obj">Objects</h1>
+            <br>
+            <h4>I don't think it needs much of explanation but the way we make it is like this</h4>
+            <h4>EObject(X Position,Y Position,Shape,Material)</h4>
+            <h4>But remember all the commands use Object non of them use shape or material seperately, they are bind into the object</h4>
+            <h4>When you create a object it gives some information which are</h4>
+            <h4>EVelocityX(object) = returns the velocity in x direction of object</h4>
+            <h4>EVelocityY(object) = returns the velocity in y direction of object</h4>
+            <h4>EPositionX(object) = returns the position x of object</h4>
+            <h4>EPositionX(object) = returns the position y of object</h4>
+            <h4>EScaleX(object) = returns the scale x of object(image or rectangle)</h4>
+            <h4>EScaleY(object) = returns the scale y of object(image or rectangle)</h4>
+            <h4>ERadius(object) = returns the radius of object(circle)</h4>
+            <h4>EType(object) = returns the type of object (Rectangle = "Square", Image = "Image", Circle = "Circle")</h4>
+            <br>
+            <h4>so these were the information ones now to set them</h4>
+            <br>
+            <h4>ESetVelocityX(object,value) = sets the velocity in x direction of object</h4>
+            <h4>ESetVelocityY(object,value) = sets the velocity in y direction of object</h4>
+            <h4>ESetPositionX(object,value) = sets the position x of object</h4>
+            <h4>ESetPositionX(object,value) = sets the position y of object</h4>
+            <h4>ESetScaleX(object,value) = sets the scale x of object(image or rectangle)</h4>
+            <h4>ESetScaleY(object,value) = sets the scale y of object(image or rectangle)</h4>
+            <h4>ESetRadius(object,value) = sets the radius of object(circle)</h4>
+            <br>
+            <h4>And yep thats pretty much all I could say about object, except 1 thing! object.shape.Cid which is how the object collides</h4>
+            <h4>I don't think you'll need it but if you did well, nice, also for more info for the Cid go to Shape part</h4>
+            <h1 id="cmds">Commands</h1>
+            <br>
+            <h4>Coming soon...</h4>
+            <br>
             <br>
             <br>
             <br>
