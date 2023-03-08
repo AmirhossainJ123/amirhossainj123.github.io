@@ -39,7 +39,7 @@ number = 0
 chars = 0
 for y in Submit:
     A = open(y,"r")
-    number += length(arrayTostring(A.read()).replace(" ","").replace("    ","").split("\n"))
+    number += length(arrayTostring(A.read()).split("\n"))
 for y in Submit:
     A = open(y,"r")
     File = (arrayTostring(A.read()).split("\n"))

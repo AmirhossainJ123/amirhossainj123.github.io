@@ -1,14 +1,86 @@
 <html>
     <head>
+        <script src="https://unpkg.com/brain.js"></script>
         <script src="Libraries/test_stuff.js"></script>
+        <style>
+            button {
+                background-color: green;
+                color: white;
+                padding: 10px;
+                border-radius: 20px;
+                border: 2px solid olivedrab;
+            }
+            button:hover {
+                background-color: olivedrab;
+                color: white;
+                padding: 10px;
+                border-radius: 20px;
+                border: 2px solid green;
+            }
+            h2 {
+                font-size: x-large;
+            }
+            h2[value = "W"] {
+                color: green;
+            }
+            h2[value = "D"] {
+                color: orange;
+            }
+            h2[value = "L"] {
+                color: red;
+            }
+            h2[value = "+"] {
+                color: darkgreen;
+            }
+            h2[value = "-"] {
+                color: red;
+            }
+            h2[value = "0"] {
+                color: black;
+            }
+            * {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+            h1 {
+                text-align: center;
+            }
+            h2 {
+                white-space: pre-wrap;
+                text-align: center;
+            }
+            .center {
+                left: 50%;
+                transform: translateX(-50%);
+                position: absolute;
+                margin: 0px;
+            }
+            .conter {
+                top: 50%;
+                transform: translateY(-50%);
+                position: absolute;
+                display: block;
+                width: 100%;
+                margin: 0px;
+            }
+        </style>
     </head>
     <script src="https://amirhossainj123.github.io/website.js"></script>
     <body>
-        <h1>Rock Paper Scissors</h1>
-        <button onclick="user_choice(1)">Rock</button>
-        <button onclick="user_choice(2)">Paper</button>
-        <button onclick="user_choice(3)">Scissors</button>
-        <h2 id="result"></h2>
-        <h2 id="score"></h2>
+        <div class="conter">
+            <h1>Rock Paper Scissors</h1>
+            <div class="center">
+                <button onclick="user_choice(1)">Rock</button>
+                <button onclick="user_choice(2)">Paper</button>
+                <button onclick="user_choice(3)">Scissors</button>
+            </div>
+            <br>
+            <br>
+            <h2 id="result"></h2>
+            <h2 id="score"></h2>
+            <button class="center" onclick="future()">Guess my next choose</button>
+            <br>
+            <br>
+            <h2 id="next"></h2>
+        </div>
     </body>
 </html>
