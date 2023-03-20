@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/brain.js"></script>
+        <script>
+            function test(pattern) {
+                const net = new brain.recurrent.LSTMTimeStep()
+                net.train([pattern], { iterations: 600, log: true })
+                return Math.round(net.run(pattern))
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

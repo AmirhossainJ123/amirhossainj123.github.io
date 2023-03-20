@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                background-color: black;
+            }
+            h2, h3 {
+                color: white;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            button {
+                transition: 200ms;
+                padding: 10px;
+                border: 2px solid black;
+                border-radius: 20px;
+            }
+            button:hover {
+                transition: 200ms;
+                background-color: gray;
+            }
+        </style>
+    </head>
+    <body hidden>
+        <h3 id="word">Word: </h3>
+        <h3 id="trans">Translation: </h3>
+        <button onclick="nextword()" style="display: inline-block;">Next ==></button>
+        <h2>Word Language: <button onclick="switchlang()" id="lang">English</button></h2>
+        <h2>Translation Language: <button onclick="switchtrans()" id="tang">Persian</button></h2>
+        <script src="words.js"></script>
+        <script>
+            CurrentWord = 0
+            CurrentLang = 0
+            CurrentTrans = 2
+            Current = ["English","Germany","Persian"]
+            CurrentWords = [English_Words,Germany_Words,Persian_Words]
+            function start() {
+                document.body.hidden = false
+            }
+            start()
+            function switchlang() {
+                CurrentLang++
+                if (CurrentLang == 3)
+                    CurrentLang = 0
+                document.getElementById("lang").textContent = Current[CurrentLang]
+            }
+            function switchtrans() {
+                CurrentTrans++
+                if (CurrentTrans == 3)
+                    CurrentTrans = 0
+                document.getElementById("tang").textContent = Current[CurrentTrans]
+            }
+            function nextword() {
+                CurrentWord++
+                document.getElementById("word").textContent = "Word: " + CurrentWords[CurrentLang][CurrentWord]
+                document.getElementById("trans").textContent = "Translation: " + CurrentWords[CurrentTrans][CurrentWord]
+            }
+            nextword()
+        </script>
+    </body>
+</html>

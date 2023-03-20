@@ -28,8 +28,10 @@ https://amirhossainj123.github.io/utilities/image
 https://amirhossainj123.github.io/utilities/index
 https://amirhossainj123.github.io/utilities/note
 https://amirhossainj123.github.io/utilities/rps
+https://amirhossainj123.github.io/utilities/self_learning
 https://amirhossainj123.github.io/utilities/sgen
 https://amirhossainj123.github.io/utilities/steve
+https://amirhossainj123.github.io/utilities/word_learning
 https://amirhossainj123.github.io/utilities/Libraries/game_making/documentation
 https://amirhossainj123.github.io/utilities/Libraries/game_making/example
 https://amirhossainj123.github.io/utilities/Libraries/game_making/example2
