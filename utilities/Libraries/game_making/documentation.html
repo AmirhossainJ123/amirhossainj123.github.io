@@ -65,6 +65,7 @@
                 font-family: 'Shantell Sans', cursive;
             }
             .Information h3 {
+                transition: 500ms;
                 margin: 5px;
                 font-size: large;
                 font-family: 'Source Sans Pro', sans-serif;
@@ -78,6 +79,11 @@
                 max-height: 600px;
                 overflow-y: auto;
                 overflow-x: hidden;
+            }
+            .Information h3:hover {
+                transition: 500ms;
+                background-color: rgb(65, 65, 65);;
+                color: black;
             }
             .Information sup {
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -789,7 +795,7 @@ my_first_game();</h3>
             <h4>Square.w which is top side length</h4>
             <h4>Square.z which is left side length</h4>
             <h4>Square.image which only happens if our shape is a image(EImage's shape is also square)</h4>
-            <h4>Square.Cid which is how the object should colide = "Square"</h4>
+            <h4>Square.Cid which is how the object should collide = "Square"</h4>
             <h4>Square.id which is the id of the object which is "Square"/"Image"</h4>
             <h4>Circle is also the same but without image and w and z instead a rad</h4>
             <h4>The way we define Square which is 20 by 10 is </h4>
@@ -858,7 +864,44 @@ my_first_game();</h3>
             <h4>I don't think you'll need it but if you did well, nice, also for more info for the Cid go to Shape part</h4>
             <h1 id="cmds">Commands</h1>
             <br>
-            <h4>Coming soon...</h4>
+            <h4>I use the mark <sup>Exp</sup> if they are already explained</h4>
+            <h4>I use the mark <sup>OR</sup> if you can put the other thing there too for example: (1+1)<sup>OR</sup>(2+0) = 2 when I use OR I mean that if you select one of them you have to remove '(' and ')' for the OR</h4>
+            <h4>Current commands are, EColors<sup>Exp</sup></h4>
+            <h4>EKeyboard(key) you can check if the key is pressed for example key can be 'a' or 'B' whatever</h4>
+            <h4>EGame is a class so how you use it is, var MyGame = new EGame(canvas id), and the canvas id is the canvas id of the html</h4>
+            <h4>ESquare<sup>Exp</sup>, EImage<sup>Exp</sup>, ECircle<sup>Exp</sup>, EObject<sup>Exp</sup></h4>
+            <h4>EApplyForce is a command that lets you apply force to a object, this is how it works: GameObject = EApplyForce(GameObject,[force_x,force_y],([force of positive x limit, force of positive y limit, force of nagative x limit, force of negative y limit])<sup>OR</sup>(false))</h4>
+            <h4>EConfig is a command that configs currently gravity and friction, all of its parts are optional, EConfig(Gravity<sup>BOOLEAN</sup>,Friction<sup>BOOLEAN</sup>,Gravity Force<sup>FLOAT</sup>,Friction Force<sup>FLOAT</sup>)</h4>
+            <h4>EBoxCollision checks if 2 boxes (rectangles) are collided or not it requires 2 game objects</h4>
+            <h4>EBoxCircleCollision checks if a box and a circle are collided or not it requires 2 game objects</h4>
+            <h4>ECircleCollision checks if 2 circles are collided or not it requires 2 game objects</h4>
+            <h4>EVelocityX<sup>Exp</sup></h4>
+            <h4>EVelocityY<sup>Exp</sup></h4>
+            <h4>EPositionX<sup>Exp</sup></h4>
+            <h4>EPositionX<sup>Exp</sup></h4>
+            <h4>EScaleX<sup>Exp</sup></h4>
+            <h4>EScaleY<sup>Exp</sup></h4>
+            <h4>ERadius<sup>Exp</sup></h4>
+            <h4>EType<sup>Exp</sup></h4>
+            <h4>ESetVelocityX<sup>Exp</sup></h4>
+            <h4>ESetVelocityY<sup>Exp</sup></h4>
+            <h4>ESetPositionX<sup>Exp</sup></h4>
+            <h4>ESetPositionX<sup>Exp</sup></h4>
+            <h4>ESetScaleX<sup>Exp</sup></h4>
+            <h4>ESetScaleY<sup>Exp</sup></h4>
+            <h4>ESetRadius<sup>Exp</sup></h4>
+            <h4>GameObject1 = EApplyCollision(GameObject1,GameObject2,Bounce Force) takes 2 game objects and applies the colliding like they no longer pass through each other and it also takes a bounce force which is how much force they get when they hit from [right, left, bottom, top]</h4>
+            <h4>GameObj = EApplyMotion(GameObj) applies the motion of the object must be executed after applying all the physics</h4>
+            <h4>EInit() currently doesnt help but later on MUST be executed RIGHT BEFORE anything about your game has executed</h4>
+            <h4>GameObj = EApplyPhysicsTo(GaneObj) which applies the gravity and friction depending on EConfig</h4>
+            <h4>ECreateGame(id,width,height) creates a canvas for the game you can use EGame(id) later then</h4>
+            <h4>ERender(Game,GameObject) Renders the object so ppl can see it</h4>
+            <h4>EClear(Game) clears the frame for the next render!</h4>
+            <h4>GameObj = EDeleteObject(Object) deletes an object, you must use this if you want to delete "image" otherwise you can just set it to undefined or run this command</h4>
+            <h4></h4>
+            <h1 id="forces">Forces</h1>
+            <h4>COMING SOON...</h4>
+            <br>
             <br>
             <br>
             <br>

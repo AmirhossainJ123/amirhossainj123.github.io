@@ -1,9 +1,9 @@
 // Game default logic
-EFGRAVITY = -0.1;
-EFFRICTION = 0.025;
+var EFGRAVITY = -0.1;
+var EFFRICTION = 0.025;
 var EGRAVITY=false
 var EFRICTION=false
-
+EGamesImages = []
 // key detection
 KeysPressed = []
 addEventListener("keydown",(e) => {
@@ -65,6 +65,7 @@ function EKeyboard(key) {return _findResult(KeysPressed,key.toLowerCase());}
 class EGame {
     constructor (screen_id) {
         this.screen_id = screen_id
+        EGamesImages.push([screen_id,[]])
     }
 }
 
@@ -84,6 +85,7 @@ class EImage {
         this.image = Image_Dest
         this.Cid = "Square"
         this.id = "Image"
+        this.SpecialityRegisterCode = _RandomizedDigitedNumber(30)
     }
 }
 
@@ -113,7 +115,7 @@ function _abs(num) {
         return num
 }
 
-function Centerize_Number(num1,num2) {
+function _Centerize_Number(num1,num2) {
     if (num1 < 0)
         num1 += num2
     else if (num1 > 0)
@@ -144,6 +146,21 @@ function EConfig(Gravity=false,Friction=true,GravityF=-EFGRAVITY,FrictionF=EFFRI
     EFGRAVITY = -GravityF
 }
 
+function _randomize(min,max) {
+    return min + Math.floor(Math.random()*(max-min))
+}
+
+function _RandomizedDigitedNumber(num) {
+    let numberz = "";
+    keys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%"
+    keys = keys.split('')
+    limit = keys.length
+    for (let index = 0; index < num; index++) {
+        numberz += keys[_randomize(0,limit)]
+    }
+    return numberz
+}
+
 function EBoxCollision(rect1,rect2) {
     Collision = rect1.x < rect2.x + rect2.shape.w && rect1.x + rect1.shape.w > rect2.x && rect1.y < rect2.y + rect2.shape.z && rect1.shape.z + rect1.y > rect2.y
     Collisionz = [rect1.x < rect2.x + rect2.shape.w , rect1.x + rect1.shape.w > rect2.x , rect1.y < rect2.y + rect2.shape.z , rect1.shape.z + rect1.y > rect2.y]
@@ -166,6 +183,23 @@ function EBoxCircleCollision(circ1,rect2) {
     }
     return false;
     // thanks to https://www.jeffreythompson.org/collision-detection/circle-rect.php 
+}
+
+function EDeleteObject(GObject) {
+    if (GObject.shape.id == "Image") {
+        let tempp
+        for (let index = 0; index < EGamesImages.length; index++) {
+            for (let indez = 0; indez < EGamesImages[index][1].length; indez++) {
+                if (EGamesImages[index][1][indez] == GObject) {
+                    tempp = EGamesImages[index][1][0]
+                    EGamesImages[index][1][0] = EGamesImages[index][1][indez]
+                    EGamesImages[index][1][indez] = tempp
+                    EGamesImages[index][1] = EGamesImages[index][1].shift()
+                }
+            }
+        }
+    }
+    return undefined
 }
 
 function ECircleCollision(circ1,circ2) {
@@ -262,15 +296,17 @@ function EApplyMotion(Object) {
 }
 
 function EInit() {
-    console.log("Started")
+    let A = document.createElement("div")
+    A.id = "GameAssets"
+    document.body.append(A)
 }
 
 function EApplyPhysicsTo(Object) {
     if (EGRAVITY)
     Object.vy -= EFGRAVITY
     if (EFRICTION) {
-        Object.vx = Centerize_Number(Object.vx,EFFRICTION)
-        Object.vy = Centerize_Number(Object.vy,EFFRICTION)
+        Object.vx = _Centerize_Number(Object.vx,EFFRICTION)
+        Object.vy = _Centerize_Number(Object.vy,EFFRICTION)
     }
     return Object
 }
@@ -286,6 +322,7 @@ function ECreateGame(id,width,height) {
 }
 
 function ERender(Game,Objectz) {
+    let mrflag = false
     var game = document.getElementById(Game.screen_id).getContext("2d");
     game.fillStyle = Objectz.color
     if (Objectz.shape.id == "Square")
@@ -296,15 +333,24 @@ function ERender(Game,Objectz) {
             game.fill();
     }
     if (Objectz.shape.id == "Image") {
-        Image = document.createElement("img")
-        Image.setAttribute("src",Objectz.shape.image)
-        Image.setAttribute("class","EImage")
-        Image.id="EImagez"
-        document.getElementById("game_making_hidden_stuff_in_electrame_library").append(Image)
-        Image.addEventListener("onload", ()=> {
-            game.drawImage(Image,Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z)
-            Current_Added_Images++
-        })
+        for (let index = 0; index < EGamesImages; index++) {
+            if (EGamesImages[index][0] == Game.screen_id)
+                for (let indez = 0; indez < EGamesImages[index][1]; indez++) {
+                    if (EGamesImages[index][1][indez] == Objectz)
+                        mrflag = true
+                }
+        }
+        if (!mrflag) {
+            Image = document.createElement("img")
+            Image.setAttribute("src",Objectz.shape.image)
+            Image.setAttribute("class","EImage")
+            Image.id=Objectz.shape.SpecialityRegisterCode
+            document.getElementById("GameAssets").append(Image)
+            Image.addEventListener("onload", ()=> {
+                game.drawImage(Image,Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z)
+                Current_Added_Images++
+            })
+        }
     }
 }
 
