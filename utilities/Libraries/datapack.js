@@ -93,7 +93,7 @@ function inputset() {
 function resize(x,y) {
     dude = document.getElementById("input_" + x + "_" + y)
     if (!(dude.type == "checkbox")) {
-        dude.style.width = dude.value.length+1 + "ch";
+        dude.style.width = dude.value.length+2 + "ch";
         if (dude.type == "number")
             dude.style.width = dude.value.length+3 + "ch";
     }

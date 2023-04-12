@@ -333,31 +333,15 @@ function ERender(Game,Objectz) {
             game.fill();
     }
     if (Objectz.shape.id == "Image") {
-        for (let index = 0; index < EGamesImages; index++) {
-            if (EGamesImages[index][0] == Game.screen_id)
-                for (let indez = 0; indez < EGamesImages[index][1]; indez++) {
-                    if (EGamesImages[index][1][indez] == Objectz)
-                        mrflag = true
-                }
-        }
-        if (!mrflag) {
             Image = document.createElement("img")
             Image.setAttribute("src",Objectz.shape.image)
             Image.setAttribute("class","EImage")
             Image.id=Objectz.shape.SpecialityRegisterCode
-            document.getElementById("GameAssets").append(Image)
-            Image.addEventListener("onload", ()=> {
-                game.drawImage(Image,Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z)
-                Current_Added_Images++
-            })
-        }
+            game.drawImage(Image,Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z)
     }
 }
 
 
 function EClear(Game) {
-    for(let x=0;x<Current_Added_Images;x++)
-        document.getElementById("EImagez").remove()
-    Current_Added_Images = 0
     return document.getElementById(Game.screen_id).getContext("2d").reset()
 }

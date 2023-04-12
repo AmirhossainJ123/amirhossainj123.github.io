@@ -1,12 +1,39 @@
 <html>
     <head>
-        <script src="https://unpkg.com/brain.js"></script>
+        <script src="Libraries/brain.js" module></script>
         <script>
-            function test(pattern) {
-                const net = new brain.recurrent.LSTMTimeStep()
-                net.train([pattern], { iterations: 600, log: true })
-                return Math.round(net.run(pattern))
-            }
+            const trainingData = [
+                'Whats the story name: This is the Story of the four opposises',
+                'Who is Jingo: Jingo is a Epic Hero and a friend of Polo',
+                'Who is Polo: Polo is a Epic Traveler and a friend of Jingo',
+                'Who is Rope: Rope is a Traitor and a friend of Freako',
+                'What did Rope do: Rope used a sword and killed Polo for helping Jingo',
+                'What did Polo do: Polo traveled around the world and brought weapons for Jingo',
+                'What did Jingo do: Jingo used the weapons Polo brought and killed Rope because Rope killed Polo',
+                'How Rope died: Jingo killed Rope using the weapons Polo brought',
+                'Why Rope died: Jingo killed Rope because Rope killed Polo',
+                'How Polo died: Rope killed Polo with a sword',
+                'Why Polo died: Rope killed Polo because Polo helped Jingo',
+                'Did Jingo die: Jingo is killed a year later by a person called Freako',
+                'Who is Freako: Freako is a old friend of Rope and the guy who killed Jingo',
+                'What did Freako do: Freako used a powerful punch and killed Jingo',
+                'Why Jingo died: Freako killed Jingo because Jingo killed Rope',
+                'How Jingo died: Freako killed Jingo with a powerful punch',
+                'Jingo is good',
+                'Polo is good',
+                'Rope is bad',
+                'Freako is bad',
+                'good is best',
+                'bad is worst',
+            ]
+
+            const net = new brain.recurrent.LSTM();
+            net.train(trainingData, {
+                iterations: 750,
+                errorThresh: 0.011
+            });
+
+            function ask(a) {return console.log(net.run(a.replaceAll("!","").replaceAll("?","")).replace(a.replaceAll("!","").replaceAll("?",""),""));}
         </script>
     </head>
     <body>

@@ -1,17 +1,67 @@
 <html>
     <title>Personal Notebook</title>
     <script>
+        function IsValid(num) {return num == parseInt(num)}
+        Number = 1
+        function hint() {
+            let sure = confirm("You pressed the help buttom, we can only help with popups(6 popups), do you want to continue?")
+            if (sure) {
+                alert("Well this page is a personal notebook page, you can store data in it, you can have a lot of pages, 1/6")
+                alert("When I say a lot I mean you can have more than 20000000000000000 pages! and each page can contain more than 80k characters not tested more than that but it can have more obv, 2/6")
+                alert("But sadly your personal notebook is not shareable using the url, anyone who enters here sees his own notebook but you can copy the page, 3/6")
+                alert("All the things you write in this page will be stored thoughout the localstorage AKA cookies, deleting them will cause all your pages to be lost, 4/6")
+                alert("I suggest you make your first page the page that tells what every single other page is about so you don't get lost, but its just a suggestion, 5/6")
+                alert("Good luck and I hope it helps ya :D, 6/6")
+            }
+        }
+        function pagechange() {
+            Numbor = Number
+            if (IsValid(document.getElementById("numbir").value)) {
+                Number = parseInt(document.getElementById("numbir").value)
+                document.getElementById("numbir").value = Number
+            }
+            else {
+                document.getElementById("numbir").value = Number
+            }
+            if (Number < 1) {
+                Number = Numbor
+                document.getElementById("numbir").value = Numbor
+            }
+            if (Number == 1)
+                document.getElementById("butbad").disabled = true
+            else
+                document.getElementById("butbad").disabled = false
+            document.getElementById("numbir").style.width = parseInt(document.getElementById("numbir").value).toString().length + 2 + "ch"
+            document.getElementById("mainz").value = localStorage.getItem(`psolnotebook${Number.toString()}`)
+        }
+        function pageback() {
+            Number--;
+            if (Number == 1)
+                document.getElementById("butbad").disabled = true
+            else
+                document.getElementById("butbad").disabled = false
+            document.getElementById("numbir").value = Number
+            document.getElementById("mainz").value = localStorage.getItem(`psolnotebook${Number.toString()}`)
+            document.getElementById("numbir").style.width = parseInt(document.getElementById("numbir").value).toString().length + 2 + "ch"
+        }
+        function pagefor() {
+            Number++;
+            document.getElementById("butbad").disabled = false
+            document.getElementById("numbir").value = Number
+            document.getElementById("mainz").value = localStorage.getItem(`psolnotebook${Number.toString()}`)
+            document.getElementById("numbir").style.width = parseInt(document.getElementById("numbir").value).toString().length + 2 + "ch"
+        }
         function save() {
-            localStorage.setItem("psolnotebook",document.getElementById("mainz").value)
+            localStorage.setItem(`psolnotebook${Number.toString()}`,document.getElementById("mainz").value)
         }
         function main() {
-            document.getElementById("mainz").value = localStorage.getItem("psolnotebook")
+            document.getElementById("mainz").value = localStorage.getItem("psolnotebook1")
         }
     </script>
     <style>
         textarea {
-            width: 500px;
-            height: 200px;
+            width: 1200px;
+            height: 480px;
             outline: none;
             border: 2px solid black;
             border-radius: 20px;
@@ -20,12 +70,16 @@
             left: 50%;
             top: 50%;
             position: absolute;
-            margin-top:-100;
-            margin-left:-250;
+            margin-top:-280px;
+            margin-left:-600px;
             color: black;
+            padding: 20px;
+            font-size: large;
         }
-        button {
-            background-color: gray;
+        .amogusy {
+            width: 1200px;
+            transition: 200ms;
+            background-color: rgb(88, 88, 88);
             border: 2px solid black;
             border-radius: 30px;
             text-align: center;
@@ -33,8 +87,8 @@
             left: 50%;
             top: 50%;
             position: absolute;
-            margin-top:100;
-            margin-left:-25;
+            margin-top:210px;
+            margin-left:-600px;
         }
         body {
             background-color: black;
@@ -42,10 +96,73 @@
         * {
             color: white;
         }
+        .pagies {
+            transition: 200ms;
+            background-color: gray;
+            border: 2px solid white;
+            border-radius: 10px;
+        }
+        .pagien {
+            width: 3ch;
+            background-color: black;
+            border-radius: 10px;
+            border: 2px solid white;
+            text-align: center;
+            padding-right: 2px;
+        }
+        .pagies:hover {
+            transition: 200ms;
+            background-color: rgb(61, 61, 61);
+        }
+        .pagies:active {
+            transition: 200ms;
+            background-color: rgb(10, 10, 10);
+        }
+        .pagies:disabled {
+            opacity: 0.5;
+            background-color: black;
+        }
+        * {
+            cursor: auto;
+        }
+        .amogusy:hover {
+            transition: 200ms;
+            background-color: white;
+            color: black;
+        }
+        .amogusy:active {
+            transition: 200ms;
+            background-color: black;
+            color: white;
+        }
+        h3 {
+            display: inline-block;
+        }
+        .bottom {
+            width: 40px;
+            height: 40px;
+            left: 5px;
+            bottom: 5px;
+            border-radius: 100%;
+            position: absolute;
+            font-size: larger;
+            color: black;
+            border: 2px solid black;
+        }
+        .bottom:hover {
+            color: white;
+            border: 2px solid white;
+            background-color: black;
+        }
     </style>
     <script src="https://amirhossainj123.github.io/website.js"></script>
     <body onload="main()">
+        <h3>Page: </h3>
+        <button class="pagies" disabled onclick="pageback()" id="butbad">◄</button>
+        <input class="pagien" value="1" onchange="pagechange()" id="numbir">
+        <button class="pagies" onclick="pagefor()">►</button>
         <textarea id="mainz" value="Your Personal NoteBook" ></textarea>
-        <button onclick="save()">Save</button>
+        <button class="amogusy" onclick="save()">Save</button>
+        <button class="bottom" onclick="hint()">❓</button>
     </body>
 </html>
