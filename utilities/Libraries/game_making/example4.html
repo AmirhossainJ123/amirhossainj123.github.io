@@ -1,0 +1,79 @@
+<head>
+    <script src="electrame.js"></script>
+    <title>Game Test</title>
+    <script>
+        function randomizer(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+    </script>
+</head>
+<style>
+    canvas {
+        border: 5px solid black;
+    }
+</style>
+<body>
+    <canvas id="game" width="800" height="400"></canvas>
+    <script>
+        EInit() // Initiate for images and stuff
+
+        // Config for Physics
+        Gravity = true  // NO gravity >:C
+        Friction = true // Yes Friction :)
+        EConfig(Gravity,Friction)
+        function CreateArray(num) {A = []; for (var x = 0; x < num; x++) {A.push(0);} return A;}
+        function abs(num) {
+            if (num < 0)
+                return -num
+            else
+                return num
+        }
+        // Coding Game
+        
+        Game = new EGame("game") // Define game (canvas id)
+        jerks = CreateArray(64)
+        balls = new EColors(1).DAY // background color (any RGB color (which I put some built-in premade))
+        for (let x = 0; x < jerks.length; x++) {
+            ball = new ECircle(randomizer(5,10))
+            jerks[x] = new EObject(randomizer(20,780),200,ball,balls);
+            for (let y = 0; y < jerks.length; y++) {
+                try {
+                    if (x != y) {
+                        if (ECircleCollision(jerks[x],jerks[y])) {
+                            ball = new ECircle(randomizer(5,10))
+                            jerks[x] = new EObject(randomizer(20,780),randomizer(20,300),ball,balls);
+                            y = -1
+                        }
+                    }
+                } catch {continue}
+            }
+        }
+        grnd = new EColors(1).BLACK // background color (any RGB color (which I put some built-in premade))
+        grond = new ESquare(800,100)
+        ground = new EObject(0,300,grond,grnd) // Object Background (x,y,shape,material)
+        function My_Game() { // Game Functions
+            setTimeout( () => {
+                for (let x = 0; x < jerks.length; x++) {
+                    jerks[x] = EApplyPhysicsTo(jerks[x])
+                    for (let y = 0; y < jerks.length; y++) {
+                        if (x != y) {
+                            jerks[x] = EApplyCollision(jerks[x],jerks[y],1) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
+                        }
+                    }
+                    jerks[x] = EApplyCollision(jerks[x],ground,1) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
+                    if (EBoxCircleCollision(jerks[x],ground))
+                    jerks[x].vy = -0.1
+                    jerks[x] = EApplyMotion(jerks[x])
+
+                }
+
+                EClear(Game) // Clear the screen (get ready to render another one)
+                for (let x = 0; x < jerks.length; x++)
+                    ERender(Game,jerks[x])
+                ERender(Game,ground) // Render the Background in Game
+                My_Game()
+            },10)
+        }
+        My_Game() // Run Game Function
+    </script>
+</body>

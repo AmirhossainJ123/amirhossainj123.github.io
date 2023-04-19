@@ -237,23 +237,23 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
         
             if ((object1.y <= object2.y + object2.shape.z && object1.y + object1.shape.z > object2.y + object2.shape.z) && (object1Top_object2Bottom < object1Right_object2Left && object1Top_object2Bottom < object1Left_object2Right)) {
                 object1.y = object2.y + object2.shape.z;
-                object1.vy = Bounce_Force[2];
+                object1.vy = Bounce_Force;
             }
             if ((object1.y + object1.shape.z >= object2.y && object1.y < object2.y) && (object1Bottom_object2Top < object1Right_object2Left && object1Bottom_object2Top < object1Left_object2Right)) {
                 object1.y = object2.y - object1.shape.z; 
-                object1.vy = Bounce_Force[3];
+                object1.vy = -Bounce_Force;
             }
             if ((object1.x + object1.shape.w >= object2.x && object1.x < object2.x) && (object1Right_object2Left < object1Top_object2Bottom && object1Right_object2Left < object1Bottom_object2Top)) {
                 object1.x = object2.x - object1.shape.w;
-                object1.vx = Bounce_Force[1]; 
+                object1.vx = Bounce_Force; 
             }
             if ((object1.x <= object2.x + object2.shape.w && object1.x + object1.shape.w > object2.x + object2.shape.w) && (object1Left_object2Right < object1Top_object2Bottom && object1Left_object2Right < object1Bottom_object2Top)) {
                 object1.x = object2.x + object2.shape.w;
-                object1.vx = Bounce_Force[0]; 
+                object1.vx = -Bounce_Force; 
             }
         }
     }
-    else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Square")
+    else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Square") {
         if (EBoxCircleCollision(object1,object2)) {
             let CircleLeft = object1.x-object1.shape.rad
             let CircleRight = object1.x+object1.shape.rad
@@ -264,28 +264,32 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
             let SquareTop = object2.y
             let SquareBottom = object2.y+object2.shape.z
             if ((CircleLeft <= SquareRight && object1.x >= object2.x) && !(object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
-                object1.x = SquareRight + object1.shape.rad
-                object1.vx = Bounce_Force[0]
+                object1.vx = -object1.vx*Bounce_Force
+                object1.vy = object1.vy*Bounce_Force
             }
             else if ((CircleRight >= SquareLeft && object1.x <= object2.x) && !(object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
-                object1.x = SquareLeft - object1.shape.rad
-                object1.vx = Bounce_Force[1]
+                object1.vx = -object1.vx*Bounce_Force
+                object1.vy = object1.vy*Bounce_Force
             }
             if ((CircleTop <= SquareBottom && object1.y >= object2.y) && (object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
-                object1.y = SquareBottom + object1.shape.rad
-                object1.vy = Bounce_Force[2]
+                object1.vx = object1.vx*Bounce_Force
+                object1.vy = -object1.vy*Bounce_Force
             }
             else if ((CircleBottom >= SquareTop && object1.y <= object2.y) && (object2.x+1 < object1.x && object1.x < object2.x+object2.shape.w-1)) {
-                object1.y = SquareLeft - object1.shape.rad
-                object1.vy = Bounce_Force[3]
+                object1.vx = object1.vx*Bounce_Force
+                object1.vy = -object1.vy*Bounce_Force
             }
         }
-    else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Circle")
+    }
+    else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Circle")  {
         if (ECircleCollision(object1,object2)) {
-            console.log("nu")
+            object1.vx = -object1.vx*Bounce_Force
+            object1.vy = -object1.vy*Bounce_Force
         }
-    else if (object1.shape.Cid == "Square" && object2.shape.Cid == "Circle")
+    }
+    else if (object1.shape.Cid == "Square" && object2.shape.Cid == "Circle") {
         console.log("Box Circle Collider")
+    }
     return object1
 }
 

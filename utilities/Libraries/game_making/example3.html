@@ -37,16 +37,16 @@
         Sky = new EImage(1000,600,"https://www.textures.com/system/gallery/photos/Landscapes/Skies%20Partial/16294/Skies0239_350.jpg") // background shape (width and height)
         Boll = new ECircle(5) // ball shape (radius)
         Grond = new ECircle(10) // Small box shape 
-        Grund = new ESquare(10,20) // Tall rectangle shape
+        Grund = new ESquare(10,50) // Tall rectangle shape
         Background = new EObject(-100,-100,Sky,World) // Object Background (x,y,shape,material)
         Player1 = new EObject(100,100,Grond,Sq) // Object Small Box
         Player2 = new EObject(200,200,Grund,SqA) // Object Tall Rectangle
         Corcle = new EObject(300,300,Boll,SqS) // Object Ball
         function My_Game() { // Game Functions
             setTimeout( () => {
-                Player1 = EApplyCollision(Player1,Player2,[1,-1,1,-1]) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
-                Corcle = EApplyCollision(Corcle,Player1,[1,-1,1,-1])
-                Corcle = EApplyCollision(Corcle,Player2,[1,-1,1,-1])
+                Player1 = EApplyCollision(Player1,Player2,1) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
+                Corcle = EApplyCollision(Corcle,Player1,1)
+                Corcle = EApplyCollision(Corcle,Player2,1)
                 Corcle = EApplyMotion(Corcle) // Applies all the motions added to the object even physics, without this the object doesnt move
                 Player1 = EApplyMotion(Player1)
                 Player2 = EApplyMotion(Player2)
