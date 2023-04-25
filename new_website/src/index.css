@@ -1,8 +1,33 @@
+body {
+    transition: 500ms;
+}
+.navshade {
+    transition: 500ms;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+}
+.navshade:hover {
+    transition: 500ms;
+    background-color: rgba(0,0,0,0.85);
+}
+.lsdm {
+    transition: 500ms;
+    background-color: rgba(100,100,100,0.95);
+}
+.lsdm:hover {
+    transition: 500ms;
+    background-color: rgba(100,100,100,0.85);
+}
 .nav {
+    border-radius: 20px;
     width: 100%;
     height: 20%;
     margin: 0px;
     background-color: black;
+    background-image: url("assets/navigationbar.jpg");
+    background-size: cover;
 }
 .nav .bluemode {
     transition: 500ms;
@@ -52,4 +77,15 @@
     transition: 100ms;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: -10%;
+}
+.darkmode {
+    transition: 500ms;
+    background-color: darkgray;
+    color: black !important;
+    border-color: black !important;
+}
+.bodark {
+    transition: 500ms;
+    background-color: black;
+    color: white;
 }
