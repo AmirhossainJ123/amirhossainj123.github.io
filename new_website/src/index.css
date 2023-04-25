@@ -1,0 +1,55 @@
+.nav {
+    width: 100%;
+    height: 20%;
+    margin: 0px;
+    background-color: black;
+}
+.nav .bluemode {
+    transition: 500ms;
+    width: calc((7vh + 7vw)/2);
+    top:10%;
+    left:7%;
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 100%;
+    box-shadow: 0px 0px calc((2vh + 2vw)/2) blue;
+}
+.nav .redmode {
+    transition: 500ms;
+    transform: translateX(-50%) translateY(-50%) rotateZ(720deg);
+    border-radius: 90%;
+    filter: hue-rotate(90deg);
+}
+.navbut {
+    top:10%;
+    left: 100%;
+    position: absolute;
+    transform: translateX(-105%) translateY(-50%);
+    display: flex;
+}
+.navbut button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px solid black;
+    width: calc((10vh + 10vw)/2);
+    border-bottom: 2px solid white;
+    display: inline-block;
+    color: white;
+    margin: 20px;
+    font-size: calc((1.5vh + 1.5vw)/2);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.navbut button {
+    transition: 500ms;
+    border-bottom: 2px solid white;
+    border-radius: 10%;
+}
+.navbut button:hover {
+    transition: 500ms;
+    border-bottom: 2.5px solid lightgray;
+    border-radius: 20%;
+}
+.navbut button:active {
+    transition: 100ms;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: -10%;
+}

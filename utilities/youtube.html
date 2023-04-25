@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <script>
+            NotePerSec = 0
+            addEventListener('keydown', (pressed) => {
+                if (pressed.key == "q")
+                    playnote(0)
+                if (pressed.key == "w")
+                    playnote(1)
+                if (pressed.key == "e")
+                    playnote(2)
+                if (pressed.key == "r")
+                    playnote(3)
+                if (pressed.key == "t")
+                    playnote(4)
+            }) // if you press q, w, e it will play the note
+
+            function SpawnParticle(num) {
+                let text = document.createElement("h2");
+                text.textContent = "♫"
+                text.className = "Button" + num
+                document.getElementById("music").append(text)
+                setTimeout(() => {
+                    text.remove()
+                },7200)
+            }
+
+            function LoopPerSec() {
+                setTimeout(() => {
+                    NotePerSec/=2
+                    LoopPerSec()
+                },1000)
+            }
+            LoopPerSec()
+            function LoopPerTMili() {
+                setTimeout(() => {
+                    document.getElementById("sus").textContent = "N/S = " + parseInt(NotePerSec)
+                    LoopPerTMili()
+                },10)
+            }
+            LoopPerTMili()
+            LoopPerSec()
+            function playnote(num) { // takes the note number
+                NotePerSec++;
+                let Note = document.createElement("audio") // creates a audio element
+                Note.src = `Assets/Beep${num+1}.mp3` // loads the note
+                Note.play() // plays it
+                SpawnParticle(num)
+            } // the function that plays the note
+        </script>
+        <style>
+            @keyframes music {
+                0% {
+                    transform: translateX(0px) translateY(-47px);
+                    opacity: 1;
+                }
+                99% {
+                    opacity: 1;
+                    transform: translateX(105vw) translateY(-47px);
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+            .soundtext * {
+                opacity: 0;
+                animation: music 7s;
+                position: absolute;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 50px;
+                font-weight: bold;
+            }
+            .soundtext {
+                display: inline-block;
+                width: 101%;
+                height: 50px;
+                padding: 0px;
+                margin: 0px;
+                position: absolute;
+                top: 50%;
+                left: -1%;
+                border: 2px solid black;
+            }
+            .pianow {
+                width: 50px;
+                height: 150px;
+                background-color: white;
+                margin: 0px;
+                border: 1px solid black;
+            }
+            .pianow:hover {
+                background-color: darkgray;
+            }
+            .pianow:active {
+                background-color: gray;
+            }
+            .pianob {
+                width: 40px;
+                height: 70px;
+                position: absolute;
+                margin-left: -22.5px;
+                background-color: black;
+            }
+            .pianob:hover {
+                background-color: rgb(41, 41, 41);
+            }
+            .pianob:active {
+                background-color: rgb(51, 51, 51);
+            }
+            .Button0 {color: red;}
+            .Button1 {color: blue;}
+            .Button2 {color: darkgreen;}
+            .Button3 {color: blueviolet;}
+            .Button4 {color: darkgoldenrod;}
+        </style>
+    </head>
+    <body>
+        <h3>Example Piano</h3>
+        <button PianoButtonNum = "B1" class="pianow" onclick="playnote(0)"></button>
+        <button PianoButtonNum = "B2" class="pianob" onclick="playnote(1)"></button>
+        <button PianoButtonNum = "B3" class="pianow" onclick="playnote(2)"></button>
+        <button PianoButtonNum = "B4" class="pianob" onclick="playnote(3)"></button>
+        <button PianoButtonNum = "B5" class="pianow" onclick="playnote(4)"></button>
+        <h5 id="sus">N/S: 0</h5>
+        <div id="music" class="soundtext"></div>
+        <!--PianoW stands for Piano White Button, like that white button-->
+        <!--PianoB stands for Piano Black Button, like that black button-->
+    </body>
+</html>

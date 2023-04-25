@@ -5,7 +5,6 @@ https://amirhossainj123.github.io/credit
 https://amirhossainj123.github.io/custom_cursor
 https://amirhossainj123.github.io/google91712cb0588e9de3
 https://amirhossainj123.github.io/index
-https://amirhossainj123.github.io/new_index
 https://amirhossainj123.github.io/planeteer
 https://amirhossainj123.github.io/quiz
 https://amirhossainj123.github.io/ai/iran/index
@@ -17,6 +16,7 @@ https://amirhossainj123.github.io/discord/bin
 https://amirhossainj123.github.io/discord/index
 https://amirhossainj123.github.io/DWAA/index
 https://amirhossainj123.github.io/fun_math_facts/index
+https://amirhossainj123.github.io/new_website/index
 https://amirhossainj123.github.io/portfolio/index
 https://amirhossainj123.github.io/projects/index
 https://amirhossainj123.github.io/redirect_moderation/baablu
@@ -33,6 +33,7 @@ https://amirhossainj123.github.io/utilities/self_learning
 https://amirhossainj123.github.io/utilities/sgen
 https://amirhossainj123.github.io/utilities/steve
 https://amirhossainj123.github.io/utilities/word_learning
+https://amirhossainj123.github.io/utilities/youtube
 https://amirhossainj123.github.io/utilities/Libraries/game_making/documentation
 https://amirhossainj123.github.io/utilities/Libraries/game_making/example
 https://amirhossainj123.github.io/utilities/Libraries/game_making/example2

@@ -82,6 +82,7 @@ class EImage {
     constructor(Scale_x,Scale_y,Image_Dest) {
         this.w = Scale_x
         this.z = Scale_y
+        this.rad = Scale_x
         this.image = Image_Dest
         this.Cid = "Square"
         this.id = "Image"
