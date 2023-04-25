@@ -1,10 +1,10 @@
 toggle = true;
 function doci(id) {return document.getElementById(id);}
 function darkmodetoggle() {
-    let Nodes = document.querySelectorAll('body');
+    let Nodes = document.body.querySelectorAll("*");
     for (let index = 0; index < Nodes.length; index++) {
         try {
-        const element = document.createRange().createContextualFragment(Nodes[index].replaceAll("\n","").replaceAll(" ",""));
+        const element = Nodes.item(index);
         if (element.style.backgroundColor === "white")
             element.style.backgroundColor = "black"
         else if (element.style.backgroundColor === "black")
@@ -16,7 +16,7 @@ function darkmodetoggle() {
         
         if (element.style.color === "white")
             element.style.color = "black"
-        else if (element.style.color.contains("black"))
+        else if (element.style.color === "black")
             element.style.color = "white"
         else if (element.style.color.startsWith("rgba("))
             element.style.color = "rgba" + arrtostr(opcolor(element.style.color.replaceAll("rgba(","").replaceAll(")","").split(","))) + ")"
