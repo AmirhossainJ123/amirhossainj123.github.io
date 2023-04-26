@@ -1,9 +1,10 @@
 body {
+    padding: 0px;
     transition: 500ms;
 }
 .navshade {
     transition: 500ms;
-    border-radius: 20px;
+    border-radius: calc((1vh + 1vw)/2);
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.95);
@@ -21,7 +22,7 @@ body {
     background-color: rgba(100,100,100,0.85);
 }
 .nav {
-    border-radius: 20px;
+    border-radius: calc((1vh + 1vw)/2);
     width: 100%;
     height: 20%;
     margin: 0px;
@@ -39,6 +40,12 @@ body {
     border-radius: 100%;
     box-shadow: 0px 0px calc((2vh + 2vw)/2) blue;
 }
+.nav .bluemode:hover {
+    cursor: grab;
+}
+.nav .bluemode:active {
+    cursor: grabbing;
+}
 .nav .redmode {
     transition: 500ms;
     transform: translateX(-50%) translateY(-50%) rotateZ(720deg);
@@ -55,18 +62,31 @@ body {
 .navbut button {
     background-color: rgba(0, 0, 0, 0);
     border: 0px solid black;
-    width: calc((10vh + 10vw)/2);
+    width: 13vw;
     border-bottom: 2px solid white;
     display: inline-block;
     color: white;
-    margin: 20px;
-    font-size: calc((1.5vh + 1.5vw)/2);
+    margin: 1vw;
+    font-size: calc((2.5vw+2.5vh)/2);
+    max-width: 15vh;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .navbut button {
     transition: 500ms;
     border-bottom: 2px solid white;
     border-radius: 10%;
+}
+.navbut button:disabled {
+    transition: 100ms;
+    background-color: rgba(255,0,0,0.3);
+}
+.navbut button:disabled:hover {
+    transition: 100ms;
+    background-color: rgba(200,0,0,0.5);
+}
+.navbut button:disabled:active {
+    transition: 100ms;
+    background-color: rgba(200,0,0,0.75);
 }
 .navbut button:hover {
     transition: 500ms;
@@ -77,6 +97,9 @@ body {
     transition: 100ms;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: -10%;
+}
+.navbut form {
+    margin: 0px;
 }
 .darkmode {
     transition: 500ms;
