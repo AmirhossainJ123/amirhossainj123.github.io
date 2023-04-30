@@ -1,0 +1,19 @@
+if the player is in 1000 : x and 1000 : z
+then the start of chunk x/z position is 992 and the end of it is 1008
+# how did we get these numbers? well the closest number to 1000 which is smaller and divisible by 16 is 992 and the closest number to 1000 which is bigger and divisible by 16 is 1008
+# how am I supposed to calculate these in MINECRAFT?
+well for example we have 1000 : x and 500 : z
+start of the chunk (x pos) = floor(1000/16)*16 (floor is rounded down like even if its 5.999 it will become 5)
+end of the chunk (x pos) = (floor(500/16)+1)*16 (ceil is rounded up like even if its 5.001 it will become 6)
+start of the chunk (z pos) = floor(500/16)*16
+end of the chunk (z pos) = (floor(500/16)+1)*16
+# how to do ceil and floor?
+well in scoreboards you can only store integer, integer is exactly floor, like if you put 5.9 in scoreboard result it will become 5
+so floor is done
+/scoreboard players operation Jeferson startchunkxpos /= Jeferson number16
+for the ceil we can get the mode of it
+/scoreboard players operation Jeferson checkceil %= Jeferson number16
+so now if checkceil is not 0! you have to add 1 to the startchunkxpos to get the endchunkxpos
+then do the same for startchunkzpos and endchunkzpos then multiply all to 16
+# what am I supposed to do with these 4 numbers?
+check if the armor stand position has became smaller or bigger than this numbers then the armor stand has escaped, you can also get the exact escape position of it
