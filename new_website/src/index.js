@@ -5,11 +5,11 @@ function darkmodetoggle() {
     for (let index = 0; index < Nodes.length; index++) {
         if (toggle) {
             Nodes.item(index).classList.remove("darkmode")
-            document.body.classList.remove("bodark");
+            document.getElementById("bodyshader").classList.remove("bodark");
         }
         else if (!Nodes.item(index).classList.contains("NoDarkMode")) {
             Nodes.item(index).classList.add("darkmode")
-            document.body.classList.add("bodark");
+            document.getElementById("bodyshader").classList.add("bodark");
         }
         if (Nodes.item(index).classList.contains("LightShadeDarkMode")) {
             if (toggle) {

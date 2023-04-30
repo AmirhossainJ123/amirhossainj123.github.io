@@ -1,114 +1,141 @@
 body {
-    padding: 0px;
-    transition: 500ms;
+	height: 5000px;
+	padding: 0px;
+    background-image: url();
+    margin: calc((2vh+2vw)/2);
+	transition: 500ms;
 }
 .navshade {
-    transition: 500ms;
-    border-radius: calc((1vh + 1vw)/2);
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.95);
+	transition: 500ms;
+	border-radius: calc((1vh + 1vw) / 2);
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.95);
 }
 .navshade:hover {
-    transition: 500ms;
-    background-color: rgba(0,0,0,0.85);
+	transition: 500ms;
+	background-color: rgba(0, 0, 0, 0.85);
 }
 .lsdm {
-    transition: 500ms;
-    background-color: rgba(100,100,100,0.95);
+	transition: 500ms;
+	background-color: rgba(100, 100, 100, 0.95);
 }
 .lsdm:hover {
-    transition: 500ms;
-    background-color: rgba(100,100,100,0.85);
+	transition: 500ms;
+	background-color: rgba(100, 100, 100, 0.85);
 }
 .nav {
-    border-radius: calc((1vh + 1vw)/2);
-    width: 100%;
-    height: 20%;
-    margin: 0px;
-    background-color: black;
-    background-image: url("assets/navigationbar.jpg");
-    background-size: cover;
+	border-radius: calc((0.5vh + 1vw) / 2);
+	width: calc(100vw-(2vh+2vw)/2);
+	height: 20vh;
+	margin: 0px;
+	background-color: black;
+	background-image: url("assets/navigationbar.jpg");
+	background-size: cover;
+	position: fixed;
+	left: calc((2vh+2vw)/2);
+	right: calc((2vh+2vw)/2);
+	bottom: calc((2vh+2vw)/2);
+	top: calc((2vh+2vw)/2);
 }
 .nav .bluemode {
-    transition: 500ms;
-    width: calc((7vh + 7vw)/2);
-    top:10%;
-    left:7%;
-    position: absolute;
-    transform: translateX(-50%) translateY(-50%);
-    border-radius: 100%;
-    box-shadow: 0px 0px calc((2vh + 2vw)/2) blue;
+	transition: 500ms;
+	width: calc((7vh + 7vw) / 2);
+	margin-top: 10vh;
+	left: 7%;
+	position: absolute;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 100%;
+	box-shadow: 0px 0px calc((2vh + 2vw) / 2) blue;
 }
 .nav .bluemode:hover {
-    cursor: grab;
+	cursor: grab;
 }
 .nav .bluemode:active {
-    cursor: grabbing;
+	cursor: grabbing;
 }
 .nav .redmode {
-    transition: 500ms;
-    transform: translateX(-50%) translateY(-50%) rotateZ(720deg);
-    border-radius: 90%;
-    filter: hue-rotate(90deg);
+	transition: 500ms;
+	transform: translateX(-50%) translateY(-50%) rotateZ(720deg);
+	border-radius: 90%;
+	filter: hue-rotate(90deg);
 }
 .navbut {
-    top:10%;
-    left: 100%;
-    position: absolute;
-    transform: translateX(-105%) translateY(-50%);
-    display: flex;
+	margin-top: 10vh;
+	left: 100%;
+	position: absolute;
+	transform: translateX(-105%) translateY(-50%);
+	display: flex;
 }
 .navbut button {
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px solid black;
-    width: 13vw;
-    border-bottom: 2px solid white;
-    display: inline-block;
-    color: white;
-    margin: 1vw;
-    font-size: calc((2.5vw+2.5vh)/2);
-    max-width: 15vh;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	background-color: rgba(0, 0, 0, 0);
+	border: 0px solid black;
+	width: 13vw;
+	display: inline-block;
+	color: white;
+	margin: 1vw;
+	font-size: calc((2.5vw+2.5vh) / 2);
+	max-width: 15vh;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 .navbut button {
-    transition: 500ms;
-    border-bottom: 2px solid white;
-    border-radius: 10%;
+	transition: 500ms;
+	border-bottom: 0.2vw solid white;
+	border-radius: 10%;
 }
 .navbut button:disabled {
-    transition: 100ms;
-    background-color: rgba(255,0,0,0.3);
+	transition: 100ms;
+	background-color: rgba(255, 0, 0, 0.3);
 }
 .navbut button:disabled:hover {
-    transition: 100ms;
-    background-color: rgba(200,0,0,0.5);
+	transition: 100ms;
+	background-color: rgba(200, 0, 0, 0.5);
 }
 .navbut button:disabled:active {
-    transition: 100ms;
-    background-color: rgba(200,0,0,0.75);
+	transition: 100ms;
+	background-color: rgba(200, 0, 0, 0.75);
 }
 .navbut button:hover {
-    transition: 500ms;
-    border-bottom: 2.5px solid lightgray;
-    border-radius: 20%;
+	transition: 500ms;
+	border-radius: 20%;
 }
 .navbut button:active {
-    transition: 100ms;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: -10%;
+	transition: 100ms;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: -10%;
 }
 .navbut form {
-    margin: 0px;
+	margin: 0px;
 }
 .darkmode {
-    transition: 500ms;
-    background-color: darkgray;
-    color: black !important;
-    border-color: black !important;
+	transition: 500ms;
+	background-color: darkgray;
+	color: black !important;
+	border-color: black !important;
 }
 .bodark {
-    transition: 500ms;
-    background-color: black;
-    color: white;
+	transition: 500ms;
+	background-color: black;
+	color: white;
+}
+::-webkit-scrollbar {
+	background-color: black;
+}
+::-webkit-scrollbar-thumb {
+	background-color: rgb(25, 25, 25);
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgb(35, 35, 35);
+}
+::-webkit-scrollbar-button {
+	background-color: rgb(20, 20, 20);
+	color: white;
+}
+::-webkit-scrollbar-button:hover {
+	background-color: rgb(30, 30, 30);
+	color: white;
+}
+::-webkit-scrollbar-button:active {
+	background-color: rgb(40, 40, 40);
+	color: white;
 }

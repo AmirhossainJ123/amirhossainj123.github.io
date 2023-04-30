@@ -73,6 +73,7 @@ class ESquare {
     constructor(Scale_x,Scale_y) {
         this.w = Scale_x
         this.z = Scale_y
+        this.rotation = 0
         this.Cid = "Square"
         this.id = "Square"
     }
@@ -211,6 +212,7 @@ function ECircleCollision(circ1,circ2) {
         return false
 }
 
+function ERotation(object) {return object.shape.rotation}
 function EVelocityX(object) {return object.vx}
 function EVelocityY(object) {return object.vy}
 function EPositionX(object) {return object.x}
@@ -220,6 +222,7 @@ function EScaleY(object) {return object.shape.z}
 function ERadius(object) {return object.shape.rad}
 function EType(object) {return object.shape.id}
 
+function ESetRotation(object,value) {return object.shape.rotation=value}
 function ESetVelocityX(object,value) {return object.vx=value}
 function ESetVelocityY(object,value) {return object.vy=value}
 function ESetPositionX(object,value) {return object.x=value}
@@ -330,8 +333,14 @@ function ERender(Game,Objectz) {
     let mrflag = false
     var game = document.getElementById(Game.screen_id).getContext("2d");
     game.fillStyle = Objectz.color
-    if (Objectz.shape.id == "Square")
+    if (Objectz.shape.id == "Square") {
+        let cx = Objectz.x + Objectz.shape.w/2
+        let cy = Objectz.y + Objectz.shape.z/2
         game.fillRect(Objectz.x,Objectz.y,Objectz.shape.w,Objectz.shape.z);
+        game.translate(cx, cy);              //translate to center of shape
+        game.rotate( (Math.PI / 180) * Objectz.shape.rotation);  //rotate 25 degrees.
+        game.translate(-cx, -cy);            //translate center back to 0,0
+    }
         if (Objectz.shape.id == "Circle") {
             game.beginPath();
             game.arc(Objectz.x, Objectz.y, Objectz.shape.rad, 0, 2 * Math.PI);
