@@ -17,3 +17,23 @@ so now if checkceil is not 0! you have to add 1 to the startchunkxpos to get the
 then do the same for startchunkzpos and endchunkzpos then multiply all to 16
 # what am I supposed to do with these 4 numbers?
 check if the armor stand position has became smaller or bigger than this numbers then the armor stand has escaped, you can also get the exact escape position of it
+
+Run Once:
+/scoreboard objectives add xposition dummy
+/scoreboard objectives add cnumbers dummy
+/scoreboard players set num16 cnumbers 16
+/scoreboard players set num1 cnumbers 1
+/scoreboard objectives add chunk_start_x_pos dummy
+/scoreboard objectives add chunk_end_x_pos dummy
+
+Run on Loop:
+/execute as desiredplayer store result score @s xposition run data get entity @s Pos[0]
+/execute as desiredplayer run scoreboard players operation @s chunk_start_x_pos = @s xposition
+/execute as desiredplayer run scoreboard players operation @s chunk_start_x_pos /= num16 cnumbers
+/execute as desiredplayer run scoreboard players operation @s chunk_end_x_pos = @s chunk_start_x_pos
+/execute as desiredplayer run scoreboard players operation @s chunk_end_x_pos += num1 cnumbers
+/execute as desiredplayer run scoreboard players operation @s chunk_start_x_pos *= num16 cnumbers
+/execute as desiredplayer run scoreboard players operation @s chunk_end_x_pos *= num16 cnumbers
+
+then you have the end and start of the chunk's x pos
+do the same with z pos, remember for z pos use Pos[2]
