@@ -79,6 +79,15 @@ class ESquare {
     }
 }
 
+class EAudio {
+    constructor(url) {
+        let audition = document.createElement("audio")
+        audition.src = url;
+        this.url = url;
+        this.audio = audition;
+    }
+}
+
 class EImage {
     constructor(Scale_x,Scale_y,Image_Dest) {
         this.w = Scale_x
@@ -100,7 +109,7 @@ class ECircle {
 }
 
 class EObject {
-    constructor (Position_x,Position_y,Shape,Color) {
+    constructor (Position_x,Position_y,Shape,Color="rgb(0,0,0)") {
         this.x = Position_x
         this.y = Position_y
         this.shape = Shape
@@ -126,6 +135,8 @@ function _Centerize_Number(num1,num2) {
         num1 = 0
     return num1
 }
+
+function EPlayAudio(Audio) {return Audio.audio.play();}
 
 function EApplyForce(Object,Force,Limit) {
     if (Limit != false) {
@@ -207,9 +218,9 @@ function EDeleteObject(GObject) {
 function ECircleCollision(circ1,circ2) {
     distance = Math.sqrt(parseFloat(Math.abs(circ1.x-circ2.x)**2)+parseFloat(Math.abs(circ1.y-circ2.y)**2))
     if (distance <= parseFloat(circ1.shape.rad + circ2.shape.rad))
-        return true
+        return [true,parseFloat(circ1.shape.rad + circ2.shape.rad)-distance]
     else
-        return false
+        return [false,0]
 }
 
 function ERotation(object) {return object.shape.rotation}
@@ -286,9 +297,10 @@ function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basi
         }
     }
     else if (object1.shape.Cid == "Circle" && object2.shape.Cid == "Circle")  {
-        if (ECircleCollision(object1,object2)) {
-            object1.vx = -object1.vx*Bounce_Force
-            object1.vy = -object1.vy*Bounce_Force
+        let ecc = ECircleCollision(object1,object2)
+        if (ecc[0]) {
+            object1.vx = -object1.vx*Bounce_Force*((ecc[1]/10)+1)
+            object1.vy = -object1.vy*Bounce_Force*((ecc[1]/10)+1)
         }
     }
     else if (object1.shape.Cid == "Square" && object2.shape.Cid == "Circle") {

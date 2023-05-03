@@ -58,7 +58,7 @@
             for (let y = 0; y < jerks.length; y++) {
                 try {
                     if (x != y) {
-                        if (ECircleCollision(jerks[x],jerks[y])) {
+                        if (ECircleCollision(jerks[x],jerks[y])[0]) {
                             ball = new ECircle(randomizer(5,25))
                             jerks[x] = new EObject(randomizer(20,980),randomizer(20,600),ball,balls);
                             y = -1
@@ -90,12 +90,12 @@
                     for (let y = 0; y < jerks.length; y++) {
                         jerks[y].vy = 3
                         if (x != y) {
-                            if (ECircleCollision(jerks[x],jerks[y])) {
+                            if (ECircleCollision(jerks[x],jerks[y])[0]) {
                                 jerks[x].vy = 10
                                 jerks[y].vy = 0.1
+                                jerks[x] = EApplyCollision(jerks[x],jerks[y],0.1) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
                                 jerks[x].color = jerks[y].color
                             }
-                            jerks[x] = EApplyCollision(jerks[x],jerks[y],0.25) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))
                         }
                     }
                     jerks[x] = EApplyCollision(jerks[x],ground,1) // Apply Collision like apply it not detect it (Object 1 which is going to be moved, Object 2 which is static, Bounce Force(right, left, bottom, top))

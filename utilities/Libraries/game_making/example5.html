@@ -1,0 +1,98 @@
+<head>
+    <script src="electrame.js"></script>
+    <title>Sonic</title>
+    <script>
+        function randomizer(min,max) {
+            return min + Math.floor(Math.random()*(max-min))
+        }
+    </script>
+</head>
+<style>
+    canvas {
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        transform: translate(-50%,-50%);
+        border: 5px solid black;
+        background-color: white;
+        background-image: url(assets/DayLightCycle.gif);
+        background-size: cover;
+        position: absolute;
+    }
+</style>
+<body>
+    <h2 id="score"></h2>
+    <button onclick="jumper = true"> >> JUMP << </button>
+    <canvas id="game" width="1000" height="600" onclick="jumper = true" ontouch="jumper = true"></canvas>
+    <script>
+        let jumper = false;
+        let Gravity = true  // Yes gravity :>
+        let Friction = false // No Friction >>:<
+        EConfig(Gravity,Friction,0.25)
+        EInit()
+        Game = new EGame("game")
+        let SonicGif = new EImage(150,150,"assets/Sonic1.png")
+        CrabT = new EImage(150,150,"assets/Crab.webp")
+        let Score = 0
+        let Ground = new ESquare(1000,100)
+        let GroundColor = new EColors(1).GREEN;
+        Sonic = new EObject(50,400,SonicGif)
+        Crab = new EObject(-500,400,CrabT)
+        CrabList = [Crab]
+        Grond = new EObject(0,500,Ground,GroundColor)
+        let WallSpeed = 5;
+        CurrentFrame = 1;
+        function WallSpeedInc() {
+            setTimeout(()=>{
+                WallSpeed+=0.5
+                WallSpeedInc()
+            },2500)
+        }
+        function CrabInc() {
+            setTimeout(()=>{
+                CrabList.push(new EObject(1000 + randomizer(100,500),400,CrabT))
+                CrabInc()
+            },10000)
+        }
+        function GameTick() {
+            setTimeout(()=>{
+                for (let i = 0; i < CrabList.length; i++) {
+                    CrabList[i].vx = -WallSpeed
+                    if (CrabList[i].x < -100)
+                    CrabList[i].x = 1000 + randomizer(100,500)
+                    CrabList[i] = EApplyMotion(CrabList[i])
+                }
+                let SSpeed = 0.5;
+                Sonic = EApplyPhysicsTo(Sonic);
+                Sonic = EApplyCollision(Sonic,Grond,0)
+                if ((jumper || EKeyboard("w")) && EBoxCollision(EApplyMotion(Sonic),Grond)[0]) {
+                    Sonic.vy = -9;
+                    if (jumper)
+                        Sonic.vy = -11;
+                    jumper = false
+                }
+                Sonic = EApplyMotion(Sonic);
+                for (let i = 0; i < CrabList.length; i++) {
+                    if (EBoxCollision(Sonic,CrabList[i])[0])
+                        window.location.reload()
+                }
+                CurrentFrame+=SSpeed;
+                Sonic.shape.image = "assets/Sonic" + parseInt(CurrentFrame) + ".png";
+                if (CurrentFrame == 4)
+                    CurrentFrame = 1-SSpeed;
+                EClear(Game);
+                ERender(Game,Sonic);
+                ERender(Game,Grond);
+                CrabList.forEach((element) => {
+                    ERender(Game,element);
+                })
+                Score += 0.1
+                document.getElementById("score").textContent = "SCORE = " + parseInt(Score);
+                GameTick()
+            },10)
+        }
+        GameTick()
+        WallSpeedInc()
+        CrabInc()
+    </script>
+</body>
