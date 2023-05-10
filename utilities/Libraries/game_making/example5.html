@@ -19,12 +19,141 @@
         background-size: cover;
         position: absolute;
     }
+    .sprt {
+        transition: 500ms;
+        background-color: black;
+        color: orange;
+        border-radius: 20px;
+        padding: 20px;
+        width: 90%;
+        margin: 2px;
+        margin-left: 33px;
+    }
+    .sprt:hover {
+        transition: 500ms;
+        background-color: rgba(200,200,0,0.6);
+        color: black;
+    }
+    .sprt:active {
+        transition: 500ms;
+        background-color: rgba(200,200,0,0.9);
+        color: white;
+    }
+    .levelbutton {
+        transition: 500ms;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+        padding: 20px;
+        width: 200px;
+        margin: 2px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+    .levelbutton:hover {
+        transition: 500ms;
+        background-color: rgba(0,200,0,0.6);
+        color: black;
+    }
+    .levelbutton:active {
+        transition: 500ms;
+        background-color: rgba(0,200,0,0.9);
+        color: white;
+    }
+    .levelbutton:disabled:hover {
+        transition: 500ms;
+        background-color: rgba(200,0,0,0.6);
+        color: darkred;
+    }
+    @keyframes shake {
+        0% {
+            transform: translateX(0px);
+        }
+        25% {
+            transform: translateX(-20px);
+        }
+        50% {
+            transform: translateX(0px);
+        }
+        75% {
+            transform: translateX(20px);
+        }
+        100% {
+            transform: translateX(0px);
+        }
+    }
+    .levelbutton:disabled:active {
+        transition: 500ms;
+        animation: shake 0.2s forwards infinite;
+        background-color: rgba(200,0,0,0.9);
+        color: darkred;
+    }
+    @keyframes titleanim {
+        0% {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        9% {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        18% {
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        27% {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        36% {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        45% {
+            font-family:'Times New Roman', Times, serif;
+        }
+        54% {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        63% {
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        72% {
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        81% {
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+        90% {
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, 'Times New Roman', Times, serif;
+        }
+        99% {
+            font-family:Verdana, Geneva, Tahoma, sans-serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif, 'Times New Roman', Times, serif;
+        }
+        100% {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    }
+    .MTitle {
+        color: maroon;
+        font-family:'Courier New', Courier, monospace;
+        text-align: center;
+        animation: titleanim 20s forwards infinite;
+        font-style: normal;
+    }
+    .buttonlist {
+        width: 40%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        position: absolute;
+        z-index: 10 !important;
+        display: flexbox;
+        align-items: center;
+    }
 </style>
 <body>
     <h2 id="score"></h2>
     <button onclick="jumper = true"> >> JUMP << </button>
     <canvas id="game" width="1000" height="600" onclick="jumper = true" ontouch="jumper = true"></canvas>
+    <div id="buttonlist" class="buttonlist"></div>
     <script>
+        selectedlevel = 0
         let jumper = false;
         let Gravity = true  // Yes gravity :>
         let Friction = false // No Friction >>:<
@@ -54,7 +183,43 @@
                 CrabInc()
             },10000)
         }
-        function GameTick() {
+        function MenuButton(style,id,onclick,text,dis) {
+            let level = document.createElement("button");
+            level.className = style
+            level.id = id
+            level.setAttribute("onclick",onclick)
+            level.textContent = text
+            level.disabled = dis
+            return document.getElementById("buttonlist").appendChild(level)
+        }
+        function MenuTitle(Text) {
+            let level = document.createElement("h1");
+            level.className = "MTitle"
+            level.textContent = Text
+            return document.getElementById("buttonlist").appendChild(level)
+        }
+        function MenuLoad() {
+            MenuTitle("Sonic Hedgehog Electrame Edition")
+            MenuButton("levelbutton","tutorial","selectedlevel=2;document.getElementById('buttonlist').remove()","Tutorial (Coming Soon)",true)
+            MenuButton("levelbutton","level1","selectedlevel=1;document.getElementById('buttonlist').remove()","Level 1",false)
+            MenuButton("levelbutton","level2","selectedlevel=2;document.getElementById('buttonlist').remove()","Level 2 (Coming Soon)",true)
+            MenuButton("levelbutton","level3","selectedlevel=3;document.getElementById('buttonlist').remove()","Level 3 (Coming Soon)",true)
+            MenuButton("levelbutton","level4","selectedlevel=4;document.getElementById('buttonlist').remove()","Level 4 (Coming Soon)",true)
+            MenuButton("levelbutton","level5","selectedlevel=5;document.getElementById('buttonlist').remove()","Level 5 (Coming Soon)",true)
+            MenuButton("sprt","support","window.location.href = 'https://amirhossainj123.github.io/donate'","Donate Us :D",false)
+            MenuTick()
+        }
+        function MenuTick() {           
+            setTimeout(()=>{
+                if (selectedlevel==1) {
+                    Level1Tick()
+                    WallSpeedInc()
+                    CrabInc()
+                }
+                else MenuTick()
+            },200)
+        }
+        function Level1Tick() {
             setTimeout(()=>{
                 for (let i = 0; i < CrabList.length; i++) {
                     CrabList[i].vx = -WallSpeed
@@ -63,6 +228,14 @@
                     CrabList[i] = EApplyMotion(CrabList[i])
                 }
                 let SSpeed = 0.5;
+                for (let i = 0; i < CrabList.length; i++) {
+                    if (EBoxCollision(Sonic,CrabList[i])[0]) {
+                        document.getElementById(Game.screen_id).hidden = true
+                        setTimeout(() => {
+                        window.location.reload()
+                        },1)
+                    }
+                }
                 Sonic = EApplyPhysicsTo(Sonic);
                 Sonic = EApplyCollision(Sonic,Grond,0)
                 if ((jumper || EKeyboard("w")) && EBoxCollision(EApplyMotion(Sonic),Grond)[0]) {
@@ -72,10 +245,6 @@
                     jumper = false
                 }
                 Sonic = EApplyMotion(Sonic);
-                for (let i = 0; i < CrabList.length; i++) {
-                    if (EBoxCollision(Sonic,CrabList[i])[0])
-                        window.location.reload()
-                }
                 CurrentFrame+=SSpeed;
                 Sonic.shape.image = "assets/Sonic" + parseInt(CurrentFrame) + ".png";
                 if (CurrentFrame == 4)
@@ -88,11 +257,9 @@
                 })
                 Score += 0.1
                 document.getElementById("score").textContent = "SCORE = " + parseInt(Score);
-                GameTick()
+                Level1Tick()
             },10)
         }
-        GameTick()
-        WallSpeedInc()
-        CrabInc()
+        MenuLoad()
     </script>
 </body>
