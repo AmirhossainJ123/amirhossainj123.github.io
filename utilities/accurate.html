@@ -1,12 +1,22 @@
 <html>
-    <head>
-        <title>Accurate Calculation</title>
-    </head>
-    <script src="https://amirhossainj123.github.io/website.js"></script>
-    <script src="Libraries//super_calculator.js"></script>
-    <input id="numa">
-    <input id="numz">
-    <button onclick="document.getElementById('zuz').textContent = add(document.getElementById('numa').value,document.getElementById('numz').value,document.getElementById('numa').value,document.getElementById('numz').value)">Add</button>
-    <button onclick="document.getElementById('zuz').textContent = divide(document.getElementById('numa').value,document.getElementById('numz').value)">Divide</button>
-    <h1 id="zuz"></h1>
+
+<head>
+    <title>Accurate Calculation</title>
+</head>
+<script src="https://amirhossainj123.github.io/website.js"></script>
+<script src="Libraries//super_calculator.js"></script>
+<input id="numa">
+<input id="numz">
+<button onclick="document.getElementById('zuz').textContent = divide(document.getElementById('numa').value,document.getElementById('numz').value)">Divide</button>
+<button
+    onclick="document.getElementById('zuz').textContent = multiply(document.getElementById('numa').value,document.getElementById('numz').value)"
+    disabled>Multiply (COMING SOON)</button>
+<button
+    onclick="document.getElementById('zuz').textContent = add(document.getElementById('numa').value,document.getElementById('numz').value)"
+    disabled>Add (COMING SOON)</button>
+<button
+    onclick="document.getElementById('zuz').textContent = minus(document.getElementById('numa').value,document.getElementById('numz').value)"
+    disabled>Minus (COMING SOON)</button>
+<h1 id="zuz"></h1>
+
 </html>

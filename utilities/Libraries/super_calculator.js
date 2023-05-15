@@ -48,6 +48,20 @@ function add(a,b,large_number_neededa=a.toString(),large_number_neededb=b.toStri
     return final_answer
 }
 function divide(a,b) {
+    if (b == 0 && a == 0)
+        return "Undefined answer, there are infinite amount of answers for this question, it can be any number!"
+    if (b == 0)
+        return "Undefined answer, you cannot divide any number by 0, cause multiplication of 0 cannot increase!"
+    if (a == 0)
+        return 0
+    if (a == b)
+        return 1
+    if (a < b)
+        return divideB(a,b)
+    if (a > b)
+        return divideS(a,b)
+}
+function divideB(a,b) {
     final_answer = "";
     final_answer_pluser = 0;
     num = a;
@@ -82,4 +96,7 @@ function divide(a,b) {
         done = true
     }
     return final_answer
+}
+function divideS(a,b) {
+    return a/b
 }
