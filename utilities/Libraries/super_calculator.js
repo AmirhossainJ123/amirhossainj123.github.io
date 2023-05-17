@@ -1,23 +1,23 @@
 // Made by the gigantic idiot!
 // Author: AmirhossainJ123, Visual Studio Code
-function xor(a, b){return (a === b ? 0 : 1);}
-function and(a, b){return a == 1 && b == 1 ? 1 : 0;}
-function or(a, b){return (a || b);}
+function xor(a, b) { return (a === b ? 0 : 1); }
+function and(a, b) { return a == 1 && b == 1 ? 1 : 0; }
+function or(a, b) { return (a || b); }
 
-function add(a,b,large_number_neededa=a.toString(),large_number_neededb=b.toString()) {
+function add(a, b, large_number_neededa = a.toString(), large_number_neededb = b.toString()) {
     sum = []
-    az =large_number_neededa
-    bz =large_number_neededb
+    az = large_number_neededa
+    bz = large_number_neededb
     if (a > b)
-        biggest = az.length+1
+        biggest = az.length + 1
     else
-        biggest = bz.length+1
+        biggest = bz.length + 1
     lean = az.length
     lebn = bz.length
-    for (let index = 0; index < biggest-lean; index++) {
+    for (let index = 0; index < biggest - lean; index++) {
         az = "0" + az
     }
-    for (let index = 0; index < biggest-lebn; index++) {
+    for (let index = 0; index < biggest - lebn; index++) {
         bz = "0" + bz
     }
     for (let index = 0; index < biggest; index++) {
@@ -28,10 +28,10 @@ function add(a,b,large_number_neededa=a.toString(),large_number_neededb=b.toStri
         sum[index] = zum
     }
     for (let indez = 1; indez < sum.length; indez++) {
-        index = sum.length-indez
+        index = sum.length - indez
         if (sum[index] >= 10) {
             sum[index] -= 10
-            sum[index-1] = (parseInt(sum[index-1])+1).toString()
+            sum[index - 1] = (parseInt(sum[index - 1]) + 1).toString()
         }
     }
     reached = false
@@ -47,7 +47,7 @@ function add(a,b,large_number_neededa=a.toString(),large_number_neededb=b.toStri
     });
     return final_answer
 }
-function divide(a,b) {
+function divide(a, b) {
     if (b == 0 && a == 0)
         return "Undefined answer, there are infinite amount of answers for this question, it can be any number!"
     if (b == 0)
@@ -57,11 +57,11 @@ function divide(a,b) {
     if (a == b)
         return 1
     if (a < b)
-        return divideB(a,b)
+        return divideB(a, b)
     if (a > b)
-        return divideS(a,b)
+        return divideS(a, b)
 }
-function divideB(a,b) { //
+function divideB(a, b) { //
     final_answer = "";
     final_answer_pluser = 0;
     num = a;
@@ -85,18 +85,22 @@ function divideB(a,b) { //
         }*/
         final_answer += final_answer_pluser
         if (num != 0)
-        if (first) {
-            final_answer += "."
-            first = false
-            num *= 10
-        }
+            if (first) {
+                final_answer += "."
+                first = false
+                num *= 10
+            }
+            else
+                num *= 10
         else
-        num *= 10
-        else
-        done = true
+            done = true
     }
     return final_answer
 }
-function divideS(a,b) {
-    return a/b
+function divideS(a, b) {
+    return a / b
 }
+/*
+int a(int a) {}
+int a(int a, int b) {}
+*/

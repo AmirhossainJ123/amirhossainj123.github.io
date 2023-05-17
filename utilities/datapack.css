@@ -448,3 +448,32 @@ button:not(.expandable):not(.download):hover {
     background-color: black;
     color: white;
 }
+.li-tos {
+    display: inline-block;
+    padding: 0px;
+    height: 70px;
+    border-radius: 15px;
+}
+.li-tos * {
+    border: 0px;
+}
+.li-tos img {
+    margin: 7px;
+    padding: 0px;
+    display: inline-block;
+    margin-top: 9px;
+}
+.li-tos h3 {
+    margin-left: -10px;
+    transform: translateY(-25px);
+    display: inline-block;
+}
+.li-tos:hover {
+    filter: saturate(20);
+    background-color: gray;
+}
+.li-tos:active {
+    filter: saturate(50) invert(1) grayscale(1);
+    background-color: white;
+    color: black;
+}
