@@ -61,7 +61,7 @@ function divide(a,b) {
     if (a > b)
         return divideS(a,b)
 }
-function divideB(a,b) {
+function divideB(a,b) { //
     final_answer = "";
     final_answer_pluser = 0;
     num = a;
