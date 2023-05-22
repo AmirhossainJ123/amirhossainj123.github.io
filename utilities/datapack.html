@@ -24,13 +24,14 @@
         <script src="https://amirhossainj123.github.io/website.js" defer></script>
     </head>
     <body>
-        <div class="background">
+        <div class="background" id="background_theme">
             <div class="functions">
                 <button class="eve" onclick="visible(1)" id="Keys1">Events</button><br>
                 <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
                 <button class="inf" onclick="visible(3)" id="Keys3">Informations</button><br>
                 <button class="var" onclick="visible(4)" id="Keys4">Variables</button><br>
                 <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button><br>
+                <button class="plu" onclick="visible(6)" id="Keys6">Plugin Functions</button><br>
                 <button class="loa" onclick="localStorage.setItem('SavedLoadCodes',ConvertFor(FullCode[0])); localStorage.setItem('SavedTickCodes',ConvertFor(FullCode[1])); refresh();">Save Project</button><br>
                 <button class="loa" onclick="SavedFullCode[0]=ConvertBack(localStorage.getItem('SavedLoadCodes')); SavedFullCode[1] = ConvertBack(localStorage.getItem('SavedTickCodes')); FullCode = SavedFullCode; Elements = FullCode[CurrentCode]; refresh();">Load Last Project</button>
                 <div class="themes">
@@ -42,6 +43,7 @@
                 <button class="discord" onclick="window.location.href = 'https://amirhossainj123.github.io/discord'"><img src="../discord.ico" width="50" height="50"><h3>Discord</h3></button>
                 <button class="li-tos" onclick="window.location.href = 'https://amirhossainj123.github.io/datapack/License'"><img src="Assets/license.png" width="50" height="50"><h3>License</h3></button>
                 <button class="li-tos" onclick="window.location.href = 'https://amirhossainj123.github.io/datapack/TOS'"><img src="Assets/tos.png" width="50" height="50"><h3>Terms of Service</h3></button>
+                <button class="plugins" onclick="PluginManager()">Plugins Manager</button>
             </div>
             <div class="preview" id="preview">
                 Preview - On World Load

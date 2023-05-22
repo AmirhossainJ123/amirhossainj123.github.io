@@ -13,6 +13,7 @@ input:hover {
     transform: translate(-50%,-50%);
     position: absolute;
     background-color: rgba(100,100,100,0.5);
+    background-image: linear-gradient(to right, rgb(40,40,40) , rgb(70,70,70));
     box-shadow: 0px 0px 10px gray;
     border-radius: 20px;
     padding: 5px;
@@ -120,6 +121,18 @@ input:hover {
 .loo:active {
     transition: 100ms;
     background-color: rgb(0, 0, 150);
+}
+.plu {
+    transition: 100ms;
+    background-color: rgb(105,0,40);
+}
+.plu:hover {
+    transition: 100ms;
+    background-color: rgb(75, 0, 10);
+}
+.plu:active {
+    transition: 100ms;
+    background-color: rgb(65, 0, 0);
 }
 .loa {
     transition: 100ms;
@@ -370,10 +383,10 @@ i {
         transform: rotateZ(0deg);
     }
     33% {
-        transform: rotateZ(5deg);
+        transform: rotateZ(2deg);
     }
     66% {
-        transform: rotateZ(-5deg);
+        transform: rotateZ(-2deg);
     }
     99% {
         transform: rotateZ(0deg);
@@ -413,14 +426,12 @@ button:not(.expandable):not(.download):hover {
 }
 @keyframes refresh {
     0% {
-        transform: rotateY(0deg);
         opacity: 1;
     }
     50% {
         opacity: 0;
     }
     100% {
-        transform: rotateY(360deg);
         opacity: 1;
     }
 }
@@ -476,4 +487,22 @@ button:not(.expandable):not(.download):hover {
     filter: saturate(50) invert(1) grayscale(1);
     background-color: white;
     color: black;
+}
+.plugins {
+    display: inline-block;
+    width: calc(50%);
+    margin-left: 25%;
+    height: 70px;
+    border: 2px solid black;
+    border-radius: 15px;
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.plugins:hover {
+    background-color: gray;
+}
+.plugins:active {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
 }

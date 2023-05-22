@@ -1,6 +1,6 @@
 // Main Page Stuff ---------------------------------------------------------------------------------------------------------------
 current_theme = 0;
-function theme_set(link, clr) {
+function theme_set(link, clr, background) {
 	const boxes = document.querySelectorAll(".Connecties");
 	boxes.forEach((box) => {
 		box.style.animation = "refresh 0.3s ease-in 1 0s normal forwards";
@@ -12,13 +12,28 @@ function theme_set(link, clr) {
 			box.style.color = clr;
 		}, 150);
 	});
+	document.getElementById("background_theme").style.backgroundImage = "linear-gradient(" + background + ")";
+}
+PUBLIC_Code = []
+PUBLIC_Line = 0
+
+class thecode {
+	constructor(code,line) {
+		this.AddLine = (lines) => {
+			console.log(lines)
+			code[line] = lines
+			line++
+		}
+		PUBLIC_Code = code
+		PUBLIC_Line = line
+	}
 }
 
 function theme(num) {
-	if (num == 0) theme_set("", "black");
-	if (num == 1) theme_set("url('Assets/gold_texture.jpg')", "black");
-	if (num == 2) theme_set("url('Assets/program.jpeg')", "white");
-	if (num == 3) theme_set("url('Assets/wall.jpg')", "");
+	if (num == 0) theme_set("", "black", "to right, rgb(40,40,40) , rgb(70,70,70)");
+	if (num == 1) theme_set("url('Assets/gold_texture.jpg')", "black", "to top, rgb(140,100,0), gray,rgb(140,100,0),rgb(140,80,0),rgb(140,100,0),gray, rgb(140,100,0)");
+	if (num == 2) theme_set("url('Assets/program.jpeg')", "white", "to right, black , rgb(0,50,0)");
+	if (num == 3) theme_set("url('Assets/wall.jpg')", "", "to top, lightgray,black");
 	current_theme = num;
 }
 
@@ -29,16 +44,17 @@ function ConvertBack(Array) {
 	return JSON.parse(Array);
 }
 
-DefineAllTheItems();
+// Define all the commands, the entire program is based on this single command
+DefineAllTheCommands();
 
 FullCode = [[], []];
 CurrentCode = 0;
 FullCode[CurrentCode] = Elements;
 Elements = FullCode[CurrentCode];
-All = [Events, Functions, Informations, Variables, Loops];
+All = [Events, Functions, Informations, Variables, Loops, PluginButtons];
 toggle = [false, false, false, false, false];
 function visible(num) {
-	Classes = ["eve", "fun", "inf", "var", "loo"];
+	Classes = ["eve", "fun", "inf", "var", "loo", "plu"];
 	num--;
 	Curasses = Classes[num];
 	check = toggle[num];
@@ -355,6 +371,7 @@ function Download(load, tick) {
 	load.unshift("# Constant Changable Informations");
 	load.unshift(" ");
 	load.unshift("scoreboard objectives add CONST_HEALTH health");
+	load.unshift("scoreboard objectives add CONST_SNEAK custom:sneak_time");
 	load.unshift("scoreboard objectives add CONST_FOOD food");
 	load.unshift("scoreboard objectives add CONST_DEATH deathCount");
 	load.unshift("scoreboard objectives add CONST_DEALT custom:damage_dealt");
@@ -369,6 +386,9 @@ function Download(load, tick) {
 	load.unshift("scoreboard objectives add CONST_MOTION_Z_PRIME dummy");
 	load.unshift("# Constant Scoreboards!");
 	load.unshift(" ");
+	tick.push(" ")
+	tick.push("# Sneak time must be converted to sneak toggle")
+	tick.push("scoreboard players reset @e[score={CONST_SNEAK=1..}] CONST_SNEAK")
 
 	load = endliner(load);
 	tick = endliner(tick);
@@ -601,18 +621,43 @@ function Compiler(Info) {
 								.replaceAll(" is ", "=")
 								.replaceAll(" ", "_")
 						) +
-						"] at @s run ";
+						"] run ";
 					filler++;
 				}
 			}
 			if (Info[index][2][1] == 12) {
 				filler = filled_lines;
 				for (x = 0; x < Info[index][1][0]; x++) {
-					Code[filler] = "execute as " + Info[index][1][1] + " at @s run ";
+					Code[filler] = "execute as " + Info[index][1][1] + " run ";
 					filler++;
 				}
 			}
 			if (Info[index][2][1] == 13) {
+				filler = filled_lines;
+				for (x = 0; x < Info[index][1][0]; x++) {
+					Code[filler] =
+						"execute at @e[type=" +
+						Caser(
+							Info[index][1][1]
+								.replaceAll(" and ", ",")
+								.replaceAll(" with ", ",")
+								.replaceAll("&", "§")
+								.replaceAll(" being ", "=")
+								.replaceAll(" is ", "=")
+								.replaceAll(" ", "_")
+						) +
+						"] run ";
+					filler++;
+				}
+			}
+			if (Info[index][2][1] == 14) {
+				filler = filled_lines;
+				for (x = 0; x < Info[index][1][0]; x++) {
+					Code[filler] = "execute at " + Info[index][1][1] + " run ";
+					filler++;
+				}
+			}
+			if (Info[index][2][1] == 15) {
 				Code[filled_lines] +=
 					"tp " +
 					Info[index][1][0] +
@@ -624,7 +669,7 @@ function Compiler(Info) {
 					Info[index][1][3];
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 14) {
+			if (Info[index][2][1] == 16) {
 				Code[filled_lines] +=
 					"tp @e[type=" +
 					Caser(
@@ -644,7 +689,7 @@ function Compiler(Info) {
 					Info[index][1][3];
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 15) {
+			if (Info[index][2][1] == 17) {
 				Code[filled_lines] +=
 					"tellraw " +
 					Info[index][1][0] +
@@ -653,7 +698,7 @@ function Compiler(Info) {
 					'"}';
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 16) {
+			if (Info[index][2][1] == 18) {
 				Code[filled_lines] +=
 					"title " +
 					Info[index][1][0] +
@@ -662,7 +707,7 @@ function Compiler(Info) {
 					'"}';
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 17) {
+			if (Info[index][2][1] == 19) {
 				Code[filled_lines] +=
 					"title " +
 					Info[index][1][0] +
@@ -671,7 +716,7 @@ function Compiler(Info) {
 					'"}';
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 18) {
+			if (Info[index][2][1] == 20) {
 				Code[filled_lines] +=
 					"title " +
 					Info[index][1][0] +
@@ -680,7 +725,7 @@ function Compiler(Info) {
 					'"}';
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 19) {
+			if (Info[index][2][1] == 21) {
 				Code[filled_lines] += `execute as @e[type=${Caser(
 					Info[index][1][3]
 						.replaceAll(" and ", ",")
@@ -696,7 +741,7 @@ function Compiler(Info) {
 				).toString()}]}`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 20) {
+			if (Info[index][2][1] == 22) {
 				SavedFilledLine = Code[filled_lines];
 				Code[filled_lines] += `execute as @e[type=${Caser(
 					Info[index][1][1]
@@ -934,7 +979,7 @@ function Compiler(Info) {
 				)}] run scoreboard players reset @s CONST_MOTION_Z_PRIME`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 21) {
+			if (Info[index][2][1] == 23) {
 				SavedFilledLine = Code[filled_lines];
 				Code[filled_lines] += `execute as ${
 					Info[index][1][1]
@@ -1160,17 +1205,17 @@ function Compiler(Info) {
 				)}] run scoreboard players reset @s CONST_MOTION_Z_PRIME`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 22) {
+			if (Info[index][2][1] == 24) {
 				Code[filled_lines] += Info[index][1][0];
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 23) {
+			if (Info[index][2][1] == 25) {
 				Code[
 					filled_lines
 				] += `summon creeper ~ ~ ~ {ExplosionRadius:${Info[index][1][0]},Fuse:0,ignited:1}`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 24) {
+			if (Info[index][2][1] == 26) {
 				Tag = Info[index][1][1];
 				Tag = Tag.replaceAll(" and ", ",").replaceAll(" ", "_").split(",");
 				Tags = "";
@@ -1183,13 +1228,13 @@ function Compiler(Info) {
 				] += `summon fireball ~ ~ ~ {ExplosionPower:${Info[index][1][0]},Tags:[${Tags}]}`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 25) {
+			if (Info[index][2][1] == 27) {
 				Code[filled_lines] += `effect give ${Info[index][1][0]} ${Info[
 					index
 				][1][1].tolowerCase()} ${Info[index][1][2]} ${Info[index][1][1]} true`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 26) {
+			if (Info[index][2][1] == 28) {
 				Code[filled_lines] += `effect give @e[type=${Caser(
 					Info[index][1][0]
 						.replaceAll(" and ", ",")
@@ -1203,13 +1248,13 @@ function Compiler(Info) {
 				} true`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 27) {
+			if (Info[index][2][1] == 29) {
 				Code[filled_lines] += `effect clear ${Info[index][1][0]} ${(
 					Info[index][1][1].tolowerCase() + " "
 				).replaceAll(" all ", "")}`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 28) {
+			if (Info[index][2][1] == 30) {
 				Code[filled_lines] += `effect clear @e[type=${Caser(
 					Info[index][1][0]
 						.replaceAll(" and ", ",")
@@ -1221,7 +1266,7 @@ function Compiler(Info) {
 				)}] ${(Info[index][1][1].tolowerCase() + " ").replaceAll(" all ", "")}`;
 				filled_lines++;
 			}
-			if (Info[index][2][1] == 29) {
+			if (Info[index][2][1] == 31) {
 				Tag = Info[index][1][5];
 				Tag = Tag.replaceAll(" and ", ",").replaceAll(" ", "_").split(",");
 				Tags = "";
@@ -1314,6 +1359,27 @@ function Compiler(Info) {
 					" store result score " +
 					Info[index][1][0] +
 					" CONST_NUMBERS run scoreboard players get entity @s CONST_USED_" +
+					Info[index][1][2].toUpperCase().replaceAll(" ", "_");
+				filled_lines++;
+			}
+			if (Info[index][2][1] == 7) {
+				let check = true;
+				submitions.forEach((element) => {
+					if (
+						Info[index][1][2].toLowerCase().replaceAll(" ", "") ==
+						element.toLowerCase().replaceAll(" ", "")
+					)
+						check = false;
+				});
+				if (check) {
+					submitions.push(Info[index][1][2]);
+				}
+				Code[filled_lines] +=
+					"execute as " +
+					Info[index][1][1] +
+					" store result score " +
+					Info[index][1][0] +
+					" CONST_NUMBERS run scoreboard players get entity @s CONST_SNEAK" +
 					Info[index][1][2].toUpperCase().replaceAll(" ", "_");
 				filled_lines++;
 			}
@@ -1589,6 +1655,13 @@ function Compiler(Info) {
 					Info[index][1][0] +
 					" CONST_NUMBERS matches 1 run ";
 			}
+		}
+		if (Info[index][2][0] == 5) {
+			console.log(Code)
+			PButtonFunctions[Info[index][2][1]](new thecode(Code,filled_lines),Info[index][1])
+			Code = PUBLIC_Code
+			filled_lines = PUBLIC_Line
+			console.log(Code)
 		}
 	}
 	return Code;
