@@ -184,47 +184,51 @@ function DefineAllTheCommands() {
     PButtonFunctions = PButtonFunc 
 }
 function PluginManager() {
-    let a = prompt("You have currently " + InstalledPlugins.length + " Plugins installed" + "\nIf you want to see the list, type View\nIf you want to add plugin, type Add\nIf you want to remove from the list type Remove","")
-    switch (a.toLowerCase()) {
-        case "view":
-            let numbir = 1;
-            txt = ""
-            InstalledPlugins.forEach(e => {
-                txt += "Plugin " + numbir + ": " + e.name + "\n"
-                txt += e.description + "\n"
-                numbir++
-            });
-            alert(txt)
-            break;
-        case "add":
-            let b = prompt("Enter the URL for the plugin:","")
-            let New_Plugin = InstalledPlugins
-            New_Plugin.push({
-                name: "Unknown Plugin",
-                description: `Unknown Plugin`,
-                required: false,
-                url: b
-            })
-            localStorage.setItem("plugins",
-                ConvertFor(
-                    New_Plugin
+    let project = confirm("if you continue, the page will refresh after the plugin management, so make sure you have saved your project before continuing")
+    if (project) {
+        let a = prompt("You have currently " + InstalledPlugins.length + " Plugins installed" + "\nIf you want to see the list, type View\nIf you want to add plugin, type Add\nIf you want to remove from the list type Remove\nIf you want us to suggest some plugins, type Plugin","")
+        switch (a.toLowerCase()) {
+            case "view":
+                let numbir = 1;
+                txt = ""
+                InstalledPlugins.forEach(e => {
+                    txt += "Plugin " + numbir + ": " + e.name + "\n"
+                    txt += e.description + "\n"
+                    numbir++
+                });
+                alert(txt)
+                break;
+            case "add":
+                let b = prompt("Enter the URL for the plugin:","")
+                let New_Plugin = InstalledPlugins
+                New_Plugin.push({
+                    name: "Unknown Plugin",
+                    description: `Unknown Plugin`,
+                    required: false,
+                    url: b
+                })
+                localStorage.setItem("plugins",
+                    ConvertFor(
+                        New_Plugin
+                    )
                 )
-            )
-            break;
-        case "remove":
-            let c = prompt("Enter the ID of the plugin:","")
-            let modified = InstalledPlugins
-            if (modified[c-1].required == false) {
-                modified.splice(c-1,1)
-                localStorage.setItem("plugins",ConvertFor(modified))
-            }
-            else alert("Cannot delete that plugin, that plugin is Required")
-            break;
-        default:
-            break;
+                break;
+            case "remove":
+                let c = prompt("Enter the ID of the plugin:","")
+                let modified = InstalledPlugins
+                if (modified[c-1].required == false) {
+                    modified.splice(c-1,1)
+                    localStorage.setItem("plugins",ConvertFor(modified))
+                }
+                else alert("Cannot delete that plugin, that plugin is Required")
+                break;
+            case "plugin":
+                open("plugins.txt")
+            default:
+                break;
+        }
+        setTimeout(() => {
+            window.location.reload()
+        },200)
     }
-    if (window.location.href.endsWith("#"))
-        window.location.href = window.location.href.slice(0,window.location.href.length-1)
-    else
-    window.location.href += "#"
 }

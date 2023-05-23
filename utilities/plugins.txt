@@ -1,0 +1,16 @@
+Example Plugin {
+    adds a element which lets you rainbomb where ever you want with a certain amount of tnt
+    adds a button which does nothing at all
+} = https://amirhossainj123.github.io/utilities/Libraries/example_plugin_datapack.js
+
+White Theme Plugin {
+    This plugin, ruins the quality of the datapack maker but it inverts colors!
+} = https://amirhossainj123.github.io/datapack/whitetheme.js
+
+Moderation Plugin {
+    Adds a bunch of useful moderation commands
+} = https://amirhossainj123.github.io/datapack/moderations.js
+
+BROKEN Theme Plugin {
+    Changes the theme to the most broken thing
+} = https://amirhossainj123.github.io/datapack/broken.js

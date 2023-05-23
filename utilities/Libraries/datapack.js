@@ -388,7 +388,7 @@ async function Download(load, tick) {
 	"description": "§6AmirhossainJ123 + Binbinuser's Datapack Maker\\n§7${userddescription}"
 }
 }`)
-	var namespace = generateRandomString(7)
+	var namespace = generateRandomString(10)
 	var datafolder = zip.folder('data')
 	var functagfolder = datafolder.folder('minecraft').folder('tags').folder('functions')
 	var funcfolder = datafolder.folder(namespace).folder('functions')
