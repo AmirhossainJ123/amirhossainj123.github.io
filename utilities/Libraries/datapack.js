@@ -1,4 +1,7 @@
 // Main Page Stuff ---------------------------------------------------------------------------------------------------------------
+var script = document.createElement('script');
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js';
+document.head.appendChild(script)
 current_theme = 0;
 function generateRandomString(length) {
 	let result = '';
@@ -382,7 +385,7 @@ async function Download(load, tick) {
 	zip.file('pack.mcmeta',`{
 "pack": {
 	"pack_format": 10,
-	"description": "AmirhossainJ123 + Binbinuser's Datapack Maker\n${userddescription}"
+	"description": "§6AmirhossainJ123 + Binbinuser's Datapack Maker\\n§7${userddescription}"
 }
 }`)
 	var namespace = generateRandomString(7)
