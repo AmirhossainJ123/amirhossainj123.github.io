@@ -21,7 +21,7 @@ class thecode {
 	constructor(code,line) {
 		this.AddLine = (lines) => {
 			console.log(lines)
-			code[line] = lines
+			code[line] += lines
 			line++
 		}
 		PUBLIC_Code = code
