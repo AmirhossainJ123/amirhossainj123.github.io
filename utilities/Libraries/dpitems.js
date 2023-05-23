@@ -81,17 +81,23 @@ function loadPlugins() {
         var script = document.createElement("script")
         script.src=InstalledPlugins[index].url
         document.head.append(script)
-        script.onload = () => {
-            PluginMain();
-            PluginMain = '';
-            InstalledPlugins[InstalledPlugins.length-1].url = InstalledPlugins[index].url
+        if (index == Len-1) {
+            script.onload = () => {
+                PluginMain();
+                PluginMain = '';
+                InstalledPlugins[InstalledPlugins.length-1].url = InstalledPlugins[index].url
+                InstalledPlugins = SetVerification(InstalledPlugins)
+            }
+            setTimeout(() => {
+                InstalledPlugins = SetVerification(InstalledPlugins)
+            },1000)
         }
-        if (index == Len-1)
-        script.onload = () => {
-            PluginMain();
-            PluginMain = '';
-            InstalledPlugins[InstalledPlugins.length-1].url = InstalledPlugins[index].url
-            InstalledPlugins = SetVerification(InstalledPlugins)
+        else {
+            script.onload = () => {
+                PluginMain();
+                PluginMain = '';
+                InstalledPlugins[InstalledPlugins.length-1].url = InstalledPlugins[index].url
+            }
         }
     }
 }
@@ -192,25 +198,33 @@ function PluginManager() {
             break;
         case "add":
             let b = prompt("Enter the URL for the plugin:","")
-            localStorage.setItem("plugins",ConvertFor(ConvertBack(localStorage.getItem("plugins")).push({
+            let New_Plugin = InstalledPlugins
+            New_Plugin.push({
                 name: "Unknown Plugin",
                 description: `Unknown Plugin`,
                 required: false,
                 url: b
-            })))
-            window.refresh()
+            })
+            localStorage.setItem("plugins",
+                ConvertFor(
+                    New_Plugin
+                )
+            )
             break;
         case "remove":
             let c = prompt("Enter the ID of the plugin:","")
-            let modified = ConvertBack(localStorage.getItem("plugins"))
+            let modified = InstalledPlugins
             if (modified[c-1].required == false) {
                 modified.splice(c-1,1)
                 localStorage.setItem("plugins",ConvertFor(modified))
             }
             else alert("Cannot delete that plugin, that plugin is Required")
-            window.refresh()
             break;
         default:
             break;
     }
+    if (window.location.href.endsWith("#"))
+        window.location.href = window.location.href.slice(0,window.location.href.length-1)
+    else
+    window.location.href += "#"
 }

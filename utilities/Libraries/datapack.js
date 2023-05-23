@@ -1,5 +1,17 @@
 // Main Page Stuff ---------------------------------------------------------------------------------------------------------------
 current_theme = 0;
+function generateRandomString(length) {
+	let result = '';
+	const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	const charactersLength = characters.length;
+	
+	for (let i = 0; i < length; i++) {
+		const randomIndex = Math.floor(Math.random() * charactersLength);
+		result += characters.charAt(randomIndex);
+	}
+	
+	return result;
+}
 function theme_set(link, clr, background) {
 	const boxes = document.querySelectorAll(".Connecties");
 	boxes.forEach((box) => {
@@ -16,13 +28,20 @@ function theme_set(link, clr, background) {
 }
 PUBLIC_Code = []
 PUBLIC_Line = 0
+PUBLIC_Load = []
+PUBLIC_Tick = []
 
 class thecode {
 	constructor(code,line) {
 		this.AddLine = (lines) => {
-			console.log(lines)
 			code[line] += lines
 			line++
+		}
+		this.AddLoadLine = (lines) => {
+			PUBLIC_Load.unshift(lines)
+		}
+		this.AddTickLine = (lines) => {
+			PUBLIC_Tick.unshift(lines)
 		}
 		PUBLIC_Code = code
 		PUBLIC_Line = line
@@ -355,10 +374,41 @@ function BuildItem(Index, Array) {
 }
 
 var submitions = [];
-
-function Download(load, tick) {
+async function Download(load, tick) {
+	let userdname = prompt("Enter your Datapack name (LIMITS: 50 characters)").slice(0,50)
+	let userddescription = prompt("Enter your Datapack description (LIMITS: 60 character)").slice(0,60)
+	var zip = new JSZip();
+	var rand= 
+	zip.file('pack.mcmeta',`{
+"pack": {
+	"pack_format": 10,
+	"description": "AmirhossainJ123 + Binbinuser's Datapack Maker\n${userddescription}"
+}
+}`)
+	var namespace = generateRandomString(7)
+	var datafolder = zip.folder('data')
+	var functagfolder = datafolder.folder('minecraft').folder('tags').folder('functions')
+	var funcfolder = datafolder.folder(namespace).folder('functions')
+	functagfolder.file('load.json',`{
+"values": [
+	"${namespace}:load"
+]
+}
+`)
+	functagfolder.file('tick.json',`{
+"values": [
+	"${namespace}:tick"
+]
+}
+`)
 	tick.unshift(" ");
 	load.unshift(" ");
+	for (let index = 0; index < PUBLIC_Load.length; index++) {
+		load.unshift(PUBLIC_Load[index])
+	}
+	for (let index = 0; index < PUBLIC_Tick.length; index++) {
+		tick.unshift(PUBLIC_Tick[index])
+	}
 	submitions.forEach((element) => {
 		load.unshift(
 			`scoreboard objectives add CONST_USED_${element
@@ -393,45 +443,14 @@ function Download(load, tick) {
 	load = endliner(load);
 	tick = endliner(tick);
 
-	const link = document.createElement("a");
-	const file = new Blob([load], { type: "text/plain" });
-	link.href = URL.createObjectURL(file);
-	link.download = "load.mcfunction";
+	funcfolder.file('load.mcfunction',load)
+	funcfolder.file('tick.mcfunction', tick)
+	const link = document.createElement('a');
+	var b = await zip.generateAsync({type:"blob"})
+	link.href = URL.createObjectURL(b);
+	link.download = userdname + ".zip";
 	link.click();
 	URL.revokeObjectURL(link.href);
-
-	const linkz = document.createElement("a");
-	const filez = new Blob([tick], { type: "text/plain" });
-	linkz.href = URL.createObjectURL(filez);
-	linkz.download = "tick.mcfunction";
-	linkz.click();
-	URL.revokeObjectURL(linkz.href);
-
-	// ZIP PART BABY
-	/*const zip = new JSZip();
-    zip.file("pack.mcmeta", '{\n    "pack": {\n        "pack_format": 7,\n        "description": "My Datapack"\n    }\n}');
-    const loadTag = {
-        "values": [
-            "MyDatapack:load"
-        ]
-    }
-    const tickTag = {
-        "values": [
-            "MyDatapack:tick"
-        ]
-    }
-    zip.file("data/minecraft/tags/functions/load.json", JSON.stringify(loadTag));
-    zip.file("data/minecraft/tags/functions/tick.json", JSON.stringify(tickTag));
-    zip.file('pack.mcmeta', '{\n    "pack": {\n        "pack_format": 10,\n        "description": "Made with AmirhossainJ123\'s datapack maker"\n    }\n}');
-    zip.folder('data/minecraft/tags/functions').file('load.json', '{\n   "values": [\n       "[' + datapack + ']:load"\n   ]\n}');
-    zip.folder('data/minecraft/tags/functions').file('tick.json', '{\n   "values": [\n       "[' + datapack + ']:tick"\n   ]\n}');
-    zip.folder('data/' + datapack + '/functions').file('tick.mcfunction', tick);
-    zip.folder('data/' + datapack + '/functions').file('load.mcfunction', load);
-    
-    zip.generateAsync({ type: "blob" })
-    .then(function(content) {
-        saveAs(content, "datapack.zip");
-    });*/
 }
 function BuildEntity(Index, Array) {
 	Info = Array[Index]; // [Info[index][1][0],Caser(Info[index][1][1].replaceAll(" ","_")),"",0b,"",["air","air"],["air","air","air","air"]]
