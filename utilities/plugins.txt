@@ -14,3 +14,7 @@ Moderation Plugin {
 BROKEN Theme Plugin {
     Changes the theme to the most broken thing
 } = https://amirhossainj123.github.io/datapack/broken.js
+
+Rain Items Plugin {
+    Makes you be able to rain multiple items, for example fire charge and tnt or like totem and diamond and etc
+} = https://amirhossainj123.github.io/datapack/rainitems.js
