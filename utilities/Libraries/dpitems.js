@@ -1,4 +1,5 @@
 PluginButton = []
+toggleload = false
 PButtonFunc = []
 InstalledPlugins = [
     {
@@ -14,8 +15,12 @@ InstalledPlugins = [
         url: "Libraries/example_plugin_datapack.js"
     }
 ]
+CurrentIndexMeow = -1;
+PluginNameButton = []
 class DatapackMakerPlugin {
     constructor(Name,Description) {
+        CurrentIndexMeow++;
+        PluginButton[CurrentIndexMeow] = []
         InstalledPlugins.push({
             name: Name,
             description: Description,
@@ -23,8 +28,10 @@ class DatapackMakerPlugin {
             url: "noll"
         })
         this.AddButton = (text,func=(code)=>{return code;}) => {
-            PluginButton.push(text)
+            PluginButton[CurrentIndexMeow].push(text)
             PButtonFunc.push(func)
+            if (Name in PluginNameButton == false)
+                PluginNameButton.push(Name)
         }
     }
 }
@@ -180,8 +187,21 @@ function DefineAllTheCommands() {
         "If <var number> run the next <number> command",
         "Unless <var number> run the next <number> command"
     ];
-    PluginButtons = PluginButton
-    PButtonFunctions = PButtonFunc 
+    num = 0
+    PluginColors = []
+    PluginButtons = []
+    setTimeout(()=>{
+        PluginButton.forEach(e => {
+            e.forEach(element => {
+                PluginButtons.push(element)
+                num++
+            });
+            PluginColors.push(num)
+        })
+        PButtonFunctions = PButtonFunc
+        toggleload = true
+    },1000)
+
 }
 function PluginManager() {
     let project = confirm("if you continue, the page will refresh after the plugin management, so make sure you have saved your project before continuing")

@@ -4,22 +4,22 @@ function PluginMain() {
     let Plugin = new DatapackMakerPlugin(Plugin_Name,Plugin_Description)
     let Ban = (code,[username,reason,banip]) => {
         if (banip)
-            code.AddLine(`/ban-ip ${username} ${reason}`)
+            code.AddLine(`ban-ip ${username} ${reason}`)
         else
-            code.AddLine(`/ban ${username} ${reason}`)
+            code.AddLine(`ban ${username} ${reason}`)
         return code
     }
     Plugin.AddButton("Ban <user> for <reason>, ban ip: <yes/no>",Ban)
     let Kick = (code,[username,reason]) => {
-        code.AddLine(`/kick ${username} ${reason}`)
+        code.AddLine(`kick ${username} ${reason}`)
         return code
     }
     Plugin.AddButton("Kick <user> for <reason>",Kick)
     let Unban = (code,[username,unbanip]) => {
         if (unbanip)
-            code.AddLine(`/pardon-ip ${username}`)
+            code.AddLine(`pardon-ip ${username}`)
         else
-            code.AddLine(`/pardon ${username}`)
+            code.AddLine(`pardon ${username}`)
         return code
     }
     Plugin.AddButton("UnBan <user>, unban ip: <yes/no>",Unban)

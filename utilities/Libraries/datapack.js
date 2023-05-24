@@ -3,6 +3,9 @@ var script = document.createElement('script');
 script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js';
 document.head.appendChild(script)
 current_theme = 0;
+function randomize(min,max) {
+	return min + Math.floor(Math.random()*(max-min))
+  }
 function generateRandomString(length) {
 	let result = '';
 	const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,12 +36,18 @@ PUBLIC_Code = []
 PUBLIC_Line = 0
 PUBLIC_Load = []
 PUBLIC_Tick = []
-
+BeginningOCode = ""
 class thecode {
 	constructor(code,line) {
+		BeginningOCode = code[line]
 		this.AddLine = (lines) => {
+			code[line] = ""
+			if (BeginningOCode != undefined)
+				code[line] += BeginningOCode
 			code[line] += lines
 			line++
+			PUBLIC_Line = line
+			PUBLIC_Code = code
 		}
 		this.AddLoadLine = (lines) => {
 			PUBLIC_Load.unshift(lines)
@@ -85,18 +94,33 @@ function visible(num) {
 			Curasses + " expandable";
 		let Vis = All[num];
 		toggle[num] = true;
+		NUMBERA = 0
+		CurrentButtonColor = `rgb(${randomize(50,205)},${randomize(50,205)},${randomize(50,205)})`
 		for (x = 0; x < Vis.length; x++) {
 			let button = document.createElement("button");
 			button.innerText = Vis[x];
 			button.id = "Sub" + num + 1;
-			button.className = "subutton";
-			button.setAttribute(
-				"onclick",
-				"visible(" + (num + 1) + "); AddElement(" + num + "," + x + ")"
-			);
-			document.getElementById("Keys" + (num + 1)).append(button);
+			if (Classes[num] == "plu") {
+				button.className = "subutton";
+				if (x < PluginColors[NUMBERA]) {
+					button.style.backgroundColor = CurrentButtonColor
+				}
+				else if (NUMBERA < PluginColors.length) {
+					NUMBERA++
+					CurrentButtonColor = `rgb(${randomize(50,180)},${randomize(50,205)},${randomize(50,205)})`
+					button.style.backgroundColor = CurrentButtonColor
+				}
+			}
+			else
+				button.className = "subutton";
+				button.setAttribute(
+					"onclick",
+					"visible(" + (num + 1) + "); AddElement(" + num + "," + x + ")"
+				);
+				document.getElementById("Keys" + (num + 1)).append(button);
+			}
 		}
-	} else {
+	else {
 		document.getElementById("Keys" + (num + 1)).className = Curasses;
 		toggle[num] = false;
 		let Vis = All[num];
