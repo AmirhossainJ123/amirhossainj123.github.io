@@ -38,7 +38,10 @@ PUBLIC_Load = []
 PUBLIC_Tick = []
 BeginningOCode = ""
 class thecode {
-	constructor(code,line) {
+	constructor(code,line,info) {
+		this.line = line
+		this.info = info
+		this.code = code
 		BeginningOCode = code[line]
 		this.AddLine = (lines) => {
 			code[line] = ""
@@ -1704,7 +1707,7 @@ function Compiler(Info) {
 		}
 		if (Info[index][2][0] == 5) {
 			console.log(Code)
-			PButtonFunctions[Info[index][2][1]](new thecode(Code,filled_lines),Info[index][1])
+			PButtonFunctions[Info[index][2][1]](new thecode(Code,filled_lines,Info),Info[index][1])
 			Code = PUBLIC_Code
 			filled_lines = PUBLIC_Line
 			console.log(Code)

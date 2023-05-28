@@ -18,3 +18,7 @@ BROKEN Theme Plugin {
 Rain Items Plugin {
     Makes you be able to rain multiple items, for example fire charge and tnt or like totem and diamond and etc
 } = https://amirhossainj123.github.io/datapack/rainitems.js
+
+Time Control Plugin {
+    Lets you like Delay stuff like for example you want if a player pressed a button it runs a command an hour later or like 60 seconds later, etc
+} = https://amirhossainj123.github.io/datapack/timecontrol.js

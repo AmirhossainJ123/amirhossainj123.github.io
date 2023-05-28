@@ -18,38 +18,8 @@
         <link rel="canonical" href="https://amirhossainj123.github.io/utilities/datapack">
         <link rel="icon" type="image/png" sizes="32x32" href="/Assets/minecraft.png">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="datapack.css" rel="stylesheet">
-        <script src="Libraries/dpitems.js"></script>
-        <script src="Libraries/datapack.js"></script>
-        <script src="https://amirhossainj123.github.io/website.js" defer></script>
     </head>
-    <body>
-        <div class="background" id="background_theme">
-            <div class="functions">
-                <button class="eve" onclick="visible(1)" id="Keys1">Events</button><br>
-                <button class="fun" onclick="visible(2)" id="Keys2">Functions</button><br>
-                <button class="inf" onclick="visible(3)" id="Keys3">Informations</button><br>
-                <button class="var" onclick="visible(4)" id="Keys4">Variables</button><br>
-                <button class="loo" onclick="visible(5)" id="Keys5">Flow Control</button><br>
-                <button class="plu" onclick="visible(6)" id="Keys6">Plugin Functions</button><br>
-                <button class="loa" onclick="localStorage.setItem('SavedLoadCodes',ConvertFor(FullCode[0])); localStorage.setItem('SavedTickCodes',ConvertFor(FullCode[1])); refresh();">Save Project</button><br>
-                <button class="loa" onclick="SavedFullCode[0]=ConvertBack(localStorage.getItem('SavedLoadCodes')); SavedFullCode[1] = ConvertBack(localStorage.getItem('SavedTickCodes')); FullCode = SavedFullCode; Elements = FullCode[CurrentCode]; refresh();">Load Last Project</button>
-                <div class="themes">
-                    <button class="btnz" onclick="theme(0)"><img src="Assets/white.png" width="64" height="64"></button>
-                    <button class="btnz" onclick="theme(1)"><img src="Assets/gold_icon.png" width="64" height="64"></button>
-                    <button class="btnz" onclick="theme(2)"><img src="Assets/prgrm.png" width="64" height="64"></button>
-                    <button class="btnz" onclick="theme(3)"><img src="Assets/wall.png" width="64" height="64"></button>
-                </div>
-                <button class="discord" onclick="window.location.href = 'https://amirhossainj123.github.io/discord'"><img src="../discord.ico" width="50" height="50"><h3>Discord</h3></button>
-                <button class="li-tos" onclick="window.location.href = 'https://amirhossainj123.github.io/datapack/License'"><img src="Assets/license.png" width="50" height="50"><h3>License</h3></button>
-                <button class="li-tos" onclick="window.location.href = 'https://amirhossainj123.github.io/datapack/TOS'"><img src="Assets/tos.png" width="50" height="50"><h3>Terms of Service</h3></button>
-                <button class="plugins" onclick="PluginManager()">Plugins Manager</button>
-            </div>
-            <div class="preview" id="preview">
-                Preview - On World Load
-                <br><br>
-            </div>
-            <button class="download" onclick="Code = Compile(FullCode); Download(Code[0],Code[1])">☑</button>
-        </div>
+    <body style="margin:0.1px;padding:0.1px;overflow:hidden visible">
+        <iframe style="width:100%;height:100%" src="https://mcdev.studio"></iframe>
     </body>
 </html>
