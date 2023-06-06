@@ -26,6 +26,7 @@ https://amirhossainj123.github.io/new_website/shop/index
 https://amirhossainj123.github.io/portfolio/index
 https://amirhossainj123.github.io/projects/index
 https://amirhossainj123.github.io/redirect_moderation/baablu
+https://amirhossainj123.github.io/reza/index
 https://amirhossainj123.github.io/utilities/accurate
 https://amirhossainj123.github.io/utilities/badboy
 https://amirhossainj123.github.io/utilities/calculator
