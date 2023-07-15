@@ -35,9 +35,9 @@ choices = ["Rock","Paper","Scissors"]
 
 function future() {
   if (!god_mode) {
-  const net = new brain.recurrent.LSTMTimeStep()
+   net = new brain.recurrent.LSTMTimeStep()
   net.train([pattern], { iterations: 600, log: true })
-  const nextchoose = Math.round(net.run(pattern))
+   nextchoose = Math.round(net.run(pattern))
   document.getElementById("next").textContent = "I think you will pick up:   " + choices[nextchoose-1]
   let chose = 1 <= nextchoose && nextchoose <= 3 ? (nextchoose % 3) + 1 : 1
   document.getElementById("next").textContent += "\nSo I am gonna pick up:   " + choices[chose-1]
@@ -50,9 +50,9 @@ else {
 function user_choice(num) {
   document.getElementById("next").textContent = ""
   if (!god_mode) {
-  const net = new brain.recurrent.LSTMTimeStep()
+   net = new brain.recurrent.LSTMTimeStep()
   net.train([pattern], { iterations: 600, log: true })
-  const nextchoose = Math.round(net.run(pattern))
+   nextchoose = Math.round(net.run(pattern))
   console.log("Next choose is " + choices[nextchoose])
   set_pattern(num)
   let chosenByAI = 1 <= nextchoose && nextchoose <= 3 ? (nextchoose % 3) + 1 : 1

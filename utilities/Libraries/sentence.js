@@ -6,7 +6,7 @@ secret_formulaez = 6
 function knowledge() {
     part_1_1 = ["I"]
     part_1_2 = ["You","They","We","People","Humans","Ghosts","Gods","Animals","Planets"]
-    part_1_3 = ["He","She","It","Human","Earth","Alex","Steve","The King","Apple","The Giant","Legend","Hero","Rosy","Doctor","Robber","Killer","Assassin","The God","Nima","Amin","Amir","Ramin","Mani","Jaegerwald"]
+    part_1_3 = ["He","She","It","Human","Earth","Alex","Steve","The King","Apple","The Giant","Legend","Hero","Rosy","Doctor","Robber","Killer","Assassin","The God","Nima","Amin","Amir","Ramin","Mani","Jaegerwald","Noid"]
     part_1 = [part_1_1,part_1_2,part_1_3]
     
     part_2_1 = ["am","have","had"] // goes for part_1_1

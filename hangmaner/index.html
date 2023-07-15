@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <script>
+            function Find_And_Remove(array,text) {
+                flag = false
+                for (let x = 0; x < array.length; x++) {
+                    if (array[x] == text) {
+                        temp = array[array.length-1]
+                        array[array.length-1] = text
+                        array[x] = temp
+                        flag = true
+                    }
+                }
+                if (flag) {
+                    array.pop()
+                }
+                return array
+            }
+            default_filter = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","0"]
+            function convert() {
+                let input = document.getElementById("text").value
+                let result = document.getElementById("result")
+                let unfilter = document.getElementById("character")
+                let chr = document.getElementById("replace").value
+                if (unfilter.value != "nan") {
+                    default_filter = Find_And_Remove(default_filter,unfilter.value)
+                }
+                default_filter.forEach((e)=> {
+                    input = input.replaceAll(e,chr)
+                    input = input.replaceAll(e.toLowerCase(),chr)
+                })
+                result.textContent = input 
+            }
+            function copy() {
+                copyText = document.getElementById("result")
+                navigator.clipboard.writeText(copyText.textContent);
+                alert("Copied the text: " + copyText.textContent);
+            }
+        </script>
+        <style>
+            body {
+                background-color: black;
+                color: white;
+            }
+            h2 {
+                display: inline-block;
+            }
+            h3 {
+                margin-left: 20px;
+                display: inline-block;
+            }
+            input {
+                padding: 10px;
+                border-radius: 20px;
+            }
+            select, option {
+                background-color: black;
+                color: white;
+                border-radius: 5px;
+                text-align: center;
+            }
+            select {
+                padding: 15px;
+                border: 2px solid white
+            }
+            button {
+                transition: 200ms;
+                background-color: blue;
+                color: white;
+                padding: 10px;
+                border:0px;
+                border-radius: 20px;
+            }
+            button:hover {
+                transition: 200ms;
+                background-color: darkblue;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="text" onchange="convert()" placeholder="input your original text here" class="org">
+        <select id="character">
+            <option value="nan">choose the character you want to unfilter</option>
+            <option value="A" style="font-size:20px;">A</option>
+            <option value="B" style="font-size:20px;">B</option>
+            <option value="C" style="font-size:20px;">C</option>
+            <option value="D" style="font-size:20px;">D</option>
+            <option value="E" style="font-size:20px;">E</option>
+            <option value="F" style="font-size:20px;">F</option>
+            <option value="G" style="font-size:20px;">G</option>
+            <option value="H" style="font-size:20px;">H</option>
+            <option value="I" style="font-size:20px;">I</option>
+            <option value="J" style="font-size:20px;">J</option>
+            <option value="K" style="font-size:20px;">K</option>
+            <option value="L" style="font-size:20px;">L</option>
+            <option value="M" style="font-size:20px;">M</option>
+            <option value="N" style="font-size:20px;">N</option>
+            <option value="O" style="font-size:20px;">O</option>
+            <option value="P" style="font-size:20px;">P</option>
+            <option value="Q" style="font-size:20px;">Q</option>
+            <option value="R" style="font-size:20px;">R</option>
+            <option value="S" style="font-size:20px;">S</option>
+            <option value="T" style="font-size:20px;">T</option>
+            <option value="U" style="font-size:20px;">U</option>
+            <option value="V" style="font-size:20px;">V</option>
+            <option value="W" style="font-size:20px;">W</option>
+            <option value="X" style="font-size:20px;">X</option>
+            <option value="Y" style="font-size:20px;">Y</option>
+            <option value="Z" style="font-size:20px;">Z</option>
+            <option value="1" style="font-size:20px;">1</option>
+            <option value="2" style="font-size:20px;">2</option>
+            <option value="3" style="font-size:20px;">3</option>
+            <option value="4" style="font-size:20px;">4</option>
+            <option value="5" style="font-size:20px;">5</option>
+            <option value="6" style="font-size:20px;">6</option>
+            <option value="7" style="font-size:20px;">7</option>
+            <option value="8" style="font-size:20px;">8</option>
+            <option value="9" style="font-size:20px;">9</option>
+            <option value="0" style="font-size:20px;">0</option>
+        </select>
+        <button onclick="convert()">Convert</button>
+        <br>
+        <h2>Result: </h2>
+        <h3 id="result" title="Click to Copy" onclick="copy()"></h3>
+        <br>
+        <input id="replace" value="\_" style="font-size: 30px; width:100px;">
+        <br><br><br>
+        <h3>Made for Kier and Dev discord server o.o</h3>
+    </body>
+</html>
