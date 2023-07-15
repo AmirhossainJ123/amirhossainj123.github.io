@@ -1,5 +1,6 @@
 https://amirhossainj123.github.io/404
 https://amirhossainj123.github.io/blend
+https://amirhossainj123.github.io/calculator
 https://amirhossainj123.github.io/code_range
 https://amirhossainj123.github.io/credit
 https://amirhossainj123.github.io/custom_cursor
@@ -19,6 +20,7 @@ https://amirhossainj123.github.io/discord/bin
 https://amirhossainj123.github.io/discord/index
 https://amirhossainj123.github.io/DWAA/index
 https://amirhossainj123.github.io/fun_math_facts/index
+https://amirhossainj123.github.io/hangmaner/index
 https://amirhossainj123.github.io/new_website/index
 https://amirhossainj123.github.io/new_website/contact/index
 https://amirhossainj123.github.io/new_website/projects/index
