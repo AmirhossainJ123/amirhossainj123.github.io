@@ -16,20 +16,88 @@
                 }
                 return array
             }
+            function toString(array) {
+                let string = ""
+                array.forEach((e) => {
+                    string += e
+                })
+                return string
+            }
+            function ReplaceInOrder(input,words) {
+                for (let x = 0; x < words.length; x++) {
+                    guessedwords[x] = [];
+                    while (input.indexOf(words[x]) != -1) {
+                        guessedwords[x].push(input.indexOf(words[x]))
+                        input = input.replace(words[x]," ⚠ ")
+                    }
+                    for (let y = 0; y < guessedwords[x].length; y++) {
+                        console.log(guessedwords + " " + x + " " + y + " + " + input[guessedwords[x][y]+1+y*(default_wordfilter[x].length)])
+                        let currentword = default_wordfilter[x]
+                        currentword = currentword.split("")
+                        currentword[0] = ""; currentword[currentword.length-1] = "";
+                        currentword = toString(currentword)
+                        input = input.split("")
+                        input[guessedwords[x][y]+1+y*(default_wordfilter[x].length-3)] = currentword
+                        input = toString(input)
+                    }
+                }
+                default_wordfilter.forEach((e) => {
+                    input = input.replaceAll(e," ⚠ ")
+                })
+                return [input,guessedwords]
+            }
+            default_wordfilter = []
             default_filter = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","0"]
+            guessedwords = []
             function convert() {
                 let input = document.getElementById("text").value
+                input = " " + input
+                input = input + " "
+                input = input.replaceAll("'"," 🥵")
+                input = input.replaceAll("."," 👽")
+                input = input.replaceAll(","," 🙄")
+                input = input.replaceAll("!"," 👻")
+                input = input.replaceAll("?"," 😱")
                 let result = document.getElementById("result")
                 let unfilter = document.getElementById("character")
                 let chr = document.getElementById("replace").value
+                let unfilterword = document.getElementById("unfilter")
+                if (unfilterword.value != "") {
+                    let unfval = unfilterword.value.replaceAll("'"," 🥵").replaceAll("."," 👽").replaceAll(","," 🙄").replaceAll("!"," 👻").replaceAll("?"," 😱")
+                    default_wordfilter.push(" " + unfilterword.value + " ")
+                    unfilterword.value = ""
+                }
                 if (unfilter.value != "nan") {
                     default_filter = Find_And_Remove(default_filter,unfilter.value)
                 }
+                info = ReplaceInOrder(input,default_wordfilter)
+                input = info[0]; guessedwords = info[1]
                 default_filter.forEach((e)=> {
-                    input = input.replaceAll(e,chr)
-                    input = input.replaceAll(e.toLowerCase(),chr)
+                    input = input.replaceAll(e,"☠")
+                    input = input.replaceAll(e.toLowerCase(),"☠")
                 })
-                result.textContent = input 
+                for (let x = 0; x < guessedwords.length; x++) {
+                    for (let y = 0; y < guessedwords[x].length; y++) {
+                        console.log(guessedwords + " " + x + " " + y + " + " + input[guessedwords[x][y]+1+y*(default_wordfilter[x].length)])
+                        let currentword = default_wordfilter[x]
+                        currentword = currentword.split("")
+                        currentword[0] = ""; currentword[currentword.length-1] = "";
+                        currentword = toString(currentword)
+                        input = input.split("")
+                        input[guessedwords[x][y]+1+y*(default_wordfilter[x].length-3)] = currentword
+                        input = toString(input)
+                    }
+                }
+                input = input.split("")
+                input.pop()
+                input = toString(input)
+                input = input.replaceAll("☠",chr)
+                input = input.replaceAll(" 🥵","'")
+                input = input.replaceAll(" 👽",".")
+                input = input.replaceAll(" 🙄",",")
+                input = input.replaceAll(" 👻","!")
+                input = input.replaceAll(" 😱","?")
+                result.textContent = input.replace(" ","")
             }
             function copy() {
                 copyText = document.getElementById("result")
@@ -79,6 +147,7 @@
     </head>
     <body>
         <input id="text" onchange="convert()" placeholder="input your original text here" class="org">
+        <input id="unfilter" placeholder="if you have a word to unfilter place it here else leave empty!">
         <select id="character">
             <option value="nan">choose the character you want to unfilter</option>
             <option value="A" style="font-size:20px;">A</option>
