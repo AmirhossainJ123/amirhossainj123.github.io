@@ -25,7 +25,19 @@
                 })
                 return string
             }
+            function BubbleSort(array) {
+                let temp;
+                for (let x = 0; x < array.length; x++)
+                    for (let y = 0; y < array.length; y++)
+                        if (array[x].length > array[y].length) {
+                            temp = array[x]
+                            array[x] = array[y]
+                            array[y] = temp
+                        }
+                return array
+            }
             function ReplaceInOrder(input,words) {
+                let first = input
                 for (let x = 0; x < words.length; x++) {
                     guessedwords[x] = [];
                     while (input.indexOf(words[x]) != -1) {
@@ -39,10 +51,13 @@
                         currentword[0] = ""; currentword[currentword.length-1] = "";
                         currentword = toString(currentword)
                         input = input.split("")
-                        input[guessedwords[x][y]+1+y*(default_wordfilter[x].length-3)] = currentword
+                        input[guessedwords[x][y]+1+y*(default_wordfilter[x].length-3)] = ""
+                        for (let z = 0; z < currentword.length; z++)
+                            input[guessedwords[x][y]+1+y*(default_wordfilter[x].length-3)] += "❌"
                         input = toString(input)
                     }
                 }
+                input = first
                 default_wordfilter.forEach((e) => {
                     input = input.replaceAll(e," ⚠ ")
                 })
@@ -72,6 +87,7 @@
                 if (unfilter.value != "nan") {
                     default_filter = Find_And_Remove(default_filter,unfilter.value)
                 }
+                default_wordfilter = BubbleSort(default_wordfilter)
                 info = ReplaceInOrder(input,default_wordfilter)
                 input = info[0]; guessedwords = info[1]
                 default_filter.forEach((e)=> {
