@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0px;
+                padding: 0px;
+                overflow: hidden;
+            }
+            .right {
+                width: 30%;
+                height: 100%;
+                background-image: linear-gradient(to left, darkgray,gray);
+                display: inline-block;
+            }
+            .left {
+                width: 70%;
+                height: 100%;
+                position: absolute;
+                left: 30%;
+                background-image: linear-gradient(to right, darkgray,gray);
+                display: inline-block;
+                border-left: 5px solid white;
+            }
+            .right .weapon, .army, .stats {
+                border-bottom: 5px solid white;
+                height: max-content;
+            }
+            .weapon, .army {
+                display: inline-flex; 
+            }
+            .stat {
+                display: flex;
+                justify-content: space-between;
+            }
+            .stats {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <div class="stats">
+                <div class="stat">
+                    <h2>Money</h2>
+                    <h2>Army</h2>
+                    <h2>Weapon</h2>
+                </div>
+                <div class="stat">
+                    <h2 id="money">10$</h2>
+                    <h2 id="army">0</h2>
+                    <h2 id="weapon">0</h2>
+                </div>
+            </div>
+            <br>
+            <div class="weapon">
+                
+            </div>
+        </div>
+        <div class="left">
+        </div>
+    </body>
+</html>
