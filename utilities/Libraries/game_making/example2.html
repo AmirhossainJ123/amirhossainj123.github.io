@@ -39,7 +39,7 @@
         Bois = new ESquare(100,20)
         Grond = new ESquare(1000,50)
         Background = new EObject(-100,-100,Sky,World) // Background
-        Square = new EObject(500,500,Squr,Sq) // Boi
+        Square = new EObject(100,100,Squr,Sq) // Boi
         Pads = new EObject(100,300,Bois,BIO) // Boiz
         Padz = new EObject(200,310,Bois,BIO) // Boiz
         Padx = new EObject(300,310,Bois,BIO) // Boiz
@@ -70,7 +70,7 @@
                 PPos = Pod.y+Pod.shape.z
                 if (CPos >= PPos) {
                     Results = PPos+Square.shape.rad
-                    Square.vy = 2
+                    Square.vy = 1
                     jump_able = false
                 }
                 else
@@ -81,7 +81,7 @@
         function Greender(Grund,Pod) {
             if (Grund) {
                 Square.vx=Square.vx
-                Square.vy=-Square.vy-2
+                Square.vy=-Square.vy-1
             }
         }
         score = 0
@@ -127,7 +127,7 @@
                 Grunder(Grund,Pady)
                 Grund = EBoxCircleCollision(Square,Jady)
                 Greender(Grund,Jady)
-                if (ECircleCollision(Square,CoinB)) {
+                if (ECircleCollision(Square,CoinB)[0]) {
                     score++;
                     Coin.x = randomizer(20,780)
                     Coin.y = randomizer(30,300)

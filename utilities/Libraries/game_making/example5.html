@@ -1,6 +1,6 @@
 <head>
     <script src="electrame.js"></script>
-    <title>Sonic</title>
+    <title>StickMan</title>
     <script>
         function randomizer(min,max) {
             return min + Math.floor(Math.random()*(max-min))
@@ -50,6 +50,9 @@
         margin-bottom: 10px;
         margin-left: 10px;
     }
+    .reverse {
+        transform: scaleX(-100%);
+    }
     .levelbutton:hover {
         transition: 500ms;
         background-color: rgba(0,200,0,0.6);
@@ -87,6 +90,7 @@
         animation: shake 0.2s forwards infinite;
         background-color: rgba(200,0,0,0.9);
         color: darkred;
+        display: inline-block;
     }
     @keyframes titleanim {
         0% {
@@ -144,45 +148,31 @@
         position: absolute;
         z-index: 10 !important;
         display: flexbox;
-        align-items: center;
+        justify-items: space-between;
     }
 </style>
 <body>
     <h2 id="score"></h2>
-    <button onclick="jumper = true"> >> JUMP << </button>
     <canvas id="game" width="1000" height="600" onclick="jumper = true" ontouch="jumper = true"></canvas>
     <div id="buttonlist" class="buttonlist"></div>
     <script>
         selectedlevel = 0
-        let jumper = false;
         let Gravity = true  // Yes gravity :>
-        let Friction = false // No Friction >>:<
-        EConfig(Gravity,Friction,0.25)
-        EInit()
+        let Friction = true // No Friction >>:<
+        let StickmanS = new EImage(150,150,"assets/character/idle0.gif")
+        let box = new ESquare(50,50)
+        let box2 = new ESquare(100,100)
+        let box3 = new ESquare(150,150)
+        box = new EObject(300,400,box,"rgb(100,50,50)")
+        box2 = new EObject(350,350,box2,"rgb(100,150,100)")
+        box3 = new EObject(450,300,box3,"rgb(150,150,200)")
+        Stickman = new EObject(10,280,StickmanS)
+        ESetCollisionX(Stickman,100)
+        let GroundS = new ESquare(1000, 150)
+        Ground = new EObject(0, 450, GroundS, "rgb(0,50,0)")
+        EConfig(Gravity,Friction,1,0.5)
+        
         Game = new EGame("game")
-        let SonicGif = new EImage(150,150,"assets/Sonic1.png")
-        CrabT = new EImage(150,150,"assets/Crab.webp")
-        let Score = 0
-        let Ground = new ESquare(1000,100)
-        let GroundColor = new EColors(1).GREEN;
-        Sonic = new EObject(50,400,SonicGif)
-        Crab = new EObject(-500,400,CrabT)
-        CrabList = [Crab]
-        Grond = new EObject(0,500,Ground,GroundColor)
-        let WallSpeed = 5;
-        CurrentFrame = 1;
-        function WallSpeedInc() {
-            setTimeout(()=>{
-                WallSpeed+=0.5
-                WallSpeedInc()
-            },2500)
-        }
-        function CrabInc() {
-            setTimeout(()=>{
-                CrabList.push(new EObject(1000 + randomizer(100,500),400,CrabT))
-                CrabInc()
-            },10000)
-        }
         function MenuButton(style,id,onclick,text,dis) {
             let level = document.createElement("button");
             level.className = style
@@ -199,7 +189,7 @@
             return document.getElementById("buttonlist").appendChild(level)
         }
         function MenuLoad() {
-            MenuTitle("Sonic Hedgehog Electrame Edition")
+            MenuTitle("Stickman, The Explorer")
             MenuButton("levelbutton","tutorial","selectedlevel=2;document.getElementById('buttonlist').remove()","Tutorial (Coming Soon)",true)
             MenuButton("levelbutton","level1","selectedlevel=1;document.getElementById('buttonlist').remove()","Level 1",false)
             MenuButton("levelbutton","level2","selectedlevel=2;document.getElementById('buttonlist').remove()","Level 2 (Coming Soon)",true)
@@ -213,50 +203,160 @@
             setTimeout(()=>{
                 if (selectedlevel==1) {
                     Level1Tick()
-                    WallSpeedInc()
-                    CrabInc()
                 }
                 else MenuTick()
             },200)
         }
+        PlayerAnimations = [
+            [
+                "assets/character/idle0.gif",
+                "assets/character/idle0.gif",
+                "assets/character/idle0.gif",
+                "assets/character/idle0.gif",
+                "assets/character/idle0.gif",
+                "assets/character/idle0.gif",
+                "assets/character/idle0.gif",
+                "assets/character/idle1.gif",
+                "assets/character/idle1.gif",
+                "assets/character/idle1.gif",
+                "assets/character/idle1.gif",
+                "assets/character/idle1.gif",
+                "assets/character/idle1.gif",
+                "assets/character/idle1.gif"
+            ],
+            [
+                "assets/character/itr0.gif",
+                "assets/character/itr0.gif",
+                "assets/character/itr0.gif",
+                "assets/character/itr1.gif",
+                "assets/character/itr1.gif",
+                "assets/character/itr1.gif",
+                "assets/character/itr2.gif",
+                "assets/character/itr2.gif",
+                "assets/character/itr2.gif",
+                "assets/character/itr3.gif",
+                "assets/character/itr3.gif",
+                "assets/character/itr3.gif"
+            ],
+            [
+                "assets/character/run0.gif",
+                "assets/character/run1.gif",
+                "assets/character/run2.gif",
+                "assets/character/run3.gif",
+                "assets/character/run4.gif",
+                "assets/character/run5.gif",
+                "assets/character/run6.gif",
+                "assets/character/run7.gif",
+                "assets/character/run8.gif",
+                "assets/character/run9.gif"
+            ],
+            [
+                "assets/character/itr3.gif",
+                "assets/character/itr3.gif",
+                "assets/character/itr3.gif",
+                "assets/character/itr2.gif",
+                "assets/character/itr2.gif",
+                "assets/character/itr2.gif",
+                "assets/character/itr1.gif",
+                "assets/character/itr1.gif",
+                "assets/character/itr1.gif",
+                "assets/character/itr0.gif",
+                "assets/character/itr0.gif",
+                "assets/character/itr0.gif"
+            ]
+        ]
+        CurrentAnimationSlot = 0 // AKA IDLE
+        CurrentAnimationFrame = 0 // AKA "idle0.gif"
+        idle = true;    itr = false;    run = false;    rti = false;
+        
+        function displayPlayer(player, grnd) {
+            OldCAF = CurrentAnimationSlot
+            if (player.vx > 0)
+            {
+                run = true
+                CurrentAnimationSlot = 2
+                if ((idle || itr) && !rti)
+                {
+                    idle = false
+                    itr = true
+                    run = false
+                    rti = false
+                    CurrentAnimationSlot = 1
+                }
+                player.shape.CSSCode = "EImage"
+                player.shape.flip = false
+            }
+            else if (player.vx < 0) {
+                run = true
+                CurrentAnimationSlot = 2
+                if ((idle || itr) && !rti)
+                {
+                    idle = false
+                    rti = false
+                    itr = true
+                    run = false
+                    CurrentAnimationSlot = 1
+                }
+                player.shape.flip = true
+            }
+            else {
+                idle = true;
+                CurrentAnimationSlot = 0
+                if ((run || rti) && !itr) {
+                    idle = false
+                    itr = false
+                    rti = true
+                    run = false
+                    CurrentAnimationSlot = 3
+                }
+            }
+            if (OldCAF != CurrentAnimationSlot)
+                CurrentAnimationFrame = 0
+            if (CurrentAnimationFrame == 11 && itr) {
+                itr = false
+                idle = false
+                run = true
+                rti = false
+                CurrentAnimationSlot = 2
+            }
+            if (CurrentAnimationFrame == 11 && rti) {
+                itr = false
+                rti = false
+                idle = true
+                run = false
+                CurrentAnimationSlot = 0
+            }
+            CurrentAnimationFrame++
+            if (PlayerAnimations[CurrentAnimationSlot].length <= CurrentAnimationFrame )
+                CurrentAnimationFrame = 0
+            player.shape.image = PlayerAnimations[CurrentAnimationSlot][CurrentAnimationFrame]
+            return player
+        }
+        currentframe = 0
         function Level1Tick() {
             setTimeout(()=>{
-                for (let i = 0; i < CrabList.length; i++) {
-                    CrabList[i].vx = -WallSpeed
-                    if (CrabList[i].x < -100)
-                    CrabList[i].x = 1000 + randomizer(100,500)
-                    CrabList[i] = EApplyMotion(CrabList[i])
-                }
-                let SSpeed = 0.5;
-                for (let i = 0; i < CrabList.length; i++) {
-                    if (EBoxCollision(Sonic,CrabList[i])[0]) {
-                        document.getElementById(Game.screen_id).hidden = true
-                        setTimeout(() => {
-                        window.location.reload()
-                        },1)
-                    }
-                }
-                Sonic = EApplyPhysicsTo(Sonic);
-                Sonic = EApplyCollision(Sonic,Grond,0)
-                if ((jumper || EKeyboard("w")) && EBoxCollision(EApplyMotion(Sonic),Grond)[0]) {
-                    Sonic.vy = -9;
-                    if (jumper)
-                        Sonic.vy = -11;
-                    jumper = false
-                }
-                Sonic = EApplyMotion(Sonic);
-                CurrentFrame+=SSpeed;
-                Sonic.shape.image = "assets/Sonic" + parseInt(CurrentFrame) + ".png";
-                if (CurrentFrame == 4)
-                    CurrentFrame = 1-SSpeed;
-                EClear(Game);
-                ERender(Game,Sonic);
-                ERender(Game,Grond);
-                CrabList.forEach((element) => {
-                    ERender(Game,element);
-                })
-                Score += 0.1
-                document.getElementById("score").textContent = "SCORE = " + parseInt(Score);
+                jump_able = EBoxCollision(Stickman,Ground)[0] || EBoxCollision(Stickman,box)[0] || EBoxCollision(Stickman,box2)[0] || EBoxCollision(Stickman,box3)[0]
+                Stickman = EApplyCollision(Stickman,Ground,Stickman.vy*0.1)
+                Stickman = EApplyCollision(Stickman,box,Stickman.vy*0.1)
+                Stickman = EApplyCollision(Stickman,box2,Stickman.vy*0.1)
+                Stickman = EApplyCollision(Stickman,box3,Stickman.vy*0.1)
+                Stickman = EApplyPhysicsTo(Stickman)
+                if (EKeyboard("W") && jump_able)
+                    Stickman = EApplyForce(Stickman,[0,-20],[20,20,-20,-20]);
+                if (EKeyboard("A"))
+                    Stickman = EApplyForce(Stickman,[-3,0],[10,10,-10,-10]);
+                if (EKeyboard("S"))
+                    Stickman = EApplyForce(Stickman,[0,3],[10,10,-10,-10]);
+                if (EKeyboard("D"))
+                    Stickman = EApplyForce(Stickman,[3,0],[10,10,-10,-10]);
+                Stickman = displayPlayer(Stickman, Ground)
+                Stickman = EApplyMotion(Stickman)
+                EClear(Game)
+                ERender(Game,Ground)
+                ERender(Game,box)
+                ERender(Game,box2)
+                ERender(Game,box3)
+                ERender(Game,Stickman)
                 Level1Tick()
             },10)
         }

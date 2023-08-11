@@ -191,10 +191,7 @@
         <br>
         <h1 id="start">Getting Started PART 1</h1>
         <h4>So finally a new user wants to learn our library, AMAZING!</h4>
-        <h4>So first of all! we need to tell the library to be prepared to work, so just put this command there, EInit()
-        </h4>
-        <h3>EInit();</h3>
-        <h4>then we add the canvas to html like the normal way OR we use ECreateGame(id,width,height) which we gonna
+        <h4>so we add the canvas to html like the normal way OR we use ECreateGame(id,width,height) which we gonna
             name the game: first</h4>
         <h4>and I think our game would be 600 by 300 so here it is</h4>
         <h3>ECreateGame("first", 600, 300);</h3>
@@ -223,8 +220,7 @@
             }
             my_first_game();</h3>
         <h4>current code:</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = false;
             let Friction = true;
             EConfig(Gravity,Friction);
@@ -242,8 +238,7 @@
         <h4>Oooo hi again :D</h4>
         <h4>so in the last part we learned how to create an object and render it out!</h4>
         <h4>now we can code something just like this!</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = false;
             let Friction = true;
             EConfig(Gravity,Friction);
@@ -279,8 +274,7 @@
         <h4>we also need to clear the screen every time we want to render again</h4>
         <h4>another command introduced! EClear()</h4>
         <h4>So if we implement the same thing we used in this and the other example and enable gravity we get this:</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             EConfig(Gravity,Friction);
@@ -308,13 +302,13 @@
         <h4>So I introduce you another command! EApplyPhysicsTo(object)</h4>
         <h4>So this command applies the physics you have just set in the config part! remmeber?</h4>
         <h4>So maybe you wanted to turn off gravity and friction, you can just don't run this command!</h4>
+        <h4>NOTE: The friction, is not the friction for all objects its for the air, if your game is in space set it to 0 for example</h4>
         <h4>So I also have to introduce another command which applies the motion of the object</h4>
         <h4>Like if you apply a lot of force and gravity and friction, Bla bla bla, you need to ALSO run this command
         </h4>
         <h4>or else non of them move, EApplyMotion(Object)</h4>
         <h4>So lets just put these all together</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             EConfig(Gravity,Friction);
@@ -348,8 +342,7 @@
         <h4>Note: if you want 2 Dynamic object just run this command 2 times but change the place of the first arg with
             the second</h4>
         <h4>Ok lets use this command!</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             EConfig(Gravity,Friction);
@@ -386,8 +379,7 @@
         <h4>that won't let the force be applied if its at a certain speed or higher, you can just put false, there for
             no limit</h4>
         <h4>So lets just add this to our code!</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             EConfig(Gravity,Friction);
@@ -433,8 +425,7 @@
         <h4>first you can setup a variable called jump_able which is false on default but when the object</h4>
         <h4>collides with something it enables it! and if its not colliding, disables it</h4>
         <h4>to check if 2 rectangles are colliding you can just simply use EBoxCollision(Object 1, Object 2)[0]</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             let jump_able = false;
@@ -505,8 +496,7 @@
         <h4>and teleportation means change of position not speed or velocity, and the rest might get handy for you later
         </h4>
         <h4>so first we have to check if the player is not colliding with the Sky then teleport so here we go:</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             let jump_able = false;
@@ -560,8 +550,7 @@
             do!</h4>
         <h4>So now I am gonna just add a box that player can jump on</h4>
         <h4>now we gotta add another apply collision and jump_able rule!</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             let jump_able = false;
@@ -618,8 +607,7 @@
         <h4>So now its cool and all but yk its not fun lets add a jumppad! now the bounce force helps</h4>
         <h4>remember when I said it will come handy soon? or maybe I didn't idk ;s</h4>
         <h4>so we all now know what to do I don't think it needs an explanation</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             let jump_able = false;
@@ -680,8 +668,7 @@
             my_first_game();</h3>
         <h4>but as you see its not really a good jumppad it always makes you jump with power factor of 2</h4>
         <h4>but we want to bounce depending on our height and fall speed right? so I think you can do this ;D</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             let jump_able = false;
@@ -756,8 +743,7 @@
         <h4>then minus the velocityY of the player times 5 to its health, simple enough?</h4>
         <h4>and freeze the game when health is under 0</h4>
         <h4>But since we also got to see the health I am gonna log it on console too</h4>
-        <h3>EInit();
-            ECreateGame("first", 600, 300);
+        <h3>ECreateGame("first", 600, 300);
             let Gravity = true;
             let Friction = true;
             let jump_able = false;
@@ -811,7 +797,6 @@
         <h4>When you create a shape it gives some changable information with it too for example square gives these infos
         </h4>
         <h4>Square.w which is top side length</h4>
-        <h4>Square.w which is top side length</h4>
         <h4>Square.z which is left side length</h4>
         <h4>Square.image which only happens if our shape is a image(EImage's shape is also square)</h4>
         <h4>Square.Cid which is how the object should collide = "Square"</h4>
@@ -820,10 +805,13 @@
         <h4>The way we define Square which is 20 by 10 is </h4>
         <h3>let Player = new ESquare(20,10);</h3>
         <h4>The way we define Image which is 20 by 20 and with image being Panda.png is </h4>
+
         <h3>let Panda = new EImage(20,20,"Panda.png");</h3>
         <h4>The way we define circle which has a radius of 6 is </h4>
         <h3>let Coin = new ECircle(6);</h3>
         <h4>and yep its currently pretty much it</h4>
+        <h4>NEW UPDATE: Full on description of the EImage:</h4>
+        <h3>let shape = new EImage(Scale_x, Scale_y, Image_Dest, flip = false, flop = false, rotation = 0, CoW=Scale_x, CoZ=Scale_y, CSSCode = "EImage")</h3>
         <br>
         <h1 id="material">Materials</h1>
         <h4>So you want to give you shapes some materials, well you can use our premade EColors</h4>
@@ -871,6 +859,8 @@
         <h4>EPositionX(object) = returns the position y of object</h4>
         <h4>EScaleX(object) = returns the scale x of object(image or rectangle)</h4>
         <h4>EScaleY(object) = returns the scale y of object(image or rectangle)</h4>
+        <h4>ECollisionX(object) = returns the collision scale x of object(image or rectangle)</h4>
+        <h4>ECollisionY(object) = returns the collision scale y of object(image or rectangle)</h4>
         <h4>ERadius(object) = returns the radius of object(circle)</h4>
         <h4>EType(object) = returns the type of object (Rectangle = "Square", Image = "Image", Circle = "Circle")</h4>
         <br>
@@ -885,6 +875,8 @@
         <h4>ESetPositionX(object,value) = sets the position y of object</h4>
         <h4>ESetScaleX(object,value) = sets the scale x of object(image or rectangle)</h4>
         <h4>ESetScaleY(object,value) = sets the scale y of object(image or rectangle)</h4>
+        <h4>ESetCollisionX(object,value) = sets the collision scale x of object(image or rectangle)</h4>
+        <h4>ESetCollisionY(object,value) = sets the collision scale y of object(image or rectangle)</h4>
         <h4>ESetRadius(object,value) = sets the radius of object(circle)</h4>
         <br>
         <h4>And yep thats pretty much all I could say about object, except 1 thing! object.shape.Cid which is how the
@@ -931,8 +923,6 @@
             force they get when they hit from [right, left, bottom, top]</h4>
         <h4>GameObj = EApplyMotion(GameObj) applies the motion of the object must be executed after applying all the
             physics</h4>
-        <h4>EInit() currently doesnt help but later on MUST be executed RIGHT BEFORE anything about your game has
-            executed</h4>
         <h4>GameObj = EApplyPhysicsTo(GaneObj) which applies the gravity and friction depending on EConfig</h4>
         <h4>ECreateGame(id,width,height) creates a canvas for the game you can use EGame(id) later then</h4>
         <h4>ERender(Game,GameObject) Renders the object so ppl can see it</h4>

@@ -14,6 +14,7 @@ https://amirhossainj123.github.io/anything/you/say/index
 https://amirhossainj123.github.io/anything/you/say/redirector
 https://amirhossainj123.github.io/blender/index
 https://amirhossainj123.github.io/chem/atom
+https://amirhossainj123.github.io/chem/atomic_merges
 https://amirhossainj123.github.io/datapack/License
 https://amirhossainj123.github.io/datapack/TOS
 https://amirhossainj123.github.io/discord/bin
@@ -21,6 +22,7 @@ https://amirhossainj123.github.io/discord/index
 https://amirhossainj123.github.io/DWAA/index
 https://amirhossainj123.github.io/fun_math_facts/index
 https://amirhossainj123.github.io/hangmaner/index
+https://amirhossainj123.github.io/idle_fighter/index
 https://amirhossainj123.github.io/new_website/index
 https://amirhossainj123.github.io/new_website/contact/index
 https://amirhossainj123.github.io/new_website/projects/index
