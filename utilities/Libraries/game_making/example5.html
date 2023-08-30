@@ -362,15 +362,16 @@
         currentframe = 0
         function Level1Tick() {
             setTimeout(() => {
+                Stickman = displayPlayer(Stickman, Ground);
                 jump_able = EBoxCollision(Stickman, Ground)[0] 
                 || EBoxCollision(Stickman, box)[0] 
                 || EBoxCollision(Stickman, box2)[0] 
                 || EBoxCollision(Stickman, box3)[0];
-
-                Stickman = EApplyCollision(Stickman, Ground, Stickman.vy * 0.1);
-                Stickman = EApplyCollision(Stickman, box, Stickman.vy * 0.1);
-                Stickman = EApplyCollision(Stickman, box2, Stickman.vy * 0.1);
-                Stickman = EApplyCollision(Stickman, box3, Stickman.vy * 0.1);
+                Stickman = EApplyCollision(Stickman, box3, Stickman.vy * 0.01);
+                Stickman = EApplyCollision(Stickman, box2, Stickman.vy * 0.01);
+                Stickman = EApplyCollision(Stickman, box, Stickman.vy * 0.01);
+                Stickman = EApplyCollision(Stickman, Ground, Stickman.vy * 0.01);
+                Stickman = EApplyMotion(Stickman);
                 Stickman = EApplyPhysicsTo(Stickman);
                 if (EKeyboard("W") && jump_able)
                     Stickman = EApplyForce(Stickman, [0, -20], [20, 20, -20, -20]);
@@ -380,8 +381,6 @@
                     Stickman = EApplyForce(Stickman, [0, 3], [10, 10, -10, -10]);
                 if (EKeyboard("D"))
                     Stickman = EApplyForce(Stickman, [3, 0], [10, 10, -10, -10]);
-                Stickman = displayPlayer(Stickman, Ground);
-                Stickman = EApplyMotion(Stickman);
                 EClear(Game);
                 ERender(Game, Ground);
                 ERender(Game, box);

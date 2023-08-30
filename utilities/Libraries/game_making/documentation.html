@@ -2,6 +2,12 @@
 
 <head>
     <script src="https://amirhossainj123.github.io/website.js"></script>
+    <script>
+        setTimeout(() => {
+            document.getElementById("lines").textContent += document.head.textContent.split("\n").length + document.body.textContent.split("\n").length
+            document.getElementById("chars").textContent += document.head.textContent.length + document.body.textContent.length
+        },2000)
+    </script>
     <title>Documentation</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans&display=swap');
@@ -149,6 +155,10 @@
         <a href="#cmds">Commands</a>
         <a href="#forces">Forces & Physics</a>
         <a href="#collide">Collisions</a>
+        <h4>____________________________________________</h4>
+        <p>Miscellaneous</p>
+        <a href="#support">Support Us</a>
+        <a href="#about">About Us</a>
     </div>
     <div class="Information">
         <div class="shadow"></div>
@@ -336,8 +346,7 @@
             my_first_game();</h3>
         <h4>So as you see there is a cube which falls and phase through the ground but we don't like that!</h4>
         <h4>So we make the ground have collision! with introducing another command: </h4>
-        <h4>EApplyCollision(Dynamic Object, Static Object, Bounce Force[force right, force left, force bottom, force
-            top])</h4>
+        <h4>EApplyCollision(Dynamic Object, Static Object, Bounce Force)</h4>
         <h4>I know it was hard but trust me its simple ;-;</h4>
         <h4>Note: if you want 2 Dynamic object just run this command 2 times but change the place of the first arg with
             the second</h4>
@@ -359,7 +368,7 @@
             function my_first_game() {
             setTimeout(() => {
             Player = EApplyMotion(Player);
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
+            Player = EApplyCollision(Player,Ground,0);
             Player = EApplyPhysicsTo(Player);
             EClear(Game);
             ERender(Game,Sky);
@@ -396,7 +405,7 @@
             function my_first_game() {
             setTimeout(() => {
             Player = EApplyMotion(Player);
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
+            Player = EApplyCollision(Player,Ground,0);
             Player = EApplyPhysicsTo(Player);
 
             if (EKeyboard("W"))
@@ -449,7 +458,7 @@
             else
             jump_able = false;
 
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
+            Player = EApplyCollision(Player,Ground,0);
             Player = EApplyPhysicsTo(Player);
 
             if (EKeyboard("W") && jump_able)
@@ -525,7 +534,7 @@
             ESetPositionY(Player,240)
             }
 
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
+            Player = EApplyCollision(Player,Ground,0);
             Player = EApplyPhysicsTo(Player);
 
             if (EKeyboard("W") && jump_able)
@@ -582,8 +591,8 @@
             ESetPositionY(Player,240)
             }
 
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
-            Player = EApplyCollision(Player,Pad,[0,0,0,0]);
+            Player = EApplyCollision(Player,Ground,0);
+            Player = EApplyCollision(Player,Pad,0);
             Player = EApplyPhysicsTo(Player);
 
             if (EKeyboard("W") && jump_able)
@@ -642,9 +651,9 @@
             ESetPositionY(Player,240)
             }
 
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
-            Player = EApplyCollision(Player,Pad,[0,0,0,0]);
-            Player = EApplyCollision(Player,Jump_Pad,[0,0,0,-2]);
+            Player = EApplyCollision(Player,Ground,0);
+            Player = EApplyCollision(Player,Pad,0);
+            Player = EApplyCollision(Player,Jump_Pad,2);
             Player = EApplyPhysicsTo(Player);
 
             if (EKeyboard("W") && jump_able)
@@ -704,9 +713,9 @@
             ESetPositionY(Player,240)
             }
 
-            Player = EApplyCollision(Player,Ground,[0,0,0,0]);
-            Player = EApplyCollision(Player,Pad,[0,0,0,0]);
-            Player = EApplyCollision(Player,Jump_Pad,[0,0,0,-(VelocityY/1.1) - 1]);
+            Player = EApplyCollision(Player,Ground,0);
+            Player = EApplyCollision(Player,Pad,0);
+            Player = EApplyCollision(Player,Jump_Pad,(VelocityY/1.1));
             Player = EApplyPhysicsTo(Player);
 
             if (EKeyboard("W") && jump_able)
@@ -775,8 +784,8 @@
             health-=VelocityY*5;
             else if (VelocityY < -3) health+=VelocityY*5; console.log(health) jump_able=true; } else jump_able=false; if
                 (!(EBoxCollision(Player,Sky)[0])) { ESetPositionX(Player,290); ESetPositionY(Player,240); }
-                Player=EApplyCollision(Player,Ground,[0,0,0,0]); Player=EApplyCollision(Player,Pad,[0,0,0,0]);
-                Player=EApplyCollision(Player,Jump_Pad,[0,0,0,-(VelocityY/1.1) - 1]); Player=EApplyPhysicsTo(Player); if
+                Player=EApplyCollision(Player,Ground,0); Player=EApplyCollision(Player,Pad,0);
+                Player=EApplyCollision(Player,Jump_Pad,(VelocityY/1.1)); Player=EApplyPhysicsTo(Player); if
                 (EKeyboard("W") && jump_able) Player=EApplyForce(Player,[0,-3],[3,3,-3,-3]); if (EKeyboard("A"))
                 Player=EApplyForce(Player,[-0.2,0],[3,3,-3,-3]); if (EKeyboard("S"))
                 Player=EApplyForce(Player,[0,0.2],[3,3,-3,-3]); if (EKeyboard("D"))
@@ -919,8 +928,7 @@
         <h4>ESetScaleY<sup>Exp</sup></h4>
         <h4>ESetRadius<sup>Exp</sup></h4>
         <h4>GameObject1 = EApplyCollision(GameObject1,GameObject2,Bounce Force) takes 2 game objects and applies the
-            colliding like they no longer pass through each other and it also takes a bounce force which is how much
-            force they get when they hit from [right, left, bottom, top]</h4>
+            colliding like they no longer pass through each other and it also takes a bounce force is obvious to be honest</h4>
         <h4>GameObj = EApplyMotion(GameObj) applies the motion of the object must be executed after applying all the
             physics</h4>
         <h4>GameObj = EApplyPhysicsTo(GaneObj) which applies the gravity and friction depending on EConfig</h4>
@@ -930,8 +938,31 @@
         <h4>GameObj = EDeleteObject(Object) deletes an object, you must use this if you want to delete "image" otherwise
             you can just set it to undefined or run this command</h4>
         <h4></h4>
-        <h1 id="forces">Forces</h1>
-        <h4>COMING SOON...</h4>
+        <h1 id="forces">Forces & Physics</h1>
+        <h4>in development(will be added pretty soon)</h4>
+        <h4>you can have normal forces and physics depended on them but soon you will have forces like Vortex (spinning + pulling/pushing)</h4>
+        <h4>Wind (different speed depending on the object size), Magnet (pushes/pulles certain stuff around itself), Saturn (pulles/pulling the object causing some cool things to happen)</h4>
+        <h4>Explosion (throws objects around it and fractures(in development(will be added in far far future)) them)</h4>
+        <br>
+        <h1 id="collide">Collisions</h1>
+        <h4>Mostly in development (will add more soon)</h4>
+        <h4>the current supported collision shapes are rectangle and circle but it will soon improve and you can have custom collisions</h4>
+        <h4>like a transparent image with its own collision automatically created</h4>
+        <br>
+        <br>
+        <br>
+        <h2>Miscellaneous</h2>
+        <br>
+        <h1 id="support">Support Us!</h1>
+        <h4>please support us and help us finish this game making library and you will be credited ;D</h4>
+        <h4>Donation: Not Ready Yet!</h4>
+        <h4>Please star this Project: <a href="https://github.com/Amirhossainj123/Electrame">https://github.com/Amirhossainj123/Electrame</a></h4>
+        <h4>Current Stars: </h4>
+        <h4 id="lines">Current written lines in Documentation: </h4>
+        <h4 id="chars">Current written characters in Documentation: </h4>
+        <br>
+        <h1 id="about">About Us</h1>
+        <h4>Read about Jefferson: <a href="https://mcdev.studio/about">https://mcdev.studio/about</a></h4>
         <br>
         <br>
         <br>

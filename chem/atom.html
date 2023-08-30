@@ -18,9 +18,11 @@
       <link rel="canonical" href="https://amirhossainj123.github.io/chem/atom">
       <link rel="icon" type="image/png" sizes="32x32" href="atoms.png">
       <title>Atom</title>
+      <script src="periodic_table.js"></script>
       <script src="atomic.js"></script>
     </head>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap');
       body {
         background-color: black;
       }
@@ -115,6 +117,16 @@
       .credit * {
         font-family: Georgia, 'Times New Roman', Times, serif;
       }
+      .options {
+        position: absolute;
+        top: 100vh;
+        transform: translateY(-50%);
+        padding-bottom: 20px;
+      }
+      h3 {
+        font-family: 'Roboto Slab', serif;
+        margin-bottom:-20px
+      }
     </style>
     <body>
       <div class="center">
@@ -136,7 +148,13 @@
         <input type="range" min="2" max="5000" id="fps" value=250>
       </div>
       <div class="credit">
-        <h3>Special thanks to my teacher: Mr.Hashemi</h3>
+        <h3>Special thanks to my teachers: Mr.Hashemi, Mr.Ghasemi</h3>
+      </div>
+      <div class="options">
+        <h3 style="color: white;">Closer outter layers (normally models are like that): <input type="checkbox" id="col"></h3>
+        <h3 style="color: white;">Custom Electron Shell (split with ', '): <input id="custron"> <button onclick="b=document.getElementById('custron').value.replaceAll(' ','').split(','); if (b != ``) draw(b)">Custom Draw</button></h3>
+        <h3 style="color: white;">lack of or extra electron stuff: <input id="electron_co_efficiency" type="number" value="0" min="-4" max="4"></h3>
+        <h3 style="color: white;">Information about the current atom (if you change the atomic number so this will change!): <button onclick="Getinfo()">Info</button></h3>
       </div>
     </body>
 </html>

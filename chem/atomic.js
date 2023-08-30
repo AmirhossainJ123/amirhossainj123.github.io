@@ -3,8 +3,9 @@ function show(array,seperator) {str=""; for (x=0;x<array.length;x++) str+=sepera
 function ElectronResult(a,b) {if (a>b) return a-b; else return 0;} // a = shell number, b = current limit to be applied
 function ShellResult(a,b) {if (a>=b) return b; else return a;} // a = shell number, b = current limit to be applied
 function calculate(a) { // a = atomic number
+    a -= document.getElementById("electron_co_efficiency").value
     Confirmation = true
-    if (a >= 1000000000) {
+    if (a >= 1000000) {
         Confirmation = confirm("This might lag your computer\nDo you want to continue?")
     }
     if (Confirmation) {
@@ -33,6 +34,9 @@ function calculate(a) { // a = atomic number
         return shell_array
     }
 }
+function GetElectrons(a) { // some random text I put there which I dont even know what it means lol
+    return parseInt(a); // its also get protons lol
+} 
 dnldamount = localStorage.getItem("dndld")
 function download() {
     dnldamount++;
@@ -103,14 +107,51 @@ function record() {
     animate = test(0,document.getElementById('atomic_number').value)
     record_check(mediaRecorder,recordedChunks,stream,canvas)
 }
-function draw(shells) {
+function numlen(num) {
+    return num.toString().split("").length
+}
+function Getinfo() {
+    finalinfo = "";
+    let atom = document.getElementById('atomic_number').value
+    if (1 <= atom && atom <= 118) {
+        let info = getTable()[atom-1]
+        let met = "";
+        if (info[3] == 1) met = "Metal"
+        if (info[3] == 0.75) met = "Transition Metal"
+        if (info[3] == 0.5) met = "Metaloid"
+        if (info[3] == 0) met = "Non-Metal"
+        finalinfo += `\n Icon: ${info[1]}\n Name: ${info[0]}\n Atomic Number: ${info[2]}\n Metal Properties: ${met}\n Main Element: ${info[4]}`
+    }
+    if (1 > atom) {
+        finalinfo += "\n we dont have info of the unknown"
+    }
+    if (117 < atom && atom <= 200) {
+        finalinfo += "\n mostlikely unstable"
+    }
+    if (200 < atom) {
+        finalinfo += "\n it cannot exist, it will explode into multiple pieces"
+    }
+    finalinfo += `\n Electrons: ${atom-(document.getElementById("electron_co_efficiency").value)}\n Protons: ${atom}\n 1 gram of this element contains: ${1/(atom*2)*6.02*10**23} atoms\n\n * still tho this program is calculating the info and in real life exceptions exist there are some atoms which might not have the same info as the said here! example: Uranium has different shells`
+    return alert(finalinfo)
+}
+function draw(shells,protons=GetElectrons(document.getElementById('atomic_number').value)) {
     Confirmation = true
+    toggle_closer_outer_layers = document.getElementById("col").checked
     if (shells.length >= 20) {
         Confirmation = confirm("This might lag your computer\nDo you want to continue?")
     }
     if (Confirmation) {
         margin=80;
         scale = (shells.length*2+1)*margin;
+        if (toggle_closer_outer_layers) {
+            scale = margin*2
+            for (let index = 1; index <= shells.length*2; index++){
+                let bah = ((shells.length*2+1)/(index*2));
+                if (bah > 1)
+                    bah = 1
+                scale += margin*bah;
+            }
+        }
         const canvas = document.getElementById("canvas");
         canvas.width = scale; canvas.height = scale;
         if (canvas.getContext) {
@@ -122,13 +163,28 @@ function draw(shells) {
             ctx.arc(scale/2, scale/2, 40, 0, 2 * Math.PI);
             ctx.fillStyle = "rgb(125,50,0)"
             ctx.fill();
+            ctx.fillStyle = "rgb(255,255,255)"
+            ctx.font = "30px Arial";
+            ctx.fillText(protons, scale/2-(numlen(protons)*10)+2, scale/2+10);
+            let radius = margin;
             for (let index = 1; index <= shells.length; index++){
+                if (toggle_closer_outer_layers && index>2) {
+                    let bah = (shells.length/(index*2.5));
+                    if (bah > 1)
+                        bah = 1
+                    radius += margin*bah;
+                }
+                else {
+                    radius = margin*index;
+                }
                 ctx.beginPath();
-                ctx.arc(scale/2, scale/2, index*margin, 0, 2 * Math.PI);
                 ctx.lineWidth = 4;
                 ctx.strokeStyle = "rgb(0,0,0)"
+                if (toggle_closer_outer_layers)
+                    ctx.arc(scale/2, scale/2, radius, 0, 2 * Math.PI);
+                else
+                    ctx.arc(scale/2, scale/2, index*margin, 0, 2 * Math.PI);
                 ctx.stroke();
-                let radius = margin*index;
                 let amountOfDots = shells[index-1];
                 let angle = 2 * Math.PI / amountOfDots;
                 for (let i = 0; i < amountOfDots; i++) {

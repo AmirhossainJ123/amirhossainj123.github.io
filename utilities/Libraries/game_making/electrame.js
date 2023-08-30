@@ -71,7 +71,7 @@ class EGame {
 }
 
 class ESquare {
-    constructor(Scale_x,Scale_y,CoW = Scale_x, CoZ = Scale_y) {
+    constructor(Scale_x,Scale_y,rotation=0,CoW = Scale_x, CoZ = Scale_y) {
         this.w = Scale_x
         this.z = Scale_y
         this.rotation = 0
@@ -276,6 +276,7 @@ function ESetRadius(object,value) {return object.shape.rad=value}
 function EApplyCollision(object1,object2,Bounce_Force) { // Bounce force is basically the force that will be applied to the object after hitting the thing its different in different materials
     if (object1.shape.Cid == "Square" && object2.shape.Cid == "Square") {
         if (EBoxCollision(object1,object2)[0]) {
+
             let object1Top_object2Bottom = Math.abs(object1.y - (object2.y + object2.shape.coz));
             let object1Right_object2Left = Math.abs((object1.x + object1.shape.cow) - object2.x);
             let object1Left_object2Right = Math.abs(object1.x - (object2.x + object2.shape.cow));
