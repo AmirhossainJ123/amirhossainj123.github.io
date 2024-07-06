@@ -26,13 +26,31 @@
         }
         .art {
             display: flex;
+            margin: 10px;
+            padding-top: 10px;
+            padding-bottom: 50px;
+            border-bottom: 5px solid black;
         }
         .art * {
             margin: auto;
         }
         .art img, .art model-viewer {
-            width: min(50vw,50vh);
             border: 5px solid black;
+            padding: 5px;
+        }
+        .tallimage {
+            height: min(50vw,50vh);
+        }
+        .wideimage {
+            width: min(50vw,50vh);
+        }
+        .sqimage {
+            width: min(30vw,30vh);
+            height: min(30vw,30vh);
+        }
+        .art model-viewer {
+            width: min(50vw,50vh);
+            height: 300px;
         }
         body {
             margin: 0;
@@ -67,11 +85,29 @@
     </div>
     <div class="modelling">
         <h1>Modelling</h1>
-        <p>This is a simple model of a weapon from Shadow Fight 2 game. It was created using Blender</p>
+        <p>This is a simple model of a weapon from Shadow Fight 2 game. It was created using Blender by me</p>
         <div class="art">
-            <img src="images/weapon1.webp">
+            <img src="images/weapon1.png" class="wideimage">
             <h1>=></h1>
-            <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/weapon1.glb" alt="model of a weapon from shadow fight 2"></model-viewer>
+            <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/weapon1.glb" shadow-intensity="1" alt="model of a weapon from shadow fight 2"></model-viewer>
+        </div>
+        <p>This is a simple model of another weapon from Shadow Fight 2 game. It was created using Blender by me</p>
+        <div class="art">
+            <img src="images/weapon2.png" class="wideimage">
+            <h1>=></h1>
+            <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/weapon2.glb" shadow-intensity="1" alt="model of a weapon from shadow fight 2"></model-viewer>
+        </div>
+        <p>This is a simple model of a chess piece. It was created using Blender by me</p>
+        <div class="art">
+            <img src="images/piece1.png" class="tallimage">
+            <h1>=></h1>
+            <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/piece1.glb" shadow-intensity="1" alt="chess piece model"></model-viewer>
+        </div>
+        <p>This is a simple model of another chess piece. It was created using Blender by me</p>
+        <div class="art">
+            <img src="images/piece2.png" class="sqimage">
+            <h1>=></h1>
+            <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/piece2.glb" shadow-intensity="1" alt="chess piece model"></model-viewer>
         </div>
     </div>
 </body>
