@@ -17,12 +17,20 @@
     <meta name="twitter:image" content="portfolio.png">
     <link rel="canonical" href="https://amirhossainj123.github.io/portfolio">
     <link rel="icon" type="image/png" sizes="32x32" href="portfolio.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
     <style>
         h1 {
             text-align: center;
             color: white;
             font-size: min(6vw,6vh);
+            font-family: "Anton SC", sans-serif;
+            font-weight: 400;
+            font-style: normal;
         }
         .art {
             display: flex;
@@ -60,6 +68,16 @@
             margin: 10px;
             text-align: center;
             color: white;
+            font-family: "PT Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        h2 {
+            font-family: "Inter", "PT Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: min(12vw,12vh);
+            font-optical-sizing: auto;
         }
         .intro {
             margin: 0;
@@ -75,6 +93,19 @@
             padding-bottom: 50px;
             background-image: linear-gradient(to bottom, green, aqua);
         }
+        .renders {
+            margin: 0;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            background-image: linear-gradient(to bottom, aqua, blue);
+        }
+        .renders iframe {
+            width: 100%;
+            height: 60%;
+            box-sizing: border-box;
+            border: 5px solid black;
+        }
     </style>
 </head>
 <body>
@@ -88,26 +119,30 @@
         <p>This is a simple model of a weapon from Shadow Fight 2 game. It was created using Blender by me</p>
         <div class="art">
             <img src="images/weapon1.png" class="wideimage">
-            <h1>=></h1>
+            <h2>=></h2>
             <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/weapon1.glb" shadow-intensity="1" alt="model of a weapon from shadow fight 2"></model-viewer>
         </div>
         <p>This is a simple model of another weapon from Shadow Fight 2 game. It was created using Blender by me</p>
         <div class="art">
             <img src="images/weapon2.png" class="wideimage">
-            <h1>=></h1>
+            <h2>=></h2>
             <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/weapon2.glb" shadow-intensity="1" alt="model of a weapon from shadow fight 2"></model-viewer>
         </div>
         <p>This is a simple model of a chess piece. It was created using Blender by me</p>
         <div class="art">
             <img src="images/piece1.png" class="tallimage">
-            <h1>=></h1>
+            <h2>=></h2>
             <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/piece1.glb" shadow-intensity="1" alt="chess piece model"></model-viewer>
         </div>
         <p>This is a simple model of another chess piece. It was created using Blender by me</p>
         <div class="art">
             <img src="images/piece2.png" class="sqimage">
-            <h1>=></h1>
+            <h2>=></h2>
             <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/piece2.glb" shadow-intensity="1" alt="chess piece model"></model-viewer>
         </div>
+    </div>
+    <div class="renders">
+        <h1>Renders</h1>
+        <iframe src="https://amirhossainj123.github.io/blender/"></iframe>
     </div>
 </body>
