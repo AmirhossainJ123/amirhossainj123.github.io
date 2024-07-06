@@ -1,451 +1,77 @@
-<html>
-    <script src="website.js"></script>
-    <script src="index.js" defer></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio</title>
+    <meta name="description" content="My Portfolio, Check it out, its not like it bites :)">
+    <meta name="keywords" content="Portfolio, Art, Code">
+    <meta name="theme-color" content="#2bbcda">
+    <meta name="title" content="Portfolio">
+    <meta property="og:title" content="Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amirhossainj123.github.io/portfolio">
+    <meta property="og:image" content="portfolio.png">
+    <meta property="og:description" content="My Portfolio, Check it out, its not like it bites :)">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio">
+    <meta name="twitter:description" content="My Portfolio, Check it out, its not like it bites :)">
+    <meta name="twitter:image" content="portfolio.png">
+    <link rel="canonical" href="https://amirhossainj123.github.io/portfolio">
+    <link rel="icon" type="image/png" sizes="32x32" href="portfolio.png">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Vai&display=swap');
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: min(6vw,6vh);
+        }
+        .art {
+            display: flex;
+        }
+        .art * {
+            margin: auto;
+        }
+        .art img, .art model-viewer {
+            width: min(50vw,50vh);
+            border: 5px solid black;
+        }
         body {
-            cursor:none;
+            margin: 0;
         }
-        .qlz {
-            cursor: none;
-            outline:0px;
-            border:3px solid darkgray;
-            border-radius: 5px;
-            background-color: white;
-            padding: 10px;
-            cursor: none;
-            box-shadow: 3px 3px 10px;
-        }
-        .shadow {
-            cursor: none;
-            opacity: 0.5;
-            width: 20px;
-            height: 20px;
-            margin: auto;
-            top: 0%;
-            left: 0%;
-            position: absolute;
-            display: inline-block;
-            background-color: white;
-            text-align: center;
-            pointer-events: none;
-            border: 2px solid black;
-            transform: translate3d(0px,0px,0px);
-        }
-        .qlz:hover {
-            cursor: none;
-            outline:0px;
-            border:3px solid gray;
-            border-radius: 5px;
-            background-color: darkgray;
-            padding: 10px;
-            cursor: none;
-        }
-        .qlz:active {
-            cursor: none;
-            outline:0px;
-            border:3px solid rgb(87, 87, 87);
-            border-radius: 5px;
-            background-color: gray;
-            padding: 10px;
-            cursor: none;
-        }
-        .fhf {
-            cursor: none;
-            outline:0px;
-            border:3px solid gray;
-            border-radius: 5px;
-            background-color: rgb(87, 87, 87);
-            padding: 10px;
-            cursor: none;
-            box-shadow: 3px 3px 10px;
-        }
-        .fhf:hover {
-            outline:0px;
-            cursor: none;
-            border:3px solid darkgray;
-            border-radius: 5px;
-            background-color: gray;
-            padding: 10px;
-            cursor: none;
-        }
-        .fhf:active {
-            cursor: none;
-            outline:0px;
-            border:3px solid white;
-            border-radius: 5px;
-            background-color: darkgray;
-            padding: 10px;
-            cursor: none;
-        }
-        .cl {
-            text-shadow: 1px 1px 4px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-            cursor: none;
-            outline:0px;
-            border:3px solid rebeccapurple;
-            border-radius: 5px;
-            background-color: purple;
-            padding: 10px;
-            cursor: none;
-            box-shadow: 3px 3px 10px;
-            position: relative;
-            margin-top: 75px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .cl:hover {
-            outline:0px;
-            cursor: none;
-            border:3px solid rgb(86, 43, 129);
-            border-radius: 5px;
-            background-color: rgb(161, 0, 161);
-            padding: 10px;
-            cursor: none;
-        }
-        .cl:active {
-            cursor: none;
-            outline:0px;
-            border:3px solid darkblue;
-            border-radius: 5px;
-            background-color: orangered;
-            padding: 10px;
-            cursor: none;
-        }
-        .coolz {
-            cursor: none;
-            width: 20px;
-            height: 20px;
-            margin: auto;
-            top: 0%;
-            left: 0%;
-            position: absolute;
-            display: inline-block;
-            background-color: white;
-            text-align: center;
-            pointer-events: none;
-            border: 2px solid black;
-        }
-        .ooga {
-            cursor: none;
-            margin-top: 12.5%;
-        }
-        h1, h3 {
-            cursor: none;
-            color: white;
-            text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
-        }
-        * {
-            cursor: none;
-        }
-        .cmg {
-            cursor: none;
-            color: white;
-            text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
-            border-radius: 20px;
-            padding: 5px;
-            margin: 5px;
-            background-color: black;
-            top: 100%;
-            margin-top: -45px;
-            position: absolute;
-            border: 3px solid black;
-        }
-        .cmgz {
-            cursor: none;
-            color: darkred;
-            text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
+        p {
+            font-size: min(2.1vw,2.1vh);
             margin: 10px;
-            top: 100%;
-            margin-left: 275px;
-            margin-top: -60px;
-            position: absolute;
-            font-size: 40px;
-        }
-        @keyframes dingdong {
-            0% {
-                font-size: 40px;
-                transform: rotate(0deg);
-                color: red;
-                margin-top: -60px;
-            }
-            25% {
-                transform: rotate(10deg);
-                font-size: 50px;
-                margin-top: -75px;
-                color: darkred;
-            }
-            50% {
-                transform: rotate(0deg);
-                font-size: 50px;
-                margin-top: -75px;
-                color: red;
-            }
-            75% {
-                transform: rotate(-10deg);
-                font-size: 50px;
-                margin-top: -75px;
-                color: darkred;
-            }
-            100% {
-                font-size: 40px;
-                transform: rotate(0deg);
-                margin-top: -60px;
-                color: red;
-            }
-        }
-        .butp * {
-            margin: 8.5px;
-            width: max-content;
-            height: max-content;
-        }
-        .butp {
-            width: 600;
-            height: 300;
-            left: 50%;
-            position: absolute;
-            display: flex;
-            transform: translateX(-50%);
-        }
-        .cmgz {
-            animation-name: dingdong;
-            animation-duration: 400ms;
-            animation-timing-function: ease;
-            animation-iteration-count: infinite;
-            animation-fill-mode: forwards;
-        }
-        .cmg:hover {
-            transition: 400ms;
-            background-color: indigo;
-            border: 3px solid darkred;
-        }
-        .cmg {
-            transition: 400ms;
-            background-color: black;
-            border: 3px solid black;
-        }
-        .cmgd {
-            width: 150px;
-            height: 80px;
-            cursor: none;
-            color: white;
             text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
-            border-radius: 30px;
-            padding: 5px;
-            margin: 5px;
-            background-color: blue;
-            left: 100%;
-            top: 100%;
-            margin-top: -90px;
-            margin-left: -250px;
-            position: absolute;
-            border: 3px solid darkblue;
-            display: flex;
-        }
-        .cmgd:hover {
-            transition: 400ms;
-            background-color: darkblue;
-            border: 3px solid blue;
-            box-shadow: 0px 0px 30px;
-        }
-        .cmgd:active {
-            transition: 2000ms;
-            background-color: blueviolet;
-            border: 3px solid indigo;
-            color: darkblue;
-            box-shadow: 0px 0px 10000px 10000px;
-        }
-        .cmgd {
-            transition: 400ms;
-            box-shadow: 0px 0px 0px;
-            background-color: blue;
-            border: 3px solid darkblue;
-        }
-        .cmgdz {
-            width: 150px;
-            height: 80px;
-            cursor: none;
             color: white;
-            text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
-            border-radius: 30px;
-            padding: 5px;
-            margin: 5px;
-            left: 100%;
-            top: 100%;
-            margin-top: -90px;
-            margin-left: -590px;
-            position: absolute;
-            display: flex;
         }
-        .cmgdz:hover {
-            transition: 400ms;
-            background-color: blueviolet;
-            border: 3px solid indigo;
-            box-shadow: 0px 0px 30px;
+        .intro {
+            margin: 0;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            background-image: linear-gradient(to bottom, darkgreen, green);
         }
-        .cmgdz:active {
-            transition: 2000ms;
-            background-color: purple;
-            border: 3px solid rebeccapurple;
-            color: indigo;
-            box-shadow: 0px 0px 10000px 10000px;
-        }
-        .cmgdz {
-            transition: 400ms;
-            box-shadow: 0px 0px 0px;
-            background-color: indigo;
-            border: 3px solid blueviolet;
-        }
-        .cmgbd {
-            width: 150px;
-            height: 80px;
-            cursor: none;
-            color: white;
-            text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
-            border-radius: 30px;
-            margin: 5px;
-            background-image: url("https://img.freepik.com/premium-vector/flag-usa-united-states-america-background_53500-169.jpg?w=2000");
-            background-size: cover;
-            left: 100%;
-            top: 100%;
-            margin-top: -90px;
-            margin-left: -420px;
-            position: absolute;
-            border: 3px solid darkblue;
-        }
-        .grayerz {
-            width: 140px;
-            height: 70px;
-            cursor: none;
-            color: white;
-            text-align: center;
-            font-family: 'Noto Sans Vai', sans-serif;
-            border-radius: 30px;
-            padding: 5px;
-            margin-top: -5px;
-            margin-left: -10px;
-            background-color: rgba(150,150,150,0.9);
-            left: 100%;
-            display: flex;
-            top: 100%;
-        }
-        .grayerz * {
-            font-size: 14px;
-        }
-        .grayerz h4 {
-            margin-top:22px;
-        }
-        .cmgbd:hover {
-            transition: 400ms;
-            background-color: darkblue;
-            border: 3px solid blue;
-            box-shadow: 0px 0px 30px;
-        }
-        .grayerz:hover {
-            transition: 400ms;
-            background-color: rgba(150,150,150,0.5);
-        }
-        .grayerz:active {
-            transition: 400ms;
-            background-color: rgba(150,150,150,0.2);
-        }
-        .grayerz:active h4 {
-            transition: 400ms;
-            color: black;
-            font-size: 20px;
-            margin-top:16px;
-        }
-        .cmgbd:active {
-            transition: 2000ms;
-            background-color: blueviolet;
-            border: 3px solid indigo;
-            color: darkblue;
-            box-shadow: 0px 0px 10000px 10000px;
-        }
-        .cmgbd {
-            transition: 400ms;
-            box-shadow: 0px 0px 0px;
-            background-color: blue;
-            border: 3px solid darkblue;
+        .modelling {
+            margin: 0;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            background-image: linear-gradient(to bottom, green, aqua);
         }
     </style>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>AmirhossainJ123</title>
-        <meta name="description" content="My Personal Website with a lot of public cool utilities">
-        <meta name="keywords" content="AmirhossainJ123, Utilities, Cool">
-        <meta name="theme-color" content="#2bbcda">
-        <meta name="title" content="AmirhossainJ123">
-        <meta property="og:title" content="AmirhossainJ123">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://amirhossainj123.github.io/">
-        <meta property="og:image" content="https://amirhossainj123.github.io/blender/Donut.png">
-        <meta property="og:description" content="My Personal Website with a lot of public cool utilities">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="AmirhossainJ123">
-        <meta name="twitter:description" content="My Personal Website with a lot of public cool utilities.">
-        <meta name="twitter:image" content="https://amirhossainj123.github.io/blender/Donut.png">
-        <link rel="canonical" href="https://amirhossainj123.github.io/">
-        <link rel="icon" type="image/png" sizes="32x32" href="  blender/Room.png">
-    </head>
-    <body style="background-image: url(blender/Donut.png);background-size: cover;" onload="main()">
-        <h1 class="ooga"></h1>
-        <h1>I am bored of programming now, so COMING SOON</h1>
-        <h3>You can just take a look at Quiz Land to see whether if its cool or nah idk</h3>
-        <h3>Or maybe you want to take a look at my stupid art and use it in your website</h3>
-        <h3>Or maybe you want to learn more about how this stupid website is created</h3>
-        <h3>Or maybe you want to see the current coming soon utilities that are going to be added</h3>
-        <h3>Don't cheat!</h3>
-        <div class="butp">
-            <form action="quiz">
-                <button class="qlz" href="https://amirhossainj123.github.io/quiz">Quiz Land</button>
-            </form>
-            <form action="blend">
-                <button class="fhf" href="https://amirhossainj123.github.io/blend">My arts in Blender</button>
-            </form>
-            <form action="credit">
-                <button class="qlz" href="https://amirhossainj123.github.io/credit">Credit Page</button>
-            </form>
-            <form action="utilities">
-                <button class="fhf" href="https://amirhossainj123.github.io/utilities">Utilities (Not Ready)</button>
-            </form>
+</head>
+<body>
+    <div class="intro">
+        <h1>About me</h1>
+        <p>Hi, its nice to see someone is reading my portfolio :D, anyways! my name is Amirhossain but I rather be called Jeff, I am currently a high schooler, but I have free time to work, I can work as a 3D Artist or a programmer :D</p>
+        <p>am good at modelling with blender and coding front-end, I can also do other things like shade and uv unwrap and etc in blender, three of my websites that are currently up: <a href="https://mcdev.studio">MCDev Studio</a>, <a href="https://amirhossainj123.github.io">this website</a>, <a href="https://sitedevduo.github.io">SiteDevDuo</a></p>
+    </div>
+    <div class="modelling">
+        <h1>Modelling</h1>
+        <p>This is a simple model of a weapon from Shadow Fight 2 game. It was created using Blender</p>
+        <div class="art">
+            <img src="images/weapon1.webp">
+            <h1>=></h1>
+            <model-viewer camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/portfolio/models/weapon1.glb" alt="model of a weapon from shadow fight 2"></model-viewer>
         </div>
-        <form action="website/collection">
-            <button class="cl" href="https://amirhossainj123.github.io/website/collection">Useful and Amazing websites you should definitely check out!</button>
-        </form>
-        <form action="new_index">
-            <button class="cmg" href="https://amirhossainj123.github.io/new_website/">Coming soon: A New Website!</button>
-            <h4 class="cmgz">!!!</h4>
-        </form>
-        <form action="discord">
-            <button class="cmgd" href="https://amirhossainj123.github.io/discord">
-                <img src="discord.ico" alt="discord" width="64" height="64">
-                <h4 style="margin-top:22px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 15px;">Electrians</h4>
-            </button>
-        </form>
-        <form action="discord/bin">
-            <button class="cmgbd" href="https://amirhossainj123.github.io/discord/bin">
-                <div class="grayerz">
-                    <img src="discord.ico" alt="discord" width="64" height="64">
-                    <h4 style=" font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Bin-Codes!</h4>
-                </div>
-            </button>
-        </form>
-        <form action="planeteer">
-            <button class="cmgdz" href="https://amirhossainj123.github.io/planeteer">
-                <img src="plnt.png" alt="planeteer" width="64" height="64">
-                <h4 style="margin-top:15px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 15px;">Planeteer Mod!</h4>
-            </button>
-        </form>
-        <div class="cursor shadow"></div>
-        <div class="cursor coolz"></div>
-    </body>
-</html>
+    </div>
+</body>
