@@ -1,0 +1,168 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio</title>
+    <meta name="description" content="My Portfolio, Check it out, its not like it bites :)">
+    <meta name="keywords" content="Portfolio, Art, Code">
+    <meta name="theme-color" content="#2bbcda">
+    <meta name="title" content="Portfolio">
+    <meta property="og:title" content="Portfolio">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amirhossainj123.github.io/portfolio">
+    <meta property="og:image" content="https://amirhossainj123.github.io/portfolio/portfolio.png">
+    <meta property="og:description" content="My Portfolio, Check it out, its not like it bites :)">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio">
+    <meta name="twitter:description" content="My Portfolio, Check it out, its not like it bites :)">
+    <meta name="twitter:image" content="https://amirhossainj123.github.io/portfolio/portfolio.png">
+    <link rel="canonical" href="https://amirhossainj123.github.io/portfolio">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://amirhossainj123.github.io/portfolio/portfolio.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script src="https://amirhossainj123.github.io/website.js"></script>
+    <style>
+        body {
+            background-image: linear-gradient(to bottom, rgb(100,100,100), black);
+            overflow: hidden scroll;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            border-top: 10px solid black;
+            font-size: min(6vw,6vh);
+            font-family: "Anton SC", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            margin-top: 0;
+            background-image: linear-gradient(to bottom,rgb(100,100,100),rgba(200,200,200,0.5),rgb(100,100,100));
+            box-shadow: 0px 10px 10px 5px black;
+        }
+        .art {
+            display: flex;
+            margin: 10px;
+            padding-top: 10px;
+            padding-bottom: 50px;
+            border-bottom: 5px solid black;
+            background-image: linear-gradient(to bottom,rgba(100,100,100,0.2),rgba(200,200,200,0.3),rgba(100,100,100,0.2));
+            box-shadow: 0px 0px 10px 5px black;
+        }
+        .art * {
+            margin: auto;
+        }
+        .art img, .art model-viewer {
+            border: 5px solid black;
+            padding: 5px;
+        }
+        .tallimage {
+            height: min(50vw,50vh);
+        }
+        .wideimage {
+            width: min(50vw,50vh);
+        }
+        .sqimage {
+            width: min(30vw,30vh);
+            height: min(30vw,30vh);
+        }
+        .art model-viewer {
+            width: min(50vw,50vh);
+            height: 300px;
+        }
+        body {
+            margin: 0;
+        }
+        p {
+            font-size: min(2.6vw,2.6vh);
+            margin: 10px;
+            text-align: center;
+            color: white;
+            font-family: "PT Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        h2 {
+            font-family: "Inter", "PT Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: min(12vw,12vh);
+            font-optical-sizing: auto;
+        }
+        .mainbody {
+            background-image: url(bg.png);
+            overflow: hidden
+        }
+        .intro {
+            margin: 0;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            background-image: linear-gradient(to bottom, rgba(0,0,0),rgba(0,0,0,0.75),rgba(0,0,0,5),transparent);
+        }
+        .modelling {
+            margin: 0;
+            width: 100%;
+            padding-bottom: 50px;
+            background-image: linear-gradient(to bottom, rgba(0,0,0),transparent);
+        }
+        .blurify {
+            margin: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .renders {
+            margin: 0;
+            width: 100%;
+            padding-top: 0px;
+            padding-bottom: 50px;
+            overflow: hidden;
+            background-image: linear-gradient(to bottom, rgba(0,0,0),rgba(0,0,0,0.75),rgba(0,0,0,5),transparent);
+        }
+        .renders h1 {
+            margin-bottom: 150px;
+        }
+        .renders iframe {
+            width: 133.33%;
+            height: 106%;
+            box-sizing: border-box;
+            border: 5px solid black;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: black;
+            -ms-zoom: 0.75;
+            -moz-transform: scale(0.75);
+            -moz-transform-origin: 0 0;
+            -o-transform: scale(0.75);
+            -o-transform-origin: 0 0;
+            -webkit-transform: scale(0.75);
+            -webkit-transform-origin: 0 0;
+        }
+        .contact {
+            margin: 0;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            overflow: hidden;
+        }
+        .somestupidthing {overflow: hidden;}
+        .somestupidthing img {
+            width: 100%;
+            z-index: 1;
+        }
+        .stupidoverlay {
+            background-image: linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5),black);
+            width: 100vw;
+            height: 15.625vw;
+            z-index: 99;
+            position: absolute;
+        }
+        .aaa {
+            width: 100%; height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <model-viewer class="aaa" camera-controls touch-action="pan-y" src="https://amirhossainj123.github.io/mmn/house.glb" shadow-intensity="1" alt="mewmew"></model-viewer>
+</body>
