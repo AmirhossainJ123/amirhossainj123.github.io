@@ -1,7 +1,7 @@
 <html>
     <head>
         <script src="https://unpkg.com/brain.js"></script>
-        <script src="Libraries/test_stuff.js"></script>
+        <script src="Libraries/test_stuff2.js"></script>
         <style>
             button {
                 background-color: green;
@@ -90,26 +90,19 @@
                 transition: 500ms;
                 width: 400px;
             }
-            br {
-                height: 10px;
-                margin:0px;
-            }
         </style>
     </head>
     <script src="https://amirhossainj123.github.io/website.js"></script>
     <body>
         <div class="conter">
-            <h1>Rock Paper Scissors</h1>
+            <h1>Guessing your pick</h1>
             <div class="center">
-                <button id="b1" onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
+                <button onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
                 document.getElementById('result').setAttribute('value','A');
-                setTimeout(()=>{user_choice(1);},100)">Rock</button>
-                <button id="b2" onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
+                setTimeout(()=>{user_choice(1);},100)">Left</button>
+                <button onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
                 document.getElementById('result').setAttribute('value','A');
-                setTimeout(()=>{user_choice(2);},100)">Paper</button>
-                <button id="b3" onclick="document.getElementById('result').textContent = 'Waiting for Opponent...';
-                document.getElementById('result').setAttribute('value','A');
-                setTimeout(()=>{user_choice(3);},100)">Scissors</button>
+                setTimeout(()=>{user_choice(2);},100)">Right</button>
             </div>
             <br>
             <br>
@@ -120,13 +113,8 @@
             <br>
             <h2 id="next"></h2>
             <div class="center">
-                <h2 style="display: inline-block;" id="pcc">Memory (4): </h2>
-                <input type="range" min="2" max="101" value=4 id="brain" onchange="change_pattern()" class="iq">
-                <button style="font-size: 20px; font-family:'Courier New', Courier, monospace; background-color:black; width:50px; height:50px; padding:0; border-radius: 100%" onclick="alert('increasing it will increase the calculation time, its technically how much of your previous moves the AI bot remembers.\nincreasing will make the bot better at finding patterns, but it also makes the bot rely on patterns meaning it becomes weaker as the choices become more random\nincrease till the end for the easter egg :>')">?</button>
-                <br>
-                <h2 style="display: inline-block; margin-top: 0px;" id="iteration">Iterations (1500): </h2>
-                <input type="range" min="50" max="10000" value=1500 id="iterationc" onchange="change_iterations()" class="iq">
-                <button style="font-size: 20px; font-family:'Courier New', Courier, monospace; background-color:black; width:50px; height:50px; padding:0; border-radius: 100%" onclick="alert('the amount of times, the bot thinks before making an action, increases calculation time but enhances the choices made based on the given pattern\nthe difference between this bot and a random number generator is that, this AI bot will try to find patterns in your choices')">?</button>
+                <h2 style="display: inline-block;" id="pcc">Memory (12): </h2>
+                <input type="range" min="2" max="101" value=12 id="brain" onchange="change_pattern()" class="iq" onclick="alert('Note: memory doesnt necessarily make the bot stronger and smarter, it just lets the AI remembers more of your previous moves, thats it\nother than that, more moves slowdown the calculation, keep it in mind\nand lastly if you set the memory to forexample 20, the first 20 matches dont count since the bot hasnt taken your strategy and your randomness yet\nGood luck and dont increase the memory too much ;)')">
             </div>
             <br>
         </div>
